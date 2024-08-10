@@ -21,7 +21,6 @@ readme({
 - [Table of content library](https://github.com/a-ahandani/ah-toc)`,
     getting_started: "See screenshot",
     roadmap: `
-- [x] Logo design
 - [ ] CLI with config file
 - [ ] Auto defaults from known files like Cargo.toml/{deno,package}.json`,
     usage: "See `scripts/gen-readme.ts`",

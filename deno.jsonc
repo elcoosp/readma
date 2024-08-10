@@ -1,7 +1,12 @@
 {
+  "name": "@readma/core",
+  "version": "1.0.0",
+  "exports": "./core/mod.ts",
   "tasks": {
     "r": "deno run -A scripts/gen-readme.ts",
     "r:w": "deno run -A --watch scripts/gen-readme.ts"
   },
-  "imports": { "@deno/gfm": "jsr:@deno/gfm@^0.8.2" }
+  "imports": {
+    "@deno/gfm": "jsr:@deno/gfm@^0.8.2"
+  }
 }

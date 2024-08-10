@@ -1,5 +1,5 @@
-import { readme } from "../mod.ts";
-import { md } from "../utils.ts";
+import { readme } from "../core/mod.ts";
+import { md } from "../core/utils.ts";
 const name = "readma";
 const author = "elcoosp";
 readme({

@@ -1,4 +1,4 @@
-import { MdSrc } from "./types.ts";
+import type { MdSrc } from "./types.ts";
 
 // TODO rely on https://github.com/a-ahandani/ah-toc for sweetness of the process
 /** Derive a table of content */

@@ -1,5 +1,5 @@
-import * as templates from "./templates.ts";
-import { ReadmeTemplateArgs } from "./types.ts";
+import * as templates from "../core/templates.ts";
+import { ReadmeTemplateArgs } from "../core/types.ts";
 import { render } from "@deno/gfm";
 
 /** Template independent options */

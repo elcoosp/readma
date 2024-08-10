@@ -1,5 +1,5 @@
 import { Tocer } from "./toc.ts";
-import { MdSrc, ReadmeTemplateArgs } from "./types.ts";
+import type { MdSrc, ReadmeTemplateArgs } from "./types.ts";
 /** Markdown source */
 //  TODO: Once sections derive all the table of contents
 export const readme = ({

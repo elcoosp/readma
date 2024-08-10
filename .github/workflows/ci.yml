@@ -29,5 +29,4 @@ jobs:
       - name: Test
         run: deno task t
       - name: Publish on tag
-        run: cd core && deno publish
-        # deno run -A jsr:@david/publish-on-tag@0.1.4
+        run: cd core && deno run -A jsr:@david/publish-on-tag@0.1.4

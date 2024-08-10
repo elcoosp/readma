@@ -2,6 +2,10 @@
   "name": "@readma/core",
   "version": "0.0.0",
   "exports": "./core/mod.ts",
+  "workspace": [
+    "./core",
+    "./cli"
+  ],
   "tasks": {
     "r": "deno run -A scripts/gen-readme.ts",
     "r:w": "deno run -A --watch scripts/gen-readme.ts",

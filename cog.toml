@@ -1,0 +1,7 @@
+[changelog]
+path = "CHANGELOG.md"
+template = "remote"
+remote = "github.com"
+repository = "readma"
+owner = "elcoosp"
+authors = [{ username = "elcoosp", signature = "elcoosp" }]

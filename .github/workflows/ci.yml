@@ -28,7 +28,5 @@ jobs:
 
       - name: Test
         run: deno task t
-      # TODO: May be replaced by OIDC https://docs.deno.com/runtime/manual/basics/modules/publishing_modules/#authentication
-      # See https://github.com/dsherret/jsr-publish-on-tag
-      # - name: Publish on tag
-      #   run: deno run -A jsr:@david/publish-on-tag@0.1.4
+      - name: Publish on tag
+        run: cd core && deno run -A jsr:@david/publish-on-tag@0.1.4

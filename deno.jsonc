@@ -1,0 +1,7 @@
+{
+  "tasks": {
+    "r": "deno run -A scripts/gen-readme.ts",
+    "r:w": "deno run -A --watch scripts/gen-readme.ts"
+  },
+  "imports": { "@deno/gfm": "jsr:@deno/gfm@^0.8.2" }
+}

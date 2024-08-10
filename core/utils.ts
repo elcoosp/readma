@@ -1,4 +1,4 @@
-import { MdSrc } from "./types.ts";
+import type { MdSrc } from "./types.ts";
 // TODO: fix lines of markdown inside template lit lead to incorrectly formatted md, use an md template lit & a linter
 /** Quick utils to avoid ugly escaping everywhere */
 export const md = {

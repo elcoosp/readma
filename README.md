@@ -67,7 +67,6 @@ See `scripts/gen-readme.ts`
 
 ## Roadmap
 
-- [x] Logo design
 - [ ] CLI with config file
 - [ ] Auto defaults from known files like Cargo.toml/{deno,package}.json
 

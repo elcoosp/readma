@@ -17,8 +17,8 @@ export type GlobalOptions = {
 export async function readme(
   rt: ReadmeTemplateArgs,
   options?: Partial<GlobalOptions>,
-): Promise<void> {
-  await renderWriteTemplate(templates.readme, rt, "README", options);
+): Promise<string> {
+  return (await renderWriteTemplate(templates.readme, rt, "README", options));
 }
 
 /**
@@ -51,5 +51,5 @@ async function renderWriteTemplate<
       `Expected ${folderPath} folder to exist, so that we can write the rendered markdown output inside, got error ${error}`,
     );
   }
-  console.log(rendered);
+  return rendered;
 }

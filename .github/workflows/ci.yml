@@ -26,7 +26,7 @@ jobs:
         run: deno lint
 
       - name: Test
-        run: deno test -A
+        run: deno task t
       # TODO: May be replaced by OIDC https://docs.deno.com/runtime/manual/basics/modules/publishing_modules/#authentication
       # See https://github.com/dsherret/jsr-publish-on-tag
       # - name: Publish on tag

@@ -11,7 +11,8 @@
     /** Changelog */
     "c": "cog changelog",
     /** Format */
-    "f": "cog changelog"
+    "f": "deno fmt",
+    "t": "(cd core && deno task t)"
   },
   "imports": {
     "@deno/gfm": "jsr:@deno/gfm@^0.8.2",

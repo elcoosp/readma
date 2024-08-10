@@ -5,10 +5,5 @@
   "tasks": {
     /** Test */
     "t": "deno test -A"
-  },
-  "fmt": {
-    "exclude": [
-      "../README.md"
-    ]
   }
 }

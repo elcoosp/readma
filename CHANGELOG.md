@@ -1,4 +1,4 @@
-## Unreleased ([170e1e6..348446d](https://github.com/elcoosp/readma/compare/170e1e6..348446d))
+## Unreleased ([170e1e6..4e85569](https://github.com/elcoosp/readma/compare/170e1e6..4e85569))
 
 #### Continuous Integration
 
@@ -11,7 +11,9 @@
 #### Miscellaneous Chores
 
 - **(core)** mv to folder & add deno name to pub - ([66481e4](https://github.com/elcoosp/readma/commit/66481e4a0f5a6c2837173d1db1c2b959c795ee85)) - [@elcoosp](https://github.com/elcoosp)
+- **(deno)** workspace - ([4e85569](https://github.com/elcoosp/readma/commit/4e85569b0a3c435295fc00e8c92b44d475cee56b)) - [@elcoosp](https://github.com/elcoosp)
 - **(doc)** up - ([db89fd7](https://github.com/elcoosp/readma/commit/db89fd784f657837aadcd85941cf2f549df53314)) - [@elcoosp](https://github.com/elcoosp)
+- **(git)** add cog for changelog gen - ([3d6f815](https://github.com/elcoosp/readma/commit/3d6f81506e82f4058b1421d9d19520aaf5a634ea)) - [@elcoosp](https://github.com/elcoosp)
 - **(git)** ignore - ([91ff508](https://github.com/elcoosp/readma/commit/91ff508436cbe775e0e4a89e4415fa495541fee7)) - [@elcoosp](https://github.com/elcoosp)
 - **(git)** init - ([170e1e6](https://github.com/elcoosp/readma/commit/170e1e6319f3ecd0423bb5d8225343ad2d65d157)) - [@elcoosp](https://github.com/elcoosp)
 - **(jsr)** Missing license & doc return of readme fn pub api - ([337dcd7](https://github.com/elcoosp/readma/commit/337dcd79cacecae17af14ee561abedc3d77f21ed)) - [@elcoosp](https://github.com/elcoosp)

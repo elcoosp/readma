@@ -1,7 +1,4 @@
 {
-  "name": "@readma/core",
-  "version": "0.0.0",
-  "exports": "./core/mod.ts",
   "workspace": [
     "./core",
     "./cli"

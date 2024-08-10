@@ -14,10 +14,10 @@ export type GlobalOptions = {
  * @param rt Readme arguments to feed the template
  * @param options General options
  */
-export const readme = async (
+export async function readme(
     rt: ReadmeTemplateArgs,
     options?: Partial<GlobalOptions>,
-) => {
+): Promise<void> {
     await renderWriteTemplate(templates.readme, rt, "README", options);
 };
 
@@ -28,7 +28,7 @@ export const readme = async (
  * @param filepath  Without extension, `.md` is hardcoded 
  * @param options The templater second arg
  */
-export async function renderWriteTemplate<T extends
+async function renderWriteTemplate<T extends
     // deno-lint-ignore no-explicit-any
     (...args: any) => any>(
         templater: T,

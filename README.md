@@ -68,7 +68,7 @@ See `scripts/gen-readme.ts`
 ## Roadmap
 
 - [ ] CLI with config file
-  - [ ] Auto defaults from known files like Cargo.toml/{deno,package}.json
+- [ ] Auto defaults from known files like Cargo.toml/{deno,package}.json
 
 See the [open issues](https://github.com/elcoosp/readma/issues) for a full list of proposed features (and known issues).
 
@@ -98,7 +98,7 @@ Project Link: [https://github.com/elcoosp/readma](https://github.com/elcoosp/rea
 ## Acknowledgments
 
 - [Best Readme](https://github.com/othneildrew/Best-README-Template)
-  - [Table of content library](https://github.com/a-ahandani/ah-toc)
+- [Table of content library](https://github.com/a-ahandani/ah-toc)
 
 <!--MARKDOWN LINKS & IMAGES-- >
 <!--https://www.markdownguide.org/basic-syntax/#reference-style-links -->

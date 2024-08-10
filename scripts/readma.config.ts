@@ -16,12 +16,12 @@ export default {
     about: "Create README that rocks",
     installation: md.code(`deno install ${name}`),
     acknowledgments: `
-  - [Best Readme](https://github.com/othneildrew/Best-README-Template)
-  - [Table of content library](https://github.com/a-ahandani/ah-toc)`,
+- [Best Readme](https://github.com/othneildrew/Best-README-Template)
+- [Table of content library](https://github.com/a-ahandani/ah-toc)`,
     getting_started: "See screenshot",
     roadmap: `
-  - [ ] CLI with config file
-  - [ ] Auto defaults from known files like Cargo.toml/{deno,package}.json`,
+- [ ] CLI with config file
+- [ ] Auto defaults from known files like Cargo.toml/{deno,package}.json`,
     usage: "See `scripts/gen-readme.ts`",
   },
   template: {

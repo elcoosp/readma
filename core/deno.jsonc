@@ -8,7 +8,7 @@
   },
   "fmt": {
     "exclude": [
-      "README.md"
+      "../README.md"
     ]
   }
 }

@@ -11,6 +11,7 @@ export const readme = ({
   email,
   title,
   author,
+  // TODO: add commit convention
   sections: {
     project_description,
     about,

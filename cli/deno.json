@@ -1,5 +1,5 @@
 {
-    "name": "@readma/cli",
-    "version": "0.0.0",
-    "exports": "./mod.ts"
+  "name": "@readma/cli",
+  "version": "0.0.0",
+  "exports": "./mod.ts"
 }

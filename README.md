@@ -1,8 +1,9 @@
 <a id="readme-top"></a>
+
 <!-- PROJECT SHIELDS -->
+
 [![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
+[![Forks][forks-shield]][forks-url] [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 
@@ -15,7 +16,7 @@
 
 <h3 align="center">Readma</h3>
 
-  <p align="center">
+<p align="center">
     Beautiful effortless README generator
     <br />
     <a href="https://github.com/elcoosp/readma"><strong>Explore the docs »</strong></a>
@@ -48,7 +49,7 @@
 ## About the project
 
 <img src="images/screenshot.gif" alt="Product screenshot" />
-  
+
 Create README that rocks
 
 ## Getting started
@@ -70,14 +71,18 @@ See `scripts/gen-readme.ts`
 - [ ] CLI with config file
 - [ ] Auto defaults from known files like Cargo.toml/{deno,package}.json
 
-See the [open issues](https://github.com/elcoosp/readma/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/elcoosp/readma/issues) for a full list
+of proposed features (and known issues).
 
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Contributions are what make the open source community such an amazing place to
+learn, inspire, and create. Any contributions you make are **greatly
+appreciated**.
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
+If you have a suggestion that would make this better, please fork the repo and
+create a pull request. You can also simply open an issue with the tag
+"enhancement". Don't forget to give the project a star! Thanks again!
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout-b feat/AmazingFeature`)
@@ -91,9 +96,11 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ## Contact
 
-elcoosp - [@elcoosp](https://twitter.com/elcoosp) - [elcoosp@gmail.com](elcoosp@gmail.com)
+elcoosp - [@elcoosp](https://twitter.com/elcoosp) -
+[elcoosp@gmail.com](elcoosp@gmail.com)
 
-Project Link: [https://github.com/elcoosp/readma](https://github.com/elcoosp/readma)
+Project Link:
+[https://github.com/elcoosp/readma](https://github.com/elcoosp/readma)
 
 ## Acknowledgments
 

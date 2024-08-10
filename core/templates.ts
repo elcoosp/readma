@@ -87,18 +87,20 @@ ${projectShields}
   </ol>
 </details>
 
-${tocer.section(
-    "About the project",
-    `
+${
+    tocer.section(
+      "About the project",
+      `
 <img src="${images.screenshot}" alt="Product screenshot" />
   
 ${about}`,
-  )
-    }
+    )
+  }
 ${tocer.section("Getting started", getting_started)}
 ${tocer.section("Installation", installation)}
 ${tocer.section("Usage", usage)}
-${tocer.section(
+${
+    tocer.section(
       "Roadmap",
       `
 ${roadmap}
@@ -106,8 +108,9 @@ ${roadmap}
 See the [open issues](${repoUrl}/issues) for a full list of proposed features (and known issues).
 `,
     )
-    }
-${tocer.section(
+  }
+${
+    tocer.section(
       "Contributing",
       `
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -122,13 +125,15 @@ Don't forget to give the project a star! Thanks again!
 5. Open a Pull Request
 `,
     )
-    }
-${tocer.section(
+  }
+${
+    tocer.section(
       "License",
       `Distributed under the MIT License. See \`LICENSE.txt\` for more information.`,
     )
-    }
-${tocer.section(
+  }
+${
+    tocer.section(
       "Contact",
       `
 ${author} - [@${x_handle}](https://twitter.com/${x_handle}) - [${fullEmail}](${fullEmail})
@@ -136,15 +141,16 @@ ${author} - [@${x_handle}](https://twitter.com/${x_handle}) - [${fullEmail}](${f
 Project Link: [${repoUrl}](${repoUrl})
 `,
     )
-    }
+  }
 ${tocer.section("Acknowledgments", acknowledgments)}
 <!--MARKDOWN LINKS & IMAGES-- >
 <!--https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-${ifLang(
+${
+    ifLang(
       "rs",
       "[crates-msrv-shield]: https://img.shields.io/crates/msrv/${repo_name}.svg?style=for-the-badge",
     )
-    }
+  }
 [contributors-shield]: https://img.shields.io/github/contributors/${github_username}/${repo_name}.svg?style=for-the-badge
 [contributors-url]: ${repoUrl}/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/${github_username}/${repo_name}.svg?style=for-the-badge
@@ -155,12 +161,13 @@ ${ifLang(
 [issues-url]: ${repoUrl}/issues
 [license-shield]: https://img.shields.io/github/license/${github_username}/${repo_name}.svg?style=for-the-badge
 [license-url]: ${repoUrl}/blob/master/LICENSE.txt
-${linkedin_username
+${
+    linkedin_username
       ? `[linkedin-url]: https://linkedin.com/in/${linkedin_username}
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555`
         .trim()
       : ""
-    }
+  }
 `.trim() +
     // Should end with a new line
     "\n";

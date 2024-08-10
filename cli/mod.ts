@@ -1,1 +1,1 @@
-export const cli = {}
+export const cli = {};

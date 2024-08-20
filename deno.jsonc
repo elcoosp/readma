@@ -3,9 +3,6 @@
     "./core",
     "./cli"
   ],
-  "fmt": {
-    "semiColons": false
-  },
   "tasks": {
     /** Generate readme */
     "r": "deno run -A scripts/gen-readme.ts",
@@ -28,6 +25,7 @@
     "config": "https://deno.land/x/config@v1.3.0/mod.ts"
   },
   "fmt": {
+    "semiColons": false,
     "exclude": [
       "README.md"
     ]

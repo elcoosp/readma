@@ -1,7 +1,7 @@
 import * as templates from "../core/templates.ts";
 import type { ReadmeTemplateArgs } from "../core/types.ts";
 import { render } from "@deno/gfm";
-
+export * as utils from "./utils.ts";
 /** Template independent options */
 export type GlobalOptions = {
   /** Specify folder where the file is output */

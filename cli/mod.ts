@@ -1,3 +1,4 @@
+import { Config } from "config";
 import { utils } from "@readma/core";
 import { Command } from "@cliffy/command";
 import { exists } from "@std/fs";
@@ -56,6 +57,9 @@ export const cli = {
     };
   },
   async run() {
+    const config = await Config.load({
+      file: "readma",
+    });
     await new Command()
       // Main command.
       .name("readma")
@@ -81,7 +85,9 @@ export const cli = {
             ? utils.md.code(`cargo add ${name}`)
             : null,
         };
+
         console.log({
+          config,
           language,
           sections,
           workspaceMembers,

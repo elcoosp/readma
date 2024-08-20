@@ -1,4 +1,4 @@
-import { md } from "../core/utils.ts";
+import { md } from "./core/utils.ts";
 const name = "readma";
 const author = "elcoosp";
 export default {

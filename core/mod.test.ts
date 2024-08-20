@@ -1,6 +1,6 @@
 import { assertEquals } from "@std/assert";
 import { readme } from "./mod.ts";
-import config from "../scripts/readma.config.ts";
+import config from "../readma.config.ts";
 
 Deno.test("readme", async () => {
   const current = await Deno.readTextFile("../README.md");

@@ -1,5 +1,5 @@
-import { Tocer } from "./toc.ts";
-import type { MdSrc, ReadmeTemplateArgs } from "./types.ts";
+import { Tocer } from "./toc.ts"
+import type { MdSrc, ReadmeTemplateArgs } from "./types.ts"
 /** Markdown source */
 //  TODO: Once sections derive all the table of contents
 export const readme = ({
@@ -27,13 +27,13 @@ export const readme = ({
   back_to_top,
 }: ReadmeTemplateArgs) => {
   // FIXME: domain + ext
-  const fullEmail = `${email}@${domain}.com`;
+  const fullEmail = `${email}@${domain}.com`
   // TODO: allow other repo host
-  const repoUrl = `https://github.com/${github_username}/${repo_name}`;
-  const tocer = new Tocer(back_to_top);
+  const repoUrl = `https://github.com/${github_username}/${repo_name}`
+  const tocer = new Tocer(back_to_top)
   // TODO: use lit-html extension to get intellisense inside templates
   const ifLang = (lang: ReadmeTemplateArgs["language"], src: MdSrc) =>
-    language == lang ? src : "";
+    language == lang ? src : ""
   const projectShields = `
 <!-- PROJECT SHIELDS -->
 [![Contributors][contributors-shield]][contributors-url]
@@ -43,7 +43,7 @@ export const readme = ({
 [![MIT License][license-shield]][license-url]
 ${linkedin_username ? "[![LinkedIn][linkedin-shield]][linkedin-url]" : ""}
 ${ifLang("rs", "![MSRV][crates-msrv-shield]")}
-`.trim();
+`.trim()
   return `
 <a id="readme-top"></a>
 ${projectShields}
@@ -170,5 +170,5 @@ ${
   }
 `.trim() +
     // Should end with a new line
-    "\n";
-};
+    "\n"
+}

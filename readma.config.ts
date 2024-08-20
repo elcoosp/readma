@@ -1,6 +1,6 @@
-import { md } from "./core/utils.ts";
-const name = "readma";
-const author = "elcoosp";
+import { md } from "./core/utils.ts"
+const name = "readma"
+const author = "elcoosp"
 export default {
   language: "ts",
   title: "Readma",
@@ -29,4 +29,4 @@ export default {
     feat_request: "feature-request---from-readme",
   },
   back_to_top: false,
-} as const;
+} as const

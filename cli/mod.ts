@@ -15,22 +15,31 @@ export const cli = {
       .option("-w, --write", "Write gathered config")
       .action(async (_options, ..._args) => {
         // Detect language
-        const tsFiles = ["deno.jsonc", "deno.json", "package.json"];
-        const rsFiles = ["Cargo.toml"];
+        const tsFilenames = ["deno.jsonc", "deno.json", "package.json"];
+        const rsFilenames = ["Cargo.toml"];
         const hasFiles = async (files: string[]) =>
           await Promise.all(
             files.map(async (file) => {
               if (await exists(file)) {
-                return true;
-              } else return false;
+                return (await Deno.readFile(file));
+              } else return null;
             }),
           );
-        const hasTsFiles = await hasFiles(tsFiles);
-        const hasRsFiles = await hasFiles(rsFiles);
-        // TODO: should warn ambiguous if both
-        const language = hasTsFiles.some((x) => x === true)
+        const tsFiles = await hasFiles(tsFilenames);
+        const rsFiles = await hasFiles(rsFilenames);
+        const hasRsFiles = rsFiles.some((x) => x !== null);
+        const hasTsFiles = tsFiles.some((x) => x !== null);
+        if (
+          hasRsFiles &&
+          hasTsFiles
+        ) {
+          throw new Error(
+            "Found both a typescript and rust configuration file, not supported yet",
+          );
+        }
+        const language = hasTsFiles
           ? "ts" as const
-          : hasRsFiles.some((x) => x === true)
+          : hasRsFiles
           ? "rs" as const
           : null;
         // Deduce from workspace members

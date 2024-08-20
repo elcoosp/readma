@@ -1,51 +1,51 @@
 // TODO: allow different case, this is too rusty
 export type ReadmeTemplateArgs = {
   /** Source files language, rust or typescript only for now */
-  language: "rs" | "ts"
+  language: "rs" | "ts";
   /** Images links */
-  images: { screenshot: string; logo: string }
+  images: { screenshot: string; logo: string };
   /** Main author */
-  author: string
+  author: string;
   /** Github template */
   template: {
     /** Github bug report (issue) template */
-    bug_report: string
+    bug_report: string;
     /** Github feature request template */
-    feat_request: string
-  }
+    feat_request: string;
+  };
   /** Github user name */
-  github_username: string
+  github_username: string;
   /** Repository name */
-  repo_name: string
+  repo_name: string;
   /** Ex twitter */
-  x_handle: string
+  x_handle: string;
   /** LinkedIn username */
-  linkedin_username?: string
+  linkedin_username?: string;
   /** Domain name for the mail */
-  domain: string
+  domain: string;
   /** Email (should just be the prefix, no @domain.com) */
-  email: string
+  email: string;
   /** This should be a reference to a folder that exist and contain source files for which you want a README  */
-  title: string
+  title: string;
 
   /** Wether or not to add a button to scroll back to the top of the readme */
-  back_to_top: boolean
+  back_to_top: boolean;
   /** This will be used in a near future to auto generate a table of content which would be dynamic optionally */
   sections: {
     /** Project description section */
-    project_description: string
+    project_description: string;
     /** About section */
-    about: string
+    about: string;
     /** Installation section */
-    installation: string
+    installation: string;
     /** Acknowledgments section */
-    acknowledgments: string
+    acknowledgments: string;
     /** Getting started section */
-    getting_started: string
+    getting_started: string;
     /** Roadmap section */
-    roadmap: string
+    roadmap: string;
     /** Usage section */
-    usage: string
-  }
-}
-export type MdSrc = string
+    usage: string;
+  };
+};
+export type MdSrc = string;

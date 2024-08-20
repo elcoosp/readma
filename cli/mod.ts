@@ -1,14 +1,14 @@
-import { Config } from "config"
-import { utils } from "@readma/core"
-import { Command } from "@cliffy/command"
-import { exists } from "@std/fs"
-import * as toml from "@std/toml"
-import * as jsonc from "@std/jsonc"
+import { Config } from "config";
+import { utils } from "@readma/core";
+import { Command } from "@cliffy/command";
+import { exists } from "@std/fs";
+import * as toml from "@std/toml";
+import * as jsonc from "@std/jsonc";
 
 export const cli = {
   async detectLanguage() {
-    const tsFilenames = ["deno.jsonc", "deno.json"]
-    const rsFilenames = ["Cargo.toml"]
+    const tsFilenames = ["deno.jsonc", "deno.json"];
+    const rsFilenames = ["Cargo.toml"];
     const hasFiles = async (filenames: string[]) =>
       await Promise.all(
         filenames.map(async (filename) => {
@@ -17,49 +17,49 @@ export const cli = {
               toml,
               json: JSON,
               jsonc: jsonc,
-            } as const
-            const ext = filename.split(".")[1] as keyof typeof parserMap
-            const parser = parserMap[ext].parse
-            const file = await Deno.readTextFile(filename)
-            return parser(file)
-          } else return null
+            } as const;
+            const ext = filename.split(".")[1] as keyof typeof parserMap;
+            const parser = parserMap[ext].parse;
+            const file = await Deno.readTextFile(filename);
+            return parser(file);
+          } else return null;
         }),
-      )
-    const tsFiles = await hasFiles(tsFilenames)
-    const rsFiles = await hasFiles(rsFilenames)
-    const hasRsFiles = rsFiles.some((x) => x !== null)
-    const hasTsFiles = tsFiles.some((x) => x !== null)
+      );
+    const tsFiles = await hasFiles(tsFilenames);
+    const rsFiles = await hasFiles(rsFilenames);
+    const hasRsFiles = rsFiles.some((x) => x !== null);
+    const hasTsFiles = tsFiles.some((x) => x !== null);
     if (
       hasRsFiles &&
       hasTsFiles
     ) {
       throw new Error(
         "Found both a typescript and rust configuration file, not supported yet",
-      )
+      );
     }
     const language = hasTsFiles
       ? "ts" as const
       : hasRsFiles
       ? "rs" as const
-      : null
-    if (language === null) throw new Error("Could not detect language")
+      : null;
+    if (language === null) throw new Error("Could not detect language");
     const files = {
       ts: tsFiles.find((x) => x !== null),
       rs: rsFiles.find((x) => x !== null),
-    }
+    };
     const workspaceMembers = language === "rs"
       ? files.rs.workspace.members
-      : files.ts.workspace
+      : files.ts.workspace;
     return {
       language,
       files,
       workspaceMembers,
-    }
+    };
   },
   async run() {
     const config = await Config.load({
       file: "readma",
-    })
+    });
     await new Command()
       // Main command.
       .name("readma")
@@ -72,28 +72,28 @@ export const cli = {
       .option("-w, --write", "Write gathered config")
       .action(async (_options, ..._args) => {
         const { language, files, workspaceMembers } = await cli
-          .detectLanguage()
+          .detectLanguage();
 
         /**
          * TODO: One readme for each {@link workspaceMembers}
          */
-        const name = "TODO"
+        const name = "TODO";
         const sections = {
           installation: language === "ts"
             ? utils.md.code(`deno install ${name}`)
             : language === "rs"
             ? utils.md.code(`cargo add ${name}`)
             : null,
-        }
+        };
 
         console.log({
           config,
           language,
           sections,
           workspaceMembers,
-        })
+        });
       })
-      .parse(Deno.args)
+      .parse(Deno.args);
   },
-}
-await cli.run()
+};
+await cli.run();

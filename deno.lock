@@ -10,11 +10,13 @@
       "jsr:@denosaurs/emoji@0.3": "jsr:@denosaurs/emoji@0.3.0",
       "jsr:@std/assert@1": "jsr:@std/assert@1.0.2",
       "jsr:@std/cli@1.0.0-rc.2": "jsr:@std/cli@1.0.0-rc.2",
+      "jsr:@std/collections@^1.0.4": "jsr:@std/collections@1.0.5",
       "jsr:@std/fmt@~0.225.4": "jsr:@std/fmt@0.225.6",
       "jsr:@std/fs@1.0.1": "jsr:@std/fs@1.0.1",
       "jsr:@std/internal@^1.0.1": "jsr:@std/internal@1.0.1",
       "jsr:@std/path@^1.0.2": "jsr:@std/path@1.0.2",
       "jsr:@std/text@1.0.0-rc.1": "jsr:@std/text@1.0.0-rc.1",
+      "jsr:@std/toml": "jsr:@std/toml@1.0.0",
       "npm:github-slugger@^2.0": "npm:github-slugger@2.0.0",
       "npm:he@^1.2": "npm:he@1.2.0",
       "npm:katex@^0.16": "npm:katex@0.16.11",
@@ -79,6 +81,9 @@
       "@std/cli@1.0.0-rc.2": {
         "integrity": "97dfae82b9f0e189768ebfa7a5da53375955b94bad0a1804f8e3b73563b03787"
       },
+      "@std/collections@1.0.5": {
+        "integrity": "ab9eac23b57a0c0b89ba45134e61561f69f3d001f37235a248ed40be260c0c10"
+      },
       "@std/fmt@0.225.6": {
         "integrity": "aba6aea27f66813cecfd9484e074a9e9845782ab0685c030e453a8a70b37afc8"
       },
@@ -96,6 +101,12 @@
       },
       "@std/text@1.0.0-rc.1": {
         "integrity": "34c722203e87ee12792c8d4a0cd2ee0e001341cbce75b860fc21be19d62232b0"
+      },
+      "@std/toml@1.0.0": {
+        "integrity": "c9e37564eedd84084871c66238e00196ec67aa958e09a7f761b3f36273a7a8a5",
+        "dependencies": [
+          "jsr:@std/collections@^1.0.4"
+        ]
       }
     },
     "npm": {

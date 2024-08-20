@@ -1,15 +1,24 @@
 import { utils } from "@readma/core";
 import { Command } from "@cliffy/command";
 import { exists } from "@std/fs";
+import * as toml from "@std/toml";
 export const cli = {
   async detectLanguage() {
     const tsFilenames = ["deno.jsonc", "deno.json"];
     const rsFilenames = ["Cargo.toml"];
-    const hasFiles = async (files: string[]) =>
+    const hasFiles = async (filenames: string[]) =>
       await Promise.all(
-        files.map(async (file) => {
-          if (await exists(file)) {
-            return (await Deno.readFile(file));
+        filenames.map(async (filename) => {
+          if (await exists(filename)) {
+            const parserMap = {
+              toml,
+              json: JSON,
+              jsonc: JSON,
+            } as const;
+            const ext = filename.split(".")[1] as keyof typeof parserMap;
+            const parser = parserMap[ext].parse;
+            const file = await Deno.readTextFile(filename);
+            return parser(file);
           } else return null;
         }),
       );
@@ -51,7 +60,7 @@ export const cli = {
       .command("inspect", "Inspect git repo sub-command.")
       .option("-w, --write", "Write gathered config")
       .action(async (_options, ..._args) => {
-        const { language, files } = await cli.detectLanguage();
+        const { language, files: _ } = await cli.detectLanguage();
         // Deduce from workspace members of files
         const name = "TODO";
         const sections = {

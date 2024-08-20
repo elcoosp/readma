@@ -19,7 +19,8 @@
     "@std/assert": "jsr:@std/assert@1",
     "@std/fs": "jsr:@std/fs@1.0.1",
     "@cliffy/command": "jsr:@cliffy/command@1.0.0-rc.5",
-    "@std/toml": "jsr:@std/toml"
+    "@std/toml": "jsr:@std/toml",
+    "@std/jsonc": "jsr:@std/jsonc"
   },
   "fmt": {
     "exclude": [

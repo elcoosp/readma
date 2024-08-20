@@ -2,6 +2,8 @@ import { utils } from "@readma/core";
 import { Command } from "@cliffy/command";
 import { exists } from "@std/fs";
 import * as toml from "@std/toml";
+import * as jsonc from "@std/jsonc";
+
 export const cli = {
   async detectLanguage() {
     const tsFilenames = ["deno.jsonc", "deno.json"];
@@ -13,7 +15,7 @@ export const cli = {
             const parserMap = {
               toml,
               json: JSON,
-              jsonc: JSON,
+              jsonc: jsonc,
             } as const;
             const ext = filename.split(".")[1] as keyof typeof parserMap;
             const parser = parserMap[ext].parse;
@@ -39,13 +41,18 @@ export const cli = {
       : hasRsFiles
       ? "rs" as const
       : null;
-
+    if (language === null) throw new Error("Could not detect language");
+    const files = {
+      ts: tsFiles.find((x) => x !== null),
+      rs: rsFiles.find((x) => x !== null),
+    };
+    const workspaceMembers = language === "rs"
+      ? files.rs.workspace.members
+      : files.ts.workspace;
     return {
       language,
-      files: {
-        ts: tsFiles,
-        rs: rsFiles,
-      },
+      files,
+      workspaceMembers,
     };
   },
   async run() {
@@ -60,8 +67,12 @@ export const cli = {
       .command("inspect", "Inspect git repo sub-command.")
       .option("-w, --write", "Write gathered config")
       .action(async (_options, ..._args) => {
-        const { language, files: _ } = await cli.detectLanguage();
-        // Deduce from workspace members of files
+        const { language, files, workspaceMembers } = await cli
+          .detectLanguage();
+
+        /**
+         * TODO: One readme for each {@link workspaceMembers}
+         */
         const name = "TODO";
         const sections = {
           installation: language === "ts"
@@ -73,6 +84,7 @@ export const cli = {
         console.log({
           language,
           sections,
+          workspaceMembers,
         });
       })
       .parse(Deno.args);

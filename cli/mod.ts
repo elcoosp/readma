@@ -15,7 +15,7 @@ export const cli = {
       .option("-w, --write", "Write gathered config")
       .action(async (_options, ..._args) => {
         // Detect language
-        const tsFilenames = ["deno.jsonc", "deno.json", "package.json"];
+        const tsFilenames = ["deno.jsonc", "deno.json"];
         const rsFilenames = ["Cargo.toml"];
         const hasFiles = async (files: string[]) =>
           await Promise.all(
@@ -46,7 +46,6 @@ export const cli = {
         const name = "TODO";
         const sections = {
           installation: language === "ts"
-            // TODO: should check npm vs deno
             ? utils.md.code(`deno install ${name}`)
             : language === "rs"
             ? utils.md.code(`cargo add ${name}`)

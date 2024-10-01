@@ -19,6 +19,7 @@
       "jsr:@std/path@^1.0.2": "jsr:@std/path@1.0.2",
       "jsr:@std/text@1.0.0-rc.1": "jsr:@std/text@1.0.0-rc.1",
       "jsr:@std/toml": "jsr:@std/toml@1.0.0",
+      "jsr:@wok/case@^1.0.1": "jsr:@wok/case@1.0.1",
       "npm:github-slugger@^2.0": "npm:github-slugger@2.0.0",
       "npm:he@^1.2": "npm:he@1.2.0",
       "npm:katex@^0.16": "npm:katex@0.16.11",
@@ -118,6 +119,9 @@
         "dependencies": [
           "jsr:@std/collections@^1.0.4"
         ]
+      },
+      "@wok/case@1.0.1": {
+        "integrity": "409e94f961f5b278992bace87a0c7d3c6a3db516d01759bdb827d9ae4d75e9aa"
       }
     },
     "npm": {
@@ -511,7 +515,8 @@
       "jsr:@std/fs@1.0.1",
       "jsr:@std/jsonc",
       "jsr:@std/path@^1.0.2",
-      "jsr:@std/toml"
+      "jsr:@std/toml",
+      "jsr:@wok/case@^1.0.1"
     ]
   }
 }

@@ -1,8 +1,5 @@
 {
-  "workspace": [
-    "./core",
-    "./cli"
-  ],
+  "workspace": ["./core", "./cli"],
   "tasks": {
     /** Generate readme */
     "r": "deno run -A scripts/gen-readme.ts",
@@ -22,12 +19,11 @@
     "@std/jsonc": "jsr:@std/jsonc",
     "@std/path": "jsr:@std/path@^1.0.2",
     "@std/toml": "jsr:@std/toml",
+    "@wok/case": "jsr:@wok/case@^1.0.1",
     "config": "https://deno.land/x/config@v1.3.0/mod.ts"
   },
   "fmt": {
     "semiColons": false,
-    "exclude": [
-      "README.md"
-    ]
+    "exclude": ["README.md"]
   }
 }

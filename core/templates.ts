@@ -44,7 +44,8 @@ export const readme = ({
 ${linkedin_username ? "[![LinkedIn][linkedin-shield]][linkedin-url]" : ""}
 ${ifLang("rs", "![MSRV][crates-msrv-shield]")}
 `.trim()
-  return `
+  const tocVar = "$$TOC$$"
+  const withoutToc = `
 <a id="readme-top"></a>
 ${projectShields}
 
@@ -54,9 +55,7 @@ ${projectShields}
   <a href="${repoUrl}">
     <img src="${images.logo}" style="max-height: 200px; object-fit: contain;" alt="Logo">
   </a>
-
-<h3 align="center">${title}</h3>
-
+  <h3 align="center">${title}</h3>
   <p align="center">
     ${project_description}
     <br />
@@ -71,21 +70,7 @@ ${projectShields}
   </p>
 </div>
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of contents</summary>
-  <ol>
-    <li><a href="#about-the-project">About the project</a></li>
-    <li><a href="#getting-started">Getting started</a></li>
-    <li><a href="#installation">Installation</a></li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
+${tocVar}
 
 ${
     tocer.section(
@@ -171,4 +156,6 @@ ${
 `.trim() +
     // Should end with a new line
     "\n"
+
+  return withoutToc.replace(tocVar, tocer.toc())
 }

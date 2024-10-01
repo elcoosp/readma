@@ -5,5 +5,8 @@
   "tasks": {
     /** Test */
     "t": "deno test -A"
+  },
+  "imports": {
+    "@readma/core": "../core/mod.ts"
   }
 }

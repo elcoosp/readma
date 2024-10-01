@@ -1,5 +1,5 @@
-import { Tocer } from "./toc.ts";
-import type { MdSrc, ReadmeTemplateArgs } from "./types.ts";
+import { Tocer } from "./toc.ts"
+import type { MdSrc, ReadmeTemplateArgs } from "./types.ts"
 /** Markdown source */
 //  TODO: Once sections derive all the table of contents
 export const readme = ({
@@ -27,13 +27,13 @@ export const readme = ({
   back_to_top,
 }: ReadmeTemplateArgs) => {
   // FIXME: domain + ext
-  const fullEmail = `${email}@${domain}.com`;
+  const fullEmail = `${email}@${domain}.com`
   // TODO: allow other repo host
-  const repoUrl = `https://github.com/${github_username}/${repo_name}`;
-  const tocer = new Tocer(back_to_top);
+  const repoUrl = `https://github.com/${github_username}/${repo_name}`
+  const tocer = new Tocer(back_to_top)
   // TODO: use lit-html extension to get intellisense inside templates
   const ifLang = (lang: ReadmeTemplateArgs["language"], src: MdSrc) =>
-    language == lang ? src : "";
+    language == lang ? src : ""
   const projectShields = `
 <!-- PROJECT SHIELDS -->
 [![Contributors][contributors-shield]][contributors-url]
@@ -43,8 +43,9 @@ export const readme = ({
 [![MIT License][license-shield]][license-url]
 ${linkedin_username ? "[![LinkedIn][linkedin-shield]][linkedin-url]" : ""}
 ${ifLang("rs", "![MSRV][crates-msrv-shield]")}
-`.trim();
-  return `
+`.trim()
+  const tocVar = "$$TOC$$"
+  const withoutToc = `
 <a id="readme-top"></a>
 ${projectShields}
 
@@ -54,9 +55,7 @@ ${projectShields}
   <a href="${repoUrl}">
     <img src="${images.logo}" style="max-height: 200px; object-fit: contain;" alt="Logo">
   </a>
-
-<h3 align="center">${title}</h3>
-
+  <h3 align="center">${title}</h3>
   <p align="center">
     ${project_description}
     <br />
@@ -71,21 +70,7 @@ ${projectShields}
   </p>
 </div>
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of contents</summary>
-  <ol>
-    <li><a href="#about-the-project">About the project</a></li>
-    <li><a href="#getting-started">Getting started</a></li>
-    <li><a href="#installation">Installation</a></li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
+${tocVar}
 
 ${
     tocer.section(
@@ -170,5 +155,7 @@ ${
   }
 `.trim() +
     // Should end with a new line
-    "\n";
-};
+    "\n"
+
+  return withoutToc.replace(tocVar, tocer.toc())
+}

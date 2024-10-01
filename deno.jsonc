@@ -1,8 +1,5 @@
 {
-  "workspace": [
-    "./core",
-    "./cli"
-  ],
+  "workspace": ["./core", "./cli"],
   "tasks": {
     /** Generate readme */
     "r": "deno run -A scripts/gen-readme.ts",
@@ -15,12 +12,18 @@
     "t": "(cd core && deno task t)"
   },
   "imports": {
+    "@cliffy/command": "jsr:@cliffy/command@1.0.0-rc.5",
     "@deno/gfm": "jsr:@deno/gfm@^0.8.2",
-    "@std/assert": "jsr:@std/assert@1"
+    "@std/assert": "jsr:@std/assert@1",
+    "@std/fs": "jsr:@std/fs@1.0.1",
+    "@std/jsonc": "jsr:@std/jsonc",
+    "@std/path": "jsr:@std/path@^1.0.2",
+    "@std/toml": "jsr:@std/toml",
+    "@wok/case": "jsr:@wok/case@^1.0.1",
+    "config": "https://deno.land/x/config@v1.3.0/mod.ts"
   },
   "fmt": {
-    "exclude": [
-      "README.md"
-    ]
+    "semiColons": false,
+    "exclude": ["README.md"]
   }
 }

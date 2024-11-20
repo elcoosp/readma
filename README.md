@@ -4,7 +4,7 @@
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Commit activity][commit-activity-shield]][commit-activity-url]
-[![Branch status][checks-status-shield]][checks-status-url]
+[![Branch action runs][checks-runs-shield]][checks-runs-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 
@@ -112,8 +112,8 @@ Project Link: [https://github.com/elcoosp/readma](https://github.com/elcoosp/rea
 [issues-shield]: https://img.shields.io/github/issues/elcoosp/readma.svg?style=for-the-badge
 [commit-activity-url]: https://github.com/elcoosp/readma/commits
 [commit-activity-shield]: https://img.shields.io/github/commit-activity/w/elcoosp/readma.svg?style=for-the-badge
-[checks-status-url]: https://github.com/elcoosp/readma/actions?query=branch%3Amain
-[checks-status-shield]: https://img.shields.io/github/check-status/elcoosp/readma/main.svg?style=for-the-badge
+[checks-runs-url]: https://github.com/elcoosp/readma/actions?query=branch%3Amain
+[checks-runs-shield]: https://img.shields.io/github/check-runs/elcoosp/readma/main.svg?style=for-the-badge
 [issues-url]: https://github.com/elcoosp/readma/issues
 [license-shield]: https://img.shields.io/github/license/elcoosp/readma.svg?style=for-the-badge
 [license-url]: https://github.com/elcoosp/readma/blob/master/LICENSE.txt

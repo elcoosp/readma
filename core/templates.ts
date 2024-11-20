@@ -47,7 +47,7 @@ export const readme = ({
   const repoUrl = `https://github.com/${github_username}/${repo_name}`
   const demoUrl = demo_url || repoUrl
   const branch = getBranch()
-  const checkStatusUrl = `${repoUrl}/actions?query=${
+  const checkRunsUrl = `${repoUrl}/actions?query=${
     encodeURIComponent(`branch:${branch}`)
   }`
   const tocer = new Tocer(back_to_top)
@@ -61,7 +61,7 @@ export const readme = ({
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Commit activity][commit-activity-shield]][commit-activity-url]
-[![Branch status][checks-status-shield]][checks-status-url]
+[![Branch action runs][checks-runs-shield]][checks-runs-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 ${linkedin_username ? "[![LinkedIn][linkedin-shield]][linkedin-url]" : ""}
@@ -169,8 +169,8 @@ ${
 [issues-shield]: https://img.shields.io/github/issues/${github_username}/${repo_name}.svg?style=${badgeStyle}
 [commit-activity-url]: ${repoUrl}/commits
 [commit-activity-shield]: https://img.shields.io/github/commit-activity/${commit_activity_interval}/${github_username}/${repo_name}.svg?style=${badgeStyle}
-[checks-status-url]: ${checkStatusUrl}
-[checks-status-shield]: https://img.shields.io/github/check-status/${github_username}/${repo_name}/${branch}.svg?style=${badgeStyle}
+[checks-runs-url]: ${checkRunsUrl}
+[checks-runs-shield]: https://img.shields.io/github/check-runs/${github_username}/${repo_name}/${branch}.svg?style=${badgeStyle}
 [issues-url]: ${repoUrl}/issues
 [license-shield]: https://img.shields.io/github/license/${github_username}/${repo_name}.svg?style=${badgeStyle}
 [license-url]: ${repoUrl}/blob/master/LICENSE.txt

@@ -73,7 +73,7 @@ export const cli: Cli = {
       // Main command.
       .name("readma")
       // TODO read from deno.json
-      .version("0.2.0")
+      .version("0.2.1")
       .description("Command line utility for Readme")
       .globalOption("-d, --debug", "Enable debug output.")
       .action((_options, ..._args) => console.log("Main command called."))

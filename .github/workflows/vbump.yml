@@ -13,9 +13,7 @@ jobs:
           fetch-depth: 0
 
       - name: Install deno
-        uses: denoland/setup-deno@v2
-        with:
-          deno-version: v2.x
+        uses: denoland/setup-deno@v1
 
       - name: Run workspaces version bump
         run: deno run -A jsr:@deno/bump-workspaces@0.1.21/cli

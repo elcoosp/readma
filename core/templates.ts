@@ -1,6 +1,9 @@
 import { Tocer } from "./toc.ts"
 import type { MdSrc, ReadmeTemplateArgs } from "./types.ts"
 const getBranch = () => {
+  // Workaround github ci
+  const GITHUB_HEAD_REF = Deno.env.get("GITHUB_HEAD_REF")
+  if (GITHUB_HEAD_REF) return GITHUB_HEAD_REF
   const command = new Deno.Command("git", {
     args: [
       "branch",

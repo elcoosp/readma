@@ -10,7 +10,7 @@ export default {
   x_handle: author,
   domain: "gmail",
   email: author,
-  repobeats: "bcfa91e5586a81b65ba4e64a132ce351cacec4b2",
+  repobeats: "1b12e7ffd13fd2d15772a30e8b0a995976150797",
   images: { screenshot: "images/screenshot.gif", logo: "images/logo.png" },
   sections: {
     project_description: "Beautiful effortless README generator",

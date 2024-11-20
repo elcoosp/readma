@@ -29,6 +29,7 @@
     "semiColons": false,
     "exclude": [
       "README.md",
+      "CHANGELOG.md",
       "docs"
     ]
   },

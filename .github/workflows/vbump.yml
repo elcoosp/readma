@@ -1,5 +1,6 @@
 name: vbump
 on: workflow_dispatch
+
 jobs:
   build:
     name: Version bump
@@ -10,12 +11,12 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@v4
 
-      - name: Install deno
-        uses: denoland/setup-deno@v2
-        with:
-          deno-version: v2.x
+      - name: Set up Deno
+        uses: denoland/setup-deno@v1
 
       - name: Run workspaces version bump
         run: |
           git fetch --unshallow origin
           deno run -A jsr:@deno/bump-workspaces@0.1.21/cli
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

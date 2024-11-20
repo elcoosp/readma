@@ -4,15 +4,10 @@
     "./cli"
   ],
   "tasks": {
-    /** Generate readme */
     "r": "deno run -A scripts/gen-readme.ts",
-    /** Generate readme watching */
     "r:w": "deno run -A --watch scripts/gen-readme.ts",
-    /** Changelog */
     "c": "cog changelog > CHANGELOG.md",
-    /** Format */
     "f": "deno fmt",
-    /** Doc */
     "d": "(cd core && deno task d); (cd cli && deno task d)"
   },
   "imports": {

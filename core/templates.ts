@@ -3,10 +3,7 @@ import type { MdSrc, ReadmeTemplateArgs } from "./types.ts"
 const getBranch = () => {
   // Workaround github ci
   const GITHUB_HEAD_REF = Deno.env.get("GITHUB_HEAD_REF")
-  const GITHUB_REF = Deno.env.get("GITHUB_REF")
-
   if (GITHUB_HEAD_REF) return GITHUB_HEAD_REF
-  else if (GITHUB_REF) return GITHUB_REF.replace("refs/heads/", "")
   const command = new Deno.Command("git", {
     args: [
       "branch",

@@ -6,7 +6,7 @@ const getBranch = () => {
   const GITHUB_REF = Deno.env.get("GITHUB_REF")
 
   if (GITHUB_HEAD_REF) return GITHUB_HEAD_REF
-  else if (GITHUB_REF) return GITHUB_REF.replace("ref/heads/", "")
+  else if (GITHUB_REF) return GITHUB_REF.replace("refs/heads/", "")
   const command = new Deno.Command("git", {
     args: [
       "branch",

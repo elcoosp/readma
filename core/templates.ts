@@ -16,42 +16,43 @@ const getBranch = () => {
 /** Markdown source */
 //  TODO: Once sections derive all the table of contents
 export const readme = ({
-  github_username,
-  repo_name,
-  x_handle,
-  linkedin_username,
+  githubUsername,
+  repoName,
+  xHandle,
+  linkedinUsername,
   domain,
   email,
   title,
   author,
   repobeats,
-  demo_url,
+  urls,
   // TODO: add commit convention
   sections: {
-    project_description,
+    projectDescription,
     about,
     installation,
     acknowledgments,
-    getting_started,
+    gettingStarted,
     roadmap,
     usage,
   },
   images,
   template,
   language,
-  back_to_top,
+  backToTop,
 }: ReadmeTemplateArgs) => {
   // FIXME: domain + ext
   const fullEmail = `${email}@${domain}.com`
   // TODO: allow other repo host
-  const repoUrl = `https://github.com/${github_username}/${repo_name}`
-  const demoUrl = demo_url || repoUrl
+  const repoUrl = urls?.repo ||
+    `https://github.com/${githubUsername}/${repoName}`
+  const demoUrl = urls?.demo || repoUrl
   const branch = getBranch()
   const checkRunsUrl = `${repoUrl}/actions?query=${
     encodeURIComponent(`branch:${branch}`)
   }`
-  const tocer = new Tocer(back_to_top)
-  const commit_activity_interval = "w"
+  const tocer = new Tocer(backToTop)
+  const commitActivityInterval = "w"
   // TODO: use lit-html extension to get intellisense inside templates
   const ifLang = (lang: ReadmeTemplateArgs["language"], src: MdSrc) =>
     language == lang ? src : ""
@@ -64,7 +65,7 @@ export const readme = ({
 [![Branch action runs][checks-runs-shield]][checks-runs-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-${linkedin_username ? "[![LinkedIn][linkedin-shield]][linkedin-url]" : ""}
+${linkedinUsername ? "[![LinkedIn][linkedin-shield]][linkedin-url]" : ""}
 ${ifLang("rs", "![MSRV][crates-msrv-shield]")}
 `.trim()
   const tocVar = "$$TOC$$"
@@ -81,16 +82,16 @@ ${projectShields}
   </a>
   <h3 align="center">${title}</h3>
   <p align="center">
-    ${project_description}
+    ${projectDescription}
     <br />
     <a href="${repoUrl}"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="${demoUrl}">View Demo</a>
     ·
-    <a href="${repoUrl}/issues/new?labels=bug&template=-${template.bug_report}.md">Report Bug</a>
+    <a href="${repoUrl}/issues/new?labels=bug&template=-${template.bugReport}.md">Report Bug</a>
     ·
-    <a href="${repoUrl}/issues/new?labels=enhancement&template=${template.feat_request}.md">Request Feature</a>
+    <a href="${repoUrl}/issues/new?labels=enhancement&template=${template.featRequest}.md">Request Feature</a>
   </p>
 </div>
 
@@ -105,7 +106,7 @@ ${
 ${about}`,
     )
   }
-${tocer.section("Getting started", getting_started)}
+${tocer.section("Getting started", gettingStarted)}
 ${tocer.section("Installation", installation)}
 ${tocer.section("Usage", usage)}
 ${
@@ -145,7 +146,7 @@ ${
     tocer.section(
       "Contact",
       `
-${author} - [@${x_handle}](https://twitter.com/${x_handle}) - [${fullEmail}](${fullEmail})
+${author} - [@${xHandle}](https://twitter.com/${xHandle}) - [${fullEmail}](${fullEmail})
 
 Project Link: [${repoUrl}](${repoUrl})
 `,
@@ -158,25 +159,25 @@ ${
     // TODO: more genericity on shields
     ifLang(
       "rs",
-      "[crates-msrv-shield]: https://img.shields.io/crates/msrv/${repo_name}.svg?style=${badgeStyle}",
+      "[crates-msrv-shield]: https://img.shields.io/crates/msrv/${repoName}.svg?style=${badgeStyle}",
     )}
-[contributors-shield]: https://img.shields.io/github/contributors/${github_username}/${repo_name}.svg?style=${badgeStyle}
+[contributors-shield]: https://img.shields.io/github/contributors/${githubUsername}/${repoName}.svg?style=${badgeStyle}
 [contributors-url]: ${repoUrl}/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/${github_username}/${repo_name}.svg?style=${badgeStyle}
+[forks-shield]: https://img.shields.io/github/forks/${githubUsername}/${repoName}.svg?style=${badgeStyle}
 [forks-url]: ${repoUrl}/network/members
-[stars-shield]: https://img.shields.io/github/stars/${github_username}/${repo_name}.svg?style=${badgeStyle}
+[stars-shield]: https://img.shields.io/github/stars/${githubUsername}/${repoName}.svg?style=${badgeStyle}
 [stars-url]: ${repoUrl}/stargazers
-[issues-shield]: https://img.shields.io/github/issues/${github_username}/${repo_name}.svg?style=${badgeStyle}
+[issues-shield]: https://img.shields.io/github/issues/${githubUsername}/${repoName}.svg?style=${badgeStyle}
 [commit-activity-url]: ${repoUrl}/commits
-[commit-activity-shield]: https://img.shields.io/github/commit-activity/${commit_activity_interval}/${github_username}/${repo_name}.svg?style=${badgeStyle}
+[commit-activity-shield]: https://img.shields.io/github/commit-activity/${commitActivityInterval}/${githubUsername}/${repoName}.svg?style=${badgeStyle}
 [checks-runs-url]: ${checkRunsUrl}
-[checks-runs-shield]: https://img.shields.io/github/check-runs/${github_username}/${repo_name}/${branch}.svg?style=${badgeStyle}
+[checks-runs-shield]: https://img.shields.io/github/check-runs/${githubUsername}/${repoName}/${branch}.svg?style=${badgeStyle}
 [issues-url]: ${repoUrl}/issues
-[license-shield]: https://img.shields.io/github/license/${github_username}/${repo_name}.svg?style=${badgeStyle}
+[license-shield]: https://img.shields.io/github/license/${githubUsername}/${repoName}.svg?style=${badgeStyle}
 [license-url]: ${repoUrl}/blob/master/LICENSE.txt
 ${
-    linkedin_username
-      ? `[linkedin-url]: https://linkedin.com/in/${linkedin_username}
+    linkedinUsername
+      ? `[linkedin-url]: https://linkedin.com/in/${linkedinUsername}
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=${badgeStyle}&logo=linkedin&colorB=555`
         .trim()
       : ""

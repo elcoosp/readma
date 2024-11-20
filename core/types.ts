@@ -2,8 +2,13 @@
 export type ReadmeTemplateArgs = {
   /** Hash of the repobeats svg to retrieve for your repo at https://repobeats.axiom.co/configs */
   repobeats?: string
-  /** Link to a demo, default to the repo url if not specified */
-  demo_url?: string
+
+  urls?: {
+    /** Repository url */
+    repo?: string
+    /** Link to a demo, default to the repo url if not specified */
+    demo?: string
+  }
   /** Source files language, rust or typescript only for now */
   language: "rs" | "ts"
   /** Images links */
@@ -13,18 +18,18 @@ export type ReadmeTemplateArgs = {
   /** Github template */
   template: {
     /** Github bug report (issue) template */
-    bug_report: string
+    bugReport: string
     /** Github feature request template */
-    feat_request: string
+    featRequest: string
   }
   /** Github user name */
-  github_username: string
+  githubUsername: string
   /** Repository name */
-  repo_name: string
+  repoName: string
   /** Ex twitter */
-  x_handle: string
+  xHandle: string
   /** LinkedIn username */
-  linkedin_username?: string
+  linkedinUsername?: string
   /** Domain name for the mail */
   domain: string
   /** Email (should just be the prefix, no @domain.com) */
@@ -33,11 +38,11 @@ export type ReadmeTemplateArgs = {
   title: string
 
   /** Wether or not to add a button to scroll back to the top of the readme */
-  back_to_top: boolean
+  backToTop: boolean
   /** This will be used in a near future to auto generate a table of content which would be dynamic optionally */
   sections: {
     /** Project description section */
-    project_description: string
+    projectDescription: string
     /** About section */
     about: string
     /** Installation section */
@@ -45,7 +50,7 @@ export type ReadmeTemplateArgs = {
     /** Acknowledgments section */
     acknowledgments: string
     /** Getting started section */
-    getting_started: string
+    gettingStarted: string
     /** Roadmap section */
     roadmap: string
     /** Usage section */

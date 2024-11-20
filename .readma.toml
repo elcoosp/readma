@@ -1,26 +1,26 @@
 language = "ts"
 title = "Readma"
 author = "elcoosp"
-github_username = "elcoosp"
-repo_name = "readma"
-x_handle = "elcoosp"
+githubUsername = "elcoosp"
+repoName = "readma"
+xHandle = "elcoosp"
 domain = "gmail"
 email = "elcoosp"
-back_to_top = false
+backToTop = false
 
 [images]
 screenshot = "images/screenshot.gif"
 logo = "images/logo.png"
 
 [sections]
-project_description = "Beautiful effortless README generator"
+projectDescription = "Beautiful effortless README generator"
 about = "Create README that rocks"
 installation = "```sh\ndeno install readma\n```"
 acknowledgments = "\n- [Best Readme](https://github.com/othneildrew/Best-README-Template)\n- [Table of content library](https://github.com/a-ahandani/ah-toc)"
-getting_started = "See screenshot"
+gettingStarted = "See screenshot"
 roadmap = "\n- [ ] CLI with config file\n- [ ] Auto defaults from known files like Cargo.toml/{deno,package}.json"
 usage = "See `scripts/gen-readme.ts`"
 
 [template]
-bug_report = "bug-report--from-readme"
-feat_request = "feature-request---from-readme"
+bugReport = "bug-report--from-readme"
+featRequest = "feature-request---from-readme"

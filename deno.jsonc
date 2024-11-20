@@ -30,12 +30,14 @@
     "exclude": [
       "README.md",
       "CHANGELOG.md",
-      "docs"
+      "core/docs",
+      "cli/docs"
     ]
   },
   "lint": {
     "exclude": [
-      "docs"
+      "core/docs",
+      "cli/docs"
     ]
   }
 }

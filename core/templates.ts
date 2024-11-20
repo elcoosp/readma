@@ -170,9 +170,7 @@ ${
 [commit-activity-url]: ${repoUrl}/commits
 [commit-activity-shield]: https://img.shields.io/github/commit-activity/${commit_activity_interval}/${github_username}/${repo_name}.svg?style=${badgeStyle}
 [checks-status-url]: ${checkStatusUrl}
-[checks-status-shield]: https://img.shields.io/github/check-status/${github_username}/${repo_name}/${
-    encodeURIComponent(branch)
-  }.svg?style=${badgeStyle}
+[checks-status-shield]: https://img.shields.io/github/check-status/${github_username}/${repo_name}/${branch}.svg?style=${badgeStyle}
 [issues-url]: ${repoUrl}/issues
 [license-shield]: https://img.shields.io/github/license/${github_username}/${repo_name}.svg?style=${badgeStyle}
 [license-url]: ${repoUrl}/blob/master/LICENSE.txt

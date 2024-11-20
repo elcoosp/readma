@@ -1,5 +1,6 @@
-## Unreleased ([6da9566..f5cc4ff](https://github.com/elcoosp/readma/compare/6da9566..f5cc4ff))
+## Unreleased ([6da9566..cfef256](https://github.com/elcoosp/readma/compare/6da9566..cfef256))
 #### Bug Fixes
+- changelog - ([cfef256](https://github.com/elcoosp/readma/commit/cfef2560e0802655705f6632e18a275ffff66602)) - [@elcoosp](https://github.com/elcoosp)
 - rm old files & manual vbump - ([f5cc4ff](https://github.com/elcoosp/readma/commit/f5cc4ffc600137802e2843c8e67568ced7b5f034)) - [@elcoosp](https://github.com/elcoosp)
 - reuse GITHUB_TOKEN - ([dd217df](https://github.com/elcoosp/readma/commit/dd217df8a190b965abcb4c7131e1f4a41bd89463)) - [@elcoosp](https://github.com/elcoosp)
 - rm secret on vbump - ([47dde81](https://github.com/elcoosp/readma/commit/47dde81a802b2ec5ef38673868cd503eac85208c)) - [@elcoosp](https://github.com/elcoosp)

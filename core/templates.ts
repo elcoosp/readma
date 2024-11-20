@@ -17,7 +17,7 @@ const getBranch = () => {
   return new TextDecoder().decode(stdout).trim()
 }
 /** Markdown source */
-//  TODO: Once sections derive all the table of contents
+//  TODO: Once sections derive all the table of contents, enable custom sections
 export const readme = ({
   githubUsername,
   repoName,
@@ -46,7 +46,6 @@ export const readme = ({
 }: ReadmeTemplateArgs) => {
   // FIXME: domain + ext
   const fullEmail = `${email}@${domain}.com`
-  // TODO: allow other repo host
   const repoUrl = urls?.repo ||
     `https://github.com/${githubUsername}/${repoName}`
   const demoUrl = urls?.demo || repoUrl

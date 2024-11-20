@@ -112,8 +112,8 @@ Project Link: [https://github.com/elcoosp/readma](https://github.com/elcoosp/rea
 [issues-shield]: https://img.shields.io/github/issues/elcoosp/readma.svg?style=for-the-badge
 [commit-activity-url]: https://github.com/elcoosp/readma/commits
 [commit-activity-shield]: https://img.shields.io/github/commit-activity/w/elcoosp/readma.svg?style=for-the-badge
-[checks-status-url]: https://github.com/elcoosp/readma/actions?query=branch%3Afeat%2Fcli
-[checks-status-shield]: https://img.shields.io/github/check-status/elcoosp/readma/feat%2Fcli.svg?style=for-the-badge
+[checks-status-url]: https://github.com/elcoosp/readma/actions?query=branch%3Amain
+[checks-status-shield]: https://img.shields.io/github/check-status/elcoosp/readma/main.svg?style=for-the-badge
 [issues-url]: https://github.com/elcoosp/readma/issues
 [license-shield]: https://img.shields.io/github/license/elcoosp/readma.svg?style=for-the-badge
 [license-url]: https://github.com/elcoosp/readma/blob/master/LICENSE.txt

@@ -4,6 +4,16 @@ name: ci
 on: [push, pull_request]
 
 jobs:
+  cog_check_job:
+    runs-on: ubuntu-latest
+    name: check conventional commit compliance
+    steps:
+      - uses: actions/checkout@main
+        with:
+          fetch-depth: 0
+
+      - name: Conventional commits check
+        uses: oknozor/cocogitto-action@v3
   deno:
     name: publish-on-tag
     runs-on: ubuntu-latest

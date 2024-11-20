@@ -9,13 +9,13 @@ jobs:
     steps:
       - name: Clone repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Install deno
-        uses: denoland/setup-deno@v1
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
 
       - name: Run workspaces version bump
-        run: deno run -A jsr:@deno/bump-workspaces@0.1.21/cli
-        env:
-          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
+        run: |
+          git fetch --unshallow origin
+          deno run -A jsr:@deno/bump-workspaces@0.1.21/cli

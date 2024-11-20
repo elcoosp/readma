@@ -1,5 +1,8 @@
-## Unreleased ([6da9566..cfef256](https://github.com/elcoosp/readma/compare/6da9566..cfef256))
+## Unreleased ([6da9566..55ce809](https://github.com/elcoosp/readma/compare/6da9566..55ce809))
 #### Bug Fixes
+- typo refs - ([55ce809](https://github.com/elcoosp/readma/commit/55ce8094fe0b8355d6f62493efe6bbd7125dc49b)) - [@elcoosp](https://github.com/elcoosp)
+- handle GITHUB_REF to not crash on tag push - ([2ec1112](https://github.com/elcoosp/readma/commit/2ec11124b5b0c4002ef3ad0d0557b733b585a1dd)) - [@elcoosp](https://github.com/elcoosp)
+- changelog - ([f26755e](https://github.com/elcoosp/readma/commit/f26755e53f8b00b9c3c9e6eb8771c46969977ce6)) - [@elcoosp](https://github.com/elcoosp)
 - changelog - ([cfef256](https://github.com/elcoosp/readma/commit/cfef2560e0802655705f6632e18a275ffff66602)) - [@elcoosp](https://github.com/elcoosp)
 - rm old files & manual vbump - ([f5cc4ff](https://github.com/elcoosp/readma/commit/f5cc4ffc600137802e2843c8e67568ced7b5f034)) - [@elcoosp](https://github.com/elcoosp)
 - reuse GITHUB_TOKEN - ([dd217df](https://github.com/elcoosp/readma/commit/dd217df8a190b965abcb4c7131e1f4a41bd89463)) - [@elcoosp](https://github.com/elcoosp)

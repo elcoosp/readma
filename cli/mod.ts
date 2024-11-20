@@ -72,7 +72,8 @@ export const cli: Cli = {
     await new Command()
       // Main command.
       .name("readma")
-      .version("0.1.0")
+      // TODO read from deno.json
+      .version("0.2.0")
       .description("Command line utility for Readme")
       .globalOption("-d, --debug", "Enable debug output.")
       .action((_options, ..._args) => console.log("Main command called."))

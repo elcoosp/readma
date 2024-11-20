@@ -1,0 +1,40 @@
+{
+  "workspace": [
+    "./core",
+    "./cli"
+  ],
+  "tasks": {
+    /** Generate readme */
+    "r": "deno run -A scripts/gen-readme.ts",
+    /** Generate readme watching */
+    "r:w": "deno run -A --watch scripts/gen-readme.ts",
+    /** Changelog */
+    "c": "cog changelog",
+    /** Format */
+    "f": "deno fmt",
+    /** Doc */
+    "d": "(cd core && deno task d); (cd cli && deno task d)"
+  },
+  "imports": {
+    "@cliffy/command": "jsr:@cliffy/command@1.0.0-rc.5",
+    "@deno/gfm": "jsr:@deno/gfm@^0.8.2",
+    "@std/assert": "jsr:@std/assert@1.0.8",
+    "@std/fs": "jsr:@std/fs@1.0.1",
+    "@std/jsonc": "jsr:@std/jsonc@1.0.1",
+    "@std/path": "jsr:@std/path@^1.0.8",
+    "@std/toml": "jsr:@std/toml@1.0.1",
+    "@wok/case": "jsr:@wok/case@^1.0.1"
+  },
+  "fmt": {
+    "semiColons": false,
+    "exclude": [
+      "README.md",
+      "docs"
+    ]
+  },
+  "lint": {
+    "exclude": [
+      "docs"
+    ]
+  }
+}

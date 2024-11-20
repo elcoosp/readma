@@ -1,0 +1,11 @@
+{
+  "name": "@readma/core",
+  "version": "0.0.0",
+  "exports": "./mod.ts",
+  "tasks": {
+    /** Test */
+    "t": "deno test -A",
+    /** Doc */
+    "d": "deno doc --html mod.ts"
+  }
+}

@@ -9,7 +9,7 @@
     /** Generate readme watching */
     "r:w": "deno run -A --watch scripts/gen-readme.ts",
     /** Changelog */
-    "c": "cog changelog",
+    "c": "cog changelog > CHANGELOG.md",
     /** Format */
     "f": "deno fmt",
     /** Doc */

@@ -33,46 +33,46 @@
 <details>
   <summary>Table of contents</summary>
   <ol>
-   <li><a href="#about-the-project">About the project</a></li>
-   <li><a href="#getting-started">Getting started</a></li>
-   <li><a href="#installation">Installation</a></li>
-   <li><a href="#usage">Usage</a></li>
-   <li><a href="#roadmap">Roadmap</a></li>
-   <li><a href="#contributing">Contributing</a></li>
-   <li><a href="#license">License</a></li>
-   <li><a href="#contact">Contact</a></li>
+   <li><a href="#about-the-project">💡 About the project</a></li>
+   <li><a href="#getting-started">🎉 Getting started</a></li>
+   <li><a href="#installation">📋 Installation</a></li>
+   <li><a href="#usage">📖 Usage</a></li>
+   <li><a href="#roadmap">🚀 Roadmap</a></li>
+   <li><a href="#contributing">👏 Contributing</a></li>
+   <li><a href="#license">📄 License</a></li>
+   <li><a href="#contact">📨 Contact</a></li>
    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
-## About the project
+## 💡 About the project
 
 <img src="images/screenshot.gif" alt="Product screenshot" />
   
 Create README that rocks
 
-## Getting started
+## 🎉 Getting started
 
 See screenshot
 
-## Installation
+## 📋 Installation
 
 ```sh
 deno install @readma/core
 ```
 
-## Usage
+## 📖 Usage
 
 See `scripts/gen-readme.ts`
 
-## Roadmap
+## 🚀 Roadmap
 
 - [ ] CLI with config file
 - [ ] Auto defaults from known files like Cargo.toml/{deno,package}.json
 
 See the [open issues](https://github.com/elcoosp/readma/issues) for a full list of proposed features (and known issues).
 
-## Contributing
+## 👏 Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
@@ -85,11 +85,11 @@ Don't forget to give the project a star! Thanks again!
 4. Push to the Branch (`git push origin feat/AmazingFeature`)
 5. Open a Pull Request
 
-## License
+## 📄 License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
-## Contact
+## 📨 Contact
 
 elcoosp - [@elcoosp](https://twitter.com/elcoosp) - [elcoosp@gmail.com](elcoosp@gmail.com)
 
@@ -98,6 +98,7 @@ Project Link: [https://github.com/elcoosp/readma](https://github.com/elcoosp/rea
 ## Acknowledgments
 
 - [Best Readme](https://github.com/othneildrew/Best-README-Template)
+- [Badges 4 README](https://github.com/alexandresanlim/Badges4-README.md-Profile)
 
 <!--MARKDOWN LINKS & IMAGES-- >
 <!--https://www.markdownguide.org/basic-syntax/#reference-style-links -->

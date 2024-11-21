@@ -100,19 +100,19 @@ ${tocVar}
 
 ${
     tocer.section(
-      "About the project",
+      "💡 About the project",
       `
 <img src="${images.screenshot}" alt="Product screenshot" />
   
 ${about}`,
     )
   }
-${tocer.section("Getting started", gettingStarted)}
-${tocer.section("Installation", installation)}
-${tocer.section("Usage", usage)}
+${tocer.section("🎉 Getting started", gettingStarted)}
+${tocer.section("📋 Installation", installation)}
+${tocer.section("📖 Usage", usage)}
 ${
     tocer.section(
-      "Roadmap",
+      "🚀 Roadmap",
       `
 ${roadmap}
 
@@ -122,7 +122,7 @@ See the [open issues](${repoUrl}/issues) for a full list of proposed features (a
   }
 ${
     tocer.section(
-      "Contributing",
+      "👏 Contributing",
       `
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
@@ -139,13 +139,13 @@ Don't forget to give the project a star! Thanks again!
   }
 ${
     tocer.section(
-      "License",
+      "📄 License",
       `Distributed under the MIT License. See \`LICENSE.txt\` for more information.`,
     )
   }
 ${
     tocer.section(
-      "Contact",
+      "📨 Contact",
       `
 ${author} - [@${xHandle}](https://twitter.com/${xHandle}) - [${fullEmail}](${fullEmail})
 

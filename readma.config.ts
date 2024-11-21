@@ -17,7 +17,8 @@ export default {
     about: "Create README that rocks",
     installation: md.code(`deno install @${name}/core`),
     acknowledgments: `
-- [Best Readme](https://github.com/othneildrew/Best-README-Template)`,
+- [Best Readme](https://github.com/othneildrew/Best-README-Template)
+- [Badges 4 README](https://github.com/alexandresanlim/Badges4-README.md-Profile)`,
     gettingStarted: "See screenshot",
     roadmap: `
 - [ ] CLI with config file

@@ -5,6 +5,7 @@
     "jsr:@cliffy/flags@1.0.0-rc.7": "1.0.0-rc.7",
     "jsr:@cliffy/internal@1.0.0-rc.7": "1.0.0-rc.7",
     "jsr:@cliffy/table@1.0.0-rc.7": "1.0.0-rc.7",
+    "jsr:@cross/deepmerge@1": "1.0.0",
     "jsr:@deno/gfm@0.10": "0.10.0",
     "jsr:@denosaurs/emoji@0.3": "0.3.1",
     "jsr:@std/assert@1.0.8": "1.0.8",
@@ -28,7 +29,8 @@
     "npm:marked-gfm-heading-id@^3.1.0": "3.2.0_marked@12.0.2",
     "npm:marked@12": "12.0.2",
     "npm:prismjs@^1.29.0": "1.29.0",
-    "npm:sanitize-html@^2.13.0": "2.13.1"
+    "npm:sanitize-html@^2.13.0": "2.13.1",
+    "npm:type-fest@^4.27.0": "4.27.0"
   },
   "jsr": {
     "@cliffy/command@1.0.0-rc.7": {
@@ -55,6 +57,9 @@
       "dependencies": [
         "jsr:@std/fmt"
       ]
+    },
+    "@cross/deepmerge@1.0.0": {
+      "integrity": "1e1318a74e31ba1959b9aa0acae8bd417b806f74ffd25ac07c90e12f83ad6b1d"
     },
     "@deno/gfm@0.10.0": {
       "integrity": "51708205e3559a4aeb6afb29d07c5bfafe7941f91bb360351ef6621de9a39527",
@@ -237,6 +242,9 @@
     },
     "source-map-js@1.2.1": {
       "integrity": "sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA=="
+    },
+    "type-fest@4.27.0": {
+      "integrity": "sha512-3IMSWgP7C5KSQqmo1wjhKrwsvXAtF33jO3QY+Uy++ia7hqvgSK6iXbbg5PbDBc1P2ZbNEDgejOrN4YooXvhwCw=="
     }
   },
   "remote": {
@@ -420,6 +428,14 @@
       "jsr:@std/path@^1.0.8",
       "jsr:@std/toml@1.0.1",
       "jsr:@wok/case@^1.0.1"
-    ]
+    ],
+    "members": {
+      "cli": {
+        "dependencies": [
+          "jsr:@cross/deepmerge@1",
+          "npm:type-fest@^4.27.0"
+        ]
+      }
+    }
   }
 }

@@ -15,7 +15,7 @@
     <img src="images/logo.png" style="max-height: 200px; object-fit: contain;" alt="Logo">
   </a>
   <h3 align="center">Readma</h3>
-  
+  <h4 align="center">core</h4>
   <p align="center">
     Beautiful effortless README generator
     <br />

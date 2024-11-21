@@ -20,6 +20,7 @@ const getBranch = () => {
 /** Markdown source */
 //  TODO: Once sections derive all the table of contents, enable custom sections
 export const readme = ({
+  workspaceMember,
   githubUsername,
   repoName,
   xHandle,
@@ -82,6 +83,7 @@ ${projectShields}
     <img src="${images.logo}" style="max-height: 200px; object-fit: contain;" alt="Logo">
   </a>
   <h3 align="center">${title}</h3>
+  ${workspaceMember ? `<h4 align="center">${workspaceMember}</h4>` : ""}
   <p align="center">
     ${projectDescription}
     <br />

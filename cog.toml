@@ -9,3 +9,10 @@ authors = [{ username = "elcoosp", signature = "elcoosp" }]
 [packages]
 core = { path = "core" }
 cli = { path = "cli" }
+
+
+pre_bump_hooks = ["deno fmt"]
+post_bump_hooks = [
+    "git push --tags"
+]
+branch_whitelist = ["main"]

@@ -99,7 +99,14 @@ ${projectShields}
     <a href="${repoUrl}/issues/new?labels=enhancement&template=${template.featRequest}.md">Request Feature</a>
   </p>
 </div>
-
+${
+    workspaceMember
+      ? `
+> [!NOTE]
+> You are inside the **${workspaceMember}** workspace member package, not the entry point
+`
+      : ""
+  }
 ${tocVar}
 
 ${

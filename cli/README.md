@@ -30,6 +30,9 @@
   </p>
 </div>
 
+> [!NOTE]
+> You are inside the **cli** workspace member package, not the entry point
+
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of contents</summary>

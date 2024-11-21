@@ -68,6 +68,8 @@ export const readme = ({
       linkedinUsername,
     }),
   )
+  // TODO: this is incorrect should not be hardcoded
+  const logoSrc = workspaceMember ? "../" + images.logo : images.logo
   const projectShields = `
 <!-- PROJECT SHIELDS -->
 ${shieldsBadges}
@@ -80,7 +82,7 @@ ${projectShields}
 <br />
 <div align="center">
   <a href="${repoUrl}">
-    <img src="${images.logo}" style="max-height: 200px; object-fit: contain;" alt="Logo">
+    <img src="${logoSrc}" style="max-height: 200px; object-fit: contain;" alt="Logo">
   </a>
   <h3 align="center">${title}</h3>
   ${workspaceMember ? `<h4 align="center">${workspaceMember}</h4>` : ""}

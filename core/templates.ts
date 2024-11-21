@@ -60,8 +60,8 @@ export const readme = async ({
       linkedinUsername,
     }),
   )
-  // TODO: this is incorrect should not be hardcoded
-  const logoSrc = workspaceMember ? "../" + images.logo : images.logo
+  const logoSrc =
+    `https://raw.githubusercontent.com/${githubUsername}/${repoName}/HEAD/${images.logo}`
   const projectShields = `
 <!-- PROJECT SHIELDS -->
 ${shieldsBadges}
@@ -71,11 +71,10 @@ ${shieldsBadges}
 ${projectShields}
 
 <!-- PROJECT LOGO -->
-![Logo](${logoSrc}){:style="display:block; margin-left:auto; margin-right:auto"}
 <br />
 <div align="center">
   <a href="${repoUrl}">
-  <!-- Does not work on jsr <img src="${logoSrc}" style="max-height: 200px; object-fit: contain;" alt="Logo"> -->
+    <img src="${logoSrc}" style="max-height: 200px; object-fit: contain;" alt="Logo">
   </a>
   <h3 align="center">${title}</h3>
   ${workspaceMember ? `<h4 align="center">${workspaceMember}</h4>` : ""}

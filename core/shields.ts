@@ -1,3 +1,5 @@
+import { paramCase } from "@wok/case"
+
 export type Shield = {
   name: string
   refName: string
@@ -12,7 +14,7 @@ export function shield(
   shieldUrl: string,
   lang?: string,
 ): Shield {
-  const refName = name
+  const refName = paramCase(name)
   return { name, refName, linkUrl, shieldUrl, lang }
 }
 const shieldUrl = (path: string, style: string) =>
@@ -65,3 +67,12 @@ export const shields = (
       `github/license/${githubUsername}/${repoName}`,
     ),
   ].map((x) => ({ ...x, shieldUrl: shieldUrl(x.shieldUrl, style) }))
+export const renderShields = (shields: Shield[]) => {
+  const shieldsBadges = shields.map((s) =>
+    `[![${s.name}][${s.refName}-shield]][${s.refName}-url]`
+  ).join("\n")
+  const shieldsRefs = shields.map((s) =>
+    `[${s.refName}-shield]: ${s.shieldUrl}\n[${s.refName}-url]: ${s.linkUrl}`
+  ).join("\n")
+  return { shieldsBadges, shieldsRefs }
+}

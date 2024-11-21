@@ -2,11 +2,11 @@
 <!-- PROJECT SHIELDS -->
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
+[![Stargazers][stargazers-shield]][stargazers-url]
 [![Commit activity][commit-activity-shield]][commit-activity-url]
-[![Branch action runs][checks-runs-shield]][checks-runs-url]
+[![Branch action runs][branch-action-runs-shield]][branch-action-runs-url]
 [![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
+[![License][license-shield]][license-url]
 
 <!-- PROJECT LOGO -->
 <br />
@@ -106,13 +106,13 @@ Project Link: [https://github.com/elcoosp/readma](https://github.com/elcoosp/rea
 [contributors-url]: https://github.com/elcoosp/readma/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/elcoosp/readma.svg?style=for-the-badge
 [forks-url]: https://github.com/elcoosp/readma/network/members
-[stars-shield]: https://img.shields.io/github/stars/elcoosp/readma.svg?style=for-the-badge
-[stars-url]: https://github.com/elcoosp/readma/stargazers
-[issues-shield]: https://img.shields.io/github/issues/elcoosp/readma.svg?style=for-the-badge
-[commit-activity-url]: https://github.com/elcoosp/readma/commits
+[stargazers-shield]: https://img.shields.io/github/stars/elcoosp/readma.svg?style=for-the-badge
+[stargazers-url]: https://github.com/elcoosp/readma/stargazers
 [commit-activity-shield]: https://img.shields.io/github/commit-activity/w/elcoosp/readma.svg?style=for-the-badge
-[checks-runs-url]: https://github.com/elcoosp/readma/actions?query=branch%3Amain
-[checks-runs-shield]: https://img.shields.io/github/check-runs/elcoosp/readma/main.svg?style=for-the-badge
+[commit-activity-url]: https://github.com/elcoosp/readma/commits
+[branch-action-runs-shield]: https://img.shields.io/github/check-runs/elcoosp/readma/main.svg?style=for-the-badge
+[branch-action-runs-url]: https://github.com/elcoosp/readma/actions?query=branch%3Amain
+[issues-shield]: https://img.shields.io/github/license/elcoosp/readma.svg?style=for-the-badge
 [issues-url]: https://github.com/elcoosp/readma/issues
 [license-shield]: https://img.shields.io/github/license/elcoosp/readma.svg?style=for-the-badge
 [license-url]: https://github.com/elcoosp/readma/blob/master/LICENSE.txt

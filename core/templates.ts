@@ -1,3 +1,4 @@
+import { renderShields, shields } from "./shields.ts"
 import { Tocer } from "./toc.ts"
 import type { MdSrc, ReadmeTemplateArgs } from "./types.ts"
 const getBranch = () => {
@@ -50,28 +51,30 @@ export const readme = ({
     `https://github.com/${githubUsername}/${repoName}`
   const demoUrl = urls?.demo || repoUrl
   const branch = getBranch()
-  const checkRunsUrl = `${repoUrl}/actions?query=${
-    encodeURIComponent(`branch:${branch}`)
-  }`
   const tocer = new Tocer(backToTop)
   const commitActivityInterval = "w"
   // TODO: use lit-html extension to get intellisense inside templates
   const ifLang = (lang: ReadmeTemplateArgs["language"], src: MdSrc) =>
     language == lang ? src : ""
+
+  const tocVar = "$$TOC$$"
+  const badgeStyle = "for-the-badge"
+  const { shieldsBadges, shieldsRefs } = renderShields(
+    shields({
+      repoName,
+      repoUrl,
+      githubUsername,
+      style: badgeStyle,
+      commitActivityInterval,
+      branch,
+    }),
+  )
   const projectShields = `
 <!-- PROJECT SHIELDS -->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Commit activity][commit-activity-shield]][commit-activity-url]
-[![Branch action runs][checks-runs-shield]][checks-runs-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
+${shieldsBadges}
 ${linkedinUsername ? "[![LinkedIn][linkedin-shield]][linkedin-url]" : ""}
 ${ifLang("rs", "![MSRV][crates-msrv-shield]")}
 `.trim()
-  const tocVar = "$$TOC$$"
-  const badgeStyle = "for-the-badge"
   const withoutToc = `
 <a id="readme-top"></a>
 ${projectShields}
@@ -163,20 +166,7 @@ ${
       "rs",
       "[crates-msrv-shield]: https://img.shields.io/crates/msrv/${repoName}.svg?style=${badgeStyle}",
     )}
-[contributors-shield]: https://img.shields.io/github/contributors/${githubUsername}/${repoName}.svg?style=${badgeStyle}
-[contributors-url]: ${repoUrl}/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/${githubUsername}/${repoName}.svg?style=${badgeStyle}
-[forks-url]: ${repoUrl}/network/members
-[stars-shield]: https://img.shields.io/github/stars/${githubUsername}/${repoName}.svg?style=${badgeStyle}
-[stars-url]: ${repoUrl}/stargazers
-[issues-shield]: https://img.shields.io/github/issues/${githubUsername}/${repoName}.svg?style=${badgeStyle}
-[commit-activity-url]: ${repoUrl}/commits
-[commit-activity-shield]: https://img.shields.io/github/commit-activity/${commitActivityInterval}/${githubUsername}/${repoName}.svg?style=${badgeStyle}
-[checks-runs-url]: ${checkRunsUrl}
-[checks-runs-shield]: https://img.shields.io/github/check-runs/${githubUsername}/${repoName}/${branch}.svg?style=${badgeStyle}
-[issues-url]: ${repoUrl}/issues
-[license-shield]: https://img.shields.io/github/license/${githubUsername}/${repoName}.svg?style=${badgeStyle}
-[license-url]: ${repoUrl}/blob/master/LICENSE.txt
+${shieldsRefs}
 ${
     linkedinUsername
       ? `[linkedin-url]: https://linkedin.com/in/${linkedinUsername}

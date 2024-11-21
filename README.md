@@ -98,7 +98,6 @@ Project Link: [https://github.com/elcoosp/readma](https://github.com/elcoosp/rea
 ## Acknowledgments
 
 - [Best Readme](https://github.com/othneildrew/Best-README-Template)
-- [Table of content library](https://github.com/a-ahandani/ah-toc)
 
 <!--MARKDOWN LINKS & IMAGES-- >
 <!--https://www.markdownguide.org/basic-syntax/#reference-style-links -->

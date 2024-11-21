@@ -1,6 +1,5 @@
 import type { MdSrc } from "./types.ts"
 import { paramCase } from "@wok/case"
-// TODO rely on https://github.com/a-ahandani/ah-toc for sweetness of the process
 /** Derive a table of content */
 export class Tocer {
   hasBackToTop: boolean

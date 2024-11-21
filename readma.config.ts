@@ -17,8 +17,7 @@ export default {
     about: "Create README that rocks",
     installation: md.code(`deno install @${name}/core`),
     acknowledgments: `
-- [Best Readme](https://github.com/othneildrew/Best-README-Template)
-- [Table of content library](https://github.com/a-ahandani/ah-toc)`,
+- [Best Readme](https://github.com/othneildrew/Best-README-Template)`,
     gettingStarted: "See screenshot",
     roadmap: `
 - [ ] CLI with config file

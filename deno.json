@@ -25,7 +25,10 @@
     "exclude": [
       "README.md",
       "cli/README.md",
+      "cli/CHANGELOG.md",
       "core/README.md",
+      "core/CHANGELOG.md",
+      "CHANGELOG.md",
       "core/docs",
       "cli/docs",
       ".vscode"

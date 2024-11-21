@@ -26,7 +26,8 @@
       "README.md",
       "CHANGELOG.md",
       "core/docs",
-      "cli/docs"
+      "cli/docs",
+      ".vscode"
     ]
   },
   "lint": {

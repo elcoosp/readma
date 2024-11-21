@@ -24,7 +24,6 @@
     "semiColons": false,
     "exclude": [
       "README.md",
-      "CHANGELOG.md",
       "core/docs",
       "cli/docs",
       ".vscode"

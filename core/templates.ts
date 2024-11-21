@@ -15,7 +15,7 @@ const getBranch = () => {
   if (!success) {
     throw new Error(new TextDecoder().decode(stderr))
   }
-  return new TextDecoder().decode(stdout).trim()
+  return new TextDecoder().decode(stdout).trim() || "main"
 }
 /** Markdown source */
 //  TODO: Once sections derive all the table of contents, enable custom sections

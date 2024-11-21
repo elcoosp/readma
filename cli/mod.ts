@@ -16,11 +16,10 @@ type Cli = {
   }>
   run: () => Promise<unknown>
 }
-const readReadmaConfig = async () => {
+const readReadmaConfig = async (configPathRoot = "./") => {
   // Can not run if using Deno.makeTempFile
   const tempFilePath = "./readReadmaConfig-tempFile.ts"
-  // FIXME find not harcode, only work in test
-  const readmaConfigRelPath = "../readma.config.ts"
+  const readmaConfigRelPath = `${configPathRoot}readma.config.ts`
   await Deno.writeTextFile(
     tempFilePath,
     `import config from '${readmaConfigRelPath}'; console.log(JSON.stringify(config));`,

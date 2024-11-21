@@ -20,3 +20,4 @@ jobs:
           deno run -A jsr:@deno/bump-workspaces@0.1.21/cli
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GIT_USER_NAME: elcoosp

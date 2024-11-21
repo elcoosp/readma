@@ -71,7 +71,7 @@ ${shieldsBadges}
 ${projectShields}
 
 <!-- PROJECT LOGO -->
-![Logo](${logoSrc})
+![Logo](${logoSrc}){:style="display:block; margin-left:auto; margin-right:auto"}
 <br />
 <div align="center">
   <a href="${repoUrl}">

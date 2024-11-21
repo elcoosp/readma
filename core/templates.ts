@@ -73,8 +73,9 @@ ${projectShields}
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="${repoUrl}">
-    <img src="${logoSrc}" style="max-height: 200px; object-fit: contain;" alt="Logo">
+<a href="${repoUrl}">
+  <!-- Does not work on jsr <img src="${logoSrc}" style="max-height: 200px; object-fit: contain;" alt="Logo"> -->
+  ![Logo](${logoSrc})
   </a>
   <h3 align="center">${title}</h3>
   ${workspaceMember ? `<h4 align="center">${workspaceMember}</h4>` : ""}

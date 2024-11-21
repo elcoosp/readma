@@ -11,8 +11,9 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/elcoosp/readma">
-    <img src="images/logo.png" style="max-height: 200px; object-fit: contain;" alt="Logo">
+<a href="https://github.com/elcoosp/readma">
+  <!-- Does not work on jsr <img src="images/logo.png" style="max-height: 200px; object-fit: contain;" alt="Logo"> -->
+  ![Logo](images/logo.png)
   </a>
   <h3 align="center">Readma</h3>
   

@@ -12,8 +12,9 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/elcoosp/readma">
-    <img src="../images/logo.png" style="max-height: 200px; object-fit: contain;" alt="Logo">
+<a href="https://github.com/elcoosp/readma">
+  <!-- Does not work on jsr <img src="../images/logo.png" style="max-height: 200px; object-fit: contain;" alt="Logo"> -->
+  ![Logo](../images/logo.png)
   </a>
   <h3 align="center">Readma</h3>
   <h4 align="center">cli</h4>
@@ -109,7 +110,7 @@ Project Link: [https://github.com/elcoosp/readma](https://github.com/elcoosp/rea
 <!--https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 ![Alt](https://repobeats.axiom.co/api/embed/1b12e7ffd13fd2d15772a30e8b0a995976150797.svg "Repobeats analytics image")
 
-[jsr-version-shield]: https://img.shields.io/jsr/v/readma/cli.svg?style=for-the-badge
+[jsr-version-shield]: https://img.shields.io/jsr/v/@readma/cli.svg?style=for-the-badge
 [jsr-version-url]: https://jsr.io/@readma/cli
 [contributors-shield]: https://img.shields.io/github/contributors/elcoosp/readma.svg?style=for-the-badge
 [contributors-url]: https://github.com/elcoosp/readma/graphs/contributors

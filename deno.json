@@ -24,6 +24,8 @@
     "semiColons": false,
     "exclude": [
       "README.md",
+      "cli/README.md",
+      "core/README.md",
       "core/docs",
       "cli/docs",
       ".vscode"

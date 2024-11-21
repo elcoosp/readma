@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## cli-0.3.0 - 2024-11-21
+#### Bug Fixes
+- **(core)** sync deno conf version - (3e0dc90) - *elcoosp*
+- **(core)** emojis in template - (34bb9f0) - *elcoosp*
+#### Features
+- **(cli)** use david/dax - (8c589f6) - *elcoosp*
+
+- - -
+
 ## cli-0.2.0 - 2024-11-21
 #### Bug Fixes
 - **(core)** fix logo path on ws member - (d56c3ca) - *elcoosp*

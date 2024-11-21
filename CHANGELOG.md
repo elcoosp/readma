@@ -2,6 +2,22 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [2.0.0](https://github.com/elcoosp/readma/compare/8c589f64b5c8cf3d6981989bfe6e86dfba826c98..2.0.0) - 2024-11-21
+### Package updates
+- [cli-0.3.0](cli) bumped to [cli-0.3.0](https://github.com/elcoosp/readma/compare/cli-0.2.0..cli-0.3.0)
+- [core-0.3.0](core) bumped to [core-0.3.0](https://github.com/elcoosp/readma/compare/core-0.2.0..core-0.3.0)
+### Global changes
+#### Bug Fixes
+- **(core)** emojis in template - ([34bb9f0](https://github.com/elcoosp/readma/commit/34bb9f0d5a5aa95c63a67fb9b5587372ae132823)) - [@elcoosp](https://github.com/elcoosp)
+#### Continuous Integration
+- cocogitto release in vbump - ([f6f9052](https://github.com/elcoosp/readma/commit/f6f9052e56c3eb2224c0270d11c82d968a69e570)) - [@elcoosp](https://github.com/elcoosp)
+#### Features
+- **(cli)** use david/dax - ([8c589f6](https://github.com/elcoosp/readma/commit/8c589f64b5c8cf3d6981989bfe6e86dfba826c98)) - [@elcoosp](https://github.com/elcoosp)
+#### Miscellaneous Chores
+- no fmt changelog - ([a7d45be](https://github.com/elcoosp/readma/commit/a7d45be509210dc2629f67c0bdbf6adc7303080f)) - [@elcoosp](https://github.com/elcoosp)
+
+- - -
+
 ## [1.2.0](https://github.com/elcoosp/readma/compare/dea9d2a66e86788c1b8d069c74c2133dfd7fa9a7..1.2.0) - 2024-11-21
 ### Package updates
 - [core-0.2.0](core) bumped to [core-0.2.0](https://github.com/elcoosp/readma/compare/core-0.1.0..core-0.2.0)

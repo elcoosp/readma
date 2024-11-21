@@ -10,11 +10,11 @@
 [![License][license-shield]][license-url]
 
 <!-- PROJECT LOGO -->
+![Logo](../images/logo.png)
 <br />
 <div align="center">
-<a href="https://github.com/elcoosp/readma">
+  <a href="https://github.com/elcoosp/readma">
   <!-- Does not work on jsr <img src="../images/logo.png" style="max-height: 200px; object-fit: contain;" alt="Logo"> -->
-  ![Logo](../images/logo.png)
   </a>
   <h3 align="center">Readma</h3>
   <h4 align="center">core</h4>

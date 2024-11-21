@@ -30,10 +30,15 @@ export const shields = (
     linkedinUsername,
     branch,
     language,
+    workspaceMember,
   }:
     & Pick<
       ReadmeTemplateArgs,
-      "repoName" | "githubUsername" | "linkedinUsername" | "language"
+      | "repoName"
+      | "githubUsername"
+      | "linkedinUsername"
+      | "language"
+      | "workspaceMember"
     >
     & {
       repoUrl: string
@@ -58,6 +63,15 @@ export const shields = (
           "Crates MSRV",
           `https://crates.io/crates/${repoName}`,
           `crates/msrv/${repoName}`,
+        ),
+      ]
+      : []),
+    ...(language === "ts" && workspaceMember
+      ? [
+        shield(
+          "JSR version",
+          `https://jsr.io/@${repoName}/${workspaceMember}`,
+          `jsr/v/${repoName}/${workspaceMember}`,
         ),
       ]
       : []),

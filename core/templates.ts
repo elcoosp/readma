@@ -52,6 +52,7 @@ export const readme = async ({
       repoName,
       repoUrl,
       githubUsername,
+      workspaceMember,
       style: badgeStyle,
       commitActivityInterval,
       branch,

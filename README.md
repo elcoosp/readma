@@ -58,7 +58,7 @@ See screenshot
 ## Installation
 
 ```sh
-deno install readma
+deno install @readma/core
 ```
 
 ## Usage

@@ -161,7 +161,9 @@ ${
       ? `![Alt](https://repobeats.axiom.co/api/embed/${repobeats}.svg "Repobeats analytics image")`
       : ""
   }
-${shieldsRefs}
+${
+    // The new line is absolutely necessary
+    "\n" + shieldsRefs}
 `.trim() +
     // Should end with a new line
     "\n"

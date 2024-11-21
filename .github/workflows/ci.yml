@@ -43,11 +43,3 @@ jobs:
       - name: Test @readma/cli
         working-directory: cli
         run: deno task t
-
-      - name: Publish on tag @readma/core
-        working-directory: core
-        run: deno run -A jsr:@david/publish-on-tag@0.1.4
-
-      - name: Publish on tag @readma/cli
-        working-directory: cli
-        run: deno run -A jsr:@david/publish-on-tag@0.1.4

@@ -1,6 +1,6 @@
 import { renderShields, shields } from "./shields.ts"
 import { Tocer } from "./toc.ts"
-import type { MdSrc, ReadmeTemplateArgs } from "./types.ts"
+import type { ReadmeTemplateArgs } from "./types.ts"
 const getBranch = () => {
   // Workaround github ci
   const GITHUB_HEAD_REF = Deno.env.get("GITHUB_HEAD_REF")
@@ -53,10 +53,6 @@ export const readme = ({
   const branch = getBranch()
   const tocer = new Tocer(backToTop)
   const commitActivityInterval = "w"
-  // TODO: use lit-html extension to get intellisense inside templates
-  const ifLang = (lang: ReadmeTemplateArgs["language"], src: MdSrc) =>
-    language == lang ? src : ""
-
   const tocVar = "$$TOC$$"
   const badgeStyle = "for-the-badge"
   const { shieldsBadges, shieldsRefs } = renderShields(
@@ -67,13 +63,13 @@ export const readme = ({
       style: badgeStyle,
       commitActivityInterval,
       branch,
+      language,
+      linkedinUsername,
     }),
   )
   const projectShields = `
 <!-- PROJECT SHIELDS -->
 ${shieldsBadges}
-${linkedinUsername ? "[![LinkedIn][linkedin-shield]][linkedin-url]" : ""}
-${ifLang("rs", "![MSRV][crates-msrv-shield]")}
 `.trim()
   const withoutToc = `
 <a id="readme-top"></a>
@@ -161,24 +157,11 @@ ${tocer.section("Acknowledgments", acknowledgments)}
 <!--MARKDOWN LINKS & IMAGES-- >
 <!--https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 ${
-    // TODO: more genericity on shields
-    ifLang(
-      "rs",
-      "[crates-msrv-shield]: https://img.shields.io/crates/msrv/${repoName}.svg?style=${badgeStyle}",
-    )}
-${shieldsRefs}
-${
-    linkedinUsername
-      ? `[linkedin-url]: https://linkedin.com/in/${linkedinUsername}
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=${badgeStyle}&logo=linkedin&colorB=555`
-        .trim()
-      : ""
-  }
-${
     repobeats
       ? `![Alt](https://repobeats.axiom.co/api/embed/${repobeats}.svg "Repobeats analytics image")`
       : ""
   }
+${shieldsRefs}
 `.trim() +
     // Should end with a new line
     "\n"

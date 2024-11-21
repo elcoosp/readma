@@ -1,4 +1,5 @@
 import { paramCase } from "@wok/case"
+import type { ReadmeTemplateArgs } from "./types.ts"
 
 export type Shield = {
   name: string
@@ -20,17 +21,46 @@ export function shield(
 const shieldUrl = (path: string, style: string) =>
   `https://img.shields.io/${path}.svg?style=${style}`
 export const shields = (
-  { repoUrl, githubUsername, repoName, style, commitActivityInterval, branch }:
-    {
+  {
+    githubUsername,
+    repoUrl,
+    repoName,
+    style,
+    commitActivityInterval,
+    linkedinUsername,
+    branch,
+    language,
+  }:
+    & Pick<
+      ReadmeTemplateArgs,
+      "repoName" | "githubUsername" | "linkedinUsername" | "language"
+    >
+    & {
       repoUrl: string
-      repoName: string
-      githubUsername: string
       style: string
       commitActivityInterval: "w"
       branch: string
     },
 ): Shield[] =>
   [
+    ...(linkedinUsername
+      ? [
+        shield(
+          "LinkedIn",
+          `https://linkedin.com/in/${linkedinUsername}`,
+          "badge/-LinkedIn-black",
+        ),
+      ]
+      : []),
+    ...(language === "rs"
+      ? [
+        shield(
+          "Crates MSRV",
+          `https://crates.io/crates/${repoName}`,
+          `crates/msrv/${repoName}`,
+        ),
+      ]
+      : []),
     shield(
       "Contributors",
       `${repoUrl}/graphs/contributors`,

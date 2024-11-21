@@ -2,6 +2,19 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## core-0.4.0 - 2024-11-21
+#### Bug Fixes
+- **(core)** regen readme - (6f7459b) - *elcoosp*
+- **(core)** use gh user content to get a static logo src & fix jsr display - (1bbe1c5) - *elcoosp*
+- **(core)** add inline style to center logo - (88142e7) - *elcoosp*
+- **(core)** test markdown upside html - (501bdc0) - *elcoosp*
+- **(core)** test markdown inside htmfor logo - (65ce276) - *elcoosp*
+- **(core)** jsr shield - (f0189d6) - *elcoosp*
+#### Features
+- **(core)** jsr version shield template - (cf02c28) - *elcoosp*
+
+- - -
+
 ## core-0.3.1 - 2024-11-21
 #### Bug Fixes
 - **(core)** regen readme & rename ci workflow job - (28ae644) - *elcoosp*

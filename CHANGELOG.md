@@ -2,6 +2,19 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [2.1.0](https://github.com/elcoosp/readma/compare/6f7459bb20937baf66d2133615baa31d11ae5d34..2.1.0) - 2024-11-21
+### Package updates
+- [core-0.4.0](core) bumped to [core-0.4.0](https://github.com/elcoosp/readma/compare/core-0.3.1..core-0.4.0)
+- [cli-0.4.0](cli) bumped to [cli-0.4.0](https://github.com/elcoosp/readma/compare/cli-0.3.1..cli-0.4.0)
+### Global changes
+#### Bug Fixes
+- **(core)** pub workflow - ([1f8c19e](https://github.com/elcoosp/readma/commit/1f8c19e6e9753b35642bdbb778ba0be9ad4152af)) - [@elcoosp](https://github.com/elcoosp)
+- **(core)** test markdown inside htmfor logo - ([65ce276](https://github.com/elcoosp/readma/commit/65ce276451e93f4ea467b2d0f098fe90d7775e40)) - [@elcoosp](https://github.com/elcoosp)
+- **(core)** test markdown upside html - ([501bdc0](https://github.com/elcoosp/readma/commit/501bdc035c15d4759a266971f00134b98af5dd3c)) - [@elcoosp](https://github.com/elcoosp)
+- **(core)** regen readme - ([6f7459b](https://github.com/elcoosp/readma/commit/6f7459bb20937baf66d2133615baa31d11ae5d34)) - [@elcoosp](https://github.com/elcoosp)
+
+- - -
+
 ## [2.0.1](https://github.com/elcoosp/readma/compare/28ae6446edf72d86b6ef6d935d746dba23248487..2.0.1) - 2024-11-21
 ### Package updates
 - [cli-0.3.1](cli) bumped to [cli-0.3.1](https://github.com/elcoosp/readma/compare/cli-0.3.0..cli-0.3.1)

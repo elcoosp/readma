@@ -16,6 +16,31 @@ type Cli = {
   }>
   run: () => Promise<unknown>
 }
+const readReadmaConfig = async () => {
+  // Can not run if using Deno.makeTempFile
+  const tempFilePath = "./readReadmaConfig-tempFile.ts"
+  // FIXME find not harcode, only work in test
+  const readmaConfigRelPath = "../readma.config.ts"
+  await Deno.writeTextFile(
+    tempFilePath,
+    `import config from '${readmaConfigRelPath}'; console.log(JSON.stringify(config));`,
+  )
+  console.log(tempFilePath)
+
+  const cmd = new Deno.Command(Deno.execPath(), {
+    args: [
+      "run",
+      `-A`,
+      `${tempFilePath}`,
+    ],
+  })
+  const { stdout, stderr, success } = cmd.outputSync()
+  if (!success) {
+    throw new Error(new TextDecoder().decode(stderr))
+  }
+  Deno.remove(tempFilePath)
+  return JSON.parse(new TextDecoder().decode(stdout).trim())
+}
 export const cli: Cli = {
   async detectLanguage() {
     const tsFilenames = ["deno.jsonc", "deno.json"]
@@ -68,8 +93,8 @@ export const cli: Cli = {
     }
   },
   async run() {
-    // TODO
-    const config = {}
+    const config = await readReadmaConfig()
+
     await new Command()
       // Main command.
       .name("readma")
@@ -81,24 +106,28 @@ export const cli: Cli = {
       .command("inspect", "Inspect git repo sub-command.")
       .option("-w, --write", "Write gathered config")
       .action(async (_options, ..._args) => {
-        const { language, files, workspaceMembers } = await cli
+        const { language, workspaceMembers } = await cli
           .detectLanguage()
 
-        // TODO One readme for each {@link workspaceMembers}
-        const name = "TODO"
-        const sections = {
-          installation: language === "ts"
-            ? utils.md.code(`deno install ${name}`)
-            : language === "rs"
-            ? utils.md.code(`cargo add ${name}`)
-            : null,
-        }
+        const wsOverride = workspaceMembers?.map((wm) => {
+          const pkgName = language === "ts" ? `@${config.repoName}/${wm}` : wm
+          const sections = {
+            installation: language === "ts"
+              ? utils.md.code(`deno install ${pkgName}`)
+              : language === "rs"
+              ? utils.md.code(`cargo add ${pkgName}`)
+              : null,
+          }
+          return {
+            pkgName,
+            sections,
+          }
+        })
 
         console.log({
-          files,
+          wsOverride,
           config,
           language,
-          sections,
           workspaceMembers,
         })
       })

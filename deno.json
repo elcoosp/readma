@@ -4,7 +4,7 @@
     "./cli"
   ],
   "tasks": {
-    "r": "deno run -A scripts/gen-readme.ts",
+    "r": "deno run -A ./cli/mod.ts gen",
     "r:w": "deno run -A --watch scripts/gen-readme.ts",
     "c": "cog changelog > CHANGELOG.md",
     "f": "deno fmt",

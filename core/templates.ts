@@ -89,7 +89,7 @@ ${projectShields}
   <p align="center">
     ${projectDescription}
     <br />
-    <a href="${repoUrl}"><strong>Explore the docs »</strong></a>
+    <a href="${repoUrl}"><strong>📖 Explore the docs »</strong></a>
     <br />
     <br />
     <a href="${demoUrl}">View Demo</a>
@@ -120,7 +120,7 @@ ${about}`,
   }
 ${tocer.section("🎉 Getting started", gettingStarted)}
 ${tocer.section("📋 Installation", installation)}
-${tocer.section("📖 Usage", usage)}
+${tocer.section("🔧 Usage", usage)}
 ${
     tocer.section(
       "🚀 Roadmap",
@@ -133,7 +133,7 @@ See the [open issues](${repoUrl}/issues) for a full list of proposed features (a
   }
 ${
     tocer.section(
-      "👏 Contributing",
+      "💻 Contributing",
       `
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
@@ -164,7 +164,7 @@ Project Link: [${repoUrl}](${repoUrl})
 `,
     )
   }
-${tocer.section("Acknowledgments", acknowledgments)}
+${tocer.section("👏 Acknowledgments", acknowledgments)}
 <!--MARKDOWN LINKS & IMAGES-- >
 <!--https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 ${

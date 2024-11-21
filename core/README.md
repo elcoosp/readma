@@ -19,7 +19,7 @@
   <p align="center">
     Beautiful effortless README generator
     <br />
-    <a href="https://github.com/elcoosp/readma"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/elcoosp/readma"><strong>📖 Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://github.com/elcoosp/readma">View Demo</a>
@@ -40,12 +40,12 @@
    <li><a href="#about-the-project">💡 About the project</a></li>
    <li><a href="#getting-started">🎉 Getting started</a></li>
    <li><a href="#installation">📋 Installation</a></li>
-   <li><a href="#usage">📖 Usage</a></li>
+   <li><a href="#usage">🔧 Usage</a></li>
    <li><a href="#roadmap">🚀 Roadmap</a></li>
-   <li><a href="#contributing">👏 Contributing</a></li>
+   <li><a href="#contributing">💻 Contributing</a></li>
    <li><a href="#license">📄 License</a></li>
    <li><a href="#contact">📨 Contact</a></li>
-   <li><a href="#acknowledgments">Acknowledgments</a></li>
+   <li><a href="#acknowledgments">👏 Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -65,7 +65,7 @@ See screenshot
 deno install @readma/core
 ```
 
-## 📖 Usage
+## 🔧 Usage
 
 See `scripts/gen-readme.ts`
 
@@ -76,7 +76,7 @@ See `scripts/gen-readme.ts`
 
 See the [open issues](https://github.com/elcoosp/readma/issues) for a full list of proposed features (and known issues).
 
-## 👏 Contributing
+## 💻 Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
@@ -99,7 +99,7 @@ elcoosp - [@elcoosp](https://twitter.com/elcoosp) - [elcoosp@gmail.com](elcoosp@
 
 Project Link: [https://github.com/elcoosp/readma](https://github.com/elcoosp/readma)
 
-## Acknowledgments
+## 👏 Acknowledgments
 
 - [Best Readme](https://github.com/othneildrew/Best-README-Template)
 - [Badges 4 README](https://github.com/alexandresanlim/Badges4-README.md-Profile)

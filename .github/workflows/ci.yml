@@ -15,7 +15,7 @@ jobs:
       - name: Conventional commits check
         uses: oknozor/cocogitto-action@v3
   deno:
-    name: publish-on-tag
+    name: check
     runs-on: ubuntu-latest
 
     permissions:

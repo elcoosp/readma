@@ -2,6 +2,18 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [2.0.1](https://github.com/elcoosp/readma/compare/28ae6446edf72d86b6ef6d935d746dba23248487..2.0.1) - 2024-11-21
+### Package updates
+- [cli-0.3.1](cli) bumped to [cli-0.3.1](https://github.com/elcoosp/readma/compare/cli-0.3.0..cli-0.3.1)
+- [core-0.3.1](core) bumped to [core-0.3.1](https://github.com/elcoosp/readma/compare/core-0.3.0..core-0.3.1)
+### Global changes
+#### Bug Fixes
+- **(core)** regen readme & rename ci workflow job - ([28ae644](https://github.com/elcoosp/readma/commit/28ae6446edf72d86b6ef6d935d746dba23248487)) - [@elcoosp](https://github.com/elcoosp)
+#### Continuous Integration
+- add pub workflow on tags - ([7c2a2f8](https://github.com/elcoosp/readma/commit/7c2a2f89549e2076a9ef12979820138cb2bf9ba0)) - [@elcoosp](https://github.com/elcoosp)
+
+- - -
+
 ## [2.0.0](https://github.com/elcoosp/readma/compare/8c589f64b5c8cf3d6981989bfe6e86dfba826c98..2.0.0) - 2024-11-21
 ### Package updates
 - [cli-0.3.0](cli) bumped to [cli-0.3.0](https://github.com/elcoosp/readma/compare/cli-0.2.0..cli-0.3.0)

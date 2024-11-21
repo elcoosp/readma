@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## cli-0.3.1 - 2024-11-21
+#### Bug Fixes
+- **(core)** regen readme & rename ci workflow job - (28ae644) - *elcoosp*
+
+- - -
+
 ## cli-0.3.0 - 2024-11-21
 #### Bug Fixes
 - **(core)** sync deno conf version - (3e0dc90) - *elcoosp*

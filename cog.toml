@@ -5,3 +5,7 @@ remote = "github.com"
 repository = "readma"
 owner = "elcoosp"
 authors = [{ username = "elcoosp", signature = "elcoosp" }]
+
+[packages]
+core = { path = "core" }
+cli = { path = "cli" }

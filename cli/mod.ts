@@ -3,10 +3,11 @@ import { Command } from "@cliffy/command"
 import { exists } from "@std/fs"
 import * as toml from "@std/toml"
 import * as jsonc from "@std/jsonc"
+import type { ReadmeTemplateArgs } from "../core/types.ts"
 
 type Cli = {
   detectLanguage: () => Promise<{
-    language: "ts" | "rs"
+    language: ReadmeTemplateArgs["language"]
     files: {
       ts: Record<string, unknown>
       rs: undefined
@@ -84,9 +85,7 @@ export const cli: Cli = {
         const { language, files, workspaceMembers } = await cli
           .detectLanguage()
 
-        /**
-         * TODO: One readme for each {@link workspaceMembers}
-         */
+        // TODO One readme for each {@link workspaceMembers}
         const name = "TODO"
         const sections = {
           installation: language === "ts"

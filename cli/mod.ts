@@ -4,7 +4,7 @@ import { exists } from "@std/fs"
 import * as toml from "@std/toml"
 import * as jsonc from "@std/jsonc"
 import type { ReadmeTemplateArgs } from "../core/types.ts"
-
+import denoConf from "./deno.json" with { type: "json" }
 type Cli = {
   detectLanguage: () => Promise<{
     language: ReadmeTemplateArgs["language"]
@@ -73,8 +73,7 @@ export const cli: Cli = {
     await new Command()
       // Main command.
       .name("readma")
-      // TODO read from deno.json
-      .version("0.2.1")
+      .version(denoConf.version)
       .description("Command line utility for Readme")
       .globalOption("-d, --debug", "Enable debug output.")
       .action((_options, ..._args) => console.log("Main command called."))

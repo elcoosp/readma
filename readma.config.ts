@@ -1,6 +1,6 @@
-import { md } from "./core/utils.ts"
-const name = "readma"
-const author = "elcoosp"
+import { md } from "./core/utils.ts";
+const name = "readma";
+const author = "elcoosp";
 export default {
   language: "ts",
   title: "Readma",
@@ -15,7 +15,7 @@ export default {
   sections: {
     projectDescription: "Beautiful effortless README generator",
     about: "Create README that rocks",
-    installation: md.code(`deno install ${name}`),
+    installation: md.code(`deno install @${name}/core`),
     acknowledgments: `
 - [Best Readme](https://github.com/othneildrew/Best-README-Template)
 - [Table of content library](https://github.com/a-ahandani/ah-toc)`,
@@ -30,4 +30,4 @@ export default {
     featRequest: "feature-request---from-readme",
   },
   backToTop: false,
-} as const
+} as const;

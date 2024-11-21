@@ -7,6 +7,8 @@
     "d": "deno doc --html mod.ts"
   },
   "imports": {
-    "@readma/core": "../core/mod.ts"
+    "@cross/deepmerge": "jsr:@cross/deepmerge@^1.0.0",
+    "@readma/core": "../core/mod.ts",
+    "type-fest": "npm:type-fest@^4.27.0"
   }
 }

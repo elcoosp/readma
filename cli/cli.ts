@@ -1,4 +1,7 @@
-import { utils } from "@readma/core"
+import type { PartialDeep } from "type-fest"
+
+import { deepMerge } from "@cross/deepmerge"
+import { readme, utils } from "@readma/core"
 import { Command } from "@cliffy/command"
 import { exists } from "@std/fs"
 import * as toml from "@std/toml"
@@ -25,21 +28,27 @@ const readReadmaConfig = async (configPathRoot = "./") => {
     tempFilePath,
     `import config from '${readmaConfigRelPath}'; console.log(JSON.stringify(config));`,
   )
-  console.log(tempFilePath)
+  try {
+    const cmd = new Deno.Command(Deno.execPath(), {
+      args: [
+        "run",
+        `-A`,
+        `${tempFilePath}`,
+      ],
+    })
+    const { stdout, stderr, success } = cmd.outputSync()
+    if (!success) {
+      throw new Error(new TextDecoder().decode(stderr))
+    }
 
-  const cmd = new Deno.Command(Deno.execPath(), {
-    args: [
-      "run",
-      `-A`,
-      `${tempFilePath}`,
-    ],
-  })
-  const { stdout, stderr, success } = cmd.outputSync()
-  if (!success) {
-    throw new Error(new TextDecoder().decode(stderr))
+    return JSON.parse(
+      new TextDecoder().decode(stdout).trim(),
+    ) as ReadmeTemplateArgs
+  } catch (error) {
+    throw error
+  } finally {
+    Deno.remove(tempFilePath)
   }
-  Deno.remove(tempFilePath)
-  return JSON.parse(new TextDecoder().decode(stdout).trim())
 }
 export const cli: Cli = {
   async detectLanguage() {
@@ -103,35 +112,44 @@ export const cli: Cli = {
       .version(denoConf.version)
       .description("Command line utility for Readme")
       .globalOption("-d, --debug", "Enable debug output.")
-      .action((_options, ..._args) => console.log("Main command called."))
-      // Child command 1.
-      .command("inspect", "Inspect git repo sub-command.")
-      .option("-w, --write", "Write gathered config")
+      .action((_options, ..._args) =>
+        console.log(
+          "Main command called. Nothing will happen, use `gen` subcommand",
+        )
+      )
+      .command("gen", "Generate readme(s)")
       .action(async (_options, ..._args) => {
         const { language, workspaceMembers } = await cli
           .detectLanguage()
 
-        const wsOverride = workspaceMembers?.map((wm) => {
-          const pkgName = language === "ts" ? `@${config.repoName}/${wm}` : wm
+        const wsOverride = workspaceMembers?.map((
+          wm,
+        ) => {
+          // TODO pick last segment from path, more generic
+          const wmFolderName = wm.replace("./", "")
+          const pkgName = language === "ts"
+            ? `@${config.repoName}/${wmFolderName}`
+            : wmFolderName
           const sections = {
             installation: language === "ts"
               ? utils.md.code(`deno install ${pkgName}`)
               : language === "rs"
               ? utils.md.code(`cargo add ${pkgName}`)
-              : null,
+              : undefined,
           }
-          return {
-            pkgName,
+          return deepMerge<
+            PartialDeep<ReadmeTemplateArgs>
+          >(config, {
             sections,
-          }
+            workspaceMember: wmFolderName,
+          })
         })
-
-        console.log({
-          wsOverride,
-          config,
-          language,
-          workspaceMembers,
+        wsOverride?.forEach((wsConfig) => {
+          readme(wsConfig as ReadmeTemplateArgs, {
+            folderPath: `./${wsConfig.workspaceMember}`,
+          })
         })
+        readme(config, { folderPath: "./" })
       })
       .parse(Deno.args)
   },

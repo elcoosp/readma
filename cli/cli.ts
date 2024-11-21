@@ -1,5 +1,4 @@
 import type { PartialDeep } from "type-fest"
-
 import { deepMerge } from "@cross/deepmerge"
 import { readme, utils } from "@readma/core"
 import { Command } from "@cliffy/command"
@@ -8,6 +7,7 @@ import * as toml from "@std/toml"
 import * as jsonc from "@std/jsonc"
 import type { ReadmeTemplateArgs } from "../core/types.ts"
 import denoConf from "./deno.json" with { type: "json" }
+import { $ } from "@david/dax"
 
 type Cli = {
   detectLanguage: () => Promise<{
@@ -29,21 +29,8 @@ const readReadmaConfig = async (configPathRoot = "./") => {
     `import config from '${readmaConfigRelPath}'; console.log(JSON.stringify(config));`,
   )
   try {
-    const cmd = new Deno.Command(Deno.execPath(), {
-      args: [
-        "run",
-        `-A`,
-        `${tempFilePath}`,
-      ],
-    })
-    const { stdout, stderr, success } = cmd.outputSync()
-    if (!success) {
-      throw new Error(new TextDecoder().decode(stderr))
-    }
-
-    return JSON.parse(
-      new TextDecoder().decode(stdout).trim(),
-    ) as ReadmeTemplateArgs
+    const result = await $`${Deno.execPath()} run -A ${tempFilePath}`.json()
+    return result as ReadmeTemplateArgs
   } catch (error) {
     throw error
   } finally {
@@ -144,12 +131,12 @@ export const cli: Cli = {
             workspaceMember: wmFolderName,
           })
         })
-        wsOverride?.forEach((wsConfig) => {
-          readme(wsConfig as ReadmeTemplateArgs, {
+        await Promise.all((wsOverride || []).map((wsConfig) => {
+          return readme(wsConfig as ReadmeTemplateArgs, {
             folderPath: `./${wsConfig.workspaceMember}`,
           })
-        })
-        readme(config, { folderPath: "./" })
+        }))
+        await readme(config, { folderPath: "./" })
       })
       .parse(Deno.args)
   },

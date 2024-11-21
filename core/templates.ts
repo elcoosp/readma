@@ -1,25 +1,16 @@
 import { renderShields, shields } from "./shields.ts"
 import { Tocer } from "./toc.ts"
+import { $ } from "@david/dax"
 import type { ReadmeTemplateArgs } from "./types.ts"
-const getBranch = () => {
+const getBranch = async () => {
   // Workaround github ci
   const GITHUB_HEAD_REF = Deno.env.get("GITHUB_HEAD_REF")
   if (GITHUB_HEAD_REF) return GITHUB_HEAD_REF
-  const command = new Deno.Command("git", {
-    args: [
-      "branch",
-      "--show-current",
-    ],
-  })
-  const { stdout, stderr, success } = command.outputSync()
-  if (!success) {
-    throw new Error(new TextDecoder().decode(stderr))
-  }
-  return new TextDecoder().decode(stdout).trim() || "main"
+  return (await $`git branch --show-current`.text()) || "main"
 }
 /** Markdown source */
 //  TODO: Once sections derive all the table of contents, enable custom sections
-export const readme = ({
+export const readme = async ({
   workspaceMember,
   githubUsername,
   repoName,
@@ -51,7 +42,7 @@ export const readme = ({
   const repoUrl = urls?.repo ||
     `https://github.com/${githubUsername}/${repoName}`
   const demoUrl = urls?.demo || repoUrl
-  const branch = getBranch()
+  const branch = await getBranch()
   const tocer = new Tocer(backToTop)
   const commitActivityInterval = "w"
   const tocVar = "$$TOC$$"

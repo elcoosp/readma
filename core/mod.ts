@@ -30,7 +30,7 @@ export async function readme(
  */
 async function renderWriteTemplate<
   T extends // deno-lint-ignore no-explicit-any
-  (...args: any) => any,
+  (...args: any) => Promise<any>,
 >(
   templater: T,
   templateArgs: Parameters<T>[0],
@@ -38,8 +38,8 @@ async function renderWriteTemplate<
   options?: Partial<GlobalOptions>,
 ) {
   const rendered = options?.renderer === "gfm"
-    ? render(templater(templateArgs))
-    : templater(templateArgs)
+    ? render(await templater(templateArgs))
+    : await templater(templateArgs)
   const folderPath = options?.folderPath ?? ("./" + (
     // FIXME: not type safe
     templateArgs as ReadmeTemplateArgs

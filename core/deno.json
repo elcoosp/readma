@@ -5,5 +5,8 @@
   "tasks": {
     "t": "deno test -A",
     "d": "deno doc --html mod.ts"
+  },
+  "imports": {
+    "@david/dax": "jsr:@david/dax@^0.42.0"
   }
 }

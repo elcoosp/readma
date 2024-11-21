@@ -1,5 +1,5 @@
 import { assertEquals } from "@std/assert"
-import { cli } from "./mod.ts"
+import { cli } from "./cli.ts"
 
 Deno.test("detectLanguage", async () => {
   const expected = {

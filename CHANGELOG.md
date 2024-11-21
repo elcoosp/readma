@@ -1,5 +1,3 @@
----
-
 ## [1.1.0](https://github.com/elcoosp/readma/compare/b197a8f4a000a71f960b4edf1b1cc807fa83721d..1.1.0) - 2024-11-21
 
 ### Package updates

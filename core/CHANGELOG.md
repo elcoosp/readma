@@ -1,10 +1,6 @@
----
 # Changelog
 
-All notable changes to this project will be documented in this file. See
-[conventional commits](https://www.conventionalcommits.org/) for commit
-guidelines.
----
+## All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 ## core-0.1.0 - 2024-11-21
 

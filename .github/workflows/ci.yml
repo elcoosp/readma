@@ -17,7 +17,8 @@ jobs:
   deno:
     name: check
     runs-on: ubuntu-latest
-
+    env:
+      DENO_DIR: deno_cache
     permissions:
       contents: read
       id-token: write
@@ -43,3 +44,9 @@ jobs:
       - name: Test @readma/cli
         working-directory: cli
         run: deno task t
+
+      - name: Cache Deno dependencies
+          uses: actions/cache@v2
+          with:
+            path: ${{ env.DENO_DIR }}
+            key: my_cache_key

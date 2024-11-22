@@ -9,6 +9,7 @@ const getBranch = async () => {
   return (await $`git branch --show-current`.text()) || "main"
 }
 //  TODO: Once sections derive all the table of contents, enable custom sections
+/** Generate one or more readme (if there is workspace members) based on {@link ReadmeTemplateArgs} */
 export const readme = async ({
   workspaceMember,
   githubUsername,

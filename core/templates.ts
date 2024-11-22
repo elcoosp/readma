@@ -8,7 +8,6 @@ const getBranch = async () => {
   if (GITHUB_HEAD_REF) return GITHUB_HEAD_REF
   return (await $`git branch --show-current`.text()) || "main"
 }
-/** Markdown source */
 //  TODO: Once sections derive all the table of contents, enable custom sections
 export const readme = async ({
   workspaceMember,

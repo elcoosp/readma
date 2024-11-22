@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## cli-0.5.2 - 2024-11-22
+#### Bug Fixes
+- **(*)** fix rel import of core inside cli - (1a4e9fe) - *elcoosp*
+
+- - -
+
 ## cli-0.5.1 - 2024-11-22
 #### Bug Fixes
 - **(cli)** doc - (a53c13a) - *elcoosp*

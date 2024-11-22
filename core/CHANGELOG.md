@@ -2,6 +2,19 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## core-0.5.1 - 2024-11-22
+#### Bug Fixes
+- **(*)** fix rel import of core inside cli - (1a4e9fe) - *elcoosp*
+#### Continuous Integration
+- pub cli & update usage readma.config - (19074aa) - elcoosp
+#### Documentation
+- **(core)** add readme jsdoc - (7a6e3cd) - *elcoosp*
+- **(core)** add ReadmeTemplateArgs jsdoc - (b611a0a) - *elcoosp*
+#### Miscellaneous Chores
+- **(*)** fix deno pkgs version - (b61f767) - *elcoosp*
+
+- - -
+
 ## core-0.5.0 - 2024-11-22
 #### Bug Fixes
 - **(*)** fmt - (a1d1ddd) - *elcoosp*

@@ -8,7 +8,10 @@ export const md = {
     "```" + lng + `\n${c.trim()}\n` + "```",
 }
 
-export const readReadmaConfig = async (configPathRoot = "./") => {
+/** Create a temp file to log the imported config into the deno runtime, not juste a file read, this is interpreted */
+export const readReadmaConfig = async (
+  configPathRoot = "./",
+): Promise<ReadmeTemplateArgs> => {
   // Can not run if using Deno.makeTempFile
   const tempFilePath = "./readReadmaConfig-tempFile.ts"
   const readmaConfigRelPath = `${configPathRoot}readma.config.ts`

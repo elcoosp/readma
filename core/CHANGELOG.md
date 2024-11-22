@@ -2,6 +2,24 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## core-0.5.0 - 2024-11-22
+#### Bug Fixes
+- **(*)** fmt - (a1d1ddd) - *elcoosp*
+- **(core)** doc & ret ty on readReadmaConfig - (c8348d5) - *elcoosp*
+#### Continuous Integration
+- ignore lint fmt for deno_cache - (115a087) - elcoosp
+#### Documentation
+- **(core)** add shields jsdoc - (f2bbaf9) - *elcoosp*
+#### Features
+- add branch codecov shield - (368a28f) - elcoosp
+#### Miscellaneous Chores
+- release 2024.11.22 - (7c769a0) - elcoosp
+- update versions - (03b1176) - elcoosp
+#### Tests
+- **(core)** add readReadmaConfig to core & test - (3b6846b) - *elcoosp*
+
+- - -
+
 ## core-0.4.1 - 2024-11-22
 #### Bug Fixes
 - **(core)** template wording - (284ff84) - *elcoosp*

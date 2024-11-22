@@ -2,6 +2,19 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## cli-0.5.0 - 2024-11-22
+#### Documentation
+- **(cli)** add cli jsdoc - (2842e8d) - *elcoosp*
+#### Features
+- add branch codecov shield - (368a28f) - elcoosp
+#### Miscellaneous Chores
+- release 2024.11.22 - (7c769a0) - elcoosp
+- update versions - (03b1176) - elcoosp
+#### Tests
+- **(core)** add readReadmaConfig to core & test - (3b6846b) - *elcoosp*
+
+- - -
+
 ## cli-0.4.1 - 2024-11-22
 #### Bug Fixes
 - **(core)** template wording - (284ff84) - *elcoosp*

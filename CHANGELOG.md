@@ -2,6 +2,33 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [2.2.0](https://github.com/elcoosp/readma/compare/7c769a030ec0643a1b89097e37c9acfa454f8074..2.2.0) - 2024-11-22
+### Package updates
+- [cli-0.5.0](cli) bumped to [cli-0.5.0](https://github.com/elcoosp/readma/compare/cli-0.4.1..cli-0.5.0)
+- [core-0.5.0](core) bumped to [core-0.5.0](https://github.com/elcoosp/readma/compare/core-0.4.1..core-0.5.0)
+### Global changes
+#### Bug Fixes
+- **(*)** deno.lock - ([4e4b29b](https://github.com/elcoosp/readma/commit/4e4b29b22d5e6a46e1ccc3223a90edc6eb4919c7)) - [@elcoosp](https://github.com/elcoosp)
+#### Continuous Integration
+- cache before install - ([c739547](https://github.com/elcoosp/readma/commit/c7395471c5429d4f3193a16158335e93e876e511)) - [@elcoosp](https://github.com/elcoosp)
+- ignore lint fmt for deno_cache - ([115a087](https://github.com/elcoosp/readma/commit/115a08710577277503878b9ae5ea4a430d7a1a85)) - [@elcoosp](https://github.com/elcoosp)
+- codecov step - ([f091719](https://github.com/elcoosp/readma/commit/f091719dc503cc3ccf62121500cb6cc9fe84e19a)) - [@elcoosp](https://github.com/elcoosp)
+- codecov for each ws member - ([f183a32](https://github.com/elcoosp/readma/commit/f183a32c9797a15c8d59475003f691a397bfbdd6)) - [@elcoosp](https://github.com/elcoosp)
+- codecov gitignore & do not use work dir - ([c397fe4](https://github.com/elcoosp/readma/commit/c397fe4fea9c2f519236071a8b425a20c309e1fa)) - [@elcoosp](https://github.com/elcoosp)
+#### Features
+- add branch codecov shield - ([368a28f](https://github.com/elcoosp/readma/commit/368a28f1398c95f57476be92d78ab884e760a7e9)) - [@elcoosp](https://github.com/elcoosp)
+#### Miscellaneous Chores
+- **(deps)** update dependency @std/fs to v1.0.6 - ([76a515a](https://github.com/elcoosp/readma/commit/76a515ad2e034d7fe12b9c5b51353dc85982f438)) - renovate[bot]
+- **(deps)** update dependency @std/toml to v1.0.2 - ([0504e02](https://github.com/elcoosp/readma/commit/0504e0261e3a2ac227892ee9b227c40e25459591)) - renovate[bot]
+- update dependency @std/toml to v1.0.2 - ([23e00cc](https://github.com/elcoosp/readma/commit/23e00ccdaa9d88d5da9766b60b183e58e5fc75eb)) - [@elcoosp](https://github.com/elcoosp)
+- update dependency @std/fs to v1.0.6 - ([5959041](https://github.com/elcoosp/readma/commit/5959041ce8822a256629baf700ff807c28bd2384)) - [@elcoosp](https://github.com/elcoosp)
+- update versions - ([03b1176](https://github.com/elcoosp/readma/commit/03b117695a0672e3998cd6ff706dc6a1b130c7b1)) - [@elcoosp](https://github.com/elcoosp)
+- release 2024.11.22 - ([7c769a0](https://github.com/elcoosp/readma/commit/7c769a030ec0643a1b89097e37c9acfa454f8074)) - [@elcoosp](https://github.com/elcoosp)
+#### Tests
+- **(core)** add readReadmaConfig to core & test - ([3b6846b](https://github.com/elcoosp/readma/commit/3b6846b0350e071c9e6f55a1cfa7d6614a04275b)) - [@elcoosp](https://github.com/elcoosp)
+
+- - -
+
 ## [2.1.1](https://github.com/elcoosp/readma/compare/c6bf8e4cc522dc5fea2fec34dc59b43979526744..2.1.1) - 2024-11-22
 ### Package updates
 - [core-0.4.1](core) bumped to [core-0.4.1](https://github.com/elcoosp/readma/compare/core-0.4.0..core-0.4.1)

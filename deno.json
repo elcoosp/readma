@@ -14,7 +14,7 @@
     "@cliffy/command": "jsr:@cliffy/command@1.0.0-rc.7",
     "@deno/gfm": "jsr:@deno/gfm@^0.10.0",
     "@std/assert": "jsr:@std/assert@1.0.8",
-    "@std/fs": "jsr:@std/fs@1.0.5",
+    "@std/fs": "jsr:@std/fs@1.0.6",
     "@std/jsonc": "jsr:@std/jsonc@1.0.1",
     "@std/path": "jsr:@std/path@^1.0.8",
     "@std/toml": "jsr:@std/toml@1.0.1",

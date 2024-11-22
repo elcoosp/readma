@@ -9,7 +9,11 @@ import type { ReadmeTemplateArgs } from "../core/types.ts"
 import denoConf from "./deno.json" with { type: "json" }
 import { $ } from "@david/dax"
 
-type Cli = {
+/**
+ * Readma cli
+ */
+export type Cli = {
+  /** Utility to detect language and get workspace members */
   detectLanguage: () => Promise<{
     language: ReadmeTemplateArgs["language"]
     files: {
@@ -18,6 +22,7 @@ type Cli = {
     }
     workspaceMembers?: string[]
   }>
+  /** Run the cli */
   run: () => Promise<unknown>
 }
 const readReadmaConfig = async (configPathRoot = "./") => {
@@ -94,10 +99,9 @@ export const cli: Cli = {
     const config = await readReadmaConfig()
 
     await new Command()
-      // Main command.
       .name("readma")
       .version(denoConf.version)
-      .description("Command line utility for Readme")
+      .description("Command line utility for Readma")
       .globalOption("-d, --debug", "Enable debug output.")
       .action((_options, ..._args) =>
         console.log(

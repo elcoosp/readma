@@ -1,6 +1,6 @@
 {
   "name": "@readma/core",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "exports": "./mod.ts",
   "tasks": {
     "t": "deno test -A --coverage=cov/ && deno coverage --lcov cov/ > cov.lcov",

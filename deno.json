@@ -31,13 +31,15 @@
       "CHANGELOG.md",
       "core/docs",
       "cli/docs",
-      ".vscode"
+      ".vscode",
+      "deno_cache"
     ]
   },
   "lint": {
     "exclude": [
       "core/docs",
-      "cli/docs"
+      "cli/docs",
+      "deno_cache"
     ]
   }
 }

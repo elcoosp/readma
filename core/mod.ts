@@ -12,7 +12,7 @@ export type GlobalOptions = {
 }
 /**
  * @param rt Readme arguments to feed the template
- * @param options General options
+ * @param options Global options
  */
 export async function readme(
   rt: ReadmeTemplateArgs,

@@ -32,7 +32,7 @@
 </div>
 
 > [!NOTE]
-> You are inside the **cli** workspace member package, not the entry point
+> You are inside the **cli** workspace member package, not the repository entry point
 
 <!-- TABLE OF CONTENTS -->
 <details>

@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## core-0.6.0 - 2024-11-22
+#### Features
+- **(core)** add branch & ws handling to codecov shield linkUrll - (32dbecf) - *elcoosp*
+
+- - -
+
 ## core-0.5.1 - 2024-11-22
 #### Bug Fixes
 - **(*)** fix rel import of core inside cli - (1a4e9fe) - *elcoosp*

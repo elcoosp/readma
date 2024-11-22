@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## cli-0.5.4 - 2024-11-22
+#### Bug Fixes
+- **(cli)** opt files.rs.workspace.members - (6c8f7f2) - *elcoosp*
+
+- - -
+
 ## cli-0.5.3 - 2024-11-22
 #### Bug Fixes
 - **(*)** fix rel import inside deno.json - (f599901) - *elcoosp*

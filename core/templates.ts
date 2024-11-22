@@ -35,11 +35,12 @@ export const readme = async ({
   template,
   language,
   backToTop,
+  vcsName = "github",
 }: ReadmeTemplateArgs) => {
   // FIXME: domain + ext
   const fullEmail = `${email}@${domain}.com`
   const repoUrl = urls?.repo ||
-    `https://github.com/${githubUsername}/${repoName}`
+    `https://${vcsName}.com/${githubUsername}/${repoName}`
   const demoUrl = urls?.demo || repoUrl
   const branch = await getBranch()
   const tocer = new Tocer(backToTop)
@@ -48,6 +49,7 @@ export const readme = async ({
   const badgeStyle = "for-the-badge"
   const { shieldsBadges, shieldsRefs } = renderShields(
     shields({
+      vcsName,
       repoName,
       repoUrl,
       githubUsername,

@@ -1,6 +1,7 @@
 <a id="readme-top"></a>
 <!-- PROJECT SHIELDS -->
 [![JSR version][jsr-version-shield]][jsr-version-url]
+[![Codecov][codecov-shield]][codecov-url]
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stargazers-shield]][stargazers-url]
@@ -111,6 +112,8 @@ Project Link: [https://github.com/elcoosp/readma](https://github.com/elcoosp/rea
 
 [jsr-version-shield]: https://img.shields.io/jsr/v/@readma/cli.svg?style=for-the-badge
 [jsr-version-url]: https://jsr.io/@readma/cli
+[codecov-shield]: https://img.shields.io/codecov/c/github/elcoosp/readma/main.svg?style=for-the-badge
+[codecov-url]: https://codecov.io/github/elcoosp/readma
 [contributors-shield]: https://img.shields.io/github/contributors/elcoosp/readma.svg?style=for-the-badge
 [contributors-url]: https://github.com/elcoosp/readma/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/elcoosp/readma.svg?style=for-the-badge

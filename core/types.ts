@@ -2,6 +2,7 @@
 export type ReadmeTemplateArgs = {
   /** Hash of the repobeats svg to retrieve for your repo at https://repobeats.axiom.co/configs */
   repobeats?: string
+  vcsName?: "github"
   /** Name of a workspace member, auto generated if you use the cli */
   workspaceMember?: string
   urls?: {

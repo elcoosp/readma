@@ -19,7 +19,9 @@ export function shield(
   return { name, refName, linkUrl, shieldUrl, lang }
 }
 const shieldUrl = (path: string, style: string) =>
-  `https://img.shields.io/${path}.svg?style=${style}`
+  path.startsWith("https://")
+    ? `${path}&style=${style}`
+    : `https://img.shields.io/${path}.svg?style=${style}`
 export const shields = (
   {
     githubUsername,
@@ -30,6 +32,7 @@ export const shields = (
     linkedinUsername,
     branch,
     language,
+    vcsName,
     workspaceMember,
   }:
     & Pick<
@@ -39,6 +42,7 @@ export const shields = (
       | "linkedinUsername"
       | "language"
       | "workspaceMember"
+      | "vcsName"
     >
     & {
       repoUrl: string
@@ -75,6 +79,11 @@ export const shields = (
         ),
       ]
       : []),
+    shield(
+      "Codecov",
+      `https://codecov.io/${vcsName}/${githubUsername}/${repoName}`,
+      `codecov/c/${vcsName}/${githubUsername}/${repoName}/${branch}`,
+    ),
     shield(
       "Contributors",
       `${repoUrl}/graphs/contributors`,

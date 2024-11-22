@@ -69,7 +69,7 @@ export const cli: Cli = {
       rs: rsFiles.find((x) => x !== null),
     }
     const workspaceMembers = language === "rs"
-      ? files.rs.workspace.members
+      ? files.rs.workspace?.members
       : files.ts.workspace
     return {
       language,

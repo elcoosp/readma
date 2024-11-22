@@ -49,4 +49,4 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ env.DENO_DIR }}
-          key: my_cache_key
+          key: ${{ hashFiles('deno.lock') }}

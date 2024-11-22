@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## cli-0.4.1 - 2024-11-22
+#### Bug Fixes
+- **(core)** template wording - (284ff84) - *elcoosp*
+#### Continuous Integration
+- coverage during t task - (779b471) - elcoosp
+
+- - -
+
 ## cli-0.4.0 - 2024-11-21
 #### Bug Fixes
 - **(core)** regen readme - (6f7459b) - *elcoosp*

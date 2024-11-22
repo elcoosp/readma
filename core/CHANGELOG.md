@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## core-0.4.1 - 2024-11-22
+#### Bug Fixes
+- **(core)** template wording - (284ff84) - *elcoosp*
+- **(core)** 0.4.0 - (baa9a25) - *elcoosp*
+#### Continuous Integration
+- coverage during t task - (779b471) - elcoosp
+
+- - -
+
 ## core-0.4.0 - 2024-11-21
 #### Bug Fixes
 - **(core)** regen readme - (6f7459b) - *elcoosp*

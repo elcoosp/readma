@@ -2,6 +2,19 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [2.1.1](https://github.com/elcoosp/readma/compare/c6bf8e4cc522dc5fea2fec34dc59b43979526744..2.1.1) - 2024-11-22
+### Package updates
+- [core-0.4.1](core) bumped to [core-0.4.1](https://github.com/elcoosp/readma/compare/core-0.4.0..core-0.4.1)
+- [cli-0.4.1](cli) bumped to [cli-0.4.1](https://github.com/elcoosp/readma/compare/cli-0.4.0..cli-0.4.1)
+### Global changes
+#### Continuous Integration
+- cache deno deps - ([89c1abf](https://github.com/elcoosp/readma/commit/89c1abf5f06cddedde526691420503fcaefcb58a)) - [@elcoosp](https://github.com/elcoosp)
+- fix syntax issue - ([f0c460d](https://github.com/elcoosp/readma/commit/f0c460d4ada1e0110fb50d01525ebb0309fea051)) - [@elcoosp](https://github.com/elcoosp)
+- missing cache key - ([107930a](https://github.com/elcoosp/readma/commit/107930a379055a6145ba910e0f3a0ca7f7dae8b8)) - [@elcoosp](https://github.com/elcoosp)
+- use v4 cache - ([c6bf8e4](https://github.com/elcoosp/readma/commit/c6bf8e4cc522dc5fea2fec34dc59b43979526744)) - [@elcoosp](https://github.com/elcoosp)
+
+- - -
+
 ## [2.1.0](https://github.com/elcoosp/readma/compare/6f7459bb20937baf66d2133615baa31d11ae5d34..2.1.0) - 2024-11-21
 ### Package updates
 - [core-0.4.0](core) bumped to [core-0.4.0](https://github.com/elcoosp/readma/compare/core-0.3.1..core-0.4.0)

@@ -1,13 +1,11 @@
 import type { PartialDeep } from "type-fest"
 import { deepMerge } from "@cross/deepmerge"
-import { readme, utils } from "@readma/core"
+import { readme, type types, utils } from "@readma/core"
 import { Command } from "@cliffy/command"
 import { exists } from "@std/fs"
 import * as toml from "@std/toml"
 import * as jsonc from "@std/jsonc"
-import type { ReadmeTemplateArgs } from "../core/types.ts"
 import denoConf from "./deno.json" with { type: "json" }
-import { readReadmaConfig } from "../core/utils.ts"
 
 /**
  * Readma cli
@@ -15,7 +13,7 @@ import { readReadmaConfig } from "../core/utils.ts"
 export type Cli = {
   /** Utility to detect language and get workspace members */
   detectLanguage: () => Promise<{
-    language: ReadmeTemplateArgs["language"]
+    language: types.ReadmeTemplateArgs["language"]
     files: {
       ts: Record<string, unknown>
       rs: undefined
@@ -80,7 +78,7 @@ export const cli: Cli = {
     }
   },
   async run() {
-    const config = await readReadmaConfig()
+    const config = await utils.readReadmaConfig()
 
     await new Command()
       .name("readma")
@@ -113,14 +111,14 @@ export const cli: Cli = {
               : undefined,
           }
           return deepMerge<
-            PartialDeep<ReadmeTemplateArgs>
+            PartialDeep<types.ReadmeTemplateArgs>
           >(config, {
             sections,
             workspaceMember: wmFolderName,
           })
         })
         await Promise.all((wsOverride || []).map((wsConfig) => {
-          return readme(wsConfig as ReadmeTemplateArgs, {
+          return readme(wsConfig as types.ReadmeTemplateArgs, {
             folderPath: `./${wsConfig.workspaceMember}`,
           })
         }))

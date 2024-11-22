@@ -25,6 +25,7 @@ export type Cli = {
   /** Run the cli */
   run: () => Promise<unknown>
 }
+/** {@link Cli} instance */
 export const cli: Cli = {
   async detectLanguage() {
     const tsFilenames = ["deno.jsonc", "deno.json"]

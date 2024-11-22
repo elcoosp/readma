@@ -84,7 +84,9 @@ export const shields = (
       : []),
     shield(
       "Codecov",
-      `https://codecov.io/${vcsName}/${githubUsername}/${repoName}`,
+      `https://codecov.io/${vcsName}/${githubUsername}/${repoName}/tree/${branch}${
+        workspaceMember ? `/${workspaceMember}` : ""
+      }`,
       `codecov/c/${vcsName}/${githubUsername}/${repoName}/${branch}`,
     ),
     shield(

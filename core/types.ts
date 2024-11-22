@@ -1,4 +1,5 @@
 // TODO: allow different case, this is too rusty
+/** Config used to feed the {@link readme} function */
 export type ReadmeTemplateArgs = {
   /** Hash of the repobeats svg to retrieve for your repo at https://repobeats.axiom.co/configs */
   repobeats?: string

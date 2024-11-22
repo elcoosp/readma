@@ -17,7 +17,7 @@
     "@std/fs": "jsr:@std/fs@1.0.5",
     "@std/jsonc": "jsr:@std/jsonc@1.0.1",
     "@std/path": "jsr:@std/path@^1.0.8",
-    "@std/toml": "jsr:@std/toml@1.0.1",
+    "@std/toml": "jsr:@std/toml@1.0.2",
     "@wok/case": "jsr:@wok/case@^1.0.1"
   },
   "fmt": {

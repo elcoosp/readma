@@ -11,7 +11,6 @@ jobs:
       - uses: actions/checkout@main
         with:
           fetch-depth: 0
-
       - name: Conventional commits check
         uses: oknozor/cocogitto-action@v3
   deno:
@@ -25,40 +24,26 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
       - name: Cache Deno dependencies
         uses: actions/cache@v4
         with:
           path: ${{ env.DENO_DIR }}
           key: ${{ hashFiles('deno.lock') }}
-
       - name: Install deno
         uses: denoland/setup-deno@v2
         with:
           deno-version: v2.x
-
       - name: Format
         run: deno fmt --check
-
       - name: Lint
         run: deno lint
-
       - name: Test @readma/core
         working-directory: core
         run: deno task t
-      - name: Upload @readma/core coverage reports to Codecov
-        working-directory: core
-        uses: codecov/codecov-action@v4
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./cov.lcov
-
       - name: Test @readma/cli
         working-directory: cli
         run: deno task t
-      - name: Upload @readma/cli coverage reports to Codecov
-        working-directory: cli
+      - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./cov.lcov

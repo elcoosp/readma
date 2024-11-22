@@ -1,6 +1,6 @@
 import { paramCase } from "@wok/case"
 import type { ReadmeTemplateArgs } from "./types.ts"
-
+/** Shield definition, see [shields.io](https://shields.io/) */
 export type Shield = {
   name: string
   refName: string
@@ -9,6 +9,7 @@ export type Shield = {
   lang?: string
 }
 
+/** Create a {@link Shield} */
 export function shield(
   name: string,
   linkUrl: string,
@@ -18,10 +19,12 @@ export function shield(
   const refName = paramCase(name)
   return { name, refName, linkUrl, shieldUrl, lang }
 }
-const shieldUrl = (path: string, style: string) =>
+/** Util to create a {@link Shield.shieldUrl}, defaulting to [shields.io](https://shields.io/) */
+export const shieldUrl = (path: string, style: string) =>
   path.startsWith("https://")
     ? `${path}&style=${style}`
     : `https://img.shields.io/${path}.svg?style=${style}`
+/** Dynamic list of shields, with some depending on args */
 export const shields = (
   {
     githubUsername,
@@ -120,6 +123,7 @@ export const shields = (
       `github/license/${githubUsername}/${repoName}`,
     ),
   ].map((x) => ({ ...x, shieldUrl: shieldUrl(x.shieldUrl, style) }))
+/** Render {@link shields} as markdown, return markdown refs which declare urls and badges to put at the top of the document */
 export const renderShields = (shields: Shield[]) => {
   const shieldsBadges = shields.map((s) =>
     `[![${s.name}][${s.refName}-shield]][${s.refName}-url]`

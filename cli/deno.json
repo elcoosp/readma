@@ -9,7 +9,7 @@
   "imports": {
     "@cross/deepmerge": "jsr:@cross/deepmerge@^1.0.0",
     "@david/dax": "jsr:@david/dax@^0.42.0",
-    "@readma/core": "../core/mod.ts",
+    "@readma/core": "jsr:@readma/core@^0.5.0",
     "type-fest": "npm:type-fest@^4.27.0"
   }
 }

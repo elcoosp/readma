@@ -46,11 +46,19 @@ jobs:
       - name: Test @readma/core
         working-directory: core
         run: deno task t
+      - name: Upload @readma/core coverage reports to Codecov
+        working-directory: core
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./cov.lcov
 
       - name: Test @readma/cli
         working-directory: cli
         run: deno task t
-      - name: Upload coverage reports to Codecov
+      - name: Upload @readma/cli coverage reports to Codecov
+        working-directory: cli
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./cov.lcov

@@ -69,7 +69,11 @@ deno install @readma/core
 
 ## 🔧 Usage
 
-See `scripts/gen-readme.ts`
+```ts
+import { readme } from "@readma/core"
+import config from "./readma.config.ts"
+await readme(config, { folderPath: "./" })
+```
 
 ## 🚀 Roadmap
 

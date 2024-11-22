@@ -17,6 +17,6 @@ jobs:
       - name: Publish on tag @readma/core
         working-directory: core
         run: npx jsr publish
-      # - name: Publish on tag @readma/cli
-      #   working-directory: cli
-      #   run: npx jsr publish
+      - name: Publish on tag @readma/cli
+        working-directory: cli
+        run: npx jsr publish

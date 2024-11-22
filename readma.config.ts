@@ -23,7 +23,18 @@ export default {
     roadmap: `
 - [ ] CLI with config file
 - [ ] Auto defaults from known files like Cargo.toml/{deno,package}.json`,
-    usage: "See `scripts/gen-readme.ts`",
+    usage: `
+    ${
+      md.code(
+        `
+import { readme } from "@readma/core"
+import config from "./readma.config.ts"
+// Generate a single readme file
+await readme(config, { folderPath: "./" })`,
+        "ts",
+      )
+    }
+`,
   },
   template: {
     bugReport: "bug-report--from-readme",

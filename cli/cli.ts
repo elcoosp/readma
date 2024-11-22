@@ -7,7 +7,7 @@ import * as toml from "@std/toml"
 import * as jsonc from "@std/jsonc"
 import type { ReadmeTemplateArgs } from "../core/types.ts"
 import denoConf from "./deno.json" with { type: "json" }
-import { $ } from "@david/dax"
+import { readReadmaConfig } from "../core/utils.ts"
 
 /**
  * Readma cli
@@ -24,23 +24,6 @@ export type Cli = {
   }>
   /** Run the cli */
   run: () => Promise<unknown>
-}
-const readReadmaConfig = async (configPathRoot = "./") => {
-  // Can not run if using Deno.makeTempFile
-  const tempFilePath = "./readReadmaConfig-tempFile.ts"
-  const readmaConfigRelPath = `${configPathRoot}readma.config.ts`
-  await Deno.writeTextFile(
-    tempFilePath,
-    `import config from '${readmaConfigRelPath}'; console.log(JSON.stringify(config));`,
-  )
-  try {
-    const result = await $`${Deno.execPath()} run -A ${tempFilePath}`.json()
-    return result as ReadmeTemplateArgs
-  } catch (error) {
-    throw error
-  } finally {
-    Deno.remove(tempFilePath)
-  }
 }
 export const cli: Cli = {
   async detectLanguage() {

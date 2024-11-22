@@ -2,6 +2,16 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## cli-0.5.1 - 2024-11-22
+#### Bug Fixes
+- **(cli)** doc - (a53c13a) - *elcoosp*
+#### Continuous Integration
+- pub cli & update usage readma.config - (19074aa) - elcoosp
+#### Miscellaneous Chores
+- **(*)** fix deno pkgs version - (b61f767) - *elcoosp*
+
+- - -
+
 ## cli-0.5.0 - 2024-11-22
 #### Documentation
 - **(cli)** add cli jsdoc - (2842e8d) - *elcoosp*

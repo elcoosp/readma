@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## cli-0.5.6 - 2024-11-23
+#### Bug Fixes
+- **(cli)** deno 0.6.0 - (753d1f5) - *elcoosp*
+- **(cli)** core import - (11569fc) - *elcoosp*
+
+- - -
+
 ## cli-0.5.5 - 2024-11-22
 #### Bug Fixes
 - **(cli)** deno pkg version - (37e3870) - *elcoosp*

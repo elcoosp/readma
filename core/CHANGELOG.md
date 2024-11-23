@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## core-0.6.2 - 2024-11-23
+#### Bug Fixes
+- **(cli)** core import - (11569fc) - *elcoosp*
+- **(core)** deno 0.6.1 - (7fed2b6) - *elcoosp*
+
+- - -
+
 ## core-0.6.1 - 2024-11-23
 #### Bug Fixes
 - **(core)** shield license dup - (01cf001) - *elcoosp*

@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## core-0.6.3 - 2024-11-23
+#### Bug Fixes
+- **(*)** readme - (f419f4c) - *elcoosp*
+
+- - -
+
 ## core-0.6.2 - 2024-11-23
 #### Bug Fixes
 - **(cli)** core import - (11569fc) - *elcoosp*

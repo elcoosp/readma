@@ -115,11 +115,6 @@ export const shields = (
       `github/check-runs/${githubUsername}/${repoName}/${branch}`,
     ),
     shield(
-      "Issues",
-      `${repoUrl}/issues`,
-      `github/license/${githubUsername}/${repoName}`,
-    ),
-    shield(
       "License",
       `${repoUrl}/blob/master/LICENSE.txt`,
       `github/license/${githubUsername}/${repoName}`,

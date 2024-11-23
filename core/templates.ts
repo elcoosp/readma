@@ -107,8 +107,11 @@ ${
     tocer.section(
       "💡 About the project",
       `
-<img src="${images.screenshot}" alt="Product screenshot" />
-  
+${
+        images.screenshot
+          ? `<img src="${images.screenshot}" alt="Product screenshot" />\n`
+          : ""
+      }
 ${about}`,
     )
   }

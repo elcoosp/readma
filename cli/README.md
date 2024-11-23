@@ -7,7 +7,6 @@
 [![Stargazers][stargazers-shield]][stargazers-url]
 [![Commit activity][commit-activity-shield]][commit-activity-url]
 [![Branch action runs][branch-action-runs-shield]][branch-action-runs-url]
-[![Issues][issues-shield]][issues-url]
 [![License][license-shield]][license-url]
 
 <!-- PROJECT LOGO -->
@@ -54,7 +53,7 @@
 ## 💡 About the project
 
 <img src="images/screenshot.gif" alt="Product screenshot" />
-  
+
 Create README that rocks
 
 ## 🎉 Getting started
@@ -118,7 +117,7 @@ Project Link: [https://github.com/elcoosp/readma](https://github.com/elcoosp/rea
 [jsr-version-shield]: https://img.shields.io/jsr/v/@readma/cli.svg?style=for-the-badge
 [jsr-version-url]: https://jsr.io/@readma/cli
 [codecov-shield]: https://img.shields.io/codecov/c/github/elcoosp/readma/main.svg?style=for-the-badge
-[codecov-url]: https://codecov.io/github/elcoosp/readma
+[codecov-url]: https://codecov.io/github/elcoosp/readma/tree/main/cli
 [contributors-shield]: https://img.shields.io/github/contributors/elcoosp/readma.svg?style=for-the-badge
 [contributors-url]: https://github.com/elcoosp/readma/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/elcoosp/readma.svg?style=for-the-badge
@@ -129,7 +128,5 @@ Project Link: [https://github.com/elcoosp/readma](https://github.com/elcoosp/rea
 [commit-activity-url]: https://github.com/elcoosp/readma/commits
 [branch-action-runs-shield]: https://img.shields.io/github/check-runs/elcoosp/readma/main.svg?style=for-the-badge
 [branch-action-runs-url]: https://github.com/elcoosp/readma/actions?query=branch%3Amain
-[issues-shield]: https://img.shields.io/github/license/elcoosp/readma.svg?style=for-the-badge
-[issues-url]: https://github.com/elcoosp/readma/issues
 [license-shield]: https://img.shields.io/github/license/elcoosp/readma.svg?style=for-the-badge
 [license-url]: https://github.com/elcoosp/readma/blob/master/LICENSE.txt

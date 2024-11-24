@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## cli-0.5.8 - 2024-11-24
+#### Bug Fixes
+- **(cli)** bump version - (f8b1d3e) - *elcoosp*
+
+- - -
+
 ## cli-0.5.7 - 2024-11-23
 #### Bug Fixes
 - **(*)** readme - (f419f4c) - *elcoosp*

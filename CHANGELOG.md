@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [2.3.5](https://github.com/elcoosp/readma/compare/1d01c667a7e2b3aec52cd8dedd92a68ba0144886..2.3.5) - 2024-11-24
+### Package updates
+- [cli-0.5.8](cli) bumped to [cli-0.5.8](https://github.com/elcoosp/readma/compare/cli-0.5.7..cli-0.5.8)
+### Global changes
+#### Miscellaneous Chores
+- codecov-action v5 - ([1d01c66](https://github.com/elcoosp/readma/commit/1d01c667a7e2b3aec52cd8dedd92a68ba0144886)) - [@elcoosp](https://github.com/elcoosp)
+
+- - -
+
 ## [2.3.4](https://github.com/elcoosp/readma/compare/f419f4c153f7c4eb8b014ba2cc94ec5e2f1e118d..2.3.4) - 2024-11-23
 ### Package updates
 - [core-0.6.3](core) bumped to [core-0.6.3](https://github.com/elcoosp/readma/compare/core-0.6.2..core-0.6.3)

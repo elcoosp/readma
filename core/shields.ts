@@ -86,7 +86,9 @@ export const shields = (
       ? [
         shield(
           "Crates.io version",
-          `https://crates.io//${workspaceMember ? workspaceMember : repoName}`,
+          `https://crates.io/crates/${
+            workspaceMember ? workspaceMember : repoName
+          }`,
           `crates/v/${workspaceMember ? workspaceMember : repoName}`,
         ),
       ]

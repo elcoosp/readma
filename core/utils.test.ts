@@ -1,7 +1,7 @@
 import { assertEquals } from "@std/assert"
 import config from "../readma.config.ts"
-import { readReadmaConfig } from "./utils.ts"
+import { getReadmaConfig } from "./utils.ts"
 
-Deno.test("readReadmaConfig", async () => {
-  assertEquals(await readReadmaConfig("../"), config)
+Deno.test("getReadmaConfig", async () => {
+  assertEquals(await getReadmaConfig("../"), config)
 })

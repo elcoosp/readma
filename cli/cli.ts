@@ -78,7 +78,7 @@ export const cli: Cli = {
     }
   },
   async run() {
-    const config = await utils.readReadmaConfig()
+    const config = await utils.getReadmaConfig()
 
     await new Command()
       .name("readma")

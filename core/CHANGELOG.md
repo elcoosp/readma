@@ -2,6 +2,19 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## core-0.7.1 - 2024-11-24
+#### Bug Fixes
+- **(*)** crates version link - (c738b28) - *elcoosp*
+- **(*)** test broken caused by license file read + setup rsdoctor - (a890485) - *elcoosp*
+- **(cli)** logs - (2d3c694) - *elcoosp*
+- **(core)** https://readma.vercel.app/ as doc url - (c48c88f) - *elcoosp*
+- **(core)** default domainExt - (a754218) - *elcoosp*
+- **(core)** derive licenseSectionBody from LICENSE.txt file - (153e970) - *elcoosp*
+- make badgeStyle part of ReadmeTemplateArgs - (d7c8879) - elcoosp
+- rename readReadmaConfig to getReadmaConfig - (b387f91) - elcoosp
+
+- - -
+
 ## core-0.7.0 - 2024-11-24
 #### Features
 - **(*)** crates.io version shield - (d21e2fa) - *elcoosp*

@@ -2,6 +2,36 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [2.5.0](https://github.com/elcoosp/readma/compare/dfd091c566d3b1fe592899e388cfb539cab22eca..2.5.0) - 2024-11-24
+### Package updates
+- [cli-0.5.9](cli) bumped to [cli-0.5.9](https://github.com/elcoosp/readma/compare/cli-0.5.8..cli-0.5.9)
+- [core-0.7.1](core) bumped to [core-0.7.1](https://github.com/elcoosp/readma/compare/core-0.7.0..core-0.7.1)
+### Global changes
+#### Bug Fixes
+- **(*)** test broken caused by license file read + setup rsdoctor - ([a890485](https://github.com/elcoosp/readma/commit/a89048546cbb6ad8b56df7d4a5d113284fcee23b)) - [@elcoosp](https://github.com/elcoosp)
+- **(cli)** logs - ([2d3c694](https://github.com/elcoosp/readma/commit/2d3c6942272ba359ece337e6320cd1d18dfb9d3f)) - [@elcoosp](https://github.com/elcoosp)
+- **(core)** https://readma.vercel.app/ as doc url - ([c48c88f](https://github.com/elcoosp/readma/commit/c48c88fb7839a20dcbe88ebd78c60ebc2458607b)) - [@elcoosp](https://github.com/elcoosp)
+- up ts - ([9e5ba0e](https://github.com/elcoosp/readma/commit/9e5ba0e119db2033f06be13654dbce47d7e38bcd)) - [@elcoosp](https://github.com/elcoosp)
+- missing blog post & add some logs & use mdx on intro tuto & fix gitignore on deno pkg docs - ([2e3c969](https://github.com/elcoosp/readma/commit/2e3c969b438ef93ed1a2e0f1de906e9371c5e7e5)) - [@elcoosp](https://github.com/elcoosp)
+- doc social-card - ([ff25e81](https://github.com/elcoosp/readma/commit/ff25e818eca9092505de89cb62acfdab7c6dfd5e)) - [@elcoosp](https://github.com/elcoosp)
+- use rspack misconfigured, split docusaurus config to reusable module & rename doc tuto intro - ([dfd091c](https://github.com/elcoosp/readma/commit/dfd091c566d3b1fe592899e388cfb539cab22eca)) - [@elcoosp](https://github.com/elcoosp)
+#### Documentation
+- add intro tuto - ([e625a69](https://github.com/elcoosp/readma/commit/e625a690c77f41fbd260a0cf5bdc1ef9fd6a3c90)) - [@elcoosp](https://github.com/elcoosp)
+- use experimental_faster - ([7576414](https://github.com/elcoosp/readma/commit/75764145f30b8277e8aea91a63faa97c471bde37)) - [@elcoosp](https://github.com/elcoosp)
+- refactor dry config - ([50adc16](https://github.com/elcoosp/readma/commit/50adc1603b1f543696529cf39ff11e8b27b312f4)) - [@elcoosp](https://github.com/elcoosp)
+- coherent feats list - ([73fc1cb](https://github.com/elcoosp/readma/commit/73fc1cb4e1284f296ec9667e4b5ed9a794714ca0)) - [@elcoosp](https://github.com/elcoosp)
+- rm useless images & add warn to intro - ([b48981b](https://github.com/elcoosp/readma/commit/b48981b1499be27e143bffe5e788804082fb0dbc)) - [@elcoosp](https://github.com/elcoosp)
+#### Features
+- bootstrap docusaurus - ([9112a62](https://github.com/elcoosp/readma/commit/9112a62feaf856fc79349f1b3cdf0eddcbcc59de)) - [@elcoosp](https://github.com/elcoosp)
+#### Miscellaneous Chores
+- type conf - ([4220118](https://github.com/elcoosp/readma/commit/4220118f8fdabfefbf6073666fc1b14401db7516)) - [@elcoosp](https://github.com/elcoosp)
+- clean docs - ([6740fdb](https://github.com/elcoosp/readma/commit/6740fdb5735ca2007fb8326c50c1e74446ca00cb)) - [@elcoosp](https://github.com/elcoosp)
+- new logo - ([fd8fd31](https://github.com/elcoosp/readma/commit/fd8fd31ba24c6cb54c6268fa5b161089f6cc9b3b)) - [@elcoosp](https://github.com/elcoosp)
+- fix favicon - ([a4c4b44](https://github.com/elcoosp/readma/commit/a4c4b446b510ff5705728e6e289612ac81bc13e5)) - [@elcoosp](https://github.com/elcoosp)
+- new screenshot - ([c74a0e2](https://github.com/elcoosp/readma/commit/c74a0e2535feb381aa903a47e304cc6153dec496)) - [@elcoosp](https://github.com/elcoosp)
+
+- - -
+
 ## [2.4.0](https://github.com/elcoosp/readma/compare/2.3.5..2.4.0) - 1970-01-01
 ### Package updates
 - [core-0.7.0](core) bumped to [core-0.7.0](https://github.com/elcoosp/readma/compare/core-0.6.3..core-0.7.0)

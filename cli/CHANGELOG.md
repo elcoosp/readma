@@ -2,6 +2,17 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## cli-0.5.9 - 2024-11-24
+#### Bug Fixes
+- **(*)** test broken caused by license file read + setup rsdoctor - (a890485) - *elcoosp*
+- **(cli)** logs - (2d3c694) - *elcoosp*
+- **(core)** https://readma.vercel.app/ as doc url - (c48c88f) - *elcoosp*
+- rename readReadmaConfig to getReadmaConfig - (b387f91) - elcoosp
+#### Miscellaneous Chores
+- 0.6.2 - (d42782a) - elcoosp
+
+- - -
+
 ## cli-0.5.8 - 2024-11-24
 #### Bug Fixes
 - **(cli)** bump version - (f8b1d3e) - *elcoosp*

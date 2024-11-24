@@ -1,5 +1,6 @@
 .DS_Store
-docs
+cli/docs
+core/docs
 cov
 cov.lcov
 node_modules

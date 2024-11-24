@@ -9,6 +9,7 @@
   "imports": {
     "@cross/deepmerge": "jsr:@cross/deepmerge@^1.0.0",
     "@david/dax": "jsr:@david/dax@^0.42.0",
+    "@deno-library/logger": "jsr:@deno-library/logger@^1.1.7",
     "@readma/core": "jsr:@readma/core@^0.6.2",
     "type-fest": "npm:type-fest@^4.27.0"
   }

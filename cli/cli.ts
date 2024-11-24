@@ -6,7 +6,9 @@ import { exists } from "@std/fs"
 import * as toml from "@std/toml"
 import * as jsonc from "@std/jsonc"
 import denoConf from "./deno.json" with { type: "json" }
+import { Logger } from "@deno-library/logger"
 
+const log = new Logger()
 /**
  * Readma cli
  */
@@ -63,6 +65,7 @@ export const cli: Cli = {
       : hasRsFiles
       ? "rs" as const
       : null
+    log.info({ language })
     if (language === null) throw new Error("Could not detect language")
     const files = {
       ts: tsFiles.find((x) => x !== null),
@@ -71,6 +74,7 @@ export const cli: Cli = {
     const workspaceMembers = language === "rs"
       ? files.rs.workspace?.members
       : files.ts.workspace
+    log.info({ workspaceMembers })
     return {
       language,
       files,
@@ -80,6 +84,7 @@ export const cli: Cli = {
   async run() {
     const licenseFile = await Deno.readTextFile("LICENSE.txt")
     const license = licenseFile.startsWith("MIT License") ? "MIT" : undefined
+    log.info({ license })
     const config = deepMerge<
       PartialDeep<types.ReadmeTemplateArgs>
     >(await utils.getReadmaConfig(), {
@@ -92,12 +97,13 @@ export const cli: Cli = {
       .description("Command line utility for Readma")
       .globalOption("-d, --debug", "Enable debug output.")
       .action((_options, ..._args) =>
-        console.log(
+        log.warn(
           "Main command called. Nothing will happen, use `gen` subcommand",
         )
       )
       .command("gen", "Generate readme(s)")
       .action(async (_options, ..._args) => {
+        log.info("Starting readma generation")
         const { language, workspaceMembers } = await cli
           .detectLanguage()
 
@@ -124,10 +130,14 @@ export const cli: Cli = {
           })
         })
         await Promise.all((wsOverride || []).map((wsConfig) => {
+          log.info(
+            `Writing "${wsConfig.workspaceMember}" workspace member README`,
+          )
           return readme(wsConfig as types.ReadmeTemplateArgs, {
             folderPath: `./${wsConfig.workspaceMember}`,
           })
         }))
+        log.info(`Writing main workspace member README`)
         await readme(config, { folderPath: "./" })
       })
       .parse(Deno.args)

@@ -18,7 +18,7 @@ Export default a config object like the
 <CodeBlock language="ts" title="readma.config.ts">{readmaConfig}</CodeBlock>
 
 :::warning
-This file will be interpreted by a `deno` runtime.
+This file will be interpreted by a `deno` runtime. See [limitations](limitations#runtime)
 :::
 
 ### What you'll need
@@ -29,6 +29,10 @@ This file will be interpreted by a `deno` runtime.
 
 Generate a readme per project workspace member and/or a main one by running the
 following command
+
+:::danger
+Will overwrite `README.md` files, be sure to commit those before
+:::
 
 ```bash
 deno run -A jsr:@readma/cli gen

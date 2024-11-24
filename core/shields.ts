@@ -82,6 +82,15 @@ export const shields = (
         ),
       ]
       : []),
+    ...(language === "rs"
+      ? [
+        shield(
+          "Crates.io version",
+          `https://crates.io//${workspaceMember ? workspaceMember : repoName}`,
+          `crates/v/${workspaceMember ? workspaceMember : repoName}`,
+        ),
+      ]
+      : []),
     shield(
       "Codecov",
       `https://codecov.io/${vcsName}/${githubUsername}/${repoName}/tree/${branch}${

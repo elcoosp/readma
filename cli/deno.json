@@ -1,6 +1,6 @@
 {
   "name": "@readma/cli",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "exports": "./mod.ts",
   "tasks": {
     "t": "deno test -A --coverage=cov/ && deno coverage --lcov cov/ > cov.lcov",
@@ -9,7 +9,7 @@
   "imports": {
     "@cross/deepmerge": "jsr:@cross/deepmerge@^1.0.0",
     "@david/dax": "jsr:@david/dax@^0.42.0",
-    "@readma/core": "jsr:@readma/core@^0.6.1",
+    "@readma/core": "jsr:@readma/core@^0.6.2",
     "type-fest": "npm:type-fest@^4.27.0"
   }
 }

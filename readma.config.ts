@@ -1,7 +1,8 @@
 import { md } from "./core/utils.ts"
+import * as types from "./core/types.ts"
 const name = "readma"
 const author = "elcoosp"
-export default {
+const config: types.ReadmeTemplateArgs = {
   language: "ts",
   title: "Readma",
   author,
@@ -42,3 +43,4 @@ await readme(config, { folderPath: "./" })`,
   },
   backToTop: false,
 } as const
+export default config

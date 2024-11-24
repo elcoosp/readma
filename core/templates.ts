@@ -64,6 +64,10 @@ export const readme = async ({
   )
   const logoSrc =
     `https://raw.githubusercontent.com/${githubUsername}/${repoName}/HEAD/${images.logo}`
+  const license = await Deno.readTextFile("LICENSE.txt")
+  const licenseSectionBody = license.startsWith("MIT License")
+    ? `Distributed under the MIT License. See \`LICENSE.txt\` for more information.`
+    : "Not declared"
   const projectShields = `
 <!-- PROJECT SHIELDS -->
 ${shieldsBadges}
@@ -148,7 +152,7 @@ Don't forget to give the project a star! Thanks again!
 ${
     tocer.section(
       "📄 License",
-      `Distributed under the MIT License. See \`LICENSE.txt\` for more information.`,
+      licenseSectionBody,
     )
   }
 ${

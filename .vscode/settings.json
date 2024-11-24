@@ -4,7 +4,10 @@
     "templater",
     "Tocer"
   ],
-  "deno.enable": true,
+  "deno.enablePaths": [
+    "cli",
+    "core"
+  ],
   "deno.lint": true,
   "deno.config": "./deno.json",
   "editor.formatOnSave": true,

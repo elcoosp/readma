@@ -124,6 +124,9 @@ const config: Config = {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
     },
+    future: {
+      experimental_faster: true,
+    },
   } satisfies Preset.ThemeConfig,
 }
 

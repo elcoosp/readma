@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## core-0.7.2 - 2024-11-24
+#### Bug Fixes
+- **(*)** deno version bump - (de9f55f) - *elcoosp*
+
+- - -
+
 ## core-0.7.1 - 2024-11-24
 #### Bug Fixes
 - **(*)** crates version link - (c738b28) - *elcoosp*

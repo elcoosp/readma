@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## cli-0.5.10 - 2024-11-24
+#### Bug Fixes
+- **(*)** deno version bump - (de9f55f) - *elcoosp*
+
+- - -
+
 ## cli-0.5.9 - 2024-11-24
 #### Bug Fixes
 - **(*)** test broken caused by license file read + setup rsdoctor - (a890485) - *elcoosp*

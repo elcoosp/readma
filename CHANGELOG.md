@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [2.4.0](https://github.com/elcoosp/readma/compare/2.3.5..2.4.0) - 1970-01-01
+### Package updates
+- [core-0.7.0](core) bumped to [core-0.7.0](https://github.com/elcoosp/readma/compare/core-0.6.3..core-0.7.0)
+### Global changes
+
+- - -
+
 ## [2.3.5](https://github.com/elcoosp/readma/compare/1d01c667a7e2b3aec52cd8dedd92a68ba0144886..2.3.5) - 2024-11-24
 ### Package updates
 - [cli-0.5.8](cli) bumped to [cli-0.5.8](https://github.com/elcoosp/readma/compare/cli-0.5.7..cli-0.5.8)

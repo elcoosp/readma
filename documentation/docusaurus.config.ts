@@ -1,16 +1,22 @@
 import { themes as prismThemes } from "prism-react-renderer"
 import type { Config } from "@docusaurus/types"
 import type * as Preset from "@docusaurus/preset-classic"
-
-const ghHref = "https://github.com/elcoosp/readma"
+import { titleCase } from "title-case"
+const organizationName = "elcoosp"
+const projectName = "readma"
+const githubUrl = `https://github.com/${organizationName}/${projectName}`
+const deploy: "vercel" = "vercel"
+const url = { "vercel": `https://${projectName}.vercel.app` }[deploy]
+const titledProjectName = titleCase(projectName)
+const title = `${titledProjectName} documentation`
 const config: Config = {
-  title: "Readma",
+  url,
+  organizationName,
+  projectName,
+  title,
   tagline: "Beautiful effortless README generator",
   favicon: "img/favicon.ico",
-  url: "https://readma.vercel.app",
   baseUrl: "/",
-  organizationName: "elcoosp",
-  projectName: "readma",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
   i18n: {
@@ -26,8 +32,7 @@ const config: Config = {
           sidebarPath: "./sidebars.ts",
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            "https://github.com/elcoosp/readma/tree/main/documentation/blog",
+          editUrl: `${githubUrl}/tree/main/documentation/blog`,
         },
         blog: {
           showReadingTime: true,
@@ -37,8 +42,7 @@ const config: Config = {
           },
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            "https://github.com/elcoosp/readma/tree/main/documentation/docs",
+          editUrl: `${githubUrl}/tree/main/documentation/docs`,
           // Useful options to enforce blogging best practices
           onInlineTags: "warn",
           onInlineAuthors: "warn",
@@ -55,7 +59,7 @@ const config: Config = {
     // Replace with your project's social card
     image: "img/docusaurus-social-card.jpg",
     navbar: {
-      title: "Readma",
+      title: titledProjectName,
       logo: {
         alt: "Readma logo",
         src: "img/logo.svg",
@@ -69,7 +73,7 @@ const config: Config = {
         },
         { to: "/blog", label: "Blog", position: "left" },
         {
-          href: ghHref,
+          href: githubUrl,
           label: "GitHub",
           position: "right",
         },
@@ -92,7 +96,7 @@ const config: Config = {
           items: [
             {
               label: "Stack Overflow",
-              href: "https://stackoverflow.com/questions/tagged/readma",
+              href: `https://stackoverflow.com/questions/tagged/${projectName}`,
             },
           ],
         },
@@ -105,7 +109,7 @@ const config: Config = {
             },
             {
               label: "GitHub",
-              href: ghHref,
+              href: githubUrl,
             },
           ],
         },

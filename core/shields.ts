@@ -20,17 +20,17 @@ export function shield(
   return { name, refName, linkUrl, shieldUrl, lang }
 }
 /** Util to create a {@link Shield.shieldUrl}, defaulting to [shields.io](https://shields.io/) */
-export const shieldUrl = (path: string, style: string) =>
+export const shieldUrl = (path: string, style?: string) =>
   path.startsWith("https://")
     ? `${path}&style=${style}`
-    : `https://img.shields.io/${path}.svg?style=${style}`
+    : `https://img.shields.io/${path}.svg?${style ? `style=${style}` : ""}`
 /** Dynamic list of shields, with some depending on args */
 export const shields = (
   {
     githubUsername,
     repoUrl,
     repoName,
-    style,
+    badgeStyle,
     commitActivityInterval,
     linkedinUsername,
     branch,
@@ -43,13 +43,13 @@ export const shields = (
       | "repoName"
       | "githubUsername"
       | "linkedinUsername"
+      | "badgeStyle"
       | "language"
       | "workspaceMember"
       | "vcsName"
     >
     & {
       repoUrl: string
-      style: string
       commitActivityInterval: "w"
       branch: string
     },
@@ -128,7 +128,7 @@ export const shields = (
       `${repoUrl}/blob/master/LICENSE.txt`,
       `github/license/${githubUsername}/${repoName}`,
     ),
-  ].map((x) => ({ ...x, shieldUrl: shieldUrl(x.shieldUrl, style) }))
+  ].map((x) => ({ ...x, shieldUrl: shieldUrl(x.shieldUrl, badgeStyle) }))
 /** Render {@link shields} as markdown, return markdown refs which declare urls and badges to put at the top of the document */
 export const renderShields = (shields: Shield[]) => {
   const shieldsBadges = shields.map((s) =>

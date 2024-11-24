@@ -39,6 +39,7 @@ export const readme = async ({
   vcsName = "github",
   domainExt = "com",
   license,
+  badgeStyle = "for-the-badge",
 }: ReadmeTemplateArgs) => {
   const fullEmail = `${email}@${domain}.${domainExt}`
   const repoUrl = urls?.repo ||
@@ -48,7 +49,6 @@ export const readme = async ({
   const tocer = new Tocer(backToTop)
   const commitActivityInterval = "w"
   const tocVar = "$$TOC$$"
-  const badgeStyle = "for-the-badge"
   const { shieldsBadges, shieldsRefs } = renderShields(
     shields({
       vcsName,
@@ -56,7 +56,7 @@ export const readme = async ({
       repoUrl,
       githubUsername,
       workspaceMember,
-      style: badgeStyle,
+      badgeStyle,
       commitActivityInterval,
       branch,
       language,

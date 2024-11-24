@@ -62,5 +62,6 @@ export type ReadmeTemplateArgs = {
     usage: string
   }
   license?: "MIT"
+  badgeStyle?: "for-the-badge" | "social" | "flat" | "flat-square" | "plastic"
 }
 export type MdSrc = string

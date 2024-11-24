@@ -7,7 +7,9 @@ Deno.test("readme", async () => {
   if (Deno.env.get("GITHUB_REF")?.startsWith("refs/tags")) {
     assertEquals(true, true)
   } else {
-    const out = await readme(config, { folderPath: "../" })
+    const out = await readme({ ...config, license: "MIT" }, {
+      folderPath: "../",
+    })
     assertEquals(out, current)
   }
 })

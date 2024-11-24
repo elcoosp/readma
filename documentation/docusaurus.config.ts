@@ -26,6 +26,7 @@ const config: Config = {
     defaultLocale: "en",
     locales: ["en"],
   },
+  plugins: [],
 
   presets: [
     [

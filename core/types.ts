@@ -61,5 +61,6 @@ export type ReadmeTemplateArgs = {
     /** Usage section */
     usage: string
   }
+  license?: "MIT"
 }
 export type MdSrc = string

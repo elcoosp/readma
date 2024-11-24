@@ -38,6 +38,7 @@ export const readme = async ({
   backToTop,
   vcsName = "github",
   domainExt = "com",
+  license,
 }: ReadmeTemplateArgs) => {
   const fullEmail = `${email}@${domain}.${domainExt}`
   const repoUrl = urls?.repo ||
@@ -64,8 +65,7 @@ export const readme = async ({
   )
   const logoSrc =
     `https://raw.githubusercontent.com/${githubUsername}/${repoName}/HEAD/${images.logo}`
-  const license = await Deno.readTextFile("LICENSE.txt")
-  const licenseSectionBody = license.startsWith("MIT License")
+  const licenseSectionBody = license === "MIT"
     ? `Distributed under the MIT License. See \`LICENSE.txt\` for more information.`
     : "Not declared"
   const projectShields = `

@@ -78,7 +78,13 @@ export const cli: Cli = {
     }
   },
   async run() {
-    const config = await utils.getReadmaConfig()
+    const licenseFile = await Deno.readTextFile("LICENSE.txt")
+    const license = licenseFile.startsWith("MIT License") ? "MIT" : undefined
+    const config = deepMerge<
+      PartialDeep<types.ReadmeTemplateArgs>
+    >(await utils.getReadmaConfig(), {
+      license,
+    }) as types.ReadmeTemplateArgs
 
     await new Command()
       .name("readma")

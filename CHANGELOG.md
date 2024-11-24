@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [2.5.2](https://github.com/elcoosp/readma/compare/ac58b112890df2b856f76f59d265fc7995cf5b2e..2.5.2) - 2024-11-24
+### Package updates
+- [cli-0.5.11](cli) bumped to [cli-0.5.11](https://github.com/elcoosp/readma/compare/cli-0.5.10..cli-0.5.11)
+### Global changes
+#### Bug Fixes
+- **(cli)** deno version bump core in cli - ([ac58b11](https://github.com/elcoosp/readma/commit/ac58b112890df2b856f76f59d265fc7995cf5b2e)) - [@elcoosp](https://github.com/elcoosp)
+
+- - -
+
 ## [2.5.1](https://github.com/elcoosp/readma/compare/2.5.0..2.5.1) - 1970-01-01
 ### Package updates
 - [core-0.7.2](core) bumped to [core-0.7.2](https://github.com/elcoosp/readma/compare/core-0.7.1..core-0.7.2)

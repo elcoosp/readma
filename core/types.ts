@@ -11,6 +11,8 @@ export type ReadmeTemplateArgs = {
     repo?: string
     /** Link to a demo, default to the repo url if not specified */
     demo?: string
+    /** Link to documentation, default to the repo url if not specified */
+    doc?: string
   }
   /** Source files language, rust or typescript only for now */
   language: "rs" | "ts"

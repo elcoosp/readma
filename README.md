@@ -19,7 +19,7 @@
   <p align="center">
     Beautiful effortless README generator
     <br />
-    <a href="https://github.com/elcoosp/readma"><strong>📖 Explore the docs »</strong></a>
+    <a href="https://readma.vercel.app/"><strong>📖 Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://github.com/elcoosp/readma">View Demo</a>

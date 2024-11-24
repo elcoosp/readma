@@ -44,6 +44,7 @@ export const readme = async ({
   const fullEmail = `${email}@${domain}.${domainExt}`
   const repoUrl = urls?.repo ||
     `https://${vcsName}.com/${githubUsername}/${repoName}`
+  const docUrl = urls?.doc || repoUrl
   const demoUrl = urls?.demo || repoUrl
   const branch = await getBranch()
   const tocer = new Tocer(backToTop)
@@ -87,7 +88,7 @@ ${projectShields}
   <p align="center">
     ${projectDescription}
     <br />
-    <a href="${repoUrl}"><strong>📖 Explore the docs »</strong></a>
+    <a href="${docUrl}"><strong>📖 Explore the docs »</strong></a>
     <br />
     <br />
     <a href="${demoUrl}">View Demo</a>

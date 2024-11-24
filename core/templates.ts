@@ -37,9 +37,9 @@ export const readme = async ({
   language,
   backToTop,
   vcsName = "github",
+  domainExt = "com",
 }: ReadmeTemplateArgs) => {
-  // FIXME: domain + ext
-  const fullEmail = `${email}@${domain}.com`
+  const fullEmail = `${email}@${domain}.${domainExt}`
   const repoUrl = urls?.repo ||
     `https://${vcsName}.com/${githubUsername}/${repoName}`
   const demoUrl = urls?.demo || repoUrl

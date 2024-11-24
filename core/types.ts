@@ -35,6 +35,8 @@ export type ReadmeTemplateArgs = {
   linkedinUsername?: string
   /** Domain name for the mail */
   domain: string
+  /** Domain extension for the mail, default to com */
+  domainExt?: string
   /** Email (should just be the prefix, no @domain.com) */
   email: string
   /** This should be a reference to a folder that exist and contain source files for which you want a README  */

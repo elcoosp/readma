@@ -84,7 +84,6 @@ export const cli: Cli = {
   async run() {
     const licenseFile = await Deno.readTextFile("LICENSE.txt")
     const license = licenseFile.startsWith("MIT License") ? "MIT" : undefined
-    log.info({ license })
     const config = deepMerge<
       PartialDeep<types.ReadmeTemplateArgs>
     >(await utils.getReadmaConfig(), {
@@ -104,6 +103,7 @@ export const cli: Cli = {
       .command("gen", "Generate readme(s)")
       .action(async (_options, ..._args) => {
         log.info("Starting readma generation")
+        log.info({ license })
         const { language, workspaceMembers } = await cli
           .detectLanguage()
 

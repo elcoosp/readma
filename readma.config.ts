@@ -12,7 +12,7 @@ const config: types.ReadmeTemplateArgs = {
   domain: "gmail",
   email: author,
   urls: {
-    doc: "https://readma.vercel.app/",
+    doc: `https://${name}.vercel.app/`,
   },
   repobeats: "1b12e7ffd13fd2d15772a30e8b0a995976150797",
   images: { screenshot: "images/screenshot.gif", logo: "images/logo.png" },

@@ -1,10 +1,10 @@
-import type { Config } from "@docusaurus/types"
-import createDocusaurusConfig, {
+import {
   classicPreset,
+  createDocusaurusConfig,
   themeConfig,
-} from "./create-docusaurus-config"
+} from "@elcoosp-configs/docusaurus"
 
-const config: Config = createDocusaurusConfig(
+const config = createDocusaurusConfig(
   { organizationName: "elcoosp", projectName: "readma" },
   (derived) => {
     return ({

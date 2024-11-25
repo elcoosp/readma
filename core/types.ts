@@ -17,7 +17,7 @@ export type ReadmeTemplateArgs = {
   /** Source files language, rust or typescript only for now */
   language: "rs" | "ts"
   /** Images links */
-  images: { screenshot: string; logo: string }
+  images: { screenshot?: string; logo: string }
   /** Main author */
   author: string
   /** Github template */

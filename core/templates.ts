@@ -117,7 +117,10 @@ ${tocVar}
 ${
     tocer.section(
       '💡 About the project',
-      `${
+      `
+${about}
+
+${
         images.screenshot
           ? `<img src="${screenshotSrc}" alt="Product screenshot" />\n`
           : ''
@@ -136,10 +139,8 @@ ${
               ) => [`[${pkgName}](${path})`]),
             ))
           }
-
-${about}
 `
-          : about
+          : ''
       }
 `,
     )

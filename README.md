@@ -48,6 +48,8 @@
 
 ## 💡 About the project
 
+Create README that rocks
+
 <img src="https://raw.githubusercontent.com/elcoosp/readma/HEAD/images/screenshot.gif" alt="Product screenshot" />
 
 > [!TIP]
@@ -58,8 +60,6 @@
 | [@readma/core](./core)         |
 | [@readma/cli](./cli)           |
 | [@readma/pkg-json](./pkg-json) |
-
-Create README that rocks
 
 ## 🎉 Getting started
 

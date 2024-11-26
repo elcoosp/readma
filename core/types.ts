@@ -52,6 +52,7 @@ export type ReadmeTemplateArgs = {
   domainExt?: string
   /** Email (should just be the prefix, no @domain.com) */
   email: string
+  // FIXME semantically incorrect
   /** This should be a reference to a folder that exist and contain source files for which you want a README  */
   title: string
   /** Wether or not to add a button to scroll back to the top of the readme */

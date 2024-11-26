@@ -36,6 +36,7 @@
     "npm:@mdx-js/mdx@^3.1.0": "3.1.0",
     "npm:@pnpm/workspace.read-manifest@^2.2.1": "2.2.1",
     "npm:glob@11": "11.0.0",
+    "npm:jiti@^2.4.0": "2.4.0",
     "npm:markdown-table@^3.0.4": "3.0.4",
     "npm:react-dom@^18.3.1": "18.3.1_react@18.3.1",
     "npm:react@^18.3.1": "18.3.1",
@@ -567,6 +568,9 @@
       "dependencies": [
         "@isaacs/cliui"
       ]
+    },
+    "jiti@2.4.0": {
+      "integrity": "sha512-H5UpaUI+aHOqZXlYOaFP/8AzKsg+guWu+Pr3Y8i7+Y3zr1aXAvCvTAQ1RxSc6oVD8R8c7brgNtTVP91E7upH/g=="
     },
     "js-tokens@4.0.0": {
       "integrity": "sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ=="
@@ -1298,6 +1302,7 @@
         "dependencies": [
           "jsr:@david/dax@0.42",
           "jsr:@deno-library/logger@^1.1.7",
+          "npm:jiti@^2.4.0",
           "npm:markdown-table@^3.0.4"
         ]
       },

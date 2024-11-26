@@ -1,4 +1,5 @@
-import { $ } from '@david/dax'
+import { createJiti } from 'jiti/native'
+import * as path from '@std/path'
 import type { MdSrc, ReadmeTemplateArgs } from './types.ts'
 // TODO: fix lines of markdown inside template lit lead to incorrectly formatted md, use an md template lit & a linter
 /** Quick utils to avoid ugly escaping everywhere */
@@ -12,19 +13,10 @@ export const md = {
 export const getReadmaConfig = async (
   configPathRoot = './',
 ): Promise<ReadmeTemplateArgs> => {
-  // Can not run if using Deno.makeTempFile
-  const tempFilePath = './getReadmaConfig-tempFile.ts'
-  const readmaConfigRelPath = `${configPathRoot}readma.config.ts`
-  await Deno.writeTextFile(
-    tempFilePath,
-    `import config from '${readmaConfigRelPath}'; console.log(JSON.stringify(config));`,
-  )
-  try {
-    const result = await $`${Deno.execPath()} run -A ${tempFilePath}`.json()
-    return result as ReadmeTemplateArgs
-  } catch (error) {
-    throw error
-  } finally {
-    Deno.remove(tempFilePath)
-  }
+  const configPath = path.join(Deno.cwd(), configPathRoot, 'readma.config.ts')
+  const jiti = createJiti(import.meta.url)
+
+  const config =
+    (await jiti.import(configPath) as { default: ReadmeTemplateArgs }).default
+  return config
 }

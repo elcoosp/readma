@@ -2,7 +2,8 @@
 
 ## Runtime
 
-Need a deno runtime to interpret the configuration file
+Need a node runtime to interpret the configuration file using
+[jiti](https://github.com/unjs/jiti)
 
 ## VCS
 
@@ -11,7 +12,8 @@ logo) on other vcs
 
 ## Package registries
 
-To get a version shield your package need to be hosted on one of those registry
+To get a version shield and automatic installation section your package need to
+be hosted on one of those registry
 
 | Registry                      | Support |
 | ----------------------------- | ------- |

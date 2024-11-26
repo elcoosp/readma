@@ -12,18 +12,14 @@ Let's discover **Readma in less than 5 minutes**.
 ### Configuration
 Create a `readma.config.ts` file at the root of your project workspace.
 
-Export default a config object like the
-[following](https://github.com/elcoosp/readma/blob/main/readma.config.ts)
+**Export default** a config object [following this type](https://jsr.io/@readma/core/doc/~/types.ReadmeTemplateArgs)
 
 <CodeBlock language="ts" title="readma.config.ts">{readmaConfig}</CodeBlock>
-
-:::warning
-This file will be interpreted by a `deno` runtime and is expected to export default an object which can be given to `JSON.stringify`. See [limitations](limitations#runtime)
-:::
 
 ### What you'll need
 
 - [Deno](https://deno.com/) version 2 or above
+- [Node](https://nodejs.org/) (used to read the configuration file)
 
 ## Run [@readma/cli](https://github.com/elcoosp/readma/tree/main/cli)
 ### Generate readme(s) of your project workspace

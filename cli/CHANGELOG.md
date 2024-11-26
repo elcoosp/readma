@@ -2,6 +2,19 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## cli-0.9.0 - 2024-11-26
+#### Bug Fixes
+- **(*)** missing paren on ternary - (e35fd33) - *elcoosp*
+- default ws member description - (71cba1c) - elcoosp
+#### Features
+- **(*)** allow to not specify installation section in a single rust package case - (552b1bd) - *elcoosp*
+- **(*)** fetch jsr meta to get workspace member description - (4677ca6) - *elcoosp*
+- **(*)** add features section - (1921956) - *elcoosp*
+#### Miscellaneous Chores
+- version packages - (990f8b1) - elcoosp
+
+- - -
+
 ## cli-0.8.1 - 2024-11-26
 #### Bug Fixes
 - mv about section - (9420588) - elcoosp

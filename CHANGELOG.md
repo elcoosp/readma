@@ -2,6 +2,20 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [2.10.0](https://github.com/elcoosp/readma/compare/e35fd33f778d171854dfed956f115c43d610a9ae..2.10.0) - 2024-11-26
+### Package updates
+- [core-0.12.0](core) bumped to [core-0.12.0](https://github.com/elcoosp/readma/compare/core-0.11.1..core-0.12.0)
+- [cli-0.9.0](cli) bumped to [cli-0.9.0](https://github.com/elcoosp/readma/compare/cli-0.8.1..cli-0.9.0)
+### Global changes
+#### Bug Fixes
+- **(*)** missing paren on ternary - ([e35fd33](https://github.com/elcoosp/readma/commit/e35fd33f778d171854dfed956f115c43d610a9ae)) - [@elcoosp](https://github.com/elcoosp)
+- default ws member description - ([71cba1c](https://github.com/elcoosp/readma/commit/71cba1c48f92ff0dc091e8b84a53cc72269a6747)) - [@elcoosp](https://github.com/elcoosp)
+#### Features
+- **(*)** add features section - ([1921956](https://github.com/elcoosp/readma/commit/1921956754cd3f7ab463a42e7baa3eaa14394335)) - [@elcoosp](https://github.com/elcoosp)
+- **(*)** fetch jsr meta to get workspace member description - ([4677ca6](https://github.com/elcoosp/readma/commit/4677ca6368818677b3422ffb2bf8642991bdd97c)) - [@elcoosp](https://github.com/elcoosp)
+
+- - -
+
 ## [2.9.1](https://github.com/elcoosp/readma/compare/9420588bf9a8140eea2b81f5969f55c49053aacd..2.9.1) - 2024-11-26
 ### Package updates
 - [cli-0.8.1](cli) bumped to [cli-0.8.1](https://github.com/elcoosp/readma/compare/cli-0.8.0..cli-0.8.1)

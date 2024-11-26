@@ -2,6 +2,17 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## core-0.12.0 - 2024-11-26
+#### Bug Fixes
+- default ws member description - (71cba1c) - elcoosp
+#### Features
+- **(*)** allow to not specify installation section in a single rust package case - (552b1bd) - *elcoosp*
+- **(*)** add features section - (1921956) - *elcoosp*
+#### Miscellaneous Chores
+- version packages - (990f8b1) - elcoosp
+
+- - -
+
 ## core-0.11.1 - 2024-11-26
 #### Bug Fixes
 - mv about section - (9420588) - elcoosp

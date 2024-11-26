@@ -59,6 +59,8 @@ export type ReadmeTemplateArgs = {
   backToTop: boolean
   /** This will be used in a near future to auto generate a table of content which would be dynamic optionally */
   sections: {
+    /** Features section */
+    features: string
     /** Project description section */
     projectDescription: string
     /** About section */
@@ -73,6 +75,7 @@ export type ReadmeTemplateArgs = {
     roadmap: string
     /** Usage section */
     usage: string
+    /** Custom sections */
     [sectionName: string]: string
   }
   /** License */

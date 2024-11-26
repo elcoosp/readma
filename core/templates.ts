@@ -29,6 +29,7 @@ export const readme = async ({
   sections: {
     projectDescription,
     about,
+    features,
     installation,
     acknowledgments,
     gettingStarted,
@@ -145,6 +146,7 @@ ${
 `,
     )
   }
+${tocer.section('✨ Features', features)}
 ${tocer.section('🎉 Getting started', gettingStarted)}
 ${tocer.section('📋 Installation', installation)}
 ${tocer.section('🔧 Usage', usage)}

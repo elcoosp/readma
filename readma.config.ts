@@ -17,6 +17,10 @@ const config: types.ReadmeTemplateArgs = {
   repobeats: '1b12e7ffd13fd2d15772a30e8b0a995976150797',
   images: { screenshot: 'images/screenshot.gif', logo: 'images/logo.png' },
   sections: {
+    features: `
+- Workspace compatible
+- Automatic shields
+- Cross platform`,
     projectDescription: 'Beautiful effortless README generator',
     about: 'Create README that rocks',
     installation: md.code(`deno install @${name}/core`),
@@ -25,7 +29,7 @@ const config: types.ReadmeTemplateArgs = {
 - [Badges 4 README](https://github.com/alexandresanlim/Badges4-README.md-Profile)`,
     gettingStarted: 'See screenshot',
     roadmap: `
-- [ ] CLI with config file
+- [x] CLI with config file
 - [ ] Auto defaults from known files like Cargo.toml/{deno,package}.json`,
     usage: `
     ${

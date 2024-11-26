@@ -39,7 +39,8 @@
       "README.md",
       "CHANGELOG.md",
       ".vscode",
-      "deno_cache"
+      "deno_cache",
+      "documentation"
     ]
   },
   "lint": {

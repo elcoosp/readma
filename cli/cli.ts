@@ -202,6 +202,7 @@ export const cli: Cli = {
         log.info(`Writing main workspace member README`)
         await readme({
           ...config,
+          packageRegistry,
           root: {
             members: (wsOverride || []).map((x) =>
               x.workspaceMember as types.WorkspaceMember

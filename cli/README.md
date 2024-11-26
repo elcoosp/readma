@@ -16,7 +16,7 @@
     <img src="https://raw.githubusercontent.com/elcoosp/readma/HEAD/images/logo.png" style="max-height: 200px; object-fit: contain;" alt="Logo">
   </a>
   <h3 align="center">Readma</h3>
-  <h4 align="center">cli</h4>
+  <h4 align="center">@readma/cli</h4>
   <p align="center">
     Beautiful effortless README generator
     <br />
@@ -32,7 +32,7 @@
 </div>
 
 > [!NOTE]
-> You are inside the **cli** workspace member package, not the repository entry point
+> You are inside the **@readma/cli** workspace member package, not the repository entry point
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -114,10 +114,10 @@ Project Link: [https://github.com/elcoosp/readma](https://github.com/elcoosp/rea
 <!--https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 ![Alt](https://repobeats.axiom.co/api/embed/1b12e7ffd13fd2d15772a30e8b0a995976150797.svg "Repobeats analytics image")
 
-[jsr-version-shield]: https://img.shields.io/jsr/v/@readma/cli.svg?style=for-the-badge
-[jsr-version-url]: https://jsr.io/@readma/cli
+[jsr-version-shield]: https://img.shields.io/jsr/v/@readma/@readma/cli.svg?style=for-the-badge
+[jsr-version-url]: https://jsr.io/@readma/@readma/cli
 [codecov-shield]: https://img.shields.io/codecov/c/github/elcoosp/readma/main.svg?style=for-the-badge
-[codecov-url]: https://codecov.io/github/elcoosp/readma/tree/main/cli
+[codecov-url]: https://codecov.io/github/elcoosp/readma/tree/main/@readma/cli
 [contributors-shield]: https://img.shields.io/github/contributors/elcoosp/readma.svg?style=for-the-badge
 [contributors-url]: https://github.com/elcoosp/readma/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/elcoosp/readma.svg?style=for-the-badge

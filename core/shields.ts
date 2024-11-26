@@ -37,6 +37,7 @@ export const shields = (
     language,
     vcsName,
     workspaceMember,
+    packageRegistry,
   }:
     & Pick<
       ReadmeTemplateArgs,
@@ -47,6 +48,7 @@ export const shields = (
       | "language"
       | "workspaceMember"
       | "vcsName"
+      | "packageRegistry"
     >
     & {
       repoUrl: string
@@ -73,16 +75,25 @@ export const shields = (
         ),
       ]
       : []),
-    ...(language === "ts" && workspaceMember
+    ...(language === "ts" && workspaceMember && packageRegistry === "jsr"
       ? [
         shield(
           "JSR version",
-          `https://jsr.io/@${repoName}/${workspaceMember}`,
-          `jsr/v/@${repoName}/${workspaceMember}`,
+          `https://jsr.io/@${repoName}/${workspaceMember.pkgName}`,
+          `jsr/v/@${repoName}/${workspaceMember.pkgName}`,
         ),
       ]
       : []),
-    ...(language === "rs"
+    ...(language === "ts" && workspaceMember && packageRegistry === "npm"
+      ? [
+        shield(
+          "NPM version",
+          `https://www.npmjs.com/package/${workspaceMember.pkgName}`,
+          `npm/v/${workspaceMember.pkgName}`,
+        ),
+      ]
+      : []),
+    ...(language === "rs" && packageRegistry === "crates.io"
       ? [
         shield(
           "Crates.io version",
@@ -96,7 +107,7 @@ export const shields = (
     shield(
       "Codecov",
       `https://codecov.io/${vcsName}/${githubUsername}/${repoName}/tree/${branch}${
-        workspaceMember ? `/${workspaceMember}` : ""
+        workspaceMember ? `/${workspaceMember.pkgName}` : ""
       }`,
       `codecov/c/${vcsName}/${githubUsername}/${repoName}/${branch}`,
     ),

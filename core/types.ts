@@ -1,11 +1,14 @@
 // TODO: allow different case, this is too rusty
 /** Config used to feed the {@link readme} function */
+export type WorkspaceMember = { pkgName: string; path: string }
+export type PackageRegistry = "jsr" | "npm" | "crates.io"
 export type ReadmeTemplateArgs = {
   /** Hash of the repobeats svg to retrieve for your repo at https://repobeats.axiom.co/configs */
   repobeats?: string
   vcsName?: "github"
   /** Name of a workspace member, auto generated if you use the cli */
-  workspaceMember?: string
+  workspaceMember?: WorkspaceMember
+  packageRegistry?: PackageRegistry
   urls?: {
     /** Repository url */
     repo?: string

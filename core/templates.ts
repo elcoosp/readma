@@ -21,6 +21,7 @@ export const readme = async ({
   title,
   author,
   repobeats,
+  packageRegistry,
   urls,
   // TODO: add commit convention
   sections: {
@@ -52,6 +53,7 @@ export const readme = async ({
   const tocVar = "$$TOC$$"
   const { shieldsBadges, shieldsRefs } = renderShields(
     shields({
+      packageRegistry,
       vcsName,
       repoName,
       repoUrl,
@@ -84,7 +86,7 @@ ${projectShields}
     <img src="${logoSrc}" style="max-height: 200px; object-fit: contain;" alt="Logo">
   </a>
   <h3 align="center">${title}</h3>
-  ${workspaceMember ? `<h4 align="center">${workspaceMember}</h4>` : ""}
+  ${workspaceMember ? `<h4 align="center">${workspaceMember.pkgName}</h4>` : ""}
   <p align="center">
     ${projectDescription}
     <br />
@@ -102,7 +104,7 @@ ${
     workspaceMember
       ? `
 > [!NOTE]
-> You are inside the **${workspaceMember}** workspace member package, not the repository entry point
+> You are inside the **${workspaceMember.pkgName}** workspace member package, not the repository entry point
 `
       : ""
   }

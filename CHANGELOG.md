@@ -2,6 +2,17 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [2.9.0](https://github.com/elcoosp/readma/compare/32b1a6cd9b27550c192583a82bd9441ae7918ad9..2.9.0) - 2024-11-26
+### Package updates
+- [core-0.11.0](core) bumped to [core-0.11.0](https://github.com/elcoosp/readma/compare/core-0.10.0..core-0.11.0)
+### Global changes
+#### Documentation
+- **(documentation)** intro & mdx - ([0c50d1d](https://github.com/elcoosp/readma/commit/0c50d1d52d9744ce1a20f8d446ef245684bd0a2a)) - [@elcoosp](https://github.com/elcoosp)
+#### Features
+- **(*)** use jiti to read config - ([32b1a6c](https://github.com/elcoosp/readma/commit/32b1a6cd9b27550c192583a82bd9441ae7918ad9)) - [@elcoosp](https://github.com/elcoosp)
+
+- - -
+
 ## [2.8.0](https://github.com/elcoosp/readma/compare/02ad5ba2d115d96f76ce4f13517f6ae436c67e45..2.8.0) - 2024-11-26
 ### Package updates
 - [cli-0.8.0](cli) bumped to [cli-0.8.0](https://github.com/elcoosp/readma/compare/cli-0.7.2..cli-0.8.0)

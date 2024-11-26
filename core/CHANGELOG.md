@@ -2,6 +2,16 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## core-0.11.0 - 2024-11-26
+#### Documentation
+- **(core)** processFile - (33d17c2) - *elcoosp*
+#### Features
+- **(*)** use jiti to read config - (32b1a6c) - *elcoosp*
+#### Miscellaneous Chores
+- version packages - (2002827) - elcoosp
+
+- - -
+
 ## core-0.10.0 - 2024-11-26
 #### Features
 - **(*)** allow custom sections & workspace specific mdx files inside readma/sections/* - (02ad5ba) - *elcoosp*

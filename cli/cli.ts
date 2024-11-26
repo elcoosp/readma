@@ -1,3 +1,4 @@
+import { glob } from "glob"
 import type { PartialDeep } from "type-fest"
 import { deepMerge } from "@cross/deepmerge"
 import { readme, type types, utils } from "@readma/core"
@@ -7,8 +8,12 @@ import * as toml from "@std/toml"
 import * as jsonc from "@std/jsonc"
 import denoConf from "./deno.json" with { type: "json" }
 import { Logger } from "@deno-library/logger"
-
+import {
+  readWorkspaceManifest,
+  type WorkspaceManifest,
+} from "@pnpm/workspace.read-manifest"
 const log = new Logger()
+type PackageRegistry = "jsr" | "npm" | "crates.io" | undefined
 /**
  * Readma cli
  */
@@ -17,10 +22,13 @@ export type Cli = {
   detectLanguage: () => Promise<{
     language: types.ReadmeTemplateArgs["language"]
     files: {
-      ts: Record<string, unknown>
+      deno: Record<string, unknown>
       rs: undefined
+      pnpm: undefined | Readonly<[WorkspaceManifest]>
     }
+    // TODO should have a package name & path
     workspaceMembers?: string[]
+    packageRegistry: PackageRegistry
   }>
   /** Run the cli */
   run: () => Promise<unknown>
@@ -28,7 +36,8 @@ export type Cli = {
 /** {@link Cli} instance */
 export const cli: Cli = {
   async detectLanguage() {
-    const tsFilenames = ["deno.jsonc", "deno.json"]
+    const pnpmWorkspaceManifest = await readWorkspaceManifest(".")
+    const denoFilenames = ["deno.jsonc", "deno.json"]
     const rsFilenames = ["Cargo.toml"]
     const hasFiles = async (filenames: string[]) =>
       await Promise.all(
@@ -48,34 +57,50 @@ export const cli: Cli = {
           } else return null
         }),
       )
-    const tsFiles = await hasFiles(tsFilenames)
+    const denoFiles = await hasFiles(denoFilenames)
     const rsFiles = await hasFiles(rsFilenames)
     const hasRsFiles = rsFiles.some((x) => x !== null)
-    const hasTsFiles = tsFiles.some((x) => x !== null)
+    const hasDenoFiles = denoFiles.some((x) => x !== null)
     if (
       hasRsFiles &&
-      hasTsFiles
+      hasDenoFiles
     ) {
       throw new Error(
-        "Found both a typescript and rust configuration file, not supported yet",
+        "Found both a deno and rust configuration file, not supported yet",
       )
     }
-    const language = hasTsFiles
+    const language = hasDenoFiles || pnpmWorkspaceManifest !== undefined
       ? "ts" as const
       : hasRsFiles
       ? "rs" as const
       : null
-    log.info({ language })
     if (language === null) throw new Error("Could not detect language")
     const files = {
-      ts: tsFiles.find((x) => x !== null),
+      deno: denoFiles.find((x) => x !== null),
       rs: rsFiles.find((x) => x !== null),
+      pnpm: pnpmWorkspaceManifest
+        ? [pnpmWorkspaceManifest] as const
+        : undefined,
     }
-    const workspaceMembers = language === "rs"
+
+    const packageRegistry: PackageRegistry = hasDenoFiles
+      ? "jsr"
+      : pnpmWorkspaceManifest
+      ? "npm"
+      : hasRsFiles
+      ? "crates.io"
+      : undefined
+    const workspaceMembers = packageRegistry === "crates.io"
       ? files.rs.workspace?.members
-      : files.ts.workspace
+      : packageRegistry === "jsr"
+      ? files.deno.workspace
+      : packageRegistry === "npm"
+      ? await getPackagesFromManifest(pnpmWorkspaceManifest)
+      : undefined
+    log.info({ packageRegistry })
     log.info({ workspaceMembers })
     return {
+      packageRegistry,
       language,
       files,
       workspaceMembers,
@@ -144,3 +169,20 @@ export const cli: Cli = {
   },
 } as const
 export default cli
+
+async function getPackagesFromManifest(
+  pnpmWorkspaceManifest: WorkspaceManifest | undefined,
+) {
+  if (!pnpmWorkspaceManifest) {
+    throw new Error("pnpmWorkspaceManifest should be defined")
+  }
+  const packages = []
+  for (const pkgsGlob of pnpmWorkspaceManifest.packages) {
+    packages.push(
+      ...(
+        await glob(`${pkgsGlob}/package.json`, { ignore: "**/node_modules/**" })
+      ).map((path) => path.replace("/package.json", "")),
+    )
+  }
+  return packages
+}

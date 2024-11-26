@@ -1,0 +1,7 @@
+remotes:
+  - git_url: git@github.com:elcoosp/elcoosp-configs
+    ref: main
+    configs:
+      - packages/lefthook/src/cspell.yml
+extends:
+  - cspell

@@ -79,7 +79,7 @@ export const shields = (
       ? [
         shield(
           "JSR version",
-          `https://jsr.io/@${repoName}/${workspaceMember.pkgName}`,
+          `https://jsr.io/@${workspaceMember.pkgName}`,
           `jsr/v/@${repoName}/${workspaceMember.pkgName}`,
         ),
       ]

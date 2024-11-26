@@ -68,8 +68,10 @@ export const readme = async ({
       linkedinUsername,
     }),
   )
-  const logoSrc =
-    `https://raw.githubusercontent.com/${githubUsername}/${repoName}/HEAD/${images.logo}`
+  const ghContentUrl = (x = "") =>
+    `https://raw.githubusercontent.com/${githubUsername}/${repoName}/HEAD/${x}`
+  const logoSrc = ghContentUrl(images.logo)
+  const screenshotSrc = ghContentUrl(images.screenshot)
   const licenseSectionBody = license === "MIT"
     ? `Distributed under the MIT License. See \`LICENSE.txt\` for more information.`
     : "Not declared"
@@ -117,7 +119,7 @@ ${
       "💡 About the project",
       `${
         images.screenshot
-          ? `<img src="${images.screenshot}" alt="Product screenshot" />\n`
+          ? `<img src="${screenshotSrc}" alt="Product screenshot" />\n`
           : ""
       }
 ${

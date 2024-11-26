@@ -230,11 +230,12 @@ export const cli: Cli = {
             PartialDeep<types.ReadmeTemplateArgs>
           >(config, {
             sections: {
-              installation: config.sections?.installation ?? language == 'rs'
-                ? utils.md.code(
-                  `cargo add ${files.rs?.package?.name}`,
-                )
-                : 'Not specified',
+              installation: config.sections?.installation ??
+                (language == 'rs'
+                  ? utils.md.code(
+                    `cargo add ${files.rs?.package?.name}`,
+                  )
+                  : 'Not specified'),
             },
             packageRegistry,
             root: {

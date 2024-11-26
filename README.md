@@ -60,7 +60,7 @@ Create README that rocks
 | ------------------------------ | -------------------------------------------------- |
 | [@readma/core](./core)         | Beautiful effortless README generator core package |
 | [@readma/cli](./cli)           | Beautiful effortless README generator cli package  |
-| [@readma/pkg-json](./pkg-json) |                                                    |
+| [@readma/pkg-json](./pkg-json) | Typed function to read package.json                |
 
 ## ✨ Features
 

@@ -1,5 +1,5 @@
-import { paramCase } from "@wok/case"
-import type { ReadmeTemplateArgs } from "./types.ts"
+import { paramCase } from '@wok/case'
+import type { ReadmeTemplateArgs } from './types.ts'
 /** Shield definition, see [shields.io](https://shields.io/) */
 export type Shield = {
   name: string
@@ -21,9 +21,9 @@ export function shield(
 }
 /** Util to create a {@link Shield.shieldUrl}, defaulting to [shields.io](https://shields.io/) */
 export const shieldUrl = (path: string, style?: string) =>
-  path.startsWith("https://")
+  path.startsWith('https://')
     ? `${path}&style=${style}`
-    : `https://img.shields.io/${path}.svg?${style ? `style=${style}` : ""}`
+    : `https://img.shields.io/${path}.svg?${style ? `style=${style}` : ''}`
 /** Dynamic list of shields, with some depending on args */
 export const shields = (
   {
@@ -41,18 +41,18 @@ export const shields = (
   }:
     & Pick<
       ReadmeTemplateArgs,
-      | "repoName"
-      | "githubUsername"
-      | "linkedinUsername"
-      | "badgeStyle"
-      | "language"
-      | "workspaceMember"
-      | "vcsName"
-      | "packageRegistry"
+      | 'repoName'
+      | 'githubUsername'
+      | 'linkedinUsername'
+      | 'badgeStyle'
+      | 'language'
+      | 'workspaceMember'
+      | 'vcsName'
+      | 'packageRegistry'
     >
     & {
       repoUrl: string
-      commitActivityInterval: "w"
+      commitActivityInterval: 'w'
       branch: string
     },
 ): Shield[] =>
@@ -60,43 +60,43 @@ export const shields = (
     ...(linkedinUsername
       ? [
         shield(
-          "LinkedIn",
+          'LinkedIn',
           `https://linkedin.com/in/${linkedinUsername}`,
-          "badge/-LinkedIn-black",
+          'badge/-LinkedIn-black',
         ),
       ]
       : []),
-    ...(language === "rs"
+    ...(language === 'rs'
       ? [
         shield(
-          "Crates MSRV",
+          'Crates MSRV',
           `https://crates.io/crates/${repoName}`,
           `crates/msrv/${repoName}`,
         ),
       ]
       : []),
-    ...(language === "ts" && workspaceMember && packageRegistry === "jsr"
+    ...(language === 'ts' && workspaceMember && packageRegistry === 'jsr'
       ? [
         shield(
-          "JSR version",
+          'JSR version',
           `https://jsr.io/${workspaceMember.pkgName}`,
           `jsr/v/${workspaceMember.pkgName}`,
         ),
       ]
       : []),
-    ...(language === "ts" && workspaceMember && packageRegistry === "npm"
+    ...(language === 'ts' && workspaceMember && packageRegistry === 'npm'
       ? [
         shield(
-          "NPM version",
+          'NPM version',
           `https://www.npmjs.com/package/${workspaceMember.pkgName}`,
           `npm/v/${workspaceMember.pkgName}`,
         ),
       ]
       : []),
-    ...(language === "rs" && packageRegistry === "crates.io"
+    ...(language === 'rs' && packageRegistry === 'crates.io'
       ? [
         shield(
-          "Crates.io version",
+          'Crates.io version',
           `https://crates.io/crates/${
             workspaceMember ? workspaceMember : repoName
           }`,
@@ -105,39 +105,39 @@ export const shields = (
       ]
       : []),
     shield(
-      "Codecov",
+      'Codecov',
       `https://codecov.io/${vcsName}/${githubUsername}/${repoName}/tree/${branch}${
-        workspaceMember ? `/${workspaceMember.pkgName}` : ""
+        workspaceMember ? `/${workspaceMember.pkgName}` : ''
       }`,
       `codecov/c/${vcsName}/${githubUsername}/${repoName}/${branch}`,
     ),
     shield(
-      "Contributors",
+      'Contributors',
       `${repoUrl}/graphs/contributors`,
       `github/contributors/${githubUsername}/${repoName}`,
     ),
     shield(
-      "Forks",
+      'Forks',
       `${repoUrl}/network/members`,
       `github/forks/${githubUsername}/${repoName}`,
     ),
     shield(
-      "Stargazers",
+      'Stargazers',
       `${repoUrl}/stargazers`,
       `github/stars/${githubUsername}/${repoName}`,
     ),
     shield(
-      "Commit activity",
+      'Commit activity',
       `${repoUrl}/commits`,
       `github/commit-activity/${commitActivityInterval}/${githubUsername}/${repoName}`,
     ),
     shield(
-      "Branch action runs",
+      'Branch action runs',
       `${repoUrl}/actions?query=${encodeURIComponent(`branch:${branch}`)}`,
       `github/check-runs/${githubUsername}/${repoName}/${branch}`,
     ),
     shield(
-      "License",
+      'License',
       `${repoUrl}/blob/master/LICENSE.txt`,
       `github/license/${githubUsername}/${repoName}`,
     ),
@@ -146,9 +146,9 @@ export const shields = (
 export const renderShields = (shields: Shield[]) => {
   const shieldsBadges = shields.map((s) =>
     `[![${s.name}][${s.refName}-shield]][${s.refName}-url]`
-  ).join("\n")
+  ).join('\n')
   const shieldsRefs = shields.map((s) =>
     `[${s.refName}-shield]: ${s.shieldUrl}\n[${s.refName}-url]: ${s.linkUrl}`
-  ).join("\n")
+  ).join('\n')
   return { shieldsBadges, shieldsRefs }
 }

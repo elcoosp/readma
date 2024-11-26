@@ -1,7 +1,7 @@
 ignorePaths:
   - node_modules
   - pnpm-lock.yaml
-  - "*.cast"
+  - '*.cast'
 words:
   # User
   - elcoosp
@@ -12,3 +12,10 @@ words:
   - msrv
   - templater
   - denoland
+  - rsdoctor
+  - urll
+  - pkgs
+  - regen
+  - htmfor
+  - cocogitto
+  - juste

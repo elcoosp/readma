@@ -1,16 +1,16 @@
-import * as templates from "../core/templates.ts"
-import type { ReadmeTemplateArgs } from "../core/types.ts"
+import * as templates from '../core/templates.ts'
+import type { ReadmeTemplateArgs } from '../core/types.ts'
 // import { render } from "@deno/gfm"
-export * as utils from "./utils.ts"
-export * as types from "./types.ts"
-export * as mdx from "./mdx-manager.ts"
+export * as utils from './utils.ts'
+export * as types from './types.ts'
+export * as mdx from './mdx-manager.ts'
 /** Template independent options */
 export type GlobalOptions = {
   /** Specify folder where the file is output */
   folderPath: string
   // TODO: if using deno/gfm should not use tocer ?
   /** Wether tu use @deno/gfm for postprocessing, default to raw */
-  renderer?: "gfm" | "raw"
+  renderer?: 'gfm' | 'raw'
 }
 /**
  * @param rt Readme arguments to feed the template
@@ -20,7 +20,7 @@ export async function readme(
   rt: ReadmeTemplateArgs,
   options?: Partial<GlobalOptions>,
 ): Promise<string> {
-  return (await renderWriteTemplate(templates.readme, rt, "README", options))
+  return (await renderWriteTemplate(templates.readme, rt, 'README', options))
 }
 
 /**
@@ -39,13 +39,13 @@ async function renderWriteTemplate<
   filepath: string,
   options?: Partial<GlobalOptions>,
 ) {
-  const rendered = options?.renderer === "gfm"
+  const rendered = options?.renderer === 'gfm'
     // FIXME cause ERR_TYPES_NOT_FOUND with prims
-    ? (console.error("gfm renderer not yet supported"),
+    ? (console.error('gfm renderer not yet supported'),
       await templater(templateArgs))
     // ? render(await templater(templateArgs))
     : await templater(templateArgs)
-  const folderPath = options?.folderPath ?? ("./" + (
+  const folderPath = options?.folderPath ?? ('./' + (
     // FIXME: not type safe
     templateArgs as ReadmeTemplateArgs
   ).title)

@@ -1,5 +1,5 @@
-import type { MdSrc } from "./types.ts"
-import { paramCase } from "@wok/case"
+import type { MdSrc } from './types.ts'
+import { paramCase } from '@wok/case'
 /** Derive a table of content */
 export class Tocer {
   hasBackToTop: boolean
@@ -8,7 +8,7 @@ export class Tocer {
     this.hasBackToTop = hasBackToTop
     this.sections = []
   }
-  toc(title = "Table of contents") {
+  toc(title = 'Table of contents') {
     return `
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -17,7 +17,7 @@ export class Tocer {
       this.sections.map((s) =>
         `\n   <li><a href="#${paramCase(s)}">${s}</a></li>`
       )
-        .join("")
+        .join('')
     }
   </ol>
 </details>
@@ -27,12 +27,12 @@ export class Tocer {
     this.sections.push(title)
     const backToTopMd = this.hasBackToTop
       ? `<p align="right">(<a href="#readme-top">back to top</a>)</p>`
-      : ""
+      : ''
     return `
 ## ${title}
 
-${content ? content.trim() : ""}
+${content ? content.trim() : ''}
 
-${backToTopMd}`.trim() + "\n"
+${backToTopMd}`.trim() + '\n'
   }
 }

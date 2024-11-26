@@ -1,17 +1,16 @@
-import clsx from 'clsx';
-import Heading from '@theme/Heading';
-import styles from './styles.module.css';
-import LayersIcon from '../LayersIcon';
+import clsx from 'clsx'
+import Heading from '@theme/Heading'
+import styles from './styles.module.css'
+import LayersIcon from '../LayersIcon'
 
-type FeatureItem = {
-  title: string;
-  description: JSX.Element;
-} & ({
-
-  Svg: React.ComponentType<React.ComponentProps<'svg'>>;
-} | { img: string }
-
-  );
+type FeatureItem =
+  & {
+    title: string
+    description: JSX.Element
+  }
+  & ({
+    Svg: React.ComponentType<React.ComponentProps<'svg'>>
+  } | { img: string })
 
 const FeatureList: FeatureItem[] = [
   {
@@ -19,8 +18,8 @@ const FeatureList: FeatureItem[] = [
     Svg: LayersIcon,
     description: (
       <>
-        Readma was designed from the ground up to be easily installed and
-        used on a workspace
+        Readma was designed from the ground up to be easily installed and used
+        on a workspace
       </>
     ),
   },
@@ -42,32 +41,32 @@ const FeatureList: FeatureItem[] = [
       </>
     ),
   },
-];
+]
 
 function Feature(props: FeatureItem) {
   return (
     <div className={clsx('col col--4')}>
-      <div className="text--center">
-        {'img' in props ? <img src={props.img} className={styles.featureSvg}></img> : <props.Svg className={styles.featureSvg} role="img" />}
+      <div className='text--center'>
+        {'img' in props
+          ? <img src={props.img} className={styles.featureSvg}></img>
+          : <props.Svg className={styles.featureSvg} role='img' />}
       </div>
-      <div className="text--center padding-horiz--md">
-        <Heading as="h3">{props.title}</Heading>
+      <div className='text--center padding-horiz--md'>
+        <Heading as='h3'>{props.title}</Heading>
         <p>{props.description}</p>
       </div>
-    </div >
-  );
+    </div>
+  )
 }
 
 export default function HomepageFeatures(): JSX.Element {
   return (
     <section className={styles.features}>
-      <div className="container">
-        <div className="row">
-          {FeatureList.map((props, idx) => (
-            <Feature key={idx} {...props} />
-          ))}
+      <div className='container'>
+        <div className='row'>
+          {FeatureList.map((props, idx) => <Feature key={idx} {...props} />)}
         </div>
       </div>
     </section>
-  );
+  )
 }

@@ -1,12 +1,12 @@
 // TODO: allow different case, this is too rusty
 export type WorkspaceMember = { pkgName: string; path: string }
-export type PackageRegistry = "jsr" | "npm" | "crates.io"
+export type PackageRegistry = 'jsr' | 'npm' | 'crates.io'
 /** Config used to feed the {@link readme} function */
 export type ReadmeTemplateArgs = {
   /** Hash of the repobeats svg to retrieve for your repo at https://repobeats.axiom.co/configs */
   repobeats?: string
   /** Version control system */
-  vcsName?: "github"
+  vcsName?: 'github'
   /** Name of a workspace member, auto generated if you use the cli */
   workspaceMember?: WorkspaceMember
   /** Root readme only related config */
@@ -26,7 +26,7 @@ export type ReadmeTemplateArgs = {
     doc?: string
   }
   /** Source files language, rust or typescript only for now */
-  language: "rs" | "ts"
+  language: 'rs' | 'ts'
   /** Images links */
   images: { screenshot?: string; logo: string }
   /** Main author */
@@ -74,8 +74,8 @@ export type ReadmeTemplateArgs = {
     usage: string
   }
   /** License */
-  license?: "MIT"
+  license?: 'MIT'
   /** Badge style for [shields.io](https://shields.io/) */
-  badgeStyle?: "for-the-badge" | "social" | "flat" | "flat-square" | "plastic"
+  badgeStyle?: 'for-the-badge' | 'social' | 'flat' | 'flat-square' | 'plastic'
 }
 export type MdSrc = string

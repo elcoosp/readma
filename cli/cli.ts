@@ -1,19 +1,19 @@
-import { loadPkgJson } from "@readma/pkg-json"
-import { glob } from "glob"
-import type { PartialDeep } from "type-fest"
-import { deepMerge } from "@cross/deepmerge"
-import { mdx, readme, type types, utils } from "@readma/core"
-import { Command } from "@cliffy/command"
-import { exists } from "@std/fs"
-import * as toml from "@std/toml"
-import * as path from "@std/path"
-import * as jsonc from "@std/jsonc"
-import denoConf from "./deno.json" with { type: "json" }
-import { Logger } from "@deno-library/logger"
+import { loadPkgJson } from '@readma/pkg-json'
+import { glob } from 'glob'
+import type { PartialDeep } from 'type-fest'
+import { deepMerge } from '@cross/deepmerge'
+import { mdx, readme, type types, utils } from '@readma/core'
+import { Command } from '@cliffy/command'
+import { exists } from '@std/fs'
+import * as toml from '@std/toml'
+import * as path from '@std/path'
+import * as jsonc from '@std/jsonc'
+import denoConf from './deno.json' with { type: 'json' }
+import { Logger } from '@deno-library/logger'
 import {
   readWorkspaceManifest,
   type WorkspaceManifest,
-} from "@pnpm/workspace.read-manifest"
+} from '@pnpm/workspace.read-manifest'
 const log = new Logger()
 type DenoFile = { workspace: string[] }
 type CargoFile = { workspace: { members: string[] } }
@@ -23,7 +23,7 @@ type CargoFile = { workspace: { members: string[] } }
 export type Cli = {
   /** Utility to detect language and get workspace members */
   detectLanguage: (config: Partial<types.ReadmeTemplateArgs>) => Promise<{
-    language: types.ReadmeTemplateArgs["language"]
+    language: types.ReadmeTemplateArgs['language']
     files: {
       deno?: DenoFile
       rs?: CargoFile
@@ -38,9 +38,9 @@ export type Cli = {
 /** {@link Cli} instance */
 export const cli: Cli = {
   async detectLanguage(config) {
-    const pnpmWorkspaceManifest = await readWorkspaceManifest(".")
-    const denoFilenames = ["deno.jsonc", "deno.json"]
-    const rsFilenames = ["Cargo.toml"]
+    const pnpmWorkspaceManifest = await readWorkspaceManifest('.')
+    const denoFilenames = ['deno.jsonc', 'deno.json']
+    const rsFilenames = ['Cargo.toml']
     const getParsedFiles = async <T>(filenames: string[]) =>
       await Promise.all(
         filenames.map(async (filename) => {
@@ -51,7 +51,7 @@ export const cli: Cli = {
               jsonc: jsonc,
             } as const
             const ext = filename.split(
-              ".",
+              '.',
             )[1] as keyof typeof parserMap
             const parser = parserMap[ext].parse
             const file = await Deno.readTextFile(filename)
@@ -72,15 +72,15 @@ export const cli: Cli = {
       hasDenoFiles
     ) {
       throw new Error(
-        "Found both a deno and rust configuration file, not supported yet",
+        'Found both a deno and rust configuration file, not supported yet',
       )
     }
     const language = hasDenoFiles || pnpmWorkspaceManifest !== undefined
-      ? "ts" as const
+      ? 'ts' as const
       : hasRsFiles
-      ? "rs" as const
+      ? 'rs' as const
       : null
-    if (language === null) throw new Error("Could not detect language")
+    if (language === null) throw new Error('Could not detect language')
     const files = {
       deno: denoFiles.find((x) => x !== null),
       rs: rsFiles.find((x) => x !== null),
@@ -88,25 +88,25 @@ export const cli: Cli = {
     }
 
     const packageRegistry: types.PackageRegistry | undefined = hasDenoFiles
-      ? "jsr"
+      ? 'jsr'
       : pnpmWorkspaceManifest
-      ? "npm"
+      ? 'npm'
       : hasRsFiles
-      ? "crates.io"
+      ? 'crates.io'
       : undefined
     const workspaceMembers: types.WorkspaceMember[] | undefined =
-      packageRegistry === "crates.io"
+      packageRegistry === 'crates.io'
         ? files.rs?.workspace?.members?.map((path) => ({
           path,
           pkgName: getFolderName(path),
         }))
-        : packageRegistry === "jsr"
+        : packageRegistry === 'jsr'
         ? files.deno?.workspace?.map((path) => ({
           path,
           // TODO should double check that this match with package deno.json[name]
           pkgName: `@${config.repoName}/${getFolderName(path)}`,
         }))
-        : packageRegistry === "npm"
+        : packageRegistry === 'npm'
         ? await getPackagesFromManifest(files.pnpm)
         : undefined
     log.info({ packageRegistry })
@@ -119,8 +119,8 @@ export const cli: Cli = {
     }
   },
   async run() {
-    const licenseFile = await Deno.readTextFile("LICENSE.txt")
-    const license = licenseFile.startsWith("MIT License") ? "MIT" : undefined
+    const licenseFile = await Deno.readTextFile('LICENSE.txt')
+    const license = licenseFile.startsWith('MIT License') ? 'MIT' : undefined
     const config = deepMerge<
       PartialDeep<types.ReadmeTemplateArgs>
     >(await utils.getReadmaConfig(), {
@@ -128,18 +128,18 @@ export const cli: Cli = {
     }) as types.ReadmeTemplateArgs
 
     await new Command()
-      .name("readma")
+      .name('readma')
       .version(denoConf.version)
-      .description("Command line utility for Readma")
-      .globalOption("-d, --debug", "Enable debug output.")
+      .description('Command line utility for Readma')
+      .globalOption('-d, --debug', 'Enable debug output.')
       .action((_options, ..._args) =>
         log.warn(
-          "Main command called. Nothing will happen, use `gen` subcommand",
+          'Main command called. Nothing will happen, use `gen` subcommand',
         )
       )
-      .command("gen", "Generate readme(s)")
+      .command('gen', 'Generate readme(s)')
       .action(async (_options, ..._args) => {
-        log.info("Starting readma generation")
+        log.info('Starting readma generation')
         log.info({ license })
         const { language, workspaceMembers, packageRegistry } = await cli
           .detectLanguage(config)
@@ -150,7 +150,7 @@ export const cli: Cli = {
           ) => {
             const usageSectionPath = path.join(
               wm.path,
-              "README-section-usage.mdx",
+              'README-section-usage.mdx',
             )
             let usage = config.sections.usage
             try {
@@ -159,22 +159,22 @@ export const cli: Cli = {
             } catch (err) {
               if (
                 !(err as { toString: () => string }).toString().startsWith(
-                  "Error: ENOENT: no such file or directory",
+                  'Error: ENOENT: no such file or directory',
                 )
               ) {
                 console.error(err)
               }
             }
             const sections = {
-              installation: language === "ts" && packageRegistry == "jsr"
+              installation: language === 'ts' && packageRegistry == 'jsr'
                 ? utils.md.code(`deno install ${wm.pkgName}`)
-                : language === "ts" && packageRegistry == "npm"
+                : language === 'ts' && packageRegistry == 'npm'
                 ? [
                   utils.md.code(`npm add ${wm.pkgName}`),
                   utils.md.code(`pnpm add ${wm.pkgName}`),
                   utils.md.code(`yarn add ${wm.pkgName}`),
-                ].join("\n")
-                : language === "rs"
+                ].join('\n')
+                : language === 'rs'
                 ? utils.md.code(`cargo add ${wm.pkgName}`)
                 : undefined,
               usage,
@@ -204,7 +204,7 @@ export const cli: Cli = {
               x.workspaceMember as types.WorkspaceMember
             ),
           },
-        }, { folderPath: "./" })
+        }, { folderPath: './' })
       })
       .parse(Deno.args)
   },
@@ -215,15 +215,15 @@ async function getPackagesFromManifest(
   pnpmWorkspaceManifest: WorkspaceManifest | undefined,
 ): Promise<types.WorkspaceMember[]> {
   if (!pnpmWorkspaceManifest) {
-    throw new Error("pnpmWorkspaceManifest should be defined")
+    throw new Error('pnpmWorkspaceManifest should be defined')
   }
   const packages = []
   for (const pkgsGlob of pnpmWorkspaceManifest.packages) {
     packages.push(
       ...await Promise.all((
-        await glob(`${pkgsGlob}/package.json`, { ignore: "**/node_modules/**" })
+        await glob(`${pkgsGlob}/package.json`, { ignore: '**/node_modules/**' })
       ).map(async (path) => {
-        const memberPath = path.replace("/package.json", "")
+        const memberPath = path.replace('/package.json', '')
         const pkg = await loadPkgJson(memberPath)
         return ({ path: memberPath, pkgName: pkg.name as string })
       })),
@@ -231,4 +231,4 @@ async function getPackagesFromManifest(
   }
   return packages
 }
-const getFolderName = (x: string) => x.split("/").pop() as string
+const getFolderName = (x: string) => x.split('/').pop() as string

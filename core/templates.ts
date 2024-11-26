@@ -1,13 +1,13 @@
-import { renderShields, shields } from "./shields.ts"
-import { Tocer } from "./toc.ts"
-import { $ } from "@david/dax"
-import type { ReadmeTemplateArgs } from "./types.ts"
-import { markdownTable } from "markdown-table"
+import { renderShields, shields } from './shields.ts'
+import { Tocer } from './toc.ts'
+import { $ } from '@david/dax'
+import type { ReadmeTemplateArgs } from './types.ts'
+import { markdownTable } from 'markdown-table'
 const getBranch = async () => {
   // Workaround github ci
-  const GITHUB_HEAD_REF = Deno.env.get("GITHUB_HEAD_REF")
+  const GITHUB_HEAD_REF = Deno.env.get('GITHUB_HEAD_REF')
   if (GITHUB_HEAD_REF) return GITHUB_HEAD_REF
-  return (await $`git branch --show-current`.text()) || "main"
+  return (await $`git branch --show-current`.text()) || 'main'
 }
 //  TODO: Once sections derive all the table of contents, enable custom sections
 /** Generate one or more readme (if there is workspace members) based on {@link ReadmeTemplateArgs} */
@@ -39,10 +39,10 @@ export const readme = async ({
   template,
   language,
   backToTop,
-  vcsName = "github",
-  domainExt = "com",
+  vcsName = 'github',
+  domainExt = 'com',
   license,
-  badgeStyle = "for-the-badge",
+  badgeStyle = 'for-the-badge',
 }: ReadmeTemplateArgs) => {
   const fullEmail = `${email}@${domain}.${domainExt}`
   const repoUrl = urls?.repo ||
@@ -51,8 +51,8 @@ export const readme = async ({
   const demoUrl = urls?.demo || repoUrl
   const branch = await getBranch()
   const tocer = new Tocer(backToTop)
-  const commitActivityInterval = "w"
-  const tocVar = "$$TOC$$"
+  const commitActivityInterval = 'w'
+  const tocVar = '$$TOC$$'
   const { shieldsBadges, shieldsRefs } = renderShields(
     shields({
       packageRegistry,
@@ -68,13 +68,13 @@ export const readme = async ({
       linkedinUsername,
     }),
   )
-  const ghContentUrl = (x = "") =>
+  const ghContentUrl = (x = '') =>
     `https://raw.githubusercontent.com/${githubUsername}/${repoName}/HEAD/${x}`
   const logoSrc = ghContentUrl(images.logo)
   const screenshotSrc = ghContentUrl(images.screenshot)
-  const licenseSectionBody = license === "MIT"
+  const licenseSectionBody = license === 'MIT'
     ? `Distributed under the MIT License. See \`LICENSE.txt\` for more information.`
-    : "Not declared"
+    : 'Not declared'
   const projectShields = `
 <!-- PROJECT SHIELDS -->
 ${shieldsBadges}
@@ -90,7 +90,7 @@ ${projectShields}
     <img src="${logoSrc}" style="max-height: 200px; object-fit: contain;" alt="Logo">
   </a>
   <h3 align="center">${title}</h3>
-  ${workspaceMember ? `<h4 align="center">${workspaceMember.pkgName}</h4>` : ""}
+  ${workspaceMember ? `<h4 align="center">${workspaceMember.pkgName}</h4>` : ''}
   <p align="center">
     ${projectDescription}
     <br />
@@ -110,17 +110,17 @@ ${
 > [!NOTE]
 > You are inside the **${workspaceMember.pkgName}** workspace member package, not the repository entry point
 `
-      : ""
+      : ''
   }
 ${tocVar}
 
 ${
     tocer.section(
-      "💡 About the project",
+      '💡 About the project',
       `${
         images.screenshot
           ? `<img src="${screenshotSrc}" alt="Product screenshot" />\n`
-          : ""
+          : ''
       }
 ${
         root && root.members.length > 0
@@ -129,7 +129,7 @@ ${
 
 ${
             markdownTable([
-              ["Package"],
+              ['Package'],
             ].concat(
               root.members.map((
                 { pkgName, path },
@@ -144,12 +144,12 @@ ${about}
 `,
     )
   }
-${tocer.section("🎉 Getting started", gettingStarted)}
-${tocer.section("📋 Installation", installation)}
-${tocer.section("🔧 Usage", usage)}
+${tocer.section('🎉 Getting started', gettingStarted)}
+${tocer.section('📋 Installation', installation)}
+${tocer.section('🔧 Usage', usage)}
 ${
     tocer.section(
-      "🚀 Roadmap",
+      '🚀 Roadmap',
       `
 ${roadmap}
 
@@ -159,7 +159,7 @@ See the [open issues](${repoUrl}/issues) for a full list of proposed features (a
   }
 ${
     tocer.section(
-      "💻 Contributing",
+      '💻 Contributing',
       `
 Any contributions you make are **greatly appreciated**.
 
@@ -176,13 +176,13 @@ Don't forget to give the project a star! Thanks again!
   }
 ${
     tocer.section(
-      "📄 License",
+      '📄 License',
       licenseSectionBody,
     )
   }
 ${
     tocer.section(
-      "📨 Contact",
+      '📨 Contact',
       `
 ${author} - [@${xHandle}](https://twitter.com/${xHandle}) - [${fullEmail}](${fullEmail})
 
@@ -190,20 +190,20 @@ Project Link: [${repoUrl}](${repoUrl})
 `,
     )
   }
-${tocer.section("👏 Acknowledgments", acknowledgments)}
+${tocer.section('👏 Acknowledgments', acknowledgments)}
 <!--MARKDOWN LINKS & IMAGES-- >
 <!--https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 ${
     repobeats
       ? `![Alt](https://repobeats.axiom.co/api/embed/${repobeats}.svg "Repobeats analytics image")`
-      : ""
+      : ''
   }
 ${
     // The new line is absolutely necessary
-    "\n" + shieldsRefs}
+    '\n' + shieldsRefs}
 `.trim() +
     // Should end with a new line
-    "\n"
+    '\n'
 
   return withoutToc.replace(tocVar, tocer.toc())
 }

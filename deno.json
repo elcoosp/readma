@@ -27,14 +27,17 @@
     "singleQuote": true,
     "semiColons": false,
     "exclude": [
-      "README.md",
       "cli/README.md",
       "cli/CHANGELOG.md",
+      "cli/docs",
+      "pkg-json/README.md",
+      "pkg-json/CHANGELOG.md",
+      "pkg-json/docs",
       "core/README.md",
       "core/CHANGELOG.md",
-      "CHANGELOG.md",
       "core/docs",
-      "cli/docs",
+      "README.md",
+      "CHANGELOG.md",
       ".vscode",
       "deno_cache"
     ]

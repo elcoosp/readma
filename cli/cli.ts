@@ -148,23 +148,25 @@ export const cli: Cli = {
           (workspaceMembers || [])?.map(async (
             wm,
           ) => {
-            const usageSectionPath = path.join(
-              wm.path,
-              'README-section-usage.mdx',
+            const packageSpecificSections = Object.fromEntries(
+              (await Promise.all(
+                Object.entries(config.sections)
+                  .map(async ([sectionName, v]) => {
+                    const sectionPath = path.join(
+                      wm.path,
+                      `readma/sections/${sectionName}.mdx`,
+                    )
+                    try {
+                      const mdxProcessed = await mdx.processFile(sectionPath)
+                      return [sectionName, mdxProcessed]
+                    } catch (error) {
+                      console.log(error)
+                      return [sectionName, v]
+                    }
+                  }),
+              )).filter(([_, v]) => typeof v == 'string'),
             )
-            let usage = config.sections.usage
-            try {
-              const processed = await mdx.processFile(usageSectionPath)
-              usage = processed
-            } catch (err) {
-              if (
-                !(err as { toString: () => string }).toString().startsWith(
-                  'Error: ENOENT: no such file or directory',
-                )
-              ) {
-                console.error(err)
-              }
-            }
+
             const sections = {
               installation: language === 'ts' && packageRegistry == 'jsr'
                 ? utils.md.code(`deno install ${wm.pkgName}`)
@@ -173,11 +175,12 @@ export const cli: Cli = {
                   utils.md.code(`npm add ${wm.pkgName}`),
                   utils.md.code(`pnpm add ${wm.pkgName}`),
                   utils.md.code(`yarn add ${wm.pkgName}`),
+                  utils.md.code(`deno add npm:${wm.pkgName}`),
                 ].join('\n')
                 : language === 'rs'
                 ? utils.md.code(`cargo add ${wm.pkgName}`)
                 : undefined,
-              usage,
+              ...packageSpecificSections,
             }
             return deepMerge<
               PartialDeep<types.ReadmeTemplateArgs>

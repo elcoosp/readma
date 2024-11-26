@@ -68,6 +68,13 @@ deno install @readma/cli
 
 ## 🔧 Usage
 
+```ts
+import { readme } from "@readma/core"
+import config from "./readma.config.ts"
+// Generate a single readme file
+await readme(config, { folderPath: "./" })
+```
+
 ## 🚀 Roadmap
 
 - [ ] CLI with config file

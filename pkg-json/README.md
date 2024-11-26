@@ -1,7 +1,5 @@
 <a id="readme-top"></a>
-
 <!-- PROJECT SHIELDS -->
-
 [![JSR version][jsr-version-shield]][jsr-version-url]
 [![Codecov][codecov-shield]][codecov-url]
 [![Contributors][contributors-shield]][contributors-url]
@@ -34,8 +32,7 @@
 </div>
 
 > [!NOTE]
-> You are inside the **@readma/pkg-json** workspace member package, not the
-> repository entry point
+> You are inside the **@readma/pkg-json** workspace member package, not the repository entry point
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -80,16 +77,14 @@ const pkg = await loadPkgJson(&quot;package.json&quot;)
 - [ ] CLI with config file
 - [ ] Auto defaults from known files like Cargo.toml/{deno,package}.json
 
-See the [open issues](https://github.com/elcoosp/readma/issues) for a full list
-of proposed features (and known issues).
+See the [open issues](https://github.com/elcoosp/readma/issues) for a full list of proposed features (and known issues).
 
 ## 💻 Contributing
 
 Any contributions you make are **greatly appreciated**.
 
-If you have a suggestion that would make this better, please fork the repo and
-create a pull request. You can also simply open an issue with the tag
-"enhancement". Don't forget to give the project a star! Thanks again!
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout-b feat/AmazingFeature`)
@@ -103,11 +98,9 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ## 📨 Contact
 
-elcoosp - [@elcoosp](https://twitter.com/elcoosp) -
-[elcoosp@gmail.com](elcoosp@gmail.com)
+elcoosp - [@elcoosp](https://twitter.com/elcoosp) - [elcoosp@gmail.com](elcoosp@gmail.com)
 
-Project Link:
-[https://github.com/elcoosp/readma](https://github.com/elcoosp/readma)
+Project Link: [https://github.com/elcoosp/readma](https://github.com/elcoosp/readma)
 
 ## 👏 Acknowledgments
 
@@ -116,7 +109,6 @@ Project Link:
 
 <!--MARKDOWN LINKS & IMAGES-- >
 <!--https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-
 ![Alt](https://repobeats.axiom.co/api/embed/1b12e7ffd13fd2d15772a30e8b0a995976150797.svg "Repobeats analytics image")
 
 [jsr-version-shield]: https://img.shields.io/jsr/v/@readma/pkg-json.svg?style=for-the-badge

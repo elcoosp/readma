@@ -72,6 +72,7 @@ export type ReadmeTemplateArgs = {
     roadmap: string
     /** Usage section */
     usage: string
+    [sectionName: string]: string
   }
   /** License */
   license?: 'MIT'

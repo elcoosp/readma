@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## core-0.9.1 - 2024-11-26
+#### Bug Fixes
+- **(*)** re jsr shield - (7e8da38) - *elcoosp*
+- **(*)** jsr shield - (060a9ed) - *elcoosp*
+
+- - -
+
 ## core-0.9.0 - 2024-11-26
 #### Features
 - **(*)** add packages table in root readme - (4584dfb) - *elcoosp*

@@ -106,13 +106,30 @@ export const cli: Cli = {
           pkgName: getFolderName(path),
         }))
         : packageRegistry === 'jsr'
-        ? files.deno?.workspace?.map((path) => ({
-          path,
-          // TODO jsr description should be checked against the remote
-          description: '-',
-          // TODO should double check that this match with package deno.json[name]
-          pkgName: `@${config.repoName}/${getFolderName(path)}`,
-        }))
+        ? await Promise.all(
+          (files.deno?.workspace ?? []).map(async (path) => {
+            // TODO should double check that this match with package deno.json[name]
+            const pkgName = `@${config.repoName}/${getFolderName(path)}`
+
+            const jsrMeta = await fetch(
+              `https://npm.jsr.io/@jsr/${
+                pkgName.replace('/', '__').replace('@', '')
+              }`,
+              {
+                headers: {
+                  'Accept': 'application/json',
+                },
+              },
+            ).then((x) => x.json())
+
+            return ({
+              path,
+              // TODO jsr description should be checked against the remote
+              description: jsrMeta?.description ?? '-',
+              pkgName,
+            })
+          }),
+        )
         : packageRegistry === 'npm'
         ? await getPackagesFromManifest(files.pnpm)
         : undefined

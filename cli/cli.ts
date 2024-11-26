@@ -12,7 +12,7 @@ import { Logger } from "@deno-library/logger"
 import {
   readWorkspaceManifest,
   type WorkspaceManifest,
-} from "@pnpm/workspace.read-manifest"
+} from "npm:@pnpm/workspace.read-manifest"
 const log = new Logger()
 type DenoFile = { workspace: string[] }
 type CargoFile = { workspace: { members: string[] } }

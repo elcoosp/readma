@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [2.6.1](https://github.com/elcoosp/readma/compare/e580e6063826726c64e9b8c3b5f668d347e67955..2.6.1) - 2024-11-26
+### Package updates
+- [cli-0.6.1](cli) bumped to [cli-0.6.1](https://github.com/elcoosp/readma/compare/cli-0.6.0..cli-0.6.1)
+### Global changes
+#### Bug Fixes
+- **(cli,pkg-json)** use npm: specifier - ([e580e60](https://github.com/elcoosp/readma/commit/e580e6063826726c64e9b8c3b5f668d347e67955)) - [@elcoosp](https://github.com/elcoosp)
+
+- - -
+
 ## [2.6.0](https://github.com/elcoosp/readma/compare/ca8e3b77765e0eb3d68ddc0dfff39c7a94b7aab8..2.6.0) - 2024-11-26
 ### Package updates
 - [cli-0.6.0](cli) bumped to [cli-0.6.0](https://github.com/elcoosp/readma/compare/cli-0.5.11..cli-0.6.0)

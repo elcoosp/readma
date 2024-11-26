@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## cli-0.6.1 - 2024-11-26
+#### Bug Fixes
+- **(cli,pkg-json)** use npm: specifier - (e580e60) - *elcoosp*
+
+- - -
+
 ## cli-0.6.0 - 2024-11-26
 #### Bug Fixes
 - installation ws override for npm packageRegistry - (adc7550) - elcoosp

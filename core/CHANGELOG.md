@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## core-0.9.0 - 2024-11-26
+#### Features
+- **(*)** add packages table in root readme - (4584dfb) - *elcoosp*
+
+- - -
+
 ## core-0.8.0 - 2024-11-26
 #### Documentation
 - use @elcoosp-configs/docusaurus - (3e4de96) - elcoosp

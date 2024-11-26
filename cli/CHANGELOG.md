@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## cli-0.7.0 - 2024-11-26
+#### Features
+- **(*)** add packages table in root readme - (4584dfb) - *elcoosp*
+
+- - -
+
 ## cli-0.6.2 - 2024-11-26
 #### Bug Fixes
 - **(*)** rm root package.json making deno confused - (486537d) - *elcoosp*

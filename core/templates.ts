@@ -131,7 +131,7 @@ ${
             ].concat(
               root.members.map((
                 { pkgName, path },
-              ) => [`[${pkgName}](${path}/README.md)`]),
+              ) => [`[${pkgName}](${path})`]),
             ))
           }
 

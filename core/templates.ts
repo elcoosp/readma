@@ -127,9 +127,11 @@ ${
 
 ${
             markdownTable([
-              ["Package", "Path"],
+              ["Package"],
             ].concat(
-              root.members.map(({ pkgName, path }) => [pkgName, path]),
+              root.members.map((
+                { pkgName, path },
+              ) => [`[${pkgName}](${path}/README.md)`]),
             ))
           }
 

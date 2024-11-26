@@ -114,8 +114,8 @@ Project Link: [https://github.com/elcoosp/readma](https://github.com/elcoosp/rea
 <!--https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 ![Alt](https://repobeats.axiom.co/api/embed/1b12e7ffd13fd2d15772a30e8b0a995976150797.svg "Repobeats analytics image")
 
-[jsr-version-shield]: https://img.shields.io/jsr/v/@readma/@readma/cli.svg?style=for-the-badge
-[jsr-version-url]: https://jsr.io/@readma/@readma/cli
+[jsr-version-shield]: https://img.shields.io/jsr/v/@readma/cli.svg?style=for-the-badge
+[jsr-version-url]: https://jsr.io/@readma/cli
 [codecov-shield]: https://img.shields.io/codecov/c/github/elcoosp/readma/main.svg?style=for-the-badge
 [codecov-url]: https://codecov.io/github/elcoosp/readma/tree/main/@readma/cli
 [contributors-shield]: https://img.shields.io/github/contributors/elcoosp/readma.svg?style=for-the-badge

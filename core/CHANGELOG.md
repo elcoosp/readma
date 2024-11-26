@@ -2,6 +2,16 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## core-0.9.4 - 2024-11-26
+#### Bug Fixes
+- **(*)** screenshot src using gh content - (98f65e0) - *elcoosp*
+- **(*)** packages table only if at least one root.members - (2f7d7a9) - *elcoosp*
+- **(*)** packages table in templates link to folder not just readme - (36d2405) - *elcoosp*
+#### Documentation
+- up readme - (f05b2c2) - elcoosp
+
+- - -
+
 ## core-0.9.3 - 2024-11-26
 #### Bug Fixes
 - **(*)** packages version - (c8a7fb9) - *elcoosp*

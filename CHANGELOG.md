@@ -2,6 +2,17 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [2.6.2](https://github.com/elcoosp/readma/compare/48f81ca379864e73a323741b33f026839618994b..2.6.2) - 2024-11-26
+### Package updates
+- [cli-0.6.2](cli) bumped to [cli-0.6.2](https://github.com/elcoosp/readma/compare/cli-0.6.1..cli-0.6.2)
+### Global changes
+#### Bug Fixes
+- **(*)** rm root package.json making deno confused - ([486537d](https://github.com/elcoosp/readma/commit/486537dfa90c4fff5d26355ec5207bbcecd89001)) - [@elcoosp](https://github.com/elcoosp)
+#### Documentation
+- up screenshot & ignore cast files in cspell - ([48f81ca](https://github.com/elcoosp/readma/commit/48f81ca379864e73a323741b33f026839618994b)) - [@elcoosp](https://github.com/elcoosp)
+
+- - -
+
 ## [2.6.1](https://github.com/elcoosp/readma/compare/e580e6063826726c64e9b8c3b5f668d347e67955..2.6.1) - 2024-11-26
 ### Package updates
 - [cli-0.6.1](cli) bumped to [cli-0.6.1](https://github.com/elcoosp/readma/compare/cli-0.6.0..cli-0.6.1)

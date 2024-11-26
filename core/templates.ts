@@ -133,11 +133,11 @@ ${
 
 ${
             markdownTable([
-              ['Package'],
+              ['Package', 'Description'],
             ].concat(
               root.members.map((
-                { pkgName, path },
-              ) => [`[${pkgName}](${path})`]),
+                { pkgName, path, description },
+              ) => [`[${pkgName}](${path})`, description]),
             ))
           }
 `

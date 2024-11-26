@@ -1,5 +1,9 @@
 // TODO: allow different case, this is too rusty
-export type WorkspaceMember = { pkgName: string; path: string }
+export type WorkspaceMember = {
+  pkgName: string
+  path: string
+  description: string
+}
 export type PackageRegistry = 'jsr' | 'npm' | 'crates.io'
 /** Config used to feed the {@link readme} function */
 export type ReadmeTemplateArgs = {

@@ -16,7 +16,10 @@ import {
 } from '@pnpm/workspace.read-manifest'
 const log = new Logger()
 type DenoFile = { workspace: string[] }
-type CargoFile = { workspace: { members: string[] } }
+type CargoFile = {
+  workspace: { members: string[] }
+  package?: { description?: string }
+}
 /**
  * Readma cli
  */
@@ -98,11 +101,15 @@ export const cli: Cli = {
       packageRegistry === 'crates.io'
         ? files.rs?.workspace?.members?.map((path) => ({
           path,
+          description: (files.rs?.package?.description ??
+            '-'),
           pkgName: getFolderName(path),
         }))
         : packageRegistry === 'jsr'
         ? files.deno?.workspace?.map((path) => ({
           path,
+          // TODO jsr description should be checked against the remote
+          description: '-',
           // TODO should double check that this match with package deno.json[name]
           pkgName: `@${config.repoName}/${getFolderName(path)}`,
         }))
@@ -229,7 +236,11 @@ async function getPackagesFromManifest(
       ).map(async (path) => {
         const memberPath = path.replace('/package.json', '')
         const pkg = await loadPkgJson(memberPath)
-        return ({ path: memberPath, pkgName: pkg.name as string })
+        return ({
+          path: memberPath,
+          pkgName: pkg.name as string,
+          description: pkg.description ?? '-',
+        })
       })),
     )
   }

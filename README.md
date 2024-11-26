@@ -56,11 +56,11 @@ Create README that rocks
 > [!TIP]
 > You are inside the entry point of **readma** workspace, here is a list of available packages
 
-| Package                        |
-| ------------------------------ |
-| [@readma/core](./core)         |
-| [@readma/cli](./cli)           |
-| [@readma/pkg-json](./pkg-json) |
+| Package                        | Description |
+| ------------------------------ | ----------- |
+| [@readma/core](./core)         | -           |
+| [@readma/cli](./cli)           | -           |
+| [@readma/pkg-json](./pkg-json) | -           |
 
 ## ✨ Features
 

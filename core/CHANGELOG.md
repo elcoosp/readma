@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## core-0.8.0 - 2024-11-26
+#### Documentation
+- use @elcoosp-configs/docusaurus - (3e4de96) - elcoosp
+#### Features
+- add pkg-json package - (ca8e3b7) - elcoosp
+- detect package registry & fix deno workspace member pkgName - (3be3e85) - elcoosp
+
+- - -
+
 ## core-0.7.2 - 2024-11-24
 #### Bug Fixes
 - **(*)** deno version bump - (de9f55f) - *elcoosp*

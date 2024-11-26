@@ -2,6 +2,18 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## cli-0.6.0 - 2024-11-26
+#### Bug Fixes
+- installation ws override for npm packageRegistry - (adc7550) - elcoosp
+#### Documentation
+- use @elcoosp-configs/docusaurus - (3e4de96) - elcoosp
+#### Features
+- add pkg-json package - (ca8e3b7) - elcoosp
+- detect package registry & fix deno workspace member pkgName - (3be3e85) - elcoosp
+- allow poc reading of pnpm workspace file if it exist, & deduce the packageRegistry from it + retrieve workspace members - (f8488bd) - elcoosp
+
+- - -
+
 ## cli-0.5.11 - 2024-11-24
 #### Bug Fixes
 - **(cli)** deno version bump core in cli - (ac58b11) - *elcoosp*

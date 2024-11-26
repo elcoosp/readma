@@ -2,6 +2,22 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [2.6.0](https://github.com/elcoosp/readma/compare/ca8e3b77765e0eb3d68ddc0dfff39c7a94b7aab8..2.6.0) - 2024-11-26
+### Package updates
+- [cli-0.6.0](cli) bumped to [cli-0.6.0](https://github.com/elcoosp/readma/compare/cli-0.5.11..cli-0.6.0)
+- [core-0.8.0](core) bumped to [core-0.8.0](https://github.com/elcoosp/readma/compare/core-0.7.2..core-0.8.0)
+### Global changes
+#### Documentation
+- use @elcoosp-configs/docusaurus - ([3e4de96](https://github.com/elcoosp/readma/commit/3e4de960d10a06cb9b929239a3ec0b75265113b0)) - [@elcoosp](https://github.com/elcoosp)
+#### Features
+- allow poc reading of pnpm workspace file if it exist, & deduce the packageRegistry from it + retrieve workspace members - ([f8488bd](https://github.com/elcoosp/readma/commit/f8488bd5d5c4f4d1742c127dca6c5d7854ea5cc7)) - [@elcoosp](https://github.com/elcoosp)
+- detect package registry & fix deno workspace member pkgName - ([3be3e85](https://github.com/elcoosp/readma/commit/3be3e853ad75a1c4ac37574f41f3d8cff5ccfcbf)) - [@elcoosp](https://github.com/elcoosp)
+- add pkg-json package - ([ca8e3b7](https://github.com/elcoosp/readma/commit/ca8e3b77765e0eb3d68ddc0dfff39c7a94b7aab8)) - [@elcoosp](https://github.com/elcoosp)
+#### Miscellaneous Chores
+- **(deps)** update docusaurus config - ([9c249e6](https://github.com/elcoosp/readma/commit/9c249e6aee6fd71a7dcabffe785df9c9255c13a0)) - [@elcoosp](https://github.com/elcoosp)
+
+- - -
+
 ## [2.5.2](https://github.com/elcoosp/readma/compare/ac58b112890df2b856f76f59d265fc7995cf5b2e..2.5.2) - 2024-11-24
 ### Package updates
 - [cli-0.5.11](cli) bumped to [cli-0.5.11](https://github.com/elcoosp/readma/compare/cli-0.5.10..cli-0.5.11)

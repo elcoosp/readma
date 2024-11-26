@@ -147,8 +147,14 @@ export const cli: Cli = {
           wm,
         ) => {
           const sections = {
-            installation: language === "ts"
+            installation: language === "ts" && packageRegistry == "jsr"
               ? utils.md.code(`deno install ${wm.pkgName}`)
+              : language === "ts" && packageRegistry == "npm"
+              ? [
+                utils.md.code(`npm add ${wm.pkgName}`),
+                utils.md.code(`pnpm add ${wm.pkgName}`),
+                utils.md.code(`yarn add ${wm.pkgName}`),
+              ].join("\n")
               : language === "rs"
               ? utils.md.code(`cargo add ${wm.pkgName}`)
               : undefined,

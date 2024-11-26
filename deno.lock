@@ -40,6 +40,7 @@
     "npm:glob@11": "11.0.0",
     "npm:he@^1.2.0": "1.2.0",
     "npm:katex@0.16": "0.16.11",
+    "npm:markdown-table@^3.0.4": "3.0.4",
     "npm:marked-alert@2": "2.1.2_marked@12.0.2",
     "npm:marked-footnote@^1.2.0": "1.2.4_marked@12.0.2",
     "npm:marked-gfm-heading-id@^3.1.0": "3.2.0_marked@12.0.2",
@@ -394,6 +395,9 @@
     "lru-cache@11.0.2": {
       "integrity": "sha512-123qHRfJBmo2jXDbo/a5YOQrJoHF/GNQTLzQ5+IdK5pWpceK17yRc6ozlWd25FxvGKQbIUs91fDFkXmDHTKcyA=="
     },
+    "markdown-table@3.0.4": {
+      "integrity": "sha512-wiYz4+JrLyb/DqW2hkFJxP7Vd7JuTDm77fvbM8VfEQdmSMqcImWeeRbHwZjBjIFki/VaMK2BhFi7oUUZeM5bqw=="
+    },
     "marked-alert@2.1.2_marked@12.0.2": {
       "integrity": "sha512-EFNRZ08d8L/iEIPLTlQMDjvwIsj03gxWCczYTht6DCiHJIZhMk4NK5gtPY9UqAYb09eV5VGT+jD4lp396E0I+w==",
       "dependencies": [
@@ -587,7 +591,8 @@
       "core": {
         "dependencies": [
           "jsr:@david/dax@0.42",
-          "jsr:@deno-library/logger@^1.1.7"
+          "jsr:@deno-library/logger@^1.1.7",
+          "npm:markdown-table@^3.0.4"
         ]
       },
       "pkg-json": {

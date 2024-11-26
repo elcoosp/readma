@@ -1,14 +1,22 @@
 // TODO: allow different case, this is too rusty
-/** Config used to feed the {@link readme} function */
 export type WorkspaceMember = { pkgName: string; path: string }
 export type PackageRegistry = "jsr" | "npm" | "crates.io"
+/** Config used to feed the {@link readme} function */
 export type ReadmeTemplateArgs = {
   /** Hash of the repobeats svg to retrieve for your repo at https://repobeats.axiom.co/configs */
   repobeats?: string
+  /** Version control system */
   vcsName?: "github"
   /** Name of a workspace member, auto generated if you use the cli */
   workspaceMember?: WorkspaceMember
+  /** Root readme only related config */
+  root?: {
+    /** All the members of the workspace */
+    members: WorkspaceMember[]
+  }
+  /** Registry on which the package is published  */
   packageRegistry?: PackageRegistry
+  /** Set of urls for documentation, demo, etc. */
   urls?: {
     /** Repository url */
     repo?: string
@@ -46,7 +54,6 @@ export type ReadmeTemplateArgs = {
   email: string
   /** This should be a reference to a folder that exist and contain source files for which you want a README  */
   title: string
-
   /** Wether or not to add a button to scroll back to the top of the readme */
   backToTop: boolean
   /** This will be used in a near future to auto generate a table of content which would be dynamic optionally */
@@ -66,7 +73,9 @@ export type ReadmeTemplateArgs = {
     /** Usage section */
     usage: string
   }
+  /** License */
   license?: "MIT"
+  /** Badge style for [shields.io](https://shields.io/) */
   badgeStyle?: "for-the-badge" | "social" | "flat" | "flat-square" | "plastic"
 }
 export type MdSrc = string

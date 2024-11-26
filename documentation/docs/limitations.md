@@ -15,5 +15,6 @@ To get a version shield your package need to be hosted on one of those registry
 
 | Registry                      | Support |
 | ----------------------------- | ------- |
-| [jsr.io](http://jsr.io)       | ✅      |
+| [jsr](http://jsr.io)          | ✅      |
+| [npm](http://npmjs.com)       | ✅      |
 | [crates.io](http://crates.io) | ✅      |

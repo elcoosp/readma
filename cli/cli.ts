@@ -176,7 +176,14 @@ export const cli: Cli = {
           })
         }))
         log.info(`Writing main workspace member README`)
-        await readme(config, { folderPath: "./" })
+        await readme({
+          ...config,
+          root: {
+            members: (wsOverride || []).map((x) =>
+              x.workspaceMember as types.WorkspaceMember
+            ),
+          },
+        }, { folderPath: "./" })
       })
       .parse(Deno.args)
   },

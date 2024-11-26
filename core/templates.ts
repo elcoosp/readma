@@ -2,6 +2,7 @@ import { renderShields, shields } from "./shields.ts"
 import { Tocer } from "./toc.ts"
 import { $ } from "@david/dax"
 import type { ReadmeTemplateArgs } from "./types.ts"
+import { markdownTable } from "markdown-table"
 const getBranch = async () => {
   // Workaround github ci
   const GITHUB_HEAD_REF = Deno.env.get("GITHUB_HEAD_REF")
@@ -20,6 +21,7 @@ export const readme = async ({
   email,
   title,
   author,
+  root,
   repobeats,
   packageRegistry,
   urls,
@@ -113,13 +115,29 @@ ${tocVar}
 ${
     tocer.section(
       "💡 About the project",
-      `
-${
+      `${
         images.screenshot
           ? `<img src="${images.screenshot}" alt="Product screenshot" />\n`
           : ""
       }
-${about}`,
+${
+        root
+          ? `> [!TIP]
+> You are inside the entry point of **${repoName}** workspace, here is a list of available packages
+
+${
+            markdownTable([
+              ["Package", "Path"],
+            ].concat(
+              root.members.map(({ pkgName, path }) => [pkgName, path]),
+            ))
+          }
+
+${about}
+`
+          : about
+      }
+`,
     )
   }
 ${tocer.section("🎉 Getting started", gettingStarted)}

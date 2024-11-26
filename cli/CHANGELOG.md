@@ -2,6 +2,16 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## cli-0.8.1 - 2024-11-26
+#### Bug Fixes
+- mv about section - (9420588) - elcoosp
+- mssing packageRegistry on main readme for single package - (31930bc) - elcoosp
+#### Miscellaneous Chores
+- version packages - (489b88a) - elcoosp
+- version packages - (2002827) - elcoosp
+
+- - -
+
 ## cli-0.8.0 - 2024-11-26
 #### Documentation
 - up readme - (f05b2c2) - elcoosp

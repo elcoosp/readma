@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## core-0.11.1 - 2024-11-26
+#### Bug Fixes
+- mv about section - (9420588) - elcoosp
+#### Miscellaneous Chores
+- version packages - (489b88a) - elcoosp
+
+- - -
+
 ## core-0.11.0 - 2024-11-26
 #### Documentation
 - **(core)** processFile - (33d17c2) - *elcoosp*

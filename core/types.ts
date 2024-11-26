@@ -69,7 +69,7 @@ export type ReadmeTemplateArgs = {
     projectDescription: string
     /** About section */
     about: string
-    /** Installation section */
+    /** Installation section, can be omitted in a single rust package */
     installation: string
     /** Acknowledgments section */
     acknowledgments: string

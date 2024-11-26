@@ -18,7 +18,7 @@ const log = new Logger()
 type DenoFile = { workspace: string[] }
 type CargoFile = {
   workspace: { members: string[] }
-  package?: { description?: string }
+  package?: { description?: string; name?: string }
 }
 /**
  * Readma cli
@@ -165,7 +165,7 @@ export const cli: Cli = {
       .action(async (_options, ..._args) => {
         log.info('Starting readma generation')
         log.info({ license })
-        const { language, workspaceMembers, packageRegistry } = await cli
+        const { language, workspaceMembers, packageRegistry, files } = await cli
           .detectLanguage(config)
 
         const wsOverride = await Promise.all(
@@ -224,15 +224,27 @@ export const cli: Cli = {
           })
         }))
         log.info(`Writing main workspace member README`)
-        await readme({
-          ...config,
-          packageRegistry,
-          root: {
-            members: (wsOverride || []).map((x) =>
-              x.workspaceMember as types.WorkspaceMember
-            ),
-          },
-        }, { folderPath: './' })
+
+        await readme(
+          deepMerge<
+            PartialDeep<types.ReadmeTemplateArgs>
+          >(config, {
+            sections: {
+              installation: config.sections?.installation ?? language == 'rs'
+                ? utils.md.code(
+                  `cargo add ${files.rs?.package?.name}`,
+                )
+                : 'Not specified',
+            },
+            packageRegistry,
+            root: {
+              members: (wsOverride || []).map((x) =>
+                x.workspaceMember as types.WorkspaceMember
+              ),
+            },
+          }) as types.ReadmeTemplateArgs,
+          { folderPath: './' },
+        )
       })
       .parse(Deno.args)
   },

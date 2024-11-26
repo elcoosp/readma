@@ -1,4 +1,4 @@
-import rpj from "read-package-json-fast"
+import { loadPkgJson } from "@readma/pkg-json"
 import { glob } from "glob"
 import type { PartialDeep } from "type-fest"
 import { deepMerge } from "@cross/deepmerge"
@@ -21,7 +21,7 @@ type CargoFile = { workspace: { members: string[] } }
  */
 export type Cli = {
   /** Utility to detect language and get workspace members */
-  detectLanguage: (config: types.ReadmeTemplateArgs) => Promise<{
+  detectLanguage: (config: Partial<types.ReadmeTemplateArgs>) => Promise<{
     language: types.ReadmeTemplateArgs["language"]
     files: {
       deno?: DenoFile
@@ -36,7 +36,7 @@ export type Cli = {
 }
 /** {@link Cli} instance */
 export const cli: Cli = {
-  async detectLanguage(config: types.ReadmeTemplateArgs) {
+  async detectLanguage(config) {
     const pnpmWorkspaceManifest = await readWorkspaceManifest(".")
     const denoFilenames = ["deno.jsonc", "deno.json"]
     const rsFilenames = ["Cargo.toml"]
@@ -195,9 +195,9 @@ async function getPackagesFromManifest(
       ...await Promise.all((
         await glob(`${pkgsGlob}/package.json`, { ignore: "**/node_modules/**" })
       ).map(async (path) => {
-        const pkg = await rpj(path)
         const memberPath = path.replace("/package.json", "")
-        return ({ path: memberPath, pkgName: pkg.name })
+        const pkg = await loadPkgJson(memberPath)
+        return ({ path: memberPath, pkgName: pkg.name as string })
       })),
     )
   }

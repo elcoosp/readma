@@ -6,7 +6,8 @@
   ],
   "deno.enablePaths": [
     "cli",
-    "core"
+    "core",
+    "pkg-json"
   ],
   "deno.lint": true,
   "deno.config": "./deno.json",

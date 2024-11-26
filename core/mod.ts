@@ -1,6 +1,6 @@
 import * as templates from "../core/templates.ts"
 import type { ReadmeTemplateArgs } from "../core/types.ts"
-import { render } from "@deno/gfm"
+// import { render } from "@deno/gfm"
 export * as utils from "./utils.ts"
 export * as types from "./types.ts"
 /** Template independent options */
@@ -39,7 +39,10 @@ async function renderWriteTemplate<
   options?: Partial<GlobalOptions>,
 ) {
   const rendered = options?.renderer === "gfm"
-    ? render(await templater(templateArgs))
+    // FIXME cause ERR_TYPES_NOT_FOUND with prims
+    ? (console.error("gfm renderer not yet supported"),
+      await templater(templateArgs))
+    // ? render(await templater(templateArgs))
     : await templater(templateArgs)
   const folderPath = options?.folderPath ?? ("./" + (
     // FIXME: not type safe

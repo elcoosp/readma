@@ -6,7 +6,7 @@ Deno.test("detectLanguage", async () => {
     language: "ts" as const,
     workspaceMembers: undefined,
   }
-  const actual = await cli.detectLanguage()
+  const actual = await cli.detectLanguage({ repoName: "test" })
   assertEquals(actual.language, expected.language)
   assertEquals(actual.workspaceMembers, expected.workspaceMembers)
 })

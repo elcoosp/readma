@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## core-0.10.0 - 2024-11-26
+#### Features
+- **(*)** allow custom sections & workspace specific mdx files inside readma/sections/* - (02ad5ba) - *elcoosp*
+- **(*)** poc mdx-manager module to handle custom sections per workspace member - (ed816f6) - *elcoosp*
+#### Miscellaneous Chores
+- use single quote - (4996de0) - elcoosp
+
+- - -
+
 ## [2.8.0](https://github.com/elcoosp/readma/compare/ed816f65a1889b1d6e2bb2273f0e0266acfe7452..2.8.0) - 2024-11-26
 ### Package updates
 - [cli-0.8.0](cli) bumped to [cli-0.8.0](https://github.com/elcoosp/readma/compare/cli-0.7.2..cli-0.8.0)

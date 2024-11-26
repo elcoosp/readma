@@ -2,6 +2,19 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [2.8.0](https://github.com/elcoosp/readma/compare/02ad5ba2d115d96f76ce4f13517f6ae436c67e45..2.8.0) - 2024-11-26
+### Package updates
+- [cli-0.8.0](cli) bumped to [cli-0.8.0](https://github.com/elcoosp/readma/compare/cli-0.7.2..cli-0.8.0)
+- [core-0.10.0](core) bumped to [core-0.10.0](https://github.com/elcoosp/readma/compare/core-0.9.4..core-0.10.0)
+### Global changes
+#### Features
+- **(*)** poc mdx-manager module to handle custom sections per workspace member - ([ed816f6](https://github.com/elcoosp/readma/commit/ed816f65a1889b1d6e2bb2273f0e0266acfe7452)) - [@elcoosp](https://github.com/elcoosp)
+- **(*)** allow custom sections & workspace specific mdx files inside readma/sections/* - ([02ad5ba](https://github.com/elcoosp/readma/commit/02ad5ba2d115d96f76ce4f13517f6ae436c67e45)) - [@elcoosp](https://github.com/elcoosp)
+#### Miscellaneous Chores
+- use single quote - ([4996de0](https://github.com/elcoosp/readma/commit/4996de03142814f937b59f3d084dd7cfc7dc18ba)) - [@elcoosp](https://github.com/elcoosp)
+
+- - -
+
 ## [2.7.4](https://github.com/elcoosp/readma/compare/f05b2c2db0930fe40dcfe4276b7b5126ece75d64..2.7.4) - 2024-11-26
 ### Package updates
 - [core-0.9.4](core) bumped to [core-0.9.4](https://github.com/elcoosp/readma/compare/core-0.9.3..core-0.9.4)

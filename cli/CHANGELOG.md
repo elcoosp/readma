@@ -2,6 +2,17 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## cli-0.8.0 - 2024-11-26
+#### Documentation
+- up readme - (f05b2c2) - elcoosp
+#### Features
+- **(*)** allow custom sections & workspace specific mdx files inside readma/sections/* - (02ad5ba) - *elcoosp*
+- **(*)** poc mdx-manager module to handle custom sections per workspace member - (ed816f6) - *elcoosp*
+#### Miscellaneous Chores
+- use single quote - (4996de0) - elcoosp
+
+- - -
+
 ## cli-0.7.2 - 2024-11-26
 #### Bug Fixes
 - **(*)** packages version - (c8a7fb9) - *elcoosp*

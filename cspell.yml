@@ -1,6 +1,7 @@
 ignorePaths:
   - node_modules
   - pnpm-lock.yaml
+  - "*.cast"
 words:
   # User
   - elcoosp

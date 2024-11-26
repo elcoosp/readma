@@ -68,12 +68,9 @@ deno install @readma/pkg-json
 
 ## 🔧 Usage
 
-```ts
-import { readme } from "@readma/core"
-import config from "./readma.config.ts"
-// Generate a single readme file
-await readme(config, { folderPath: "./" })
-```
+<pre><code class="language-ts">import { loadPkgJson } from &quot;@readma/pkg-json&quot;
+const pkg = await loadPkgJson(&quot;package.json&quot;)
+</code></pre>
 
 ## 🚀 Roadmap
 

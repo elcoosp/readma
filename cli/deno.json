@@ -11,9 +11,8 @@
     "@david/dax": "jsr:@david/dax@^0.42.0",
     "@deno-library/logger": "jsr:@deno-library/logger@^1.1.7",
     "@pnpm/workspace.read-manifest": "npm:@pnpm/workspace.read-manifest@^2.2.1",
-    "@readma/core": "jsr:@readma/core@^0.6.3",
+    "@readma/core": "jsr:@readma/core@^0.6",
     "glob": "npm:glob@^11.0.0",
-    "read-package-json-fast": "npm:read-package-json-fast@^4.0.0",
     "type-fest": "npm:type-fest@^4.27.0"
   }
 }

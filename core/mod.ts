@@ -3,6 +3,7 @@ import type { ReadmeTemplateArgs } from "../core/types.ts"
 // import { render } from "@deno/gfm"
 export * as utils from "./utils.ts"
 export * as types from "./types.ts"
+export * as mdx from "./mdx-manager.ts"
 /** Template independent options */
 export type GlobalOptions = {
   /** Specify folder where the file is output */

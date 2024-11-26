@@ -23,7 +23,7 @@ export class Tocer {
 </details>
     `.trim()
   }
-  section(title: string, content: MdSrc) {
+  section(title: string, content: MdSrc | undefined) {
     this.sections.push(title)
     const backToTopMd = this.hasBackToTop
       ? `<p align="right">(<a href="#readme-top">back to top</a>)</p>`
@@ -31,7 +31,7 @@ export class Tocer {
     return `
 ## ${title}
 
-${content.trim()}
+${content ? content.trim() : ""}
 
 ${backToTopMd}`.trim() + "\n"
   }

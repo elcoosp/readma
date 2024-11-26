@@ -2,10 +2,11 @@ import { loadPkgJson } from "@readma/pkg-json"
 import { glob } from "glob"
 import type { PartialDeep } from "type-fest"
 import { deepMerge } from "@cross/deepmerge"
-import { readme, type types, utils } from "@readma/core"
+import { mdx, readme, type types, utils } from "@readma/core"
 import { Command } from "@cliffy/command"
 import { exists } from "@std/fs"
 import * as toml from "@std/toml"
+import * as path from "@std/path"
 import * as jsonc from "@std/jsonc"
 import denoConf from "./deno.json" with { type: "json" }
 import { Logger } from "@deno-library/logger"
@@ -143,30 +144,50 @@ export const cli: Cli = {
         const { language, workspaceMembers, packageRegistry } = await cli
           .detectLanguage(config)
 
-        const wsOverride = workspaceMembers?.map((
-          wm,
-        ) => {
-          const sections = {
-            installation: language === "ts" && packageRegistry == "jsr"
-              ? utils.md.code(`deno install ${wm.pkgName}`)
-              : language === "ts" && packageRegistry == "npm"
-              ? [
-                utils.md.code(`npm add ${wm.pkgName}`),
-                utils.md.code(`pnpm add ${wm.pkgName}`),
-                utils.md.code(`yarn add ${wm.pkgName}`),
-              ].join("\n")
-              : language === "rs"
-              ? utils.md.code(`cargo add ${wm.pkgName}`)
-              : undefined,
-          }
-          return deepMerge<
-            PartialDeep<types.ReadmeTemplateArgs>
-          >(config, {
-            packageRegistry,
-            sections,
-            workspaceMember: wm,
-          })
-        })
+        const wsOverride = await Promise.all(
+          (workspaceMembers || [])?.map(async (
+            wm,
+          ) => {
+            const usageSectionPath = path.join(
+              wm.path,
+              "README-section-usage.mdx",
+            )
+            let usage = config.sections.usage
+            try {
+              const processed = await mdx.processFile(usageSectionPath)
+              usage = processed
+            } catch (err) {
+              if (
+                !(err as { toString: () => string }).toString().startsWith(
+                  "Error: ENOENT: no such file or directory",
+                )
+              ) {
+                console.error(err)
+              }
+            }
+            const sections = {
+              installation: language === "ts" && packageRegistry == "jsr"
+                ? utils.md.code(`deno install ${wm.pkgName}`)
+                : language === "ts" && packageRegistry == "npm"
+                ? [
+                  utils.md.code(`npm add ${wm.pkgName}`),
+                  utils.md.code(`pnpm add ${wm.pkgName}`),
+                  utils.md.code(`yarn add ${wm.pkgName}`),
+                ].join("\n")
+                : language === "rs"
+                ? utils.md.code(`cargo add ${wm.pkgName}`)
+                : undefined,
+              usage,
+            }
+            return deepMerge<
+              PartialDeep<types.ReadmeTemplateArgs>
+            >(config, {
+              packageRegistry,
+              sections,
+              workspaceMember: wm,
+            })
+          }),
+        )
         await Promise.all((wsOverride || []).map((wsConfig) => {
           log.info(
             `Writing "${wsConfig.workspaceMember?.pkgName}" workspace member README`,

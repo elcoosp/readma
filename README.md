@@ -48,16 +48,16 @@
 
 ## 💡 About the project
 
-<img src="images/screenshot.gif" alt="Product screenshot" />
+<img src="https://raw.githubusercontent.com/elcoosp/readma/HEAD/images/screenshot.gif" alt="Product screenshot" />
 
 > [!TIP]
 > You are inside the entry point of **readma** workspace, here is a list of available packages
 
-| Package                                  |
-| ---------------------------------------- |
-| [@readma/core](./core/README.md)         |
-| [@readma/cli](./cli/README.md)           |
-| [@readma/pkg-json](./pkg-json/README.md) |
+| Package                        |
+| ------------------------------ |
+| [@readma/core](./core)         |
+| [@readma/cli](./cli)           |
+| [@readma/pkg-json](./pkg-json) |
 
 Create README that rocks
 

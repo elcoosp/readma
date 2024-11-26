@@ -52,7 +52,7 @@
 
 ## 💡 About the project
 
-<img src="images/screenshot.gif" alt="Product screenshot" />
+<img src="https://raw.githubusercontent.com/elcoosp/readma/HEAD/images/screenshot.gif" alt="Product screenshot" />
 
 Create README that rocks
 

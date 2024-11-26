@@ -121,7 +121,7 @@ ${
           : ""
       }
 ${
-        root
+        root && root.members.length > 0
           ? `> [!TIP]
 > You are inside the entry point of **${repoName}** workspace, here is a list of available packages
 

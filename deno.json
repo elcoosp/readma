@@ -48,7 +48,8 @@
       "core/docs",
       "cli/docs",
       "pkg-json/docs",
-      "deno_cache"
+      "deno_cache",
+      "documentation"
     ]
   }
 }

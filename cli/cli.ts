@@ -2,8 +2,8 @@ import { Command } from '@cliffy/command'
 import { deepMerge } from '@cross/deepmerge'
 import { Logger } from '@deno-library/logger'
 import {
-  type WorkspaceManifest,
   readWorkspaceManifest,
+  type WorkspaceManifest,
 } from '@pnpm/workspace.read-manifest'
 import { mdx, readme, types, utils } from '@readma/core'
 import { loadPkgJson } from '@readma/pkg-json'
@@ -187,7 +187,9 @@ export const cli: Cli = {
                   .map(async ([sectionName, v]) => {
                     const sectionPath = path.join(
                       wm.path,
-                      `readma/sections/${sectionName}.mdx`,
+                      'readma',
+                      'sections',
+                      `${sectionName}.mdx`,
                     )
                     try {
                       const mdxProcessed = await mdx.processFile(sectionPath)
@@ -230,7 +232,7 @@ export const cli: Cli = {
           )
           return readme(wsConfig as types.ReadmeTemplateArgs)
         }))
-        log.info('Writing main workspace member README')
+        log.info('Writing workspace root README')
 
         await readme(
           deepMerge<
@@ -251,7 +253,7 @@ export const cli: Cli = {
               ),
             },
           }) as types.ReadmeTemplateArgs,
-          { workspaceRootPath: './' },
+          { workspaceRootPath: '.' },
         )
       })
       .parse(Deno.args)

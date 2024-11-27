@@ -22,7 +22,7 @@ export type ReadmeTemplateArgs = {
   repobeats?: string
   /** Version control system */
   vcsName?: 'github'
-  /** Name of a workspace member, auto generated if you use the cli */
+  /** {@link WorkspaceMember}, auto generated if you use the cli */
   workspaceMember?: WorkspaceMember
   /** Root readme only related config */
   root?: {

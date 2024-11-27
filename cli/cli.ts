@@ -271,7 +271,11 @@ async function getPackagesFromManifest(
   for (const pkgsGlob of pnpmWorkspaceManifest.packages) {
     packages.push(
       ...await Promise.all((
-        await glob(`${pkgsGlob}/package.json`, { ignore: '**/node_modules/**' })
+        await glob(`${pkgsGlob}/package.json`, {
+          ignore: '**/node_modules/**',
+          // FIXME Workaround nested package json (which is not a real one but a template)
+          maxDepth: 3,
+        })
       ).map(async (path) => {
         const memberPath = path.replace('/package.json', '')
         const pkg = await loadPkgJson(memberPath)

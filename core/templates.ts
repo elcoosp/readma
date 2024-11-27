@@ -11,8 +11,7 @@ const getBranch = async () => {
   if (GITHUB_HEAD_REF) return GITHUB_HEAD_REF
   return (await $`git branch --show-current`.text()) || 'main'
 }
-//  TODO: Once sections derive all the table of contents, enable custom sections
-/** Generate one or more readme (if there is workspace members) based on {@link ReadmeTemplateArgs} */
+/** Generate one readme based on {@link ReadmeTemplateArgs} with a table of content */
 export const readme: types.TemplateFn = async ({
   workspaceMember,
   githubUsername,
@@ -37,6 +36,7 @@ export const readme: types.TemplateFn = async ({
     gettingStarted,
     roadmap,
     usage,
+    ...customSections
   },
   images,
   template,
@@ -106,9 +106,7 @@ export const readme: types.TemplateFn = async ({
       labels,
       assignees: assignees.toString(),
     })
-    return `${repoUrl}/issues/new?template=${
-      // TODO should read template & feed default values into the uri encoded query string
-      templateFilename}&${urlParams}`
+    return `${repoUrl}/issues/new?template=${templateFilename}&${urlParams}`
   }
   const projectShields = `
 <!-- PROJECT SHIELDS -->
@@ -196,6 +194,11 @@ ${roadmap}
 See the [open issues](${repoUrl}/issues) for a full list of proposed features (and known issues).
 `,
       )
+    }
+${
+      Object.entries(customSections).map(([title, body]) => {
+        return tocer.section(title, body)
+      }).join('\n')
     }
 ${
       tocer.section(

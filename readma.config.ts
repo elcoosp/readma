@@ -29,10 +29,13 @@ const config: types.ReadmeTemplateArgs = {
 - [Best Readme](https://github.com/othneildrew/Best-README-Template)
 - [Badges 4 README](https://github.com/alexandresanlim/Badges4-README.md-Profile)`,
     gettingStarted: 'See screenshot',
+    usage: `🚧 In construction, refer to the [docs](${urls.doc})`,
     roadmap: `
 - [x] CLI with config file
-- [ ] Auto defaults from known files like Cargo.toml/{deno,package}.json`,
-    usage: `🚧 In construction, refer to the [docs](${urls.doc})`,
+- [x] Workspace readme generated from known files like \`Cargo.toml\`/\`deno.json\`/\`pnpm-workspace.yml\`
+- [x] Github issue template links`,
+    '⛑️ Support':
+      'Software is still **very early** expect **unexpected breaking changes**',
   },
   template: {
     bugReport: 'bug-report.yml',

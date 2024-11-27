@@ -43,6 +43,7 @@ snapshot[`readme - core 1`] = `
    <li><a href=\\"#installation\\">📋 Installation</a></li>
    <li><a href=\\"#usage\\">🔧 Usage</a></li>
    <li><a href=\\"#roadmap\\">🚀 Roadmap</a></li>
+   <li><a href=\\"#support\\">⛑️ Support</a></li>
    <li><a href=\\"#contributing\\">💻 Contributing</a></li>
    <li><a href=\\"#license\\">📄 License</a></li>
    <li><a href=\\"#contact\\">📨 Contact</a></li>
@@ -79,9 +80,14 @@ deno install @readma/core
 ## 🚀 Roadmap
 
 - [x] CLI with config file
-- [ ] Auto defaults from known files like Cargo.toml/{deno,package}.json
+- [x] Workspace readme generated from known files like \`Cargo.toml\`/\`deno.json\`/\`pnpm-workspace.yml\`
+- [x] Github issue template links
 
 See the [open issues](https://github.com/elcoosp/readma/issues) for a full list of proposed features (and known issues).
+
+## ⛑️ Support
+
+Software is still **very early** expect **unexpected breaking changes**
 
 ## 💻 Contributing
 

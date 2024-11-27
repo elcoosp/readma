@@ -71,7 +71,7 @@ See screenshot
 ## 📋 Installation
 
 ```sh
-deno install @readma/cli
+deno add @readma/cli
 ```
 
 ## 🔧 Usage

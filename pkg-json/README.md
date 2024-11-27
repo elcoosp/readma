@@ -71,7 +71,7 @@ See screenshot
 ## 📋 Installation
 
 ```sh
-deno install @readma/pkg-json
+deno add @readma/pkg-json
 ```
 
 ## 🔧 Usage

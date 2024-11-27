@@ -2,8 +2,8 @@ import { Command } from '@cliffy/command'
 import { deepMerge } from '@cross/deepmerge'
 import { Logger } from '@deno-library/logger'
 import {
-  type WorkspaceManifest,
   readWorkspaceManifest,
+  type WorkspaceManifest,
 } from '@pnpm/workspace.read-manifest'
 import { mdx, readme, type types, utils } from '@readma/core'
 import { loadPkgJson } from '@readma/pkg-json'
@@ -193,7 +193,7 @@ export const cli: Cli = {
 
             const sections = {
               installation: language === 'ts' && packageRegistry === 'jsr'
-                ? utils.md.code(`deno install ${wm.pkgName}`)
+                ? utils.md.code(`deno add ${wm.pkgName}`)
                 : language === 'ts' && packageRegistry === 'npm'
                 ? [
                   utils.md.code(`npm add ${wm.pkgName}`),

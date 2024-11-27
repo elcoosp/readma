@@ -2,6 +2,34 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [2.11.0](https://github.com/elcoosp/readma/compare/b5061d1e45b034be0bd6cef4911e6f618a86d4c7..2.11.0) - 2024-11-27
+### Package updates
+- [cli-0.10.0](cli) bumped to [cli-0.10.0](https://github.com/elcoosp/readma/compare/cli-0.9.0..cli-0.10.0)
+- [core-0.13.0](core) bumped to [core-0.13.0](https://github.com/elcoosp/readma/compare/core-0.12.0..core-0.13.0)
+### Global changes
+#### Bug Fixes
+- **(documentation)** broken link - ([a1b72cc](https://github.com/elcoosp/readma/commit/a1b72cc0b6bb0e14c6cc85ab27852192b1ee34e9)) - [@elcoosp](https://github.com/elcoosp)
+- fix issue template not found on workspace member - ([41fa88d](https://github.com/elcoosp/readma/commit/41fa88d225b43bbda7ca7b322b138a83719fe05c)) - [@elcoosp](https://github.com/elcoosp)
+- use deno add not install to be consistent - ([737343c](https://github.com/elcoosp/readma/commit/737343cd4269b96a5d6e81189307a6bb556b9eaf)) - [@elcoosp](https://github.com/elcoosp)
+#### Continuous Integration
+- do not deno lint documentation npm package - ([031ceca](https://github.com/elcoosp/readma/commit/031ceca7d3d21555cf3e6fdfc9609fb2d369f9c1)) - [@elcoosp](https://github.com/elcoosp)
+- add bug-report template issue - ([34a4420](https://github.com/elcoosp/readma/commit/34a4420ef34f33281aab57f3db83bb78aa56678c)) - [@elcoosp](https://github.com/elcoosp)
+- add feature-request gh template - ([2c04f4d](https://github.com/elcoosp/readma/commit/2c04f4df4714d457977df0e08ef0b58da48fa5b9)) - [@elcoosp](https://github.com/elcoosp)
+#### Documentation
+- **(documentation)** rename intro docs - ([532ba54](https://github.com/elcoosp/readma/commit/532ba543f3dce3e5c55c77254918dce39416256a)) - [@elcoosp](https://github.com/elcoosp)
+- up readme - ([82309dd](https://github.com/elcoosp/readma/commit/82309dd096de8268f08b140be92fa5076e118925)) - [@elcoosp](https://github.com/elcoosp)
+#### Features
+- handle coc in contributing optional section & add dryRun to global options for tests - ([b5061d1](https://github.com/elcoosp/readma/commit/b5061d1e45b034be0bd6cef4911e6f618a86d4c7)) - [@elcoosp](https://github.com/elcoosp)
+#### Miscellaneous Chores
+- setup biome - ([4010d3d](https://github.com/elcoosp/readma/commit/4010d3d16935d9b4d614444cae7bc47bd1bec1b4)) - [@elcoosp](https://github.com/elcoosp)
+- use biome-deno lefthook config - ([d3c4050](https://github.com/elcoosp/readma/commit/d3c40506e770b475e9bb72ee9edc1a99117210c3)) - [@elcoosp](https://github.com/elcoosp)
+- wrong nl in feat request template - ([8d83c85](https://github.com/elcoosp/readma/commit/8d83c85ddf62d9f253b2c69bff33893475736ce5)) - [@elcoosp](https://github.com/elcoosp)
+- add support custom section - ([fa3ff5d](https://github.com/elcoosp/readma/commit/fa3ff5dcaa99d04bfcc116cd288382caec1a7766)) - [@elcoosp](https://github.com/elcoosp)
+#### Tests
+- shields test #12 - ([7143b88](https://github.com/elcoosp/readma/commit/7143b88c60bfd00d5ff3770b8d7c44939060673d)) - [@elcoosp](https://github.com/elcoosp)
+
+- - -
+
 ## core-0.12.0 - 2024-11-26
 #### Bug Fixes
 - default ws member description - (71cba1c) - elcoosp

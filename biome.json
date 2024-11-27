@@ -10,7 +10,7 @@
   },
   "formatter": {
     "enabled": false,
-    "ignore":["__snapshots__"]
+    "ignore": ["__snapshots__"]
   },
   "javascript": {
     "formatter": {

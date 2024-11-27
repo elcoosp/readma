@@ -20,3 +20,7 @@ be hosted on one of those registry
 | [jsr](http://jsr.io)          | ✅      |
 | [npm](http://npmjs.com)       | ✅      |
 | [crates.io](http://crates.io) | ✅      |
+
+## `pnpm-workspace.yml`
+
+Currently glob is executed at a maxDepth of 3, and `!` patterns are not handled

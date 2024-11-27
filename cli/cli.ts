@@ -2,8 +2,8 @@ import { Command } from '@cliffy/command'
 import { deepMerge } from '@cross/deepmerge'
 import { Logger } from '@deno-library/logger'
 import {
-  type WorkspaceManifest,
   readWorkspaceManifest,
+  type WorkspaceManifest,
 } from '@pnpm/workspace.read-manifest'
 import { mdx, readme, types, utils } from '@readma/core'
 import { loadPkgJson } from '@readma/pkg-json'

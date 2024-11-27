@@ -210,7 +210,7 @@ Any contributions you make are **greatly appreciated**.
 ${
           coc
             ? `
-> [!INFO]
+> [!NOTE]
 > Check the [code of conduct](${repoUrl}/tree/${branch}/${coc})
  
 ${contributing ?? ''}`

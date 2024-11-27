@@ -1,0 +1,299 @@
+export const snapshot = {};
+
+snapshot[`shields - ts 1`] = `
+[
+  {
+    lang: undefined,
+    linkUrl: "https://codecov.io/github/elcoosp/readma/tree/main",
+    name: "Codecov",
+    refName: "codecov",
+    shieldUrl: "https://img.shields.io/codecov/c/github/elcoosp/readma/main.svg?style=for-the-badge",
+  },
+  {
+    lang: undefined,
+    linkUrl: "https://github.com/elcoosp/readma/graphs/contributors",
+    name: "Contributors",
+    refName: "contributors",
+    shieldUrl: "https://img.shields.io/github/contributors/elcoosp/readma.svg?style=for-the-badge",
+  },
+  {
+    lang: undefined,
+    linkUrl: "https://github.com/elcoosp/readma/network/members",
+    name: "Forks",
+    refName: "forks",
+    shieldUrl: "https://img.shields.io/github/forks/elcoosp/readma.svg?style=for-the-badge",
+  },
+  {
+    lang: undefined,
+    linkUrl: "https://github.com/elcoosp/readma/stargazers",
+    name: "Stargazers",
+    refName: "stargazers",
+    shieldUrl: "https://img.shields.io/github/stars/elcoosp/readma.svg?style=for-the-badge",
+  },
+  {
+    lang: undefined,
+    linkUrl: "https://github.com/elcoosp/readma/commits",
+    name: "Commit activity",
+    refName: "commit-activity",
+    shieldUrl: "https://img.shields.io/github/commit-activity/w/elcoosp/readma.svg?style=for-the-badge",
+  },
+  {
+    lang: undefined,
+    linkUrl: "https://github.com/elcoosp/readma/actions?query=branch%3Amain",
+    name: "Branch action runs",
+    refName: "branch-action-runs",
+    shieldUrl: "https://img.shields.io/github/check-runs/elcoosp/readma/main.svg?style=for-the-badge",
+  },
+  {
+    lang: undefined,
+    linkUrl: "https://github.com/elcoosp/readma/blob/master/LICENSE.txt",
+    name: "License",
+    refName: "license",
+    shieldUrl: "https://img.shields.io/github/license/elcoosp/readma.svg?style=for-the-badge",
+  },
+]
+`;
+
+snapshot[`shields - rs 1`] = `
+[
+  {
+    lang: undefined,
+    linkUrl: "https://crates.io/crates/readma",
+    name: "Crates MSRV",
+    refName: "crates-msrv",
+    shieldUrl: "https://img.shields.io/crates/msrv/readma.svg?style=for-the-badge",
+  },
+  {
+    lang: undefined,
+    linkUrl: "https://codecov.io/github/elcoosp/readma/tree/main",
+    name: "Codecov",
+    refName: "codecov",
+    shieldUrl: "https://img.shields.io/codecov/c/github/elcoosp/readma/main.svg?style=for-the-badge",
+  },
+  {
+    lang: undefined,
+    linkUrl: "https://github.com/elcoosp/readma/graphs/contributors",
+    name: "Contributors",
+    refName: "contributors",
+    shieldUrl: "https://img.shields.io/github/contributors/elcoosp/readma.svg?style=for-the-badge",
+  },
+  {
+    lang: undefined,
+    linkUrl: "https://github.com/elcoosp/readma/network/members",
+    name: "Forks",
+    refName: "forks",
+    shieldUrl: "https://img.shields.io/github/forks/elcoosp/readma.svg?style=for-the-badge",
+  },
+  {
+    lang: undefined,
+    linkUrl: "https://github.com/elcoosp/readma/stargazers",
+    name: "Stargazers",
+    refName: "stargazers",
+    shieldUrl: "https://img.shields.io/github/stars/elcoosp/readma.svg?style=for-the-badge",
+  },
+  {
+    lang: undefined,
+    linkUrl: "https://github.com/elcoosp/readma/commits",
+    name: "Commit activity",
+    refName: "commit-activity",
+    shieldUrl: "https://img.shields.io/github/commit-activity/w/elcoosp/readma.svg?style=for-the-badge",
+  },
+  {
+    lang: undefined,
+    linkUrl: "https://github.com/elcoosp/readma/actions?query=branch%3Amain",
+    name: "Branch action runs",
+    refName: "branch-action-runs",
+    shieldUrl: "https://img.shields.io/github/check-runs/elcoosp/readma/main.svg?style=for-the-badge",
+  },
+  {
+    lang: undefined,
+    linkUrl: "https://github.com/elcoosp/readma/blob/master/LICENSE.txt",
+    name: "License",
+    refName: "license",
+    shieldUrl: "https://img.shields.io/github/license/elcoosp/readma.svg?style=for-the-badge",
+  },
+]
+`;
+
+snapshot[`shields - linkedinUsername 1`] = `
+[
+  {
+    lang: undefined,
+    linkUrl: "https://linkedin.com/in/test",
+    name: "LinkedIn",
+    refName: "linked-in",
+    shieldUrl: "https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge",
+  },
+  {
+    lang: undefined,
+    linkUrl: "https://codecov.io/github/elcoosp/readma/tree/main",
+    name: "Codecov",
+    refName: "codecov",
+    shieldUrl: "https://img.shields.io/codecov/c/github/elcoosp/readma/main.svg?style=for-the-badge",
+  },
+  {
+    lang: undefined,
+    linkUrl: "https://github.com/elcoosp/readma/graphs/contributors",
+    name: "Contributors",
+    refName: "contributors",
+    shieldUrl: "https://img.shields.io/github/contributors/elcoosp/readma.svg?style=for-the-badge",
+  },
+  {
+    lang: undefined,
+    linkUrl: "https://github.com/elcoosp/readma/network/members",
+    name: "Forks",
+    refName: "forks",
+    shieldUrl: "https://img.shields.io/github/forks/elcoosp/readma.svg?style=for-the-badge",
+  },
+  {
+    lang: undefined,
+    linkUrl: "https://github.com/elcoosp/readma/stargazers",
+    name: "Stargazers",
+    refName: "stargazers",
+    shieldUrl: "https://img.shields.io/github/stars/elcoosp/readma.svg?style=for-the-badge",
+  },
+  {
+    lang: undefined,
+    linkUrl: "https://github.com/elcoosp/readma/commits",
+    name: "Commit activity",
+    refName: "commit-activity",
+    shieldUrl: "https://img.shields.io/github/commit-activity/w/elcoosp/readma.svg?style=for-the-badge",
+  },
+  {
+    lang: undefined,
+    linkUrl: "https://github.com/elcoosp/readma/actions?query=branch%3Amain",
+    name: "Branch action runs",
+    refName: "branch-action-runs",
+    shieldUrl: "https://img.shields.io/github/check-runs/elcoosp/readma/main.svg?style=for-the-badge",
+  },
+  {
+    lang: undefined,
+    linkUrl: "https://github.com/elcoosp/readma/blob/master/LICENSE.txt",
+    name: "License",
+    refName: "license",
+    shieldUrl: "https://img.shields.io/github/license/elcoosp/readma.svg?style=for-the-badge",
+  },
+]
+`;
+
+snapshot[`shields - packageRegistry 1`] = `
+[
+  {
+    lang: undefined,
+    linkUrl: "https://codecov.io/github/elcoosp/readma/tree/main",
+    name: "Codecov",
+    refName: "codecov",
+    shieldUrl: "https://img.shields.io/codecov/c/github/elcoosp/readma/main.svg?style=for-the-badge",
+  },
+  {
+    lang: undefined,
+    linkUrl: "https://github.com/elcoosp/readma/graphs/contributors",
+    name: "Contributors",
+    refName: "contributors",
+    shieldUrl: "https://img.shields.io/github/contributors/elcoosp/readma.svg?style=for-the-badge",
+  },
+  {
+    lang: undefined,
+    linkUrl: "https://github.com/elcoosp/readma/network/members",
+    name: "Forks",
+    refName: "forks",
+    shieldUrl: "https://img.shields.io/github/forks/elcoosp/readma.svg?style=for-the-badge",
+  },
+  {
+    lang: undefined,
+    linkUrl: "https://github.com/elcoosp/readma/stargazers",
+    name: "Stargazers",
+    refName: "stargazers",
+    shieldUrl: "https://img.shields.io/github/stars/elcoosp/readma.svg?style=for-the-badge",
+  },
+  {
+    lang: undefined,
+    linkUrl: "https://github.com/elcoosp/readma/commits",
+    name: "Commit activity",
+    refName: "commit-activity",
+    shieldUrl: "https://img.shields.io/github/commit-activity/w/elcoosp/readma.svg?style=for-the-badge",
+  },
+  {
+    lang: undefined,
+    linkUrl: "https://github.com/elcoosp/readma/actions?query=branch%3Amain",
+    name: "Branch action runs",
+    refName: "branch-action-runs",
+    shieldUrl: "https://img.shields.io/github/check-runs/elcoosp/readma/main.svg?style=for-the-badge",
+  },
+  {
+    lang: undefined,
+    linkUrl: "https://github.com/elcoosp/readma/blob/master/LICENSE.txt",
+    name: "License",
+    refName: "license",
+    shieldUrl: "https://img.shields.io/github/license/elcoosp/readma.svg?style=for-the-badge",
+  },
+]
+`;
+
+snapshot[`shields - packageRegistry 2`] = `
+[
+  {
+    lang: undefined,
+    linkUrl: "https://crates.io/crates/readma",
+    name: "Crates MSRV",
+    refName: "crates-msrv",
+    shieldUrl: "https://img.shields.io/crates/msrv/readma.svg?style=for-the-badge",
+  },
+  {
+    lang: undefined,
+    linkUrl: "https://crates.io/crates/readma",
+    name: "Crates.io version",
+    refName: "crates-io-version",
+    shieldUrl: "https://img.shields.io/crates/v/readma.svg?style=for-the-badge",
+  },
+  {
+    lang: undefined,
+    linkUrl: "https://codecov.io/github/elcoosp/readma/tree/main",
+    name: "Codecov",
+    refName: "codecov",
+    shieldUrl: "https://img.shields.io/codecov/c/github/elcoosp/readma/main.svg?style=for-the-badge",
+  },
+  {
+    lang: undefined,
+    linkUrl: "https://github.com/elcoosp/readma/graphs/contributors",
+    name: "Contributors",
+    refName: "contributors",
+    shieldUrl: "https://img.shields.io/github/contributors/elcoosp/readma.svg?style=for-the-badge",
+  },
+  {
+    lang: undefined,
+    linkUrl: "https://github.com/elcoosp/readma/network/members",
+    name: "Forks",
+    refName: "forks",
+    shieldUrl: "https://img.shields.io/github/forks/elcoosp/readma.svg?style=for-the-badge",
+  },
+  {
+    lang: undefined,
+    linkUrl: "https://github.com/elcoosp/readma/stargazers",
+    name: "Stargazers",
+    refName: "stargazers",
+    shieldUrl: "https://img.shields.io/github/stars/elcoosp/readma.svg?style=for-the-badge",
+  },
+  {
+    lang: undefined,
+    linkUrl: "https://github.com/elcoosp/readma/commits",
+    name: "Commit activity",
+    refName: "commit-activity",
+    shieldUrl: "https://img.shields.io/github/commit-activity/w/elcoosp/readma.svg?style=for-the-badge",
+  },
+  {
+    lang: undefined,
+    linkUrl: "https://github.com/elcoosp/readma/actions?query=branch%3Amain",
+    name: "Branch action runs",
+    refName: "branch-action-runs",
+    shieldUrl: "https://img.shields.io/github/check-runs/elcoosp/readma/main.svg?style=for-the-badge",
+  },
+  {
+    lang: undefined,
+    linkUrl: "https://github.com/elcoosp/readma/blob/master/LICENSE.txt",
+    name: "License",
+    refName: "license",
+    shieldUrl: "https://img.shields.io/github/license/elcoosp/readma.svg?style=for-the-badge",
+  },
+]
+`;

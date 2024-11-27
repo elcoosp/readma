@@ -1,17 +1,15 @@
+import { join } from '@std/path'
 import * as templates from '../core/templates.ts'
-import type { ReadmeTemplateArgs } from '../core/types.ts'
+import type {
+  GlobalOptions,
+  ReadmeTemplateArgs,
+  TemplateFn,
+} from '../core/types.ts'
 // import { render } from "@deno/gfm"
 export * as utils from './utils.ts'
 export * as types from './types.ts'
 export * as mdx from './mdx-manager.ts'
-/** Template independent options */
-export type GlobalOptions = {
-  /** Specify folder where the file is output */
-  folderPath: string
-  // TODO: if using deno/gfm should not use tocer ?
-  /** Wether tu use @deno/gfm for postprocessing, default to raw */
-  renderer?: 'gfm' | 'raw'
-}
+
 /**
  * @param rt Readme arguments to feed the template
  * @param options Global options
@@ -31,29 +29,30 @@ export async function readme(
  * @param options The templater second arg
  */
 async function renderWriteTemplate<
-  T extends // deno-lint-ignore no-explicit-any
-  (...args: any) => Promise<any>,
+  T extends TemplateFn,
 >(
   templater: T,
-  templateArgs: Parameters<T>[0],
+  templateArgs: ReadmeTemplateArgs,
   filepath: string,
   options?: Partial<GlobalOptions>,
 ) {
-  const rendered = options?.renderer === 'gfm'
-    // FIXME cause ERR_TYPES_NOT_FOUND with prims
-    ? (console.error('gfm renderer not yet supported'),
-      await templater(templateArgs))
-    // ? render(await templater(templateArgs))
-    : await templater(templateArgs)
-  const folderPath = options?.folderPath ?? ('./' + (
-    // FIXME: not type safe
-    templateArgs as ReadmeTemplateArgs
-  ).title)
+  const defaultedOptions = {
+    folderPath: join(
+      '.',
+      // FIXME Should not be title but have a path
+      templateArgs.title,
+    ),
+    ...options || {},
+  }
+  const rendered = await templater(templateArgs, defaultedOptions)
   try {
-    await Deno.writeTextFile(`${folderPath}/${filepath}.md`, rendered)
+    await Deno.writeTextFile(
+      `${defaultedOptions.folderPath}/${filepath}.md`,
+      rendered,
+    )
   } catch (error) {
     throw new Error(
-      `Expected ${folderPath} folder to exist, so that we can write the rendered markdown output inside, got error ${error}`,
+      `Expected ${defaultedOptions.folderPath} folder to exist, so that we can write the rendered markdown output inside, got error ${error}`,
     )
   }
   return rendered

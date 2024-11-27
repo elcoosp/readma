@@ -10,6 +10,7 @@
     "@deno-library/logger": "jsr:@deno-library/logger@^1.1.7",
     "@david/dax": "jsr:@david/dax@^0.42.0",
     "@std/testing": "jsr:@std/testing@^1.0.5",
+    "@std/yaml": "jsr:@std/yaml@^1.0.5",
     "markdown-table": "npm:markdown-table@^3.0.4",
     "jiti": "npm:jiti@^2.4.0"
   }

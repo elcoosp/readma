@@ -1,9 +1,15 @@
 // TODO: allow different case, this is too rusty
+/** Workspace member, language agnostic */
 export type WorkspaceMember = {
   pkgName: string
   path: string
   description: string
 }
+/** Templates function */
+export type TemplateFn = (
+  templateArgs: ReadmeTemplateArgs,
+  globalOptions: GlobalOptions,
+) => Promise<string>
 export type PackageRegistry = 'jsr' | 'npm' | 'crates.io'
 /** Config used to feed the {@link readme} function */
 export type ReadmeTemplateArgs = {
@@ -87,4 +93,10 @@ export type ReadmeTemplateArgs = {
   /** Badge style for [shields.io](https://shields.io/) */
   badgeStyle?: 'for-the-badge' | 'social' | 'flat' | 'flat-square' | 'plastic'
 }
+/** Markdown source */
 export type MdSrc = string
+/** Template independent options */
+export type GlobalOptions = {
+  /** Specify folder where the file is output */
+  folderPath: string
+}

@@ -1,8 +1,11 @@
+import { $ } from '@david/dax'
+import { join } from '@std/path'
+import * as yml from '@std/yaml'
+import { markdownTable } from 'markdown-table'
 import { renderShields, shields } from './shields.ts'
 import { Tocer } from './toc.ts'
-import { $ } from '@david/dax'
 import type { ReadmeTemplateArgs } from './types.ts'
-import { markdownTable } from 'markdown-table'
+import type * as types from './types.ts'
 const getBranch = async () => {
   // Workaround github ci
   const GITHUB_HEAD_REF = Deno.env.get('GITHUB_HEAD_REF')
@@ -44,7 +47,7 @@ export const readme = async ({
   domainExt = 'com',
   license,
   badgeStyle = 'for-the-badge',
-}: ReadmeTemplateArgs) => {
+}: ReadmeTemplateArgs, globalOptions: types.GlobalOptions) => {
   const fullEmail = `${email}@${domain}.${domainExt}`
   const repoUrl = urls?.repo ||
     `https://${vcsName}.com/${githubUsername}/${repoName}`
@@ -76,6 +79,38 @@ export const readme = async ({
   const licenseSectionBody = license === 'MIT'
     ? 'Distributed under the MIT License. See \`LICENSE.txt\` for more information.'
     : 'Not declared'
+
+  const getIssueTemplateUrl = async (templateFilename: string) => {
+    const fileStr = await Deno.readTextFile(
+      join(
+        globalOptions.folderPath,
+        '.github',
+        'ISSUE_TEMPLATE',
+        templateFilename,
+      ),
+    )
+    const {
+      title,
+      labels,
+      assignees,
+    } = yml.parse(fileStr) as {
+      title: string
+      labels: string
+      assignees: string[]
+      // The rest is ignored hence unknown
+      name: unknown
+      description: unknown
+      body: unknown
+    }
+    const urlParams = new URLSearchParams({
+      title,
+      labels,
+      assignees: assignees.toString(),
+    })
+    return `${repoUrl}/issues/new?template=${
+      // TODO should read template & feed default values into the uri encoded query string
+      templateFilename}&${urlParams}`
+  }
   const projectShields = `
 <!-- PROJECT SHIELDS -->
 ${shieldsBadges}
@@ -101,9 +136,11 @@ ${projectShields}
     <br />
     <a href="${demoUrl}">View Demo</a>
     ·
-    <a href="${repoUrl}/issues/new?labels=bug&template=-${template.bugReport}.md">Report Bug</a>
+    <a href="${await getIssueTemplateUrl(template.bugReport)}">Report Bug</a>
     ·
-    <a href="${repoUrl}/issues/new?labels=enhancement&template=${template.featRequest}.md">Request Feature</a>
+    <a href="${await getIssueTemplateUrl(
+      template.featRequest,
+    )}">Request Feature</a>
   </p>
 </div>
 ${

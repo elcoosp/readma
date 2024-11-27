@@ -1,5 +1,5 @@
-import { createJiti } from 'jiti/native'
 import * as path from '@std/path'
+import { createJiti } from 'jiti/native'
 import type { MdSrc, ReadmeTemplateArgs } from './types.ts'
 /** Quick utils to avoid ugly escaping everywhere */
 export const md = {

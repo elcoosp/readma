@@ -107,7 +107,7 @@ export const shields = (
     shield(
       'Codecov',
       `https://codecov.io/${vcsName}/${githubUsername}/${repoName}/tree/${branch}${
-        workspaceMember ? `/${workspaceMember.pkgName}` : ''
+        workspaceMember ? `/${workspaceMember.path.replace('./', '')}` : ''
       }`,
       `codecov/c/${vcsName}/${githubUsername}/${repoName}/${branch}`,
     ),

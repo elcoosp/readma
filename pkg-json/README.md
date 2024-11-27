@@ -121,7 +121,7 @@ Project Link: [https://github.com/elcoosp/readma](https://github.com/elcoosp/rea
 [jsr-version-shield]: https://img.shields.io/jsr/v/@readma/pkg-json.svg?style=for-the-badge
 [jsr-version-url]: https://jsr.io/@readma/pkg-json
 [codecov-shield]: https://img.shields.io/codecov/c/github/elcoosp/readma/main.svg?style=for-the-badge
-[codecov-url]: https://codecov.io/github/elcoosp/readma/tree/main/@readma/pkg-json
+[codecov-url]: https://codecov.io/github/elcoosp/readma/tree/main/pkg-json
 [contributors-shield]: https://img.shields.io/github/contributors/elcoosp/readma.svg?style=for-the-badge
 [contributors-url]: https://github.com/elcoosp/readma/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/elcoosp/readma.svg?style=for-the-badge

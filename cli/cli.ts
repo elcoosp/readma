@@ -1,19 +1,19 @@
-import { loadPkgJson } from '@readma/pkg-json'
-import { glob } from 'glob'
-import type { PartialDeep } from 'type-fest'
-import { deepMerge } from '@cross/deepmerge'
-import { mdx, readme, type types, utils } from '@readma/core'
 import { Command } from '@cliffy/command'
-import { exists } from '@std/fs'
-import * as toml from '@std/toml'
-import * as path from '@std/path'
-import * as jsonc from '@std/jsonc'
-import denoConf from './deno.json' with { type: 'json' }
+import { deepMerge } from '@cross/deepmerge'
 import { Logger } from '@deno-library/logger'
 import {
   readWorkspaceManifest,
   type WorkspaceManifest,
 } from '@pnpm/workspace.read-manifest'
+import { mdx, readme, type types, utils } from '@readma/core'
+import { loadPkgJson } from '@readma/pkg-json'
+import { exists } from '@std/fs'
+import * as jsonc from '@std/jsonc'
+import * as path from '@std/path'
+import * as toml from '@std/toml'
+import { glob } from 'glob'
+import type { PartialDeep } from 'type-fest'
+import denoConf from './deno.json' with { type: 'json' }
 const log = new Logger()
 type DenoFile = { workspace: string[] }
 type CargoFile = {
@@ -59,6 +59,7 @@ export const cli: Cli = {
             const parser = parserMap[ext].parse
             const file = await Deno.readTextFile(filename)
             return parser(file) as T
+            // biome-ignore lint/style/noUselessElse: <explanation>
           } else return null
         }),
       )
@@ -188,13 +189,13 @@ export const cli: Cli = {
                       return [sectionName, v]
                     }
                   }),
-              )).filter(([_, v]) => typeof v == 'string'),
+              )).filter(([_, v]) => typeof v === 'string'),
             )
 
             const sections = {
-              installation: language === 'ts' && packageRegistry == 'jsr'
+              installation: language === 'ts' && packageRegistry === 'jsr'
                 ? utils.md.code(`deno install ${wm.pkgName}`)
-                : language === 'ts' && packageRegistry == 'npm'
+                : language === 'ts' && packageRegistry === 'npm'
                 ? [
                   utils.md.code(`npm add ${wm.pkgName}`),
                   utils.md.code(`pnpm add ${wm.pkgName}`),
@@ -219,11 +220,9 @@ export const cli: Cli = {
           log.info(
             `Writing "${wsConfig.workspaceMember?.pkgName}" workspace member README`,
           )
-          return readme(wsConfig as types.ReadmeTemplateArgs, {
-            folderPath: `./${wsConfig.workspaceMember?.path}`,
-          })
+          return readme(wsConfig as types.ReadmeTemplateArgs)
         }))
-        log.info(`Writing main workspace member README`)
+        log.info('Writing main workspace member README')
 
         await readme(
           deepMerge<
@@ -231,7 +230,7 @@ export const cli: Cli = {
           >(config, {
             sections: {
               installation: config.sections?.installation ??
-                (language == 'rs'
+                (language === 'rs'
                   ? utils.md.code(
                     `cargo add ${files.rs?.package?.name}`,
                   )
@@ -244,7 +243,7 @@ export const cli: Cli = {
               ),
             },
           }) as types.ReadmeTemplateArgs,
-          { folderPath: './' },
+          { workspaceRootPath: './' },
         )
       })
       .parse(Deno.args)

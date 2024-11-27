@@ -53,6 +53,15 @@ Create README that rocks
 
 <img src="https://raw.githubusercontent.com/elcoosp/readma/HEAD/images/screenshot.gif" alt="Product screenshot" />
 
+> [!TIP]
+> You are inside the entry point of **readma** workspace, here is a list of available packages
+
+| Package                        | Description                                        |
+| ------------------------------ | -------------------------------------------------- |
+| [@readma/core](./core)         | Beautiful effortless README generator core package |
+| [@readma/cli](./cli)           | Beautiful effortless README generator cli package  |
+| [@readma/pkg-json](./pkg-json) | Typed function to read package.json                |
+
 ## ✨ Features
 
 - Workspace compatible
@@ -71,12 +80,7 @@ deno install @readma/core
 
 ## 🔧 Usage
 
-```ts
-import { readme } from "@readma/core"
-import config from "./readma.config.ts"
-// Generate a single readme file
-await readme(config, { folderPath: "./" })
-```
+🚧 In construction, refer to the [docs](https://readma.vercel.app/)
 
 ## 🚀 Roadmap
 

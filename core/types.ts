@@ -102,6 +102,5 @@ export type ReadmeTemplateArgs = {
 export type MdSrc = string
 /** Template independent options */
 export type GlobalOptions = {
-  /** Specify folder where the file is output */
-  folderPath: string
+  workspaceRootPath: string
 }

@@ -2,6 +2,9 @@ import type * as types from './core/types.ts'
 import { md } from './core/utils.ts'
 const name = 'readma'
 const author = 'elcoosp'
+const urls = {
+  doc: `https://${name}.vercel.app/`,
+}
 const config: types.ReadmeTemplateArgs = {
   language: 'ts',
   title: 'Readma',
@@ -11,9 +14,7 @@ const config: types.ReadmeTemplateArgs = {
   xHandle: author,
   domain: 'gmail',
   email: author,
-  urls: {
-    doc: `https://${name}.vercel.app/`,
-  },
+  urls,
   repobeats: '1b12e7ffd13fd2d15772a30e8b0a995976150797',
   images: { screenshot: 'images/screenshot.gif', logo: 'images/logo.png' },
   sections: {
@@ -31,18 +32,7 @@ const config: types.ReadmeTemplateArgs = {
     roadmap: `
 - [x] CLI with config file
 - [ ] Auto defaults from known files like Cargo.toml/{deno,package}.json`,
-    usage: `
-    ${
-      md.code(
-        `
-import { readme } from "@readma/core"
-import config from "./readma.config.ts"
-// Generate a single readme file
-await readme(config, { folderPath: "./" })`,
-        'ts',
-      )
-    }
-`,
+    usage: `🚧 In construction, refer to the [docs](${urls.doc})`,
   },
   template: {
     bugReport: 'bug-report.yml',

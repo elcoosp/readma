@@ -36,14 +36,18 @@ async function renderWriteTemplate<
   filepath: string,
   options?: Partial<GlobalOptions>,
 ) {
+  const workspaceRootPath = '.'
   const defaultedOptions = {
-    folderPath: join(
-      '.',
-      // FIXME Should not be title but have a path
-      templateArgs.title,
-    ),
+    workspaceRootPath,
+    folderPath: templateArgs?.workspaceMember
+      ? join(
+        workspaceRootPath,
+        templateArgs.workspaceMember.path,
+      )
+      : workspaceRootPath,
     ...options || {},
   }
+
   const rendered = await templater(templateArgs, defaultedOptions)
   try {
     await Deno.writeTextFile(

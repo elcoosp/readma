@@ -1,5 +1,5 @@
 // @ts-ignore
-import { types, utils } from '@readma/core'
+import { type types, utils } from '@readma/core'
 const name = 'readma'
 const author = 'elcoosp'
 const config: types.ReadmeTemplateArgs = {
@@ -31,7 +31,7 @@ const config: types.ReadmeTemplateArgs = {
 import { readme } from "@readma/core"
 import config from "./readma.config.ts"
 // Generate a single readme file
-await readme(config, { folderPath: "./" })`,
+await readme(config, { workspaceRootPath: "./" })`,
         'ts',
       )
     }

@@ -4,7 +4,6 @@ import * as yml from '@std/yaml'
 import { markdownTable } from 'markdown-table'
 import { renderShields, shields } from './shields.ts'
 import { Tocer } from './toc.ts'
-import type { ReadmeTemplateArgs } from './types.ts'
 import type * as types from './types.ts'
 const getBranch = async () => {
   // Workaround github ci
@@ -14,7 +13,7 @@ const getBranch = async () => {
 }
 //  TODO: Once sections derive all the table of contents, enable custom sections
 /** Generate one or more readme (if there is workspace members) based on {@link ReadmeTemplateArgs} */
-export const readme = async ({
+export const readme: types.TemplateFn = async ({
   workspaceMember,
   githubUsername,
   repoName,
@@ -47,7 +46,7 @@ export const readme = async ({
   domainExt = 'com',
   license,
   badgeStyle = 'for-the-badge',
-}: ReadmeTemplateArgs, globalOptions: types.GlobalOptions) => {
+}, globalOptions) => {
   const fullEmail = `${email}@${domain}.${domainExt}`
   const repoUrl = urls?.repo ||
     `https://${vcsName}.com/${githubUsername}/${repoName}`
@@ -83,7 +82,7 @@ export const readme = async ({
   const getIssueTemplateUrl = async (templateFilename: string) => {
     const fileStr = await Deno.readTextFile(
       join(
-        globalOptions.folderPath,
+        globalOptions.workspaceRootPath,
         '.github',
         'ISSUE_TEMPLATE',
         templateFilename,

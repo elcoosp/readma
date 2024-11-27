@@ -96,7 +96,7 @@ Software is still **very early** expect **unexpected breaking changes**
 
 Any contributions you make are **greatly appreciated**.
 
-> [!INFO]
+> [!NOTE]
 > Check the [code of conduct](https://github.com/elcoosp/readma/tree/main/.github/CODE_OF_CONDUCT.md)
 
 ## 📄 License

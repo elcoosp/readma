@@ -1,5 +1,5 @@
+import type * as types from './core/types.ts'
 import { md } from './core/utils.ts'
-import * as types from './core/types.ts'
 const name = 'readma'
 const author = 'elcoosp'
 const config: types.ReadmeTemplateArgs = {
@@ -45,7 +45,7 @@ await readme(config, { folderPath: "./" })`,
 `,
   },
   template: {
-    bugReport: 'bug-report--from-readme',
+    bugReport: 'bug-report',
     featRequest: 'feature-request---from-readme',
   },
   backToTop: false,

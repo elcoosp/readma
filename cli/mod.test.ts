@@ -4,7 +4,7 @@ import { cli } from './cli.ts'
 Deno.test('detectLanguage', async () => {
   const expected = {
     language: 'ts' as const,
-    workspaceMembers: undefined,
+    workspaceMembers: [],
   }
   const actual = await cli.detectLanguage({ repoName: 'test' })
   assertEquals(actual.language, expected.language)

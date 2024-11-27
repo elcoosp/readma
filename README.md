@@ -24,9 +24,9 @@
     <br />
     <a href="https://github.com/elcoosp/readma">View Demo</a>
     ·
-    <a href="https://github.com/elcoosp/readma/issues/new?labels=bug&template=-bug-report.md">Report Bug</a>
+    <a href="https://github.com/elcoosp/readma/issues/new?template=bug-report.yml&title=%5BBug%5D%3A+&labels=bug&assignees=elcoosp">Report Bug</a>
     ·
-    <a href="https://github.com/elcoosp/readma/issues/new?labels=enhancement&template=feature-request---from-readme.md">Request Feature</a>
+    <a href="https://github.com/elcoosp/readma/issues/new?template=feature-request.yml&title=%5BFeat%5D%3A+&labels=enhancement&assignees=elcoosp">Request Feature</a>
   </p>
 </div>
 
@@ -52,15 +52,6 @@
 Create README that rocks
 
 <img src="https://raw.githubusercontent.com/elcoosp/readma/HEAD/images/screenshot.gif" alt="Product screenshot" />
-
-> [!TIP]
-> You are inside the entry point of **readma** workspace, here is a list of available packages
-
-| Package                        | Description                                        |
-| ------------------------------ | -------------------------------------------------- |
-| [@readma/core](./core)         | Beautiful effortless README generator core package |
-| [@readma/cli](./cli)           | Beautiful effortless README generator cli package  |
-| [@readma/pkg-json](./pkg-json) | Typed function to read package.json                |
 
 ## ✨ Features
 

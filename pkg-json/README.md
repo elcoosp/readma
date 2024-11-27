@@ -25,9 +25,9 @@
     <br />
     <a href="https://github.com/elcoosp/readma">View Demo</a>
     ·
-    <a href="https://github.com/elcoosp/readma/issues/new?labels=bug&template=-bug-report.md">Report Bug</a>
+    <a href="https://github.com/elcoosp/readma/issues/new?template=bug-report.yml&title=%5BBug%5D%3A+&labels=bug&assignees=elcoosp">Report Bug</a>
     ·
-    <a href="https://github.com/elcoosp/readma/issues/new?labels=enhancement&template=feature-request---from-readme.md">Request Feature</a>
+    <a href="https://github.com/elcoosp/readma/issues/new?template=feature-request.yml&title=%5BFeat%5D%3A+&labels=enhancement&assignees=elcoosp">Request Feature</a>
   </p>
 </div>
 

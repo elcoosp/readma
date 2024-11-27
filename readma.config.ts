@@ -45,8 +45,8 @@ await readme(config, { folderPath: "./" })`,
 `,
   },
   template: {
-    bugReport: 'bug-report',
-    featRequest: 'feature-request---from-readme',
+    bugReport: 'bug-report.yml',
+    featRequest: 'feature-request.yml',
   },
   backToTop: false,
 } as const

@@ -11,6 +11,11 @@ export type TemplateFn = (
   globalOptions: GlobalOptions,
 ) => Promise<string>
 export type PackageRegistry = 'jsr' | 'npm' | 'crates.io'
+/** Path to a [github issue template](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository) */
+export type GhIssueTemplateFilename =
+  | `${string}.yml`
+  | `${string}.yaml`
+  | `${string}.md`
 /** Config used to feed the {@link readme} function */
 export type ReadmeTemplateArgs = {
   /** Hash of the repobeats svg to retrieve for your repo at https://repobeats.axiom.co/configs */
@@ -41,12 +46,12 @@ export type ReadmeTemplateArgs = {
   images: { screenshot?: string; logo: string }
   /** Main author */
   author: string
-  /** Github template */
+  /** [Github issue template](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository) paths relative to `.github/ISSUE_TEMPLATE` */
   template: {
-    /** Github bug report (issue) template */
-    bugReport: string
+    /** Github bug report template */
+    bugReport: GhIssueTemplateFilename
     /** Github feature request template */
-    featRequest: string
+    featRequest: GhIssueTemplateFilename
   }
   /** Github user name */
   githubUsername: string

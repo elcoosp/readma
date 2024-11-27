@@ -41,6 +41,7 @@
     "jsr:@wok/case@^1.0.1": "1.0.1",
     "npm:@biomejs/biome@*": "1.9.4",
     "npm:@biomejs/biome@^1.9.4": "1.9.4",
+    "npm:@elcoosp-configs/biome@^0.0.1": "0.0.1",
     "npm:@mdx-js/mdx@^3.1.0": "3.1.0",
     "npm:@pnpm/workspace.read-manifest@^2.2.1": "2.2.1",
     "npm:glob@11": "11.0.0",
@@ -250,6 +251,9 @@
     },
     "@biomejs/cli-win32-x64@1.9.4": {
       "integrity": "sha512-8Y5wMhVIPaWe6jw2H+KlEm4wP/f7EW3810ZLmDlrEEy5KvBsb9ECEfu/kMWD484ijfQ8+nIi0giMgu9g1UAuuA=="
+    },
+    "@elcoosp-configs/biome@0.0.1": {
+      "integrity": "sha512-jsrMyXdICN8243oSFmg/aSphr67uJXZ6/G+k6nSMpg71PKfNsq6CukC9mg+Enye1oGQ8p9PC6ChZB5M6Le8mVg=="
     },
     "@isaacs/cliui@8.0.2": {
       "integrity": "sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==",
@@ -1394,6 +1398,7 @@
       "jsr:@std/toml@1.0.2",
       "jsr:@wok/case@^1.0.1",
       "npm:@biomejs/biome@^1.9.4",
+      "npm:@elcoosp-configs/biome@^0.0.1",
       "npm:@mdx-js/mdx@^3.1.0",
       "npm:react-dom@^18.3.1",
       "npm:react@^18.3.1"

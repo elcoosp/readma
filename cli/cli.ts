@@ -125,7 +125,6 @@ export const cli: Cli = {
 
             return ({
               path,
-              // TODO jsr description should be checked against the remote
               description: jsrMeta?.description ?? '-',
               pkgName,
             })

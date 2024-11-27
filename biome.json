@@ -9,7 +9,8 @@
     "useIgnoreFile": true
   },
   "formatter": {
-    "enabled": false
+    "enabled": false,
+    "ignore":["__snapshots__"]
   },
   "javascript": {
     "formatter": {

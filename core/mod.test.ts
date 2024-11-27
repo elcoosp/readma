@@ -8,6 +8,7 @@ Deno.test('readme - core', async (t) => {
     assertEquals(true, true)
   } else {
     const out = await readme({ ...config, license: 'MIT' }, {
+      dryRun: true,
       workspaceRootPath: '../',
     })
     await assertSnapshot(t, out)

@@ -49,15 +49,17 @@ async function renderWriteTemplate<
   }
 
   const rendered = await templater(templateArgs, defaultedOptions)
-  try {
-    await Deno.writeTextFile(
-      `${defaultedOptions.folderPath}/${filepath}.md`,
-      rendered,
-    )
-  } catch (error) {
-    throw new Error(
-      `Expected ${defaultedOptions.folderPath} folder to exist, so that we can write the rendered markdown output inside, got error ${error}`,
-    )
+  if (!defaultedOptions.dryRun) {
+    try {
+      await Deno.writeTextFile(
+        `${defaultedOptions.folderPath}/${filepath}.md`,
+        rendered,
+      )
+    } catch (error) {
+      throw new Error(
+        `Expected ${defaultedOptions.folderPath} folder to exist, so that we can write the rendered markdown output inside, got error ${error}`,
+      )
+    }
   }
   return rendered
 }

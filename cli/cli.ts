@@ -5,7 +5,7 @@ import {
   readWorkspaceManifest,
   type WorkspaceManifest,
 } from '@pnpm/workspace.read-manifest'
-import { mdx, readme, type types, utils } from '@readma/core'
+import { mdx, readme, types, utils } from '@readma/core'
 import { loadPkgJson } from '@readma/pkg-json'
 import { exists } from '@std/fs'
 import * as jsonc from '@std/jsonc'
@@ -144,11 +144,20 @@ export const cli: Cli = {
   },
   async run() {
     const licenseFile = await Deno.readTextFile('LICENSE.txt')
+    let cocFile: string | undefined = undefined
+    try {
+      cocFile = await Deno.readTextFile(types.COC_FILE_PATH)
+    } catch (error) {
+      if (!(error instanceof Deno.errors.NotFound)) {
+        throw error
+      }
+    }
     const license = licenseFile.startsWith('MIT License') ? 'MIT' : undefined
     const config = deepMerge<
       PartialDeep<types.ReadmeTemplateArgs>
     >(await utils.getReadmaConfig(), {
       license,
+      coc: cocFile ? types.COC_FILE_PATH : undefined,
     }) as types.ReadmeTemplateArgs
 
     await new Command()

@@ -73,26 +73,34 @@ export type ReadmeTemplateArgs = {
   /** Wether or not to add a button to scroll back to the top of the readme */
   backToTop: boolean
   /** This will be used in a near future to auto generate a table of content which would be dynamic optionally */
-  sections: {
-    /** Features section */
-    features: string
-    /** Project description section */
-    projectDescription: string
-    /** About section */
-    about: string
-    /** Installation section, can be omitted in a single rust package */
-    installation: string
-    /** Acknowledgments section */
-    acknowledgments: string
-    /** Getting started section */
-    gettingStarted: string
-    /** Roadmap section */
-    roadmap: string
-    /** Usage section */
-    usage: string
-    /** Custom sections */
-    [sectionName: string]: string
-  }
+  sections:
+    & {
+      /** Features section */
+      features: string
+      /** Project description section */
+      projectDescription: string
+      /** About section */
+      about: string
+      /** Installation section, can be omitted in a single rust package */
+      installation: string
+      /** Acknowledgments section */
+      acknowledgments: string
+      /** Getting started section */
+      gettingStarted: string
+      /** Roadmap section */
+      roadmap: string
+      /** Usage section */
+      usage: string
+
+      /** Custom sections */
+      [sectionName: string]: string
+    }
+    & Partial<{
+      /** Contributing optional section */
+      contributing?: string
+    }>
+  /** Code of conduct file path if exist */
+  coc?: typeof COC_FILE_PATH
   /** License */
   license?: 'MIT'
   /** Badge style for [shields.io](https://shields.io/) */
@@ -103,4 +111,6 @@ export type MdSrc = string
 /** Template independent options */
 export type GlobalOptions = {
   workspaceRootPath: string
+  dryRun?: boolean
 }
+export const COC_FILE_PATH = '.github/CODE_OF_CONDUCT.md' as const

@@ -1,7 +1,7 @@
 export const snapshot = {};
 
 snapshot[`readme - core 1`] = `
-"<a id=\\"readme-top\\"></a>
+'<a id="readme-top"></a>
 <!-- PROJECT SHIELDS -->
 [![Codecov][codecov-shield]][codecov-url]
 [![Contributors][contributors-shield]][contributors-url]
@@ -13,23 +13,23 @@ snapshot[`readme - core 1`] = `
 
 <!-- PROJECT LOGO -->
 <br />
-<div align=\\"center\\">
-  <a href=\\"https://github.com/elcoosp/readma\\">
-    <img src=\\"https://raw.githubusercontent.com/elcoosp/readma/HEAD/images/logo.png\\" style=\\"max-height: 200px; object-fit: contain;\\" alt=\\"Logo\\">
+<div align="center">
+  <a href="https://github.com/elcoosp/readma">
+    <img src="https://raw.githubusercontent.com/elcoosp/readma/HEAD/images/logo.png" style="max-height: 200px; object-fit: contain;" alt="Logo">
   </a>
-  <h3 align=\\"center\\">Readma</h3>
+  <h3 align="center">Readma</h3>
   
-  <p align=\\"center\\">
+  <p align="center">
     Beautiful effortless README generator
     <br />
-    <a href=\\"https://readma.vercel.app/\\"><strong>📖 Explore the docs »</strong></a>
+    <a href="https://readma.vercel.app/"><strong>📖 Explore the docs »</strong></a>
     <br />
     <br />
-    <a href=\\"https://github.com/elcoosp/readma\\">View Demo</a>
+    <a href="https://github.com/elcoosp/readma">View Demo</a>
     ·
-    <a href=\\"https://github.com/elcoosp/readma/issues/new?template=bug-report.yml&title=%5BBug%5D%3A+&labels=bug&assignees=elcoosp\\">Report Bug</a>
+    <a href="https://github.com/elcoosp/readma/issues/new?template=bug-report.yml&title=%5BBug%5D%3A+&labels=bug&assignees=elcoosp">Report Bug</a>
     ·
-    <a href=\\"https://github.com/elcoosp/readma/issues/new?template=feature-request.yml&title=%5BFeat%5D%3A+&labels=enhancement&assignees=elcoosp\\">Request Feature</a>
+    <a href="https://github.com/elcoosp/readma/issues/new?template=feature-request.yml&title=%5BFeat%5D%3A+&labels=enhancement&assignees=elcoosp">Request Feature</a>
   </p>
 </div>
 
@@ -37,17 +37,17 @@ snapshot[`readme - core 1`] = `
 <details>
   <summary>Table of contents</summary>
   <ol>
-   <li><a href=\\"#about-the-project\\">💡 About the project</a></li>
-   <li><a href=\\"#features\\">✨ Features</a></li>
-   <li><a href=\\"#getting-started\\">🎉 Getting started</a></li>
-   <li><a href=\\"#installation\\">📋 Installation</a></li>
-   <li><a href=\\"#usage\\">🔧 Usage</a></li>
-   <li><a href=\\"#roadmap\\">🚀 Roadmap</a></li>
-   <li><a href=\\"#support\\">⛑️ Support</a></li>
-   <li><a href=\\"#contributing\\">💻 Contributing</a></li>
-   <li><a href=\\"#license\\">📄 License</a></li>
-   <li><a href=\\"#contact\\">📨 Contact</a></li>
-   <li><a href=\\"#acknowledgments\\">👏 Acknowledgments</a></li>
+   <li><a href="#about-the-project">💡 About the project</a></li>
+   <li><a href="#features">✨ Features</a></li>
+   <li><a href="#getting-started">🎉 Getting started</a></li>
+   <li><a href="#installation">📋 Installation</a></li>
+   <li><a href="#usage">🔧 Usage</a></li>
+   <li><a href="#roadmap">🚀 Roadmap</a></li>
+   <li><a href="#support">⛑️ Support</a></li>
+   <li><a href="#contributing">💻 Contributing</a></li>
+   <li><a href="#license">📄 License</a></li>
+   <li><a href="#contact">📨 Contact</a></li>
+   <li><a href="#acknowledgments">👏 Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -55,7 +55,7 @@ snapshot[`readme - core 1`] = `
 
 Create README that rocks
 
-<img src=\\"https://raw.githubusercontent.com/elcoosp/readma/HEAD/images/screenshot.gif\\" alt=\\"Product screenshot\\" />
+<img src="https://raw.githubusercontent.com/elcoosp/readma/HEAD/images/screenshot.gif" alt="Product screenshot" />
 
 ## ✨ Features
 
@@ -93,15 +93,6 @@ Software is still **very early** expect **unexpected breaking changes**
 
 Any contributions you make are **greatly appreciated**.
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag \\"enhancement\\".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (\`git checkout-b feat/AmazingFeature\`)
-3. Commit your Changes (\`git commit -m 'Add some AmazingFeature'\`)
-4. Push to the Branch (\`git push origin feat/AmazingFeature\`)
-5. Open a Pull Request
-
 ## 📄 License
 
 Distributed under the MIT License. See \`LICENSE.txt\` for more information.
@@ -119,7 +110,7 @@ Project Link: [https://github.com/elcoosp/readma](https://github.com/elcoosp/rea
 
 <!--MARKDOWN LINKS & IMAGES-- >
 <!--https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-![Alt](https://repobeats.axiom.co/api/embed/1b12e7ffd13fd2d15772a30e8b0a995976150797.svg \\"Repobeats analytics image\\")
+![Alt](https://repobeats.axiom.co/api/embed/1b12e7ffd13fd2d15772a30e8b0a995976150797.svg "Repobeats analytics image")
 
 [codecov-shield]: https://img.shields.io/codecov/c/github/elcoosp/readma/main.svg?style=for-the-badge
 [codecov-url]: https://codecov.io/github/elcoosp/readma/tree/main
@@ -135,5 +126,5 @@ Project Link: [https://github.com/elcoosp/readma](https://github.com/elcoosp/rea
 [branch-action-runs-url]: https://github.com/elcoosp/readma/actions?query=branch%3Amain
 [license-shield]: https://img.shields.io/github/license/elcoosp/readma.svg?style=for-the-badge
 [license-url]: https://github.com/elcoosp/readma/blob/master/LICENSE.txt
-"
+'
 `;

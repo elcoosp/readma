@@ -1,14 +1,15 @@
 <a id="readme-top"></a>
-  <!-- PROJECT SHIELDS -->
-  
-  <!-- PROJECT LOGO -->
-  <br />
+
+<!-- PROJECT SHIELDS -->
+
+<!-- PROJECT LOGO -->
+<br />
   <div align="center">
   <a href="https://github.com/elcoosp/readma">
   <img src="https://raw.githubusercontent.com/elcoosp/readma/HEAD/images/logo.png" style="max-height: 200px; object-fit: contain;" alt="Logo">
   </a>
   <h3 align="center">Readma</h3>
-  <h4 align="center">@readma/pkg-json</h4>
+  <h4 align="center">@readma/core</h4>
   <p align="center">
   Beautiful effortless README generator
   <br />
@@ -22,11 +23,10 @@
   <a href="https://github.com/elcoosp/readma/issues/new?template=feature-request.yml&title=%5BFeat%5D%3A+&labels=enhancement&assignees=elcoosp">Request Feature</a>
     </p>
     </div>
-    
-      > [!NOTE]
-      > You are inside the **@readma/pkg-json** workspace member package, not the repository entry point
-      
-      
+
+    > [!NOTE]
+    > You are inside the **@readma/core** workspace member package, not the repository entry point
+
 [![JSR version][jsr-version-shield]][jsr-version-url]
 [![Codecov][codecov-shield]][codecov-url]
 [![Contributors][contributors-shield]][contributors-url]
@@ -73,22 +73,22 @@ See screenshot
 ## 📋 Installation
 
 ```sh
-deno add @readma/pkg-json
+deno add @readma/core
 ```
 
 ## 🔧 Usage
 
-<pre><code class="language-ts">import { loadPkgJson } from &quot;@readma/pkg-json&quot;
-const pkg = await loadPkgJson(&quot;package.json&quot;)
-</code></pre>
+🚧 In construction, refer to the [docs](https://readma.vercel.app/)
 
 ## 🚀 Roadmap
 
 - [x] CLI with config file
-- [x] Workspace readme generated from known files like `Cargo.toml`/`deno.json`/`pnpm-workspace.yml`
+- [x] Workspace readme generated from known files like
+      `Cargo.toml`/`deno.json`/`pnpm-workspace.yml`
 - [x] Github issue template links
 
-See the [open issues](https://github.com/elcoosp/readma/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/elcoosp/readma/issues) for a full list
+of proposed features (and known issues).
 
 ## ⛑️ Support
 
@@ -99,17 +99,21 @@ Software is still **very early** expect **unexpected breaking changes**
 Any contributions you make are **greatly appreciated**.
 
 > [!NOTE]
-> Check the [code of conduct](https://github.com/elcoosp/readma/tree/main/.github/CODE_OF_CONDUCT.md)
+> Check the
+> [code of conduct](https://github.com/elcoosp/readma/tree/main/.github/CODE_OF_CONDUCT.md)
 
 ## 📄 License
 
-Distributed under the MIT License. See [`LICENSE.txt`](./LICENSE.txt) for more information.
+Distributed under the MIT License. See [`LICENSE.txt`](./LICENSE.txt) for more
+information.
 
 ## 📨 Contact
 
-elcoosp - [@elcoosp](https://twitter.com/elcoosp) - [elcoosp@gmail.com](elcoosp@gmail.com)
+elcoosp - [@elcoosp](https://twitter.com/elcoosp) -
+[elcoosp@gmail.com](elcoosp@gmail.com)
 
-Project Link: [https://github.com/elcoosp/readma](https://github.com/elcoosp/readma)
+Project Link:
+[https://github.com/elcoosp/readma](https://github.com/elcoosp/readma)
 
 ## 👏 Acknowledgments
 
@@ -118,12 +122,13 @@ Project Link: [https://github.com/elcoosp/readma](https://github.com/elcoosp/rea
 
 <!--MARKDOWN LINKS & IMAGES-- >
 <!--https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
 ![Alt](https://repobeats.axiom.co/api/embed/1b12e7ffd13fd2d15772a30e8b0a995976150797.svg "Repobeats analytics image")
 
-[jsr-version-shield]: https://img.shields.io/jsr/v/@readma/pkg-json.svg?style=for-the-badge
-[jsr-version-url]: https://jsr.io/@readma/pkg-json
+[jsr-version-shield]: https://img.shields.io/jsr/v/@readma/core.svg?style=for-the-badge
+[jsr-version-url]: https://jsr.io/@readma/core
 [codecov-shield]: https://img.shields.io/codecov/c/github/elcoosp/readma/main.svg?style=for-the-badge
-[codecov-url]: https://codecov.io/github/elcoosp/readma/tree/main/pkg-json
+[codecov-url]: https://codecov.io/github/elcoosp/readma/tree/main/core
 [contributors-shield]: https://img.shields.io/github/contributors/elcoosp/readma.svg?style=for-the-badge
 [contributors-url]: https://github.com/elcoosp/readma/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/elcoosp/readma.svg?style=for-the-badge

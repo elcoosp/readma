@@ -1,8 +1,9 @@
 <a id="readme-top"></a>
-  <!-- PROJECT SHIELDS -->
-  
-  <!-- PROJECT LOGO -->
-  <br />
+
+<!-- PROJECT SHIELDS -->
+
+<!-- PROJECT LOGO -->
+<br />
   <div align="center">
   <a href="https://github.com/elcoosp/readma">
   <img src="https://raw.githubusercontent.com/elcoosp/readma/HEAD/images/logo.png" style="max-height: 200px; object-fit: contain;" alt="Logo">
@@ -22,11 +23,10 @@
   <a href="https://github.com/elcoosp/readma/issues/new?template=feature-request.yml&title=%5BFeat%5D%3A+&labels=enhancement&assignees=elcoosp">Request Feature</a>
     </p>
     </div>
-    
-      > [!NOTE]
-      > You are inside the **@readma/cli** workspace member package, not the repository entry point
-      
-      
+
+    > [!NOTE]
+    > You are inside the **@readma/cli** workspace member package, not the repository entry point
+
 [![JSR version][jsr-version-shield]][jsr-version-url]
 [![Codecov][codecov-shield]][codecov-url]
 [![Contributors][contributors-shield]][contributors-url]
@@ -83,10 +83,12 @@ deno add @readma/cli
 ## 🚀 Roadmap
 
 - [x] CLI with config file
-- [x] Workspace readme generated from known files like `Cargo.toml`/`deno.json`/`pnpm-workspace.yml`
+- [x] Workspace readme generated from known files like
+      `Cargo.toml`/`deno.json`/`pnpm-workspace.yml`
 - [x] Github issue template links
 
-See the [open issues](https://github.com/elcoosp/readma/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/elcoosp/readma/issues) for a full list
+of proposed features (and known issues).
 
 ## ⛑️ Support
 
@@ -97,17 +99,21 @@ Software is still **very early** expect **unexpected breaking changes**
 Any contributions you make are **greatly appreciated**.
 
 > [!NOTE]
-> Check the [code of conduct](https://github.com/elcoosp/readma/tree/main/.github/CODE_OF_CONDUCT.md)
+> Check the
+> [code of conduct](https://github.com/elcoosp/readma/tree/main/.github/CODE_OF_CONDUCT.md)
 
 ## 📄 License
 
-Distributed under the MIT License. See [`LICENSE.txt`](./LICENSE.txt) for more information.
+Distributed under the MIT License. See [`LICENSE.txt`](./LICENSE.txt) for more
+information.
 
 ## 📨 Contact
 
-elcoosp - [@elcoosp](https://twitter.com/elcoosp) - [elcoosp@gmail.com](elcoosp@gmail.com)
+elcoosp - [@elcoosp](https://twitter.com/elcoosp) -
+[elcoosp@gmail.com](elcoosp@gmail.com)
 
-Project Link: [https://github.com/elcoosp/readma](https://github.com/elcoosp/readma)
+Project Link:
+[https://github.com/elcoosp/readma](https://github.com/elcoosp/readma)
 
 ## 👏 Acknowledgments
 
@@ -116,6 +122,7 @@ Project Link: [https://github.com/elcoosp/readma](https://github.com/elcoosp/rea
 
 <!--MARKDOWN LINKS & IMAGES-- >
 <!--https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
 ![Alt](https://repobeats.axiom.co/api/embed/1b12e7ffd13fd2d15772a30e8b0a995976150797.svg "Repobeats analytics image")
 
 [jsr-version-shield]: https://img.shields.io/jsr/v/@readma/cli.svg?style=for-the-badge

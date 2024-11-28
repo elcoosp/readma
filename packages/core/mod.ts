@@ -1,10 +1,6 @@
 import { join } from '@std/path'
-import * as templates from '../core/templates.ts'
-import type {
-  GlobalOptions,
-  ReadmeTemplateArgs,
-  TemplateFn,
-} from '../core/types.ts'
+import * as templates from './templates.ts'
+import type { GlobalOptions, ReadmeTemplateArgs, TemplateFn } from './types.ts'
 // import { render } from "@deno/gfm"
 export * as utils from './utils.ts'
 export * as types from './types.ts'

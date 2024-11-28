@@ -1,5 +1,32 @@
 <a id="readme-top"></a>
-<!-- PROJECT SHIELDS -->
+  <!-- PROJECT SHIELDS -->
+  
+  <!-- PROJECT LOGO -->
+  <br />
+  <div align="center">
+  <a href="https://github.com/elcoosp/readma">
+  <img src="https://raw.githubusercontent.com/elcoosp/readma/HEAD/images/logo.png" style="max-height: 200px; object-fit: contain;" alt="Logo">
+  </a>
+  <h3 align="center">Readma</h3>
+  <h4 align="center">@readma/pkg-json</h4>
+  <p align="center">
+  Beautiful effortless README generator
+  <br />
+  <a href="https://readma.vercel.app/"><strong>📖 Explore the docs »</strong></a>
+  <br />
+  <br />
+  <a href="https://github.com/elcoosp/readma">View Demo</a>
+  ·
+  <a href="https://github.com/elcoosp/readma/issues/new?template=bug-report.yml&title=%5BBug%5D%3A+&labels=bug&assignees=elcoosp">Report Bug</a>
+  ·
+  <a href="https://github.com/elcoosp/readma/issues/new?template=feature-request.yml&title=%5BFeat%5D%3A+&labels=enhancement&assignees=elcoosp">Request Feature</a>
+    </p>
+    </div>
+    
+      > [!NOTE]
+      > You are inside the **@readma/pkg-json** workspace member package, not the repository entry point
+      
+      
 [![JSR version][jsr-version-shield]][jsr-version-url]
 [![Codecov][codecov-shield]][codecov-url]
 [![Contributors][contributors-shield]][contributors-url]
@@ -8,31 +35,6 @@
 [![Commit activity][commit-activity-shield]][commit-activity-url]
 [![Branch action runs][branch-action-runs-shield]][branch-action-runs-url]
 [![License][license-shield]][license-url]
-
-<!-- PROJECT LOGO -->
-<br />
-<div align="center">
-  <a href="https://github.com/elcoosp/readma">
-    <img src="https://raw.githubusercontent.com/elcoosp/readma/HEAD/images/logo.png" style="max-height: 200px; object-fit: contain;" alt="Logo">
-  </a>
-  <h3 align="center">Readma</h3>
-  <h4 align="center">@readma/pkg-json</h4>
-  <p align="center">
-    Beautiful effortless README generator
-    <br />
-    <a href="https://readma.vercel.app/"><strong>📖 Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/elcoosp/readma">View Demo</a>
-    ·
-    <a href="https://github.com/elcoosp/readma/issues/new?template=bug-report.yml&title=%5BBug%5D%3A+&labels=bug&assignees=elcoosp">Report Bug</a>
-    ·
-    <a href="https://github.com/elcoosp/readma/issues/new?template=feature-request.yml&title=%5BFeat%5D%3A+&labels=enhancement&assignees=elcoosp">Request Feature</a>
-  </p>
-</div>
-
-> [!NOTE]
-> You are inside the **@readma/pkg-json** workspace member package, not the repository entry point
 
 <!-- TABLE OF CONTENTS -->
 <details>

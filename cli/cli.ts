@@ -2,8 +2,8 @@ import { Command } from '@cliffy/command'
 import { deepMerge } from '@cross/deepmerge'
 import { Logger } from '@deno-library/logger'
 import {
-  readWorkspaceManifest,
   type WorkspaceManifest,
+  readWorkspaceManifest,
 } from '@pnpm/workspace.read-manifest'
 import { mdx, readme, types, utils } from '@readma/core'
 import { loadPkgJson } from '@readma/pkg-json'
@@ -53,9 +53,7 @@ export const cli: Cli = {
               json: JSON,
               jsonc: jsonc,
             } as const
-            const ext = filename.split(
-              '.',
-            )[1] as keyof typeof parserMap
+            const ext = filename.split('.')[1] as keyof typeof parserMap
             const parser = parserMap[ext].parse
             const file = await Deno.readTextFile(filename)
             return parser(file) as T
@@ -63,27 +61,21 @@ export const cli: Cli = {
           } else return null
         }),
       )
-    const denoFiles = await getParsedFiles<DenoFile>(
-      denoFilenames,
-    )
-    const rsFiles = await getParsedFiles<CargoFile>(
-      rsFilenames,
-    )
+    const denoFiles = await getParsedFiles<DenoFile>(denoFilenames)
+    const rsFiles = await getParsedFiles<CargoFile>(rsFilenames)
     const hasRsFiles = rsFiles.some((x) => x !== null)
     const hasDenoFiles = denoFiles.some((x) => x !== null)
-    if (
-      hasRsFiles &&
-      hasDenoFiles
-    ) {
+    if (hasRsFiles && hasDenoFiles) {
       throw new Error(
         'Found both a deno and rust configuration file, not supported yet',
       )
     }
-    const language = hasDenoFiles || pnpmWorkspaceManifest !== undefined
-      ? 'ts' as const
-      : hasRsFiles
-      ? 'rs' as const
-      : null
+    const language =
+      hasDenoFiles || pnpmWorkspaceManifest !== undefined
+        ? ('ts' as const)
+        : hasRsFiles
+          ? ('rs' as const)
+          : null
     if (language === null) throw new Error('Could not detect language')
     const files = {
       deno: denoFiles.find((x) => x !== null),
@@ -94,45 +86,44 @@ export const cli: Cli = {
     const packageRegistry: types.PackageRegistry | undefined = hasDenoFiles
       ? 'jsr'
       : pnpmWorkspaceManifest
-      ? 'npm'
-      : hasRsFiles
-      ? 'crates.io'
-      : undefined
+        ? 'npm'
+        : hasRsFiles
+          ? 'crates.io'
+          : undefined
     const workspaceMembers: types.WorkspaceMember[] | undefined =
       packageRegistry === 'crates.io'
         ? files.rs?.workspace?.members?.map((path) => ({
-          path,
-          description: (files.rs?.package?.description ??
-            '-'),
-          pkgName: getFolderName(path),
-        }))
+            path,
+            description: files.rs?.package?.description ?? '-',
+            pkgName: getFolderName(path),
+          }))
         : packageRegistry === 'jsr'
-        ? await Promise.all(
-          (files.deno?.workspace ?? []).map(async (path) => {
-            // TODO should double check that this match with package deno.json[name]
-            const pkgName = `@${config.repoName}/${getFolderName(path)}`
+          ? await Promise.all(
+              (files.deno?.workspace ?? []).map(async (path) => {
+                // TODO should double check that this match with package deno.json[name]
+                const pkgName = `@${config.repoName}/${getFolderName(path)}`
 
-            const jsrMeta = await fetch(
-              `https://npm.jsr.io/@jsr/${
-                pkgName.replace('/', '__').replace('@', '')
-              }`,
-              {
-                headers: {
-                  'Accept': 'application/json',
-                },
-              },
-            ).then((x) => x.json())
+                const jsrMeta = await fetch(
+                  `https://npm.jsr.io/@jsr/${pkgName
+                    .replace('/', '__')
+                    .replace('@', '')}`,
+                  {
+                    headers: {
+                      Accept: 'application/json',
+                    },
+                  },
+                ).then((x) => x.json())
 
-            return ({
-              path,
-              description: jsrMeta?.description ?? '-',
-              pkgName,
-            })
-          }),
-        )
-        : packageRegistry === 'npm'
-        ? await getPackagesFromManifest(files.pnpm)
-        : undefined
+                return {
+                  path,
+                  description: jsrMeta?.description ?? '-',
+                  pkgName,
+                }
+              }),
+            )
+          : packageRegistry === 'npm'
+            ? await getPackagesFromManifest(files.pnpm)
+            : undefined
     log.info({ packageRegistry })
     log.info({ workspaceMembers })
     return {
@@ -153,12 +144,13 @@ export const cli: Cli = {
       }
     }
     const license = licenseFile.startsWith('MIT License') ? 'MIT' : undefined
-    const config = deepMerge<
-      PartialDeep<types.ReadmeTemplateArgs>
-    >(await utils.getReadmaConfig(), {
-      license,
-      coc: cocFile ? types.COC_FILE_PATH : undefined,
-    }) as types.ReadmeTemplateArgs
+    const config = deepMerge<PartialDeep<types.ReadmeTemplateArgs>>(
+      await utils.getReadmaConfig(),
+      {
+        license,
+        coc: cocFile ? types.COC_FILE_PATH : undefined,
+      },
+    ) as types.ReadmeTemplateArgs
 
     await new Command()
       .name('readma')
@@ -168,89 +160,88 @@ export const cli: Cli = {
       .action((_options, ..._args) =>
         log.warn(
           'Main command called. Nothing will happen, use `gen` subcommand',
-        )
+        ),
       )
       .command('gen', 'Generate readme(s)')
       .action(async (_options, ..._args) => {
         log.info('Starting readma generation')
         log.info({ license })
-        const { language, workspaceMembers, packageRegistry, files } = await cli
-          .detectLanguage(config)
+        const { language, workspaceMembers, packageRegistry, files } =
+          await cli.detectLanguage(config)
 
         const wsOverride = await Promise.all(
-          (workspaceMembers || [])?.map(async (
-            wm,
-          ) => {
+          (workspaceMembers || [])?.map(async (wm) => {
             const packageSpecificSections = Object.fromEntries(
-              (await Promise.all(
-                Object.entries(config.sections)
-                  .map(async ([sectionName, v]) => {
-                    const sectionPath = path.join(
-                      wm.path,
-                      'readma',
-                      'sections',
-                      `${sectionName}.mdx`,
-                    )
-                    try {
-                      const mdxProcessed = await mdx.processFile(sectionPath)
-                      return [sectionName, mdxProcessed]
-                    } catch (error) {
-                      console.log(error)
-                      return [sectionName, v]
-                    }
-                  }),
-              )).filter(([_, v]) => typeof v === 'string'),
+              (
+                await Promise.all(
+                  Object.entries(config.sections).map(
+                    async ([sectionName, v]) => {
+                      const sectionPath = path.join(
+                        wm.path,
+                        'readma',
+                        'sections',
+                        `${sectionName}.mdx`,
+                      )
+                      try {
+                        const mdxProcessed = await mdx.processFile(sectionPath)
+                        return [sectionName, mdxProcessed]
+                      } catch (error) {
+                        console.log(error)
+                        return [sectionName, v]
+                      }
+                    },
+                  ),
+                )
+              ).filter(([_, v]) => typeof v === 'string'),
             )
 
             const sections = {
-              installation: language === 'ts' && packageRegistry === 'jsr'
-                ? utils.md.code(`deno add ${wm.pkgName}`)
-                : language === 'ts' && packageRegistry === 'npm'
-                ? [
-                  utils.md.code(`pnpm add ${wm.pkgName}`),
-                  utils.md.code(`npm add ${wm.pkgName}`),
-                  utils.md.code(`yarn add ${wm.pkgName}`),
-                  utils.md.code(`deno add npm:${wm.pkgName}`),
-                  utils.md.code(`bun add ${wm.pkgName}`),
-                ].join('\n')
-                : language === 'rs'
-                ? utils.md.code(`cargo add ${wm.pkgName}`)
-                : undefined,
+              installation:
+                language === 'ts' && packageRegistry === 'jsr'
+                  ? utils.md.code(`deno add ${wm.pkgName}`)
+                  : language === 'ts' && packageRegistry === 'npm'
+                    ? [
+                        utils.md.code(`pnpm add ${wm.pkgName}`),
+                        utils.md.code(`npm add ${wm.pkgName}`),
+                        utils.md.code(`yarn add ${wm.pkgName}`),
+                        utils.md.code(`deno add npm:${wm.pkgName}`),
+                        utils.md.code(`bun add ${wm.pkgName}`),
+                      ].join('\n')
+                    : language === 'rs'
+                      ? utils.md.code(`cargo add ${wm.pkgName}`)
+                      : undefined,
               ...packageSpecificSections,
             }
-            return deepMerge<
-              PartialDeep<types.ReadmeTemplateArgs>
-            >(config, {
+            return deepMerge<PartialDeep<types.ReadmeTemplateArgs>>(config, {
               packageRegistry,
               sections,
               workspaceMember: wm,
             })
           }),
         )
-        await Promise.all((wsOverride || []).map((wsConfig) => {
-          log.info(
-            `Writing "${wsConfig.workspaceMember?.pkgName}" workspace member README`,
-          )
-          return readme(wsConfig as types.ReadmeTemplateArgs)
-        }))
+        await Promise.all(
+          (wsOverride || []).map((wsConfig) => {
+            log.info(
+              `Writing "${wsConfig.workspaceMember?.pkgName}" workspace member README`,
+            )
+            return readme(wsConfig as types.ReadmeTemplateArgs)
+          }),
+        )
         log.info('Writing workspace root README')
 
         await readme(
-          deepMerge<
-            PartialDeep<types.ReadmeTemplateArgs>
-          >(config, {
+          deepMerge<PartialDeep<types.ReadmeTemplateArgs>>(config, {
             sections: {
-              installation: config.sections?.installation ??
+              installation:
+                config.sections?.installation ??
                 (language === 'rs'
-                  ? utils.md.code(
-                    `cargo add ${files.rs?.package?.name}`,
-                  )
+                  ? utils.md.code(`cargo add ${files.rs?.package?.name}`)
                   : 'Not specified'),
             },
             packageRegistry,
             root: {
-              members: (wsOverride || []).map((x) =>
-                x.workspaceMember as types.WorkspaceMember
+              members: (wsOverride || []).map(
+                (x) => x.workspaceMember as types.WorkspaceMember,
               ),
             },
           }) as types.ReadmeTemplateArgs,
@@ -271,21 +262,23 @@ async function getPackagesFromManifest(
   const packages = []
   for (const pkgsGlob of pnpmWorkspaceManifest.packages) {
     packages.push(
-      ...await Promise.all((
-        await glob(`${pkgsGlob}/package.json`, {
-          ignore: '**/node_modules/**',
-          // FIXME Workaround nested package json (which is not a real one but a template)
-          maxDepth: 3,
-        })
-      ).map(async (path) => {
-        const memberPath = path.replace('/package.json', '')
-        const pkg = await loadPkgJson(memberPath)
-        return ({
-          path: memberPath,
-          pkgName: pkg.name as string,
-          description: pkg.description ?? '-',
-        })
-      })),
+      ...(await Promise.all(
+        (
+          await glob(`${pkgsGlob}/package.json`, {
+            ignore: '**/node_modules/**',
+            // FIXME Workaround nested package json (which is not a real one but a template)
+            maxDepth: 3,
+          })
+        ).map(async (path) => {
+          const memberPath = path.replace('/package.json', '')
+          const pkg = await loadPkgJson(memberPath)
+          return {
+            path: memberPath,
+            pkgName: pkg.name as string,
+            description: pkg.description ?? '-',
+          }
+        }),
+      )),
     )
   }
   return packages

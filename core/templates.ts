@@ -112,44 +112,46 @@ export const readme: types.TemplateFn = async ({
   }
   const projectShields = `
 <!-- PROJECT SHIELDS -->
-${shieldsBadges}
 `.trim()
-  const withoutToc = `${
-    `
-<a id="readme-top"></a>
-${projectShields}
-
-<!-- PROJECT LOGO -->
-<br />
-<div align="center">
+const withoutToc = `${
+  `
+  <a id="readme-top"></a>
+  ${projectShields}
+  
+  <!-- PROJECT LOGO -->
+  <br />
+  <div align="center">
   <a href="${repoUrl}">
-    <img src="${logoSrc}" style="max-height: 200px; object-fit: contain;" alt="Logo">
+  <img src="${logoSrc}" style="max-height: 200px; object-fit: contain;" alt="Logo">
   </a>
   <h3 align="center">${title}</h3>
   ${workspaceMember ? `<h4 align="center">${workspaceMember.pkgName}</h4>` : ''}
   <p align="center">
-    ${projectDescription}
-    <br />
-    <a href="${docUrl}"><strong>📖 Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="${demoUrl}">View Demo</a>
-    ·
-    <a href="${await getIssueTemplateUrl(template.bugReport)}">Report Bug</a>
-    ·
-    <a href="${await getIssueTemplateUrl(
-      template.featRequest,
+  ${projectDescription}
+  <br />
+  <a href="${docUrl}"><strong>📖 Explore the docs »</strong></a>
+  <br />
+  <br />
+  <a href="${demoUrl}">View Demo</a>
+  ·
+  <a href="${await getIssueTemplateUrl(template.bugReport)}">Report Bug</a>
+  ·
+  <a href="${await getIssueTemplateUrl(
+    template.featRequest,
     )}">Request Feature</a>
-  </p>
-</div>
-${
+    </p>
+    </div>
+    ${
       workspaceMember
-        ? `
-> [!NOTE]
-> You are inside the **${workspaceMember.pkgName}** workspace member package, not the repository entry point
-`
-        : ''
-    }
+      ? `
+      > [!NOTE]
+      > You are inside the **${workspaceMember.pkgName}** workspace member package, not the repository entry point
+      `
+      : ''
+      }
+      
+${shieldsBadges}
+
 ${tocVar}
 
 ${

@@ -207,10 +207,11 @@ export const cli: Cli = {
                 ? utils.md.code(`deno add ${wm.pkgName}`)
                 : language === 'ts' && packageRegistry === 'npm'
                 ? [
-                  utils.md.code(`npm add ${wm.pkgName}`),
                   utils.md.code(`pnpm add ${wm.pkgName}`),
+                  utils.md.code(`npm add ${wm.pkgName}`),
                   utils.md.code(`yarn add ${wm.pkgName}`),
                   utils.md.code(`deno add npm:${wm.pkgName}`),
+                  utils.md.code(`bun add ${wm.pkgName}`),
                 ].join('\n')
                 : language === 'rs'
                 ? utils.md.code(`cargo add ${wm.pkgName}`)

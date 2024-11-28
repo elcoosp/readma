@@ -27,7 +27,6 @@ export const readme: types.TemplateFn = async (
     repobeats,
     packageRegistry,
     urls,
-    // TODO: add commit convention
     sections: {
       projectDescription,
       about,

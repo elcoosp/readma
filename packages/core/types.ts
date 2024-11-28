@@ -1,4 +1,3 @@
-// TODO: allow different case, this is too rusty
 /** Workspace member, language agnostic */
 export type WorkspaceMember = {
   pkgName: string

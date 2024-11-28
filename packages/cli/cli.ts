@@ -258,7 +258,7 @@ async function getPackagesFromManifest(
   if (!pnpmWorkspaceManifest) {
     throw new Error('pnpmWorkspaceManifest should be defined')
   }
-  const packages = []
+  const packages: types.WorkspaceMember[] = []
   for (const pkgsGlob of pnpmWorkspaceManifest.packages) {
     packages.push(
       ...(await Promise.all(

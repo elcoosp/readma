@@ -59,11 +59,11 @@ Create README that rocks
 > [!TIP]
 > You are inside the entry point of **readma** workspace, here is a list of available packages
 
-| Package                        | Description                                        |
-| ------------------------------ | -------------------------------------------------- |
-| [@readma/core](./core)         | Beautiful effortless README generator core package |
-| [@readma/cli](./cli)           | Beautiful effortless README generator cli package  |
-| [@readma/pkg-json](./pkg-json) | Typed function to read package.json                |
+| Package                                 | Description                                        |
+| --------------------------------------- | -------------------------------------------------- |
+| [@readma/core](./packages/core)         | Beautiful effortless README generator core package |
+| [@readma/cli](./packages/cli)           | Beautiful effortless README generator cli package  |
+| [@readma/pkg-json](./packages/pkg-json) | Typed function to read package.json                |
 
 ## ✨ Features
 

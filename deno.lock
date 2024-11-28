@@ -10,7 +10,7 @@
     "jsr:@david/path@0.2": "0.2.0",
     "jsr:@david/which@~0.4.1": "0.4.1",
     "jsr:@deno-library/logger@^1.1.7": "1.1.7",
-    "jsr:@readma/core@0.6": "0.6.6",
+    "jsr:@readma/core@0.6": "0.6.10",
     "jsr:@std/assert@0.221": "0.221.0",
     "jsr:@std/assert@1.0.8": "1.0.8",
     "jsr:@std/assert@^1.0.8": "1.0.8",
@@ -39,14 +39,11 @@
     "jsr:@std/toml@1.0.2": "1.0.2",
     "jsr:@std/yaml@^1.0.5": "1.0.5",
     "jsr:@wok/case@^1.0.1": "1.0.1",
-    "npm:@biomejs/biome@*": "1.9.4",
-    "npm:@biomejs/biome@^1.9.4": "1.9.4",
     "npm:@elcoosp-configs/biome@^0.0.1": "0.0.1",
     "npm:@mdx-js/mdx@^3.1.0": "3.1.0",
     "npm:@pnpm/workspace.read-manifest@^2.2.1": "2.2.1",
     "npm:glob@11": "11.0.0",
     "npm:jiti@^2.4.0": "2.4.0",
-    "npm:lefthook@*": "1.8.4",
     "npm:markdown-table@^3.0.4": "3.0.4",
     "npm:react-dom@^18.3.1": "18.3.1_react@18.3.1",
     "npm:react@^18.3.1": "18.3.1",
@@ -112,12 +109,17 @@
         "jsr:@std/io@0.225.0"
       ]
     },
-    "@readma/core@0.6.6": {
-      "integrity": "a9ad3f646c4f084721c14e9da94fa445bc520ea91050e8daa83acd0b2f445d8d",
+    "@readma/core@0.6.10": {
+      "integrity": "9d5fa9dfa09841516303c4ceca0b23f23eebfada3d13f33d053d441bac69f3b0",
       "dependencies": [
         "jsr:@david/dax",
+        "jsr:@std/path@^1.0.8",
         "jsr:@wok/case",
-        "npm:markdown-table"
+        "npm:@mdx-js/mdx",
+        "npm:jiti",
+        "npm:markdown-table",
+        "npm:react",
+        "npm:react-dom"
       ]
     },
     "@std/assert@0.221.0": {
@@ -215,43 +217,6 @@
     }
   },
   "npm": {
-    "@biomejs/biome@1.9.4": {
-      "integrity": "sha512-1rkd7G70+o9KkTn5KLmDYXihGoTaIGO9PIIN2ZB7UJxFrWw04CZHPYiMRjYsaDvVV7hP1dYNRLxSANLaBFGpog==",
-      "dependencies": [
-        "@biomejs/cli-darwin-arm64",
-        "@biomejs/cli-darwin-x64",
-        "@biomejs/cli-linux-arm64",
-        "@biomejs/cli-linux-arm64-musl",
-        "@biomejs/cli-linux-x64",
-        "@biomejs/cli-linux-x64-musl",
-        "@biomejs/cli-win32-arm64",
-        "@biomejs/cli-win32-x64"
-      ]
-    },
-    "@biomejs/cli-darwin-arm64@1.9.4": {
-      "integrity": "sha512-bFBsPWrNvkdKrNCYeAp+xo2HecOGPAy9WyNyB/jKnnedgzl4W4Hb9ZMzYNbf8dMCGmUdSavlYHiR01QaYR58cw=="
-    },
-    "@biomejs/cli-darwin-x64@1.9.4": {
-      "integrity": "sha512-ngYBh/+bEedqkSevPVhLP4QfVPCpb+4BBe2p7Xs32dBgs7rh9nY2AIYUL6BgLw1JVXV8GlpKmb/hNiuIxfPfZg=="
-    },
-    "@biomejs/cli-linux-arm64-musl@1.9.4": {
-      "integrity": "sha512-v665Ct9WCRjGa8+kTr0CzApU0+XXtRgwmzIf1SeKSGAv+2scAlW6JR5PMFo6FzqqZ64Po79cKODKf3/AAmECqA=="
-    },
-    "@biomejs/cli-linux-arm64@1.9.4": {
-      "integrity": "sha512-fJIW0+LYujdjUgJJuwesP4EjIBl/N/TcOX3IvIHJQNsAqvV2CHIogsmA94BPG6jZATS4Hi+xv4SkBBQSt1N4/g=="
-    },
-    "@biomejs/cli-linux-x64-musl@1.9.4": {
-      "integrity": "sha512-gEhi/jSBhZ2m6wjV530Yy8+fNqG8PAinM3oV7CyO+6c3CEh16Eizm21uHVsyVBEB6RIM8JHIl6AGYCv6Q6Q9Tg=="
-    },
-    "@biomejs/cli-linux-x64@1.9.4": {
-      "integrity": "sha512-lRCJv/Vi3Vlwmbd6K+oQ0KhLHMAysN8lXoCI7XeHlxaajk06u7G+UsFSO01NAs5iYuWKmVZjmiOzJ0OJmGsMwg=="
-    },
-    "@biomejs/cli-win32-arm64@1.9.4": {
-      "integrity": "sha512-tlbhLk+WXZmgwoIKwHIHEBZUwxml7bRJgk0X2sPyNR3S93cdRq6XulAZRQJ17FYGGzWne0fgrXBKpl7l4M87Hg=="
-    },
-    "@biomejs/cli-win32-x64@1.9.4": {
-      "integrity": "sha512-8Y5wMhVIPaWe6jw2H+KlEm4wP/f7EW3810ZLmDlrEEy5KvBsb9ECEfu/kMWD484ijfQ8+nIi0giMgu9g1UAuuA=="
-    },
     "@elcoosp-configs/biome@0.0.1": {
       "integrity": "sha512-jsrMyXdICN8243oSFmg/aSphr67uJXZ6/G+k6nSMpg71PKfNsq6CukC9mg+Enye1oGQ8p9PC6ChZB5M6Le8mVg=="
     },
@@ -649,51 +614,6 @@
       "integrity": "sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==",
       "dependencies": [
         "argparse"
-      ]
-    },
-    "lefthook-darwin-arm64@1.8.4": {
-      "integrity": "sha512-OS5MsU0gvd8LYSpuQCHtmDUqwNrJ/LjCO0LGC1wNepY4OkuVl9DfX+rQ506CVUQYZiGVcwy2/qPOOBjNzA5+wQ=="
-    },
-    "lefthook-darwin-x64@1.8.4": {
-      "integrity": "sha512-QLRsqK9aTMRcVW8qz4pzI2OWnGCEcaEPJlIiFjwstYsS+wfkooxOS0UkfVMjy+QoGgEcki+cxF/FoY7lE7DDtw=="
-    },
-    "lefthook-freebsd-arm64@1.8.4": {
-      "integrity": "sha512-chnQ1m/Cmn9c0sLdk5HL2SToE5LBJv5uQMdH1IGRRcw+nEqWqrMnDXvM75caiJAyjmUGvPH3czKTJDzTFV1E+A=="
-    },
-    "lefthook-freebsd-x64@1.8.4": {
-      "integrity": "sha512-KQi+WBUdnGLnK0rHOR58kbMH5TDVN1ZjZLu66Pv9FCG7Y7shR1qtaTXu+wmxdRhMvaLeQIXRsUEPjNRC66yMmA=="
-    },
-    "lefthook-linux-arm64@1.8.4": {
-      "integrity": "sha512-CXNcqIskLwTwQARidGdFqmNxpvOU3jsWPK4KA7pq2+QmlWJ64w98ebMvNBoUmRUCXqzmUm7Udf/jpfz2fobewQ=="
-    },
-    "lefthook-linux-x64@1.8.4": {
-      "integrity": "sha512-pVNITkFBxUCEtamWSM/res2Gd48+m9YKbNyIBndAuZVC5pKV5aGKZy2DNq6PWUPYiUDPx+7hoAtCJg/tlAiqhw=="
-    },
-    "lefthook-openbsd-arm64@1.8.4": {
-      "integrity": "sha512-l+i/Dg5X36kYzhpMGSPE3rMbWy1KSytbLB9lY1PmxYb6LRH6iQTYIoxvLabVUwSBPSq8HtIFa50+bvC5+scfVA=="
-    },
-    "lefthook-openbsd-x64@1.8.4": {
-      "integrity": "sha512-CqhDDPPX8oHzMLgNi/Reba823DRzj+eMNWQ8axvSiIG+zmG1w20xZH5QSs/mD3tjrND90yfDd90mWMt181qPyA=="
-    },
-    "lefthook-windows-arm64@1.8.4": {
-      "integrity": "sha512-dvpvorICmVjmw29Aiczg7DcaSzkd86bEBomiGq4UsAEk3+7ExLrlWJDLFsI6xLjMKmTxy+F7eXb2uDtuFC1N4g=="
-    },
-    "lefthook-windows-x64@1.8.4": {
-      "integrity": "sha512-e+y8Jt4/7PnoplhOuK48twjGVJEsU4T3J5kxD4mWfl6Cbit0YSn4bme9nW41eqCqTUqOm+ky29XlfnPHFX5ZNA=="
-    },
-    "lefthook@1.8.4": {
-      "integrity": "sha512-XNyMaTWNRuADOaocYiHidgNkNDz8SCekpdNJ7lqceFcBT2zjumnb28/o7IMaNROpLBZdQkLkJXSeaQWGqn3kog==",
-      "dependencies": [
-        "lefthook-darwin-arm64",
-        "lefthook-darwin-x64",
-        "lefthook-freebsd-arm64",
-        "lefthook-freebsd-x64",
-        "lefthook-linux-arm64",
-        "lefthook-linux-x64",
-        "lefthook-openbsd-arm64",
-        "lefthook-openbsd-x64",
-        "lefthook-windows-arm64",
-        "lefthook-windows-x64"
       ]
     },
     "longest-streak@3.1.0": {
@@ -1397,7 +1317,6 @@
       "jsr:@std/path@^1.0.8",
       "jsr:@std/toml@1.0.2",
       "jsr:@wok/case@^1.0.1",
-      "npm:@biomejs/biome@^1.9.4",
       "npm:@elcoosp-configs/biome@^0.0.1",
       "npm:@mdx-js/mdx@^3.1.0",
       "npm:react-dom@^18.3.1",

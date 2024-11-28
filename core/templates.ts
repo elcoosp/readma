@@ -82,7 +82,7 @@ export const readme: types.TemplateFn = async (
   const screenshotSrc = ghContentUrl(images.screenshot)
   const licenseSectionBody = license === 'MIT'
     ? 'Distributed under the MIT License. See [`LICENSE.txt`](./LICENSE.txt) for more information.'
-    : 'Not declared'
+    : 'None'
 
   const getIssueTemplateUrl = async (templateFilename: string) => {
     const fileStr = await Deno.readTextFile(

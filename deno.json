@@ -25,17 +25,9 @@
     "singleQuote": true,
     "semiColons": false,
     "exclude": [
-      "cli/README.md",
-      "cli/CHANGELOG.md",
-      "cli/docs",
-      "pkg-json/README.md",
-      "pkg-json/CHANGELOG.md",
-      "pkg-json/docs",
-      "core/README.md",
-      "core/CHANGELOG.md",
-      "core/docs",
-      "README.md",
-      "CHANGELOG.md",
+      "**/README.md",
+      "**/CHANGELOG.md",
+      "**/docs",
       ".vscode",
       "deno_cache",
       "documentation"
@@ -43,9 +35,7 @@
   },
   "lint": {
     "exclude": [
-      "core/docs",
-      "cli/docs",
-      "pkg-json/docs",
+      "**/docs",
       "deno_cache",
       "documentation"
     ]

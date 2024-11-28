@@ -53,10 +53,10 @@ export const readme: types.TemplateFn = async (
   globalOptions,
 ) => {
   const fullEmail = `${email}@${domain}.${domainExt}`
-  const repoUrl = urls?.repo ||
+  const repoUrl = urls?.repo ??
     `https://${vcsName}.com/${githubUsername}/${repoName}`
-  const docUrl = urls?.doc || repoUrl
-  const demoUrl = urls?.demo || repoUrl
+  const docUrl = urls?.doc ?? repoUrl
+  const demoUrl = urls?.demo ?? repoUrl
   const branch = await getBranch()
   const tocer = new Tocer(backToTop)
   const commitActivityInterval = 'w'

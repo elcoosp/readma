@@ -2,6 +2,41 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [2.11.0](https://github.com/elcoosp/readma/compare/dcac3a22f16aac6bfc60f90dafdfa66a53927d0d..2.11.0) - 2024-11-28
+### Package updates
+- [cli-0.10.0](cli) bumped to [cli-0.10.0](https://github.com/elcoosp/readma/compare/cli-0.9.0..cli-0.10.0)
+- [core-0.13.0](core) bumped to [core-0.13.0](https://github.com/elcoosp/readma/compare/core-0.12.0..core-0.13.0)
+### Global changes
+#### Bug Fixes
+- **(core)** codecov url on workspace member use path - ([918b2d6](https://github.com/elcoosp/readma/commit/918b2d6b75274c946f6adf7d339b8709638ad65a)) - [@elcoosp](https://github.com/elcoosp)
+- **(deps)** update dependency motion to v11.12.0 - ([473b476](https://github.com/elcoosp/readma/commit/473b476f7e30b4361160472d66c68584db4dfa54)) - renovate[bot]
+- **(deps)** update dependency @elcoosp-configs/docusaurus to v1.1.1 - ([62f1445](https://github.com/elcoosp/readma/commit/62f14457599d8f0d2969ab076dc0a12a4aa0ad19)) - renovate[bot]
+- **(documentation)** broken link - ([a1b72cc](https://github.com/elcoosp/readma/commit/a1b72cc0b6bb0e14c6cc85ab27852192b1ee34e9)) - [@elcoosp](https://github.com/elcoosp)
+- fix issue template not found on workspace member - ([41fa88d](https://github.com/elcoosp/readma/commit/41fa88d225b43bbda7ca7b322b138a83719fe05c)) - [@elcoosp](https://github.com/elcoosp)
+- use deno add not install to be consistent - ([737343c](https://github.com/elcoosp/readma/commit/737343cd4269b96a5d6e81189307a6bb556b9eaf)) - [@elcoosp](https://github.com/elcoosp)
+- cli vresion & regen readme - ([e0b7758](https://github.com/elcoosp/readma/commit/e0b7758cf699210a53286b4e1dcb76f7b653e936)) - [@elcoosp](https://github.com/elcoosp)
+#### Continuous Integration
+- do not deno lint documentation npm package - ([031ceca](https://github.com/elcoosp/readma/commit/031ceca7d3d21555cf3e6fdfc9609fb2d369f9c1)) - [@elcoosp](https://github.com/elcoosp)
+- add bug-report template issue - ([34a4420](https://github.com/elcoosp/readma/commit/34a4420ef34f33281aab57f3db83bb78aa56678c)) - [@elcoosp](https://github.com/elcoosp)
+- add feature-request gh template - ([2c04f4d](https://github.com/elcoosp/readma/commit/2c04f4df4714d457977df0e08ef0b58da48fa5b9)) - [@elcoosp](https://github.com/elcoosp)
+- cancel previous workflow, see https://stackoverflow.com/a/72408109 - ([2c04870](https://github.com/elcoosp/readma/commit/2c048708606a619f74870dae471f51c1a1166d93)) - [@elcoosp](https://github.com/elcoosp)
+#### Documentation
+- **(documentation)** rename intro docs - ([532ba54](https://github.com/elcoosp/readma/commit/532ba543f3dce3e5c55c77254918dce39416256a)) - [@elcoosp](https://github.com/elcoosp)
+- **(documentation)** add pnpm-workspace related limitation section - ([6b7bbfa](https://github.com/elcoosp/readma/commit/6b7bbfaa802f9bad1f28ec646f29061de19c1a5c)) - [@elcoosp](https://github.com/elcoosp)
+- up readme - ([82309dd](https://github.com/elcoosp/readma/commit/82309dd096de8268f08b140be92fa5076e118925)) - [@elcoosp](https://github.com/elcoosp)
+#### Features
+- handle coc in contributing optional section & add dryRun to global options for tests - ([b5061d1](https://github.com/elcoosp/readma/commit/b5061d1e45b034be0bd6cef4911e6f618a86d4c7)) - [@elcoosp](https://github.com/elcoosp)
+#### Miscellaneous Chores
+- setup biome - ([4010d3d](https://github.com/elcoosp/readma/commit/4010d3d16935d9b4d614444cae7bc47bd1bec1b4)) - [@elcoosp](https://github.com/elcoosp)
+- use biome-deno lefthook config - ([d3c4050](https://github.com/elcoosp/readma/commit/d3c40506e770b475e9bb72ee9edc1a99117210c3)) - [@elcoosp](https://github.com/elcoosp)
+- wrong nl in feat request template - ([8d83c85](https://github.com/elcoosp/readma/commit/8d83c85ddf62d9f253b2c69bff33893475736ce5)) - [@elcoosp](https://github.com/elcoosp)
+- add support custom section - ([fa3ff5d](https://github.com/elcoosp/readma/commit/fa3ff5dcaa99d04bfcc116cd288382caec1a7766)) - [@elcoosp](https://github.com/elcoosp)
+- extend @elcoosp-configs/biome#fmt-base - ([9dfa7f0](https://github.com/elcoosp/readma/commit/9dfa7f0f8c73192288158adf4ff0adc476b72747)) - [@elcoosp](https://github.com/elcoosp)
+#### Tests
+- shields test #12 - ([7143b88](https://github.com/elcoosp/readma/commit/7143b88c60bfd00d5ff3770b8d7c44939060673d)) - [@elcoosp](https://github.com/elcoosp)
+
+- - -
+
 ## [2.10.0](https://github.com/elcoosp/readma/compare/e35fd33f778d171854dfed956f115c43d610a9ae..2.10.0) - 2024-11-26
 ### Package updates
 - [core-0.12.0](core) bumped to [core-0.12.0](https://github.com/elcoosp/readma/compare/core-0.11.1..core-0.12.0)

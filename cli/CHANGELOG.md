@@ -2,6 +2,32 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## cli-0.10.0 - 2024-11-28
+#### Bug Fixes
+- **(core)** codecov url on workspace member use path - (918b2d6) - *elcoosp*
+- workaround nested package json when reading pnpm workspace - (c64c0a1) - elcoosp
+- cli vresion & regen readme - (e0b7758) - elcoosp
+- use deno add not install to be consistent - (737343c) - elcoosp
+- fix issue template not found on workspace member - (41fa88d) - elcoosp
+#### Continuous Integration
+- add feature-request gh template - (2c04f4d) - elcoosp
+- add bug-report template issue - (34a4420) - elcoosp
+#### Documentation
+- **(documentation)** add pnpm-workspace related limitation section - (6b7bbfa) - *elcoosp*
+- fix WorkspaceMember & some join - (2e08d1b) - elcoosp
+#### Features
+- handle coc in contributing optional section & add dryRun to global options for tests - (b5061d1) - elcoosp
+#### Miscellaneous Chores
+- version packages - (73518b9) - elcoosp
+- fmt - (65761e6) - elcoosp
+- fmt - (5562db8) - elcoosp
+- add support custom section - (fa3ff5d) - elcoosp
+#### Tests
+- **(cli)** fix detectLanguage - (cb63dfa) - *elcoosp*
+- up snap - (cba1fc4) - elcoosp
+
+- - -
+
 ## cli-0.9.0 - 2024-11-26
 #### Bug Fixes
 - **(*)** missing paren on ternary - (e35fd33) - *elcoosp*

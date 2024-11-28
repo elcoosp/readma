@@ -2,6 +2,37 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## core-0.13.0 - 2024-11-28
+#### Bug Fixes
+- **(core)** codecov url on workspace member use path - (918b2d6) - *elcoosp*
+- workaround nested package json when reading pnpm workspace - (c64c0a1) - elcoosp
+- cli vresion & regen readme - (e0b7758) - elcoosp
+- use note info does not exist if gfm - (99b5359) - elcoosp
+- use deno add not install to be consistent - (737343c) - elcoosp
+- fix issue template not found on workspace member - (41fa88d) - elcoosp
+#### Continuous Integration
+- add bug-report template issue - (34a4420) - elcoosp
+#### Documentation
+- fix WorkspaceMember & some join - (2e08d1b) - elcoosp
+- better type GhIssueTemplateFilename - (00ba324) - elcoosp
+#### Features
+- handle coc in contributing optional section & add dryRun to global options for tests - (b5061d1) - elcoosp
+- pass globalOptions to template to be able to read github issue templates from the folderPath & use correct links on bug report/feat request - (d965a18) - elcoosp
+#### Miscellaneous Chores
+- version packages - (73518b9) - elcoosp
+- fmt - (65761e6) - elcoosp
+- version packages - (90d43b3) - elcoosp
+- add support custom section - (fa3ff5d) - elcoosp
+- setup biome - (4010d3d) - elcoosp
+- fmt - (609d209) - elcoosp
+#### Tests
+- up snap - (3dcab27) - elcoosp
+- up snap - (cba1fc4) - elcoosp
+- fix core test, do not rely on current README, this should be done in cli test which has whole context - (d3b8f2d) - elcoosp
+- shields test #12 - (7143b88) - elcoosp
+
+- - -
+
 ## [2.11.0](https://github.com/elcoosp/readma/compare/b5061d1e45b034be0bd6cef4911e6f618a86d4c7..2.11.0) - 2024-11-27
 ### Package updates
 - [cli-0.10.0](cli) bumped to [cli-0.10.0](https://github.com/elcoosp/readma/compare/cli-0.9.0..cli-0.10.0)

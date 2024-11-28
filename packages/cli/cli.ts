@@ -3,7 +3,7 @@ import { deepMerge } from '@cross/deepmerge'
 import { Logger } from '@deno-library/logger'
 import {
   readWorkspaceManifest,
-  WorkspaceManifest,
+  type WorkspaceManifest,
 } from '@pnpm/workspace.read-manifest'
 import { exists } from '@std/fs'
 import * as jsonc from '@std/jsonc'

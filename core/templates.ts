@@ -12,43 +12,46 @@ const getBranch = async () => {
   return (await $`git branch --show-current`.text()) || 'main'
 }
 /** Generate one readme based on {@link ReadmeTemplateArgs} with a table of content */
-export const readme: types.TemplateFn = async ({
-  workspaceMember,
-  githubUsername,
-  repoName,
-  xHandle,
-  linkedinUsername,
-  domain,
-  email,
-  title,
-  author,
-  root,
-  repobeats,
-  packageRegistry,
-  urls,
-  // TODO: add commit convention
-  sections: {
-    projectDescription,
-    about,
-    features,
-    installation,
-    acknowledgments,
-    contributing,
-    gettingStarted,
-    roadmap,
-    usage,
-    ...customSections
+export const readme: types.TemplateFn = async (
+  {
+    workspaceMember,
+    githubUsername,
+    repoName,
+    xHandle,
+    linkedinUsername,
+    domain,
+    email,
+    title,
+    author,
+    root,
+    repobeats,
+    packageRegistry,
+    urls,
+    // TODO: add commit convention
+    sections: {
+      projectDescription,
+      about,
+      features,
+      installation,
+      acknowledgments,
+      contributing,
+      gettingStarted,
+      roadmap,
+      usage,
+      ...customSections
+    },
+    images,
+    template,
+    language,
+    backToTop,
+    vcsName = 'github',
+    domainExt = 'com',
+    license,
+    coc,
+    badgeStyle = 'for-the-badge',
   },
-  images,
-  template,
-  language,
-  backToTop,
-  vcsName = 'github',
-  domainExt = 'com',
-  license,
-  coc,
-  badgeStyle = 'for-the-badge',
-}, globalOptions) => {
+  globalOptions,
+) => {
   const fullEmail = `${email}@${domain}.${domainExt}`
   const repoUrl = urls?.repo ||
     `https://${vcsName}.com/${githubUsername}/${repoName}`
@@ -78,7 +81,7 @@ export const readme: types.TemplateFn = async ({
   const logoSrc = ghContentUrl(images.logo)
   const screenshotSrc = ghContentUrl(images.screenshot)
   const licenseSectionBody = license === 'MIT'
-    ? 'Distributed under the MIT License. See \`LICENSE.txt\` for more information.'
+    ? 'Distributed under the MIT License. See [`LICENSE.txt`](./LICENSE.txt) for more information.'
     : 'Not declared'
 
   const getIssueTemplateUrl = async (templateFilename: string) => {
@@ -90,11 +93,7 @@ export const readme: types.TemplateFn = async ({
         templateFilename,
       ),
     )
-    const {
-      title,
-      labels,
-      assignees,
-    } = yml.parse(fileStr) as {
+    const { title, labels, assignees } = yml.parse(fileStr) as {
       title: string
       labels: string
       assignees: string[]
@@ -113,8 +112,8 @@ export const readme: types.TemplateFn = async ({
   const projectShields = `
 <!-- PROJECT SHIELDS -->
 `.trim()
-const withoutToc = `${
-  `
+  const withoutToc = `${
+    `
   <a id="readme-top"></a>
   ${projectShields}
   
@@ -137,18 +136,18 @@ const withoutToc = `${
   <a href="${await getIssueTemplateUrl(template.bugReport)}">Report Bug</a>
   ·
   <a href="${await getIssueTemplateUrl(
-    template.featRequest,
+      template.featRequest,
     )}">Request Feature</a>
     </p>
     </div>
     ${
       workspaceMember
-      ? `
+        ? `
       > [!NOTE]
       > You are inside the **${workspaceMember.pkgName}** workspace member package, not the repository entry point
       `
-      : ''
-      }
+        : ''
+    }
       
 ${shieldsBadges}
 
@@ -171,13 +170,14 @@ ${
 > You are inside the entry point of **${repoName}** workspace, here is a list of available packages
 
 ${
-              markdownTable([
-                ['Package', 'Description'],
-              ].concat(
-                root.members.map((
-                  { pkgName, path, description },
-                ) => [`[${pkgName}](${path})`, description]),
-              ))
+              markdownTable(
+                [['Package', 'Description']].concat(
+                  root.members.map(({ pkgName, path, description }) => [
+                    `[${pkgName}](${path})`,
+                    description,
+                  ]),
+                ),
+              )
             }
 `
             : ''
@@ -200,9 +200,11 @@ See the [open issues](${repoUrl}/issues) for a full list of proposed features (a
       )
     }
 ${
-      Object.entries(customSections).map(([title, body]) => {
-        return tocer.section(title, body)
-      }).join('\n')
+      Object.entries(customSections)
+        .map(([title, body]) => {
+          return tocer.section(title, body)
+        })
+        .join('\n')
     }
 ${
       tocer.section(
@@ -216,17 +218,12 @@ ${
 > Check the [code of conduct](${repoUrl}/tree/${branch}/${coc})
  
 ${contributing ?? ''}`
-            : contributing ?? ''
+            : (contributing ?? '')
         }
 `,
       )
     }
-${
-      tocer.section(
-        '📄 License',
-        licenseSectionBody,
-      )
-    }
+${tocer.section('📄 License', licenseSectionBody)}
 ${
       tocer.section(
         '📨 Contact',

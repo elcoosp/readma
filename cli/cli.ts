@@ -2,8 +2,8 @@ import { Command } from '@cliffy/command'
 import { deepMerge } from '@cross/deepmerge'
 import { Logger } from '@deno-library/logger'
 import {
-  type WorkspaceManifest,
   readWorkspaceManifest,
+  type WorkspaceManifest,
 } from '@pnpm/workspace.read-manifest'
 import { mdx, readme, types, utils } from '@readma/core'
 import { loadPkgJson } from '@readma/pkg-json'
@@ -70,12 +70,11 @@ export const cli: Cli = {
         'Found both a deno and rust configuration file, not supported yet',
       )
     }
-    const language =
-      hasDenoFiles || pnpmWorkspaceManifest !== undefined
-        ? ('ts' as const)
-        : hasRsFiles
-          ? ('rs' as const)
-          : null
+    const language = hasDenoFiles || pnpmWorkspaceManifest !== undefined
+      ? ('ts' as const)
+      : hasRsFiles
+      ? ('rs' as const)
+      : null
     if (language === null) throw new Error('Could not detect language')
     const files = {
       deno: denoFiles.find((x) => x !== null),
@@ -86,44 +85,46 @@ export const cli: Cli = {
     const packageRegistry: types.PackageRegistry | undefined = hasDenoFiles
       ? 'jsr'
       : pnpmWorkspaceManifest
-        ? 'npm'
-        : hasRsFiles
-          ? 'crates.io'
-          : undefined
+      ? 'npm'
+      : hasRsFiles
+      ? 'crates.io'
+      : undefined
     const workspaceMembers: types.WorkspaceMember[] | undefined =
       packageRegistry === 'crates.io'
         ? files.rs?.workspace?.members?.map((path) => ({
-            path,
-            description: files.rs?.package?.description ?? '-',
-            pkgName: getFolderName(path),
-          }))
+          path,
+          description: files.rs?.package?.description ?? '-',
+          pkgName: getFolderName(path),
+        }))
         : packageRegistry === 'jsr'
-          ? await Promise.all(
-              (files.deno?.workspace ?? []).map(async (path) => {
-                // TODO should double check that this match with package deno.json[name]
-                const pkgName = `@${config.repoName}/${getFolderName(path)}`
+        ? await Promise.all(
+          (files.deno?.workspace ?? []).map(async (path) => {
+            // TODO should double check that this match with package deno.json[name]
+            const pkgName = `@${config.repoName}/${getFolderName(path)}`
 
-                const jsrMeta = await fetch(
-                  `https://npm.jsr.io/@jsr/${pkgName
-                    .replace('/', '__')
-                    .replace('@', '')}`,
-                  {
-                    headers: {
-                      Accept: 'application/json',
-                    },
-                  },
-                ).then((x) => x.json())
+            const jsrMeta = await fetch(
+              `https://npm.jsr.io/@jsr/${
+                pkgName
+                  .replace('/', '__')
+                  .replace('@', '')
+              }`,
+              {
+                headers: {
+                  Accept: 'application/json',
+                },
+              },
+            ).then((x) => x.json())
 
-                return {
-                  path,
-                  description: jsrMeta?.description ?? '-',
-                  pkgName,
-                }
-              }),
-            )
-          : packageRegistry === 'npm'
-            ? await getPackagesFromManifest(files.pnpm)
-            : undefined
+            return {
+              path,
+              description: jsrMeta?.description ?? '-',
+              pkgName,
+            }
+          }),
+        )
+        : packageRegistry === 'npm'
+        ? await getPackagesFromManifest(files.pnpm)
+        : undefined
     log.info({ packageRegistry })
     log.info({ workspaceMembers })
     return {
@@ -160,14 +161,14 @@ export const cli: Cli = {
       .action((_options, ..._args) =>
         log.warn(
           'Main command called. Nothing will happen, use `gen` subcommand',
-        ),
+        )
       )
       .command('gen', 'Generate readme(s)')
       .action(async (_options, ..._args) => {
         log.info('Starting readma generation')
         log.info({ license })
-        const { language, workspaceMembers, packageRegistry, files } =
-          await cli.detectLanguage(config)
+        const { language, workspaceMembers, packageRegistry, files } = await cli
+          .detectLanguage(config)
 
         const wsOverride = await Promise.all(
           (workspaceMembers || [])?.map(async (wm) => {
@@ -196,20 +197,19 @@ export const cli: Cli = {
             )
 
             const sections = {
-              installation:
-                language === 'ts' && packageRegistry === 'jsr'
-                  ? utils.md.code(`deno add ${wm.pkgName}`)
-                  : language === 'ts' && packageRegistry === 'npm'
-                    ? [
-                        utils.md.code(`pnpm add ${wm.pkgName}`),
-                        utils.md.code(`npm add ${wm.pkgName}`),
-                        utils.md.code(`yarn add ${wm.pkgName}`),
-                        utils.md.code(`deno add npm:${wm.pkgName}`),
-                        utils.md.code(`bun add ${wm.pkgName}`),
-                      ].join('\n')
-                    : language === 'rs'
-                      ? utils.md.code(`cargo add ${wm.pkgName}`)
-                      : undefined,
+              installation: language === 'ts' && packageRegistry === 'jsr'
+                ? utils.md.code(`deno add ${wm.pkgName}`)
+                : language === 'ts' && packageRegistry === 'npm'
+                ? [
+                  utils.md.code(`pnpm add ${wm.pkgName}`),
+                  utils.md.code(`npm add ${wm.pkgName}`),
+                  utils.md.code(`yarn add ${wm.pkgName}`),
+                  utils.md.code(`deno add npm:${wm.pkgName}`),
+                  utils.md.code(`bun add ${wm.pkgName}`),
+                ].join('\n')
+                : language === 'rs'
+                ? utils.md.code(`cargo add ${wm.pkgName}`)
+                : undefined,
               ...packageSpecificSections,
             }
             return deepMerge<PartialDeep<types.ReadmeTemplateArgs>>(config, {
@@ -232,8 +232,7 @@ export const cli: Cli = {
         await readme(
           deepMerge<PartialDeep<types.ReadmeTemplateArgs>>(config, {
             sections: {
-              installation:
-                config.sections?.installation ??
+              installation: config.sections?.installation ??
                 (language === 'rs'
                   ? utils.md.code(`cargo add ${files.rs?.package?.name}`)
                   : 'Not specified'),

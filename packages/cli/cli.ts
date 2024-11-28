@@ -2,8 +2,8 @@ import { Command } from '@cliffy/command'
 import { deepMerge } from '@cross/deepmerge'
 import { Logger } from '@deno-library/logger'
 import {
-  type WorkspaceManifest,
   readWorkspaceManifest,
+  WorkspaceManifest,
 } from '@pnpm/workspace.read-manifest'
 import { exists } from '@std/fs'
 import * as jsonc from '@std/jsonc'

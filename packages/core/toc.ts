@@ -28,12 +28,12 @@ export class Tocer {
     const backToTopMd = this.hasBackToTop
       ? `<p align="right">(<a href="#readme-top">back to top</a>)</p>`
       : ''
-      const trimmed =`
+    const trimmed = `
 ## ${title}
 
 ${content ? content.trim() : ''}
 
-${backToTopMd}`.trim() 
-return `${trimmed}\n`
+${backToTopMd}`.trim()
+    return `${trimmed}\n`
   }
 }

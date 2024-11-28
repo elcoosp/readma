@@ -1,6 +1,22 @@
+# Local
 .DS_Store
-cli/docs
-core/docs
-cov
-cov.lcov
+*.local
+*.log*
+
+# Dist
 node_modules
+
+# IDE
+.idea
+
+# CI
+.turbo
+.npmrc
+codecov
+codecov.*
+
+# Test & docs
+coverage
+packages/**/docs
+packages/**/cov
+packages/**/cov.lcov

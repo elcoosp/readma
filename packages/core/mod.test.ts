@@ -1,6 +1,6 @@
 import { assertEquals } from '@std/assert'
 import { assertSnapshot } from '@std/testing/snapshot'
-import config from '../readma.config.ts'
+import config from '../../readma.config.ts'
 import { readme } from './mod.ts'
 
 Deno.test('readme - core', async (t) => {

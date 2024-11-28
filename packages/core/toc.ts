@@ -1,5 +1,5 @@
-import type { MdSrc } from './types.ts'
 import { paramCase } from '@wok/case'
+import type { MdSrc } from './types.ts'
 /** Derive a table of content */
 export class Tocer {
   hasBackToTop: boolean
@@ -28,11 +28,12 @@ export class Tocer {
     const backToTopMd = this.hasBackToTop
       ? `<p align="right">(<a href="#readme-top">back to top</a>)</p>`
       : ''
-    return `
+      const trimmed =`
 ## ${title}
 
 ${content ? content.trim() : ''}
 
-${backToTopMd}`.trim() + '\n'
+${backToTopMd}`.trim() 
+return `${trimmed}\n`
   }
 }

@@ -14,7 +14,7 @@ All notable changes to this project will be documented in this file. See [conven
 - **(documentation)** broken link - ([a1b72cc](https://github.com/elcoosp/readma/commit/a1b72cc0b6bb0e14c6cc85ab27852192b1ee34e9)) - [@elcoosp](https://github.com/elcoosp)
 - fix issue template not found on workspace member - ([41fa88d](https://github.com/elcoosp/readma/commit/41fa88d225b43bbda7ca7b322b138a83719fe05c)) - [@elcoosp](https://github.com/elcoosp)
 - use deno add not install to be consistent - ([737343c](https://github.com/elcoosp/readma/commit/737343cd4269b96a5d6e81189307a6bb556b9eaf)) - [@elcoosp](https://github.com/elcoosp)
-- cli vresion & regen readme - ([e0b7758](https://github.com/elcoosp/readma/commit/e0b7758cf699210a53286b4e1dcb76f7b653e936)) - [@elcoosp](https://github.com/elcoosp)
+- cli version & regen readme - ([e0b7758](https://github.com/elcoosp/readma/commit/e0b7758cf699210a53286b4e1dcb76f7b653e936)) - [@elcoosp](https://github.com/elcoosp)
 #### Continuous Integration
 - do not deno lint documentation npm package - ([031ceca](https://github.com/elcoosp/readma/commit/031ceca7d3d21555cf3e6fdfc9609fb2d369f9c1)) - [@elcoosp](https://github.com/elcoosp)
 - add bug-report template issue - ([34a4420](https://github.com/elcoosp/readma/commit/34a4420ef34f33281aab57f3db83bb78aa56678c)) - [@elcoosp](https://github.com/elcoosp)

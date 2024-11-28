@@ -3,7 +3,7 @@
   "version": "0.6.12",
   "exports": "./mod.ts",
   "tasks": {
-    "t": "deno test -A --coverage=cov/ && deno coverage --lcov cov/ > cov.lcov",
+    "t": "deno test -A --coverage=coverage/ && deno coverage --lcov coverage/ > cov.lcov",
     "d": "deno doc --html mod.ts"
   },
   "imports": {

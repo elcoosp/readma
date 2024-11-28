@@ -2,17 +2,17 @@ import { Command } from '@cliffy/command'
 import { deepMerge } from '@cross/deepmerge'
 import { Logger } from '@deno-library/logger'
 import {
-  readWorkspaceManifest,
   type WorkspaceManifest,
+  readWorkspaceManifest,
 } from '@pnpm/workspace.read-manifest'
-import { mdx, readme, types, utils } from '@readma/core'
-import { loadPkgJson } from '@readma/pkg-json'
 import { exists } from '@std/fs'
 import * as jsonc from '@std/jsonc'
 import * as path from '@std/path'
 import * as toml from '@std/toml'
 import { glob } from 'glob'
 import type { PartialDeep } from 'type-fest'
+import { mdx, readme, types, utils } from '../core/mod.ts'
+import { loadPkgJson } from '../pkg-json/mod.ts'
 import denoConf from './deno.json' with { type: 'json' }
 const log = new Logger()
 type DenoFile = { workspace: string[] }

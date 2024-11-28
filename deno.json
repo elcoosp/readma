@@ -1,8 +1,8 @@
 {
   "nodeModulesDir": "auto",
-  "workspace": ["./core", "./cli", "./pkg-json"],
+  "workspace": ["./packages/core", "./packages/cli", "./packages/pkg-json"],
   "tasks": {
-    "r": "deno run -A ./cli/mod.ts gen",
+    "r": "deno run -A ./packages/cli/mod.ts gen",
     "r:w": "deno run -A --watch scripts/gen-readme.ts",
     "c": "cog changelog > CHANGELOG.md",
     "f": "deno fmt",

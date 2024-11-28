@@ -1404,7 +1404,7 @@
       "npm:react@^18.3.1"
     ],
     "members": {
-      "cli": {
+      "packages/cli": {
         "dependencies": [
           "jsr:@cross/deepmerge@1",
           "jsr:@david/dax@0.42",
@@ -1415,7 +1415,7 @@
           "npm:type-fest@^4.27.0"
         ]
       },
-      "core": {
+      "packages/core": {
         "dependencies": [
           "jsr:@david/dax@0.42",
           "jsr:@deno-library/logger@^1.1.7",
@@ -1425,7 +1425,7 @@
           "npm:markdown-table@^3.0.4"
         ]
       },
-      "pkg-json": {
+      "packages/pkg-json": {
         "dependencies": [
           "npm:types-package-json@^2.0.39"
         ]

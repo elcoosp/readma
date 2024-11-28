@@ -53,8 +53,8 @@ export const readme: types.TemplateFn = async (
   globalOptions,
 ) => {
   const fullEmail = `${email}@${domain}.${domainExt}`
-  const repoUrl =
-    urls?.repo ?? `https://${vcsName}.com/${githubUsername}/${repoName}`
+  const repoUrl = urls?.repo ??
+    `https://${vcsName}.com/${githubUsername}/${repoName}`
   const docUrl = urls?.doc ?? repoUrl
   const demoUrl = urls?.demo ?? repoUrl
   const branch = await getBranch()
@@ -80,10 +80,9 @@ export const readme: types.TemplateFn = async (
     `https://raw.githubusercontent.com/${githubUsername}/${repoName}/HEAD/${x}`
   const logoSrc = ghContentUrl(images.logo)
   const screenshotSrc = ghContentUrl(images.screenshot)
-  const licenseSectionBody =
-    license === 'MIT'
-      ? 'Distributed under the MIT License. See [`LICENSE.txt`](./LICENSE.txt) for more information.'
-      : 'None'
+  const licenseSectionBody = license === 'MIT'
+    ? 'Distributed under the MIT License. See [`LICENSE.txt`](./LICENSE.txt) for more information.'
+    : 'None'
 
   const getIssueTemplateUrl = async (templateFilename: string) => {
     const fileStr = await Deno.readTextFile(
@@ -113,7 +112,8 @@ export const readme: types.TemplateFn = async (
   const projectShields = `
 <!-- PROJECT SHIELDS -->
 `.trim()
-  const withoutToc = `${`
+  const withoutToc = `${
+    `
   <a id="readme-top"></a>
   ${projectShields}
   
@@ -136,8 +136,8 @@ export const readme: types.TemplateFn = async (
   <a href="${await getIssueTemplateUrl(template.bugReport)}">Report Bug</a>
   ·
   <a href="${await getIssueTemplateUrl(
-    template.featRequest,
-  )}">Request Feature</a>
+      template.featRequest,
+    )}">Request Feature</a>
     </p>
     </div>
     ${
@@ -153,88 +153,100 @@ ${shieldsBadges}
 
 ${tocVar}
 
-${tocer.section(
-  '💡 About the project',
-  `
+${
+      tocer.section(
+        '💡 About the project',
+        `
 ${about}
 
 ${
-  images.screenshot
-    ? `<img src="${screenshotSrc}" alt="Product screenshot" />\n`
-    : ''
-}
+          images.screenshot
+            ? `<img src="${screenshotSrc}" alt="Product screenshot" />\n`
+            : ''
+        }
 ${
-  root && root.members.length > 0
-    ? `> [!TIP]
+          root && root.members.length > 0
+            ? `> [!TIP]
 > You are inside the entry point of **${repoName}** workspace, here is a list of available packages
 
-${markdownTable(
-  [['Package', 'Description']].concat(
-    root.members.map(({ pkgName, path, description }) => [
-      `[${pkgName}](${path})`,
-      description,
-    ]),
-  ),
-)}
+${
+              markdownTable(
+                [['Package', 'Description']].concat(
+                  root.members.map(({ pkgName, path, description }) => [
+                    `[${pkgName}](${path})`,
+                    description,
+                  ]),
+                ),
+              )
+            }
 `
-    : ''
-}
+            : ''
+        }
 `,
-)}
+      )
+    }
 ${tocer.section('✨ Features', features)}
 ${tocer.section('🎉 Getting started', gettingStarted)}
 ${tocer.section('📋 Installation', installation)}
 ${tocer.section('🔧 Usage', usage)}
-${tocer.section(
-  '🚀 Roadmap',
-  `
+${
+      tocer.section(
+        '🚀 Roadmap',
+        `
 ${roadmap}
 
 See the [open issues](${repoUrl}/issues) for a full list of proposed features (and known issues).
 `,
-)}
-${Object.entries(customSections)
-  .map(([title, body]) => {
-    return tocer.section(title, body)
-  })
-  .join('\n')}
-${tocer.section(
-  '💻 Contributing',
-  `
+      )
+    }
+${
+      Object.entries(customSections)
+        .map(([title, body]) => {
+          return tocer.section(title, body)
+        })
+        .join('\n')
+    }
+${
+      tocer.section(
+        '💻 Contributing',
+        `
 Any contributions you make are **greatly appreciated**.
 ${
-  coc
-    ? `
+          coc
+            ? `
 > [!NOTE]
 > Check the [code of conduct](${repoUrl}/tree/${branch}/${coc})
  
 ${contributing ?? ''}`
-    : (contributing ?? '')
-}
+            : (contributing ?? '')
+        }
 `,
-)}
+      )
+    }
 ${tocer.section('📄 License', licenseSectionBody)}
-${tocer.section(
-  '📨 Contact',
-  `
+${
+      tocer.section(
+        '📨 Contact',
+        `
 ${author} - [@${xHandle}](https://twitter.com/${xHandle}) - [${fullEmail}](${fullEmail})
 
 Project Link: [${repoUrl}](${repoUrl})
 `,
-)}
+      )
+    }
 ${tocer.section('👏 Acknowledgments', acknowledgments)}
 <!--MARKDOWN LINKS & IMAGES-- >
 <!--https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 ${
-  repobeats
-    ? `![Alt](https://repobeats.axiom.co/api/embed/${repobeats}.svg "Repobeats analytics image")`
-    : ''
-}
+      repobeats
+        ? `![Alt](https://repobeats.axiom.co/api/embed/${repobeats}.svg "Repobeats analytics image")`
+        : ''
+    }
 ${
-  // The new line is absolutely necessary
-  `\n${shieldsRefs}`
-}
-`.trim()}\n`
+      // The new line is absolutely necessary
+      `\n${shieldsRefs}`}
+`.trim()
+  }\n`
 
   return withoutToc.replace(tocVar, tocer.toc())
 }

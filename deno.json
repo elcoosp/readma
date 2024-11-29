@@ -30,14 +30,14 @@
       "**/docs",
       ".vscode",
       "deno_cache",
-      "documentation"
+      "packages/docs"
     ]
   },
   "lint": {
     "exclude": [
       "**/docs",
       "deno_cache",
-      "documentation"
+      "packages/docs"
     ]
   }
 }

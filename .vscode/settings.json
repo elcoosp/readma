@@ -1,7 +1,7 @@
 {
   "deno.enable": true,
   "deno.disablePaths": [
-    "documentation"
+    "packages/docs"
   ],
   "deno.lint": true,
   "deno.config": "deno.json",

@@ -1,5 +1,5 @@
-import { assertEquals } from '@std/assert'
-Deno.test('mod', () => {
-  // TODO snap package.json
-  assertEquals(true, true)
+import { assertSnapshot } from '@std/testing/snapshot'
+import { loadPkgJson } from '../src/mod.ts'
+Deno.test('mod', async (t) => {
+  await assertSnapshot(t, await loadPkgJson('.'))
 })

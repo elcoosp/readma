@@ -22,6 +22,7 @@
   <a href="https://github.com/elcoosp/readma/issues/new?template=feature-request.yml&title=%5BFeat%5D%3A+&labels=enhancement&assignees=elcoosp">Request Feature</a>
     </p>
     </div>
+
 > [!NOTE]
 > You are inside the **@readma/core** workspace member package, not the repository entry point
       

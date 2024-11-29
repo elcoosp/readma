@@ -25,7 +25,8 @@ snapshot[`readme - core 1`] = `
   <a href="https://github.com/elcoosp/readma/issues/new?template=feature-request.yml&title=%5BFeat%5D%3A+&labels=enhancement&assignees=elcoosp">Request Feature</a>
     </p>
     </div>
-    
+
+
       
 [![Codecov][codecov-shield]][codecov-url]
 [![Contributors][contributors-shield]][contributors-url]
@@ -127,6 +128,5 @@ Project Link: [https://github.com/elcoosp/readma](https://github.com/elcoosp/rea
 [branch-action-runs-shield]: https://img.shields.io/github/check-runs/elcoosp/readma/main.svg?style=for-the-badge
 [branch-action-runs-url]: https://github.com/elcoosp/readma/actions?query=branch%3Amain
 [license-shield]: https://img.shields.io/github/license/elcoosp/readma.svg?style=for-the-badge
-[license-url]: https://github.com/elcoosp/readma/blob/master/LICENSE.txt
-'
+[license-url]: https://github.com/elcoosp/readma/blob/master/LICENSE.txt'
 `;

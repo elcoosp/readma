@@ -1,8 +1,8 @@
+import { dedent } from 'ts-dedent'
 import { $ } from '@david/dax'
 import { join } from '@std/path'
 import * as yml from '@std/yaml'
 import { markdownTable } from 'markdown-table'
-import { dedent } from 'ts-dedent'
 import { renderShields, shields } from './shields.ts'
 import { Tocer } from './toc.ts'
 import type * as types from './types.ts'
@@ -140,14 +140,15 @@ export const readme: types.TemplateFn = async (
     )}">Request Feature</a>
     </p>
     </div>
+
 ${
+      // Space juste before is important
       workspaceMember
-        ? dedent`
-      > [!NOTE]
-      > You are inside the **${workspaceMember.pkgName}** workspace member package, not the repository entry point
-      `
-        : ''
-    }
+        ? `
+> [!NOTE]
+> You are inside the **${workspaceMember.pkgName}** workspace member package, not the repository entry point
+      `.trim()
+        : ''}
       
 ${shieldsBadges}
 

@@ -82,7 +82,7 @@ export const cli: Cli = {
       rs: rsFiles.find((x) => x !== null),
       pnpm: pnpmWorkspaceManifest,
     }
-
+    // TODO enable multiple pkg registry distributions (if both deno & package.json with access public)
     const packageRegistry: types.PackageRegistry | undefined = hasDenoFiles
       ? 'jsr'
       : pnpmWorkspaceManifest

@@ -30,7 +30,7 @@
       "**/docs",
       ".vscode",
       "deno_cache",
-      "packages/docs",
+      "packages/documentation",
       ".changeset"
     ]
   },
@@ -38,7 +38,7 @@
     "exclude": [
       "**/docs",
       "deno_cache",
-      "packages/docs"
+      "packages/documentation"
     ]
   }
 }

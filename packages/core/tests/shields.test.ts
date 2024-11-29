@@ -1,5 +1,5 @@
 import { assertSnapshot } from '@std/testing/snapshot'
-import { shields } from './shields.ts'
+import { shields } from '../src/shields.ts'
 const shieldsConfig = {
   githubUsername: 'elcoosp',
   repoUrl: 'https://github.com/elcoosp/readma',

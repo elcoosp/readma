@@ -103,7 +103,7 @@ Software is still **very early** expect **unexpected breaking changes**
 Any contributions you make are **greatly appreciated**.
 
 > [!NOTE]
-> Check the [code of conduct](https://github.com/elcoosp/readma/tree/main/.github/CODE_OF_CONDUCT.md)
+> Check the [code of conduct](https://github.com/elcoosp/readma/tree/fix/mig-template/.github/CODE_OF_CONDUCT.md)
 
 ## 📄 License
 
@@ -124,8 +124,8 @@ Project Link: [https://github.com/elcoosp/readma](https://github.com/elcoosp/rea
 <!--https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 ![Alt](https://repobeats.axiom.co/api/embed/1b12e7ffd13fd2d15772a30e8b0a995976150797.svg "Repobeats analytics image")
 
-[codecov-shield]: https://img.shields.io/codecov/c/github/elcoosp/readma/main.svg?style=for-the-badge
-[codecov-url]: https://codecov.io/github/elcoosp/readma/tree/main
+[codecov-shield]: https://img.shields.io/codecov/c/github/elcoosp/readma/fix/mig-template.svg?style=for-the-badge
+[codecov-url]: https://codecov.io/github/elcoosp/readma/tree/fix/mig-template
 [contributors-shield]: https://img.shields.io/github/contributors/elcoosp/readma.svg?style=for-the-badge
 [contributors-url]: https://github.com/elcoosp/readma/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/elcoosp/readma.svg?style=for-the-badge
@@ -134,7 +134,7 @@ Project Link: [https://github.com/elcoosp/readma](https://github.com/elcoosp/rea
 [stargazers-url]: https://github.com/elcoosp/readma/stargazers
 [commit-activity-shield]: https://img.shields.io/github/commit-activity/w/elcoosp/readma.svg?style=for-the-badge
 [commit-activity-url]: https://github.com/elcoosp/readma/commits
-[branch-action-runs-shield]: https://img.shields.io/github/check-runs/elcoosp/readma/main.svg?style=for-the-badge
-[branch-action-runs-url]: https://github.com/elcoosp/readma/actions?query=branch%3Amain
+[branch-action-runs-shield]: https://img.shields.io/github/check-runs/elcoosp/readma/fix/mig-template.svg?style=for-the-badge
+[branch-action-runs-url]: https://github.com/elcoosp/readma/actions?query=branch%3Afix%2Fmig-template
 [license-shield]: https://img.shields.io/github/license/elcoosp/readma.svg?style=for-the-badge
 [license-url]: https://github.com/elcoosp/readma/blob/master/LICENSE.txt

@@ -1,0 +1,31 @@
+{
+    "name": "@readma/root",
+    "author": "elcoosp",
+    "version": "0.0.0",
+    "description": "",
+    "packageManager": "pnpm@9.14.3",
+    "publishConfig": {
+        "access": "restricted"
+    },
+    "scripts": {
+      "boot": "pnpm i && turbo check lint fmt test doc & pnpm gen:readme",
+      "gen:readme": "deno run -A packages/cli/src/mod.ts gen",
+      "build": "turbo run build",
+      "dev": "turbo run dev",
+      "check": "turbo run check",
+      "lint": "turbo run lint",
+      "fmt": "turbo run fmt",
+      "test": "turbo run test",
+      "test:cov": "turbo run test:cov",
+      "test:watch": "turbo run test:watch",
+      "doc": "turbo run doc",
+      "ci:publish": "changeset publish",
+      "ci:version": "changeset version",
+      "changeset": "changeset"
+    },
+    "devDependencies": {
+      "turbo": "^2.3.3",
+      "@changesets/cli": "^2.27.10"
+    }
+  }
+  

@@ -1,9 +1,11 @@
 {
   "name": "@readma/cli",
-  "version": "0.6.13",
+  "version": "0.6.14",
   "type": "module",
   "description": "{{description}}",
-  "files": ["src"],
+  "files": [
+    "src"
+  ],
   "publishConfig": {
     "access": "public"
   },

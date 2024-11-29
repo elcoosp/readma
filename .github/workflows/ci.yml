@@ -5,8 +5,6 @@ on:
     branches: '**'
   pull_request:
     types: [opened, synchronize]
-env:
-  DENO_DIR: deno_cache
 jobs:
   ci:
     uses: elcoosp/elcoosp-configs/.github/workflows/ci.yml@feat/deno-ci

@@ -2,10 +2,6 @@
   "name": "@readma/pkg-json",
   "version": "0.0.0",
   "exports": "./mod.ts",
-  "tasks": {
-    "t": "deno test -A --coverage=coverage/ && deno coverage --lcov coverage/ > cov.lcov",
-    "d": "deno doc --html mod.ts"
-  },
   "imports": {
     "types-package-json": "npm:types-package-json@^2.0.39"
   }

@@ -30,7 +30,8 @@
       "**/docs",
       ".vscode",
       "deno_cache",
-      "packages/docs"
+      "packages/docs",
+      ".changeset"
     ]
   },
   "lint": {

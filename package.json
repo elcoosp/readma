@@ -16,6 +16,7 @@
     "lint": "turbo run lint",
     "fmt": "turbo run fmt",
     "test": "turbo run test",
+    "test:up": "turbo run test:up",
     "test:cov": "turbo run test:cov",
     "test:watch": "turbo run test:watch",
     "doc": "turbo run doc",

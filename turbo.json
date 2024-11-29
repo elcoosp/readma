@@ -20,6 +20,9 @@
     "test": {
       "dependsOn": ["^test"]
     },
+    "test:up": {
+      "dependsOn": ["^test:up"]
+    },
     "test:cov": {
       "dependsOn": ["^test:cov"]
     },

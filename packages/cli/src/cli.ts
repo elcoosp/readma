@@ -13,7 +13,7 @@ import { glob } from 'glob'
 import type { PartialDeep } from 'type-fest'
 // TODO use importMap
 import { mdx, readme, types, utils } from '../../core/src/mod.ts'
-import { loadPkgJson } from '../../pkg-json/mod.ts'
+import { loadPkgJson } from '../../pkg-json/src/mod.ts'
 import denoConf from '../deno.json' with { type: 'json' }
 const log = new Logger()
 type DenoFile = { workspace: string[] }

@@ -1,6 +1,6 @@
 {
-  "name": "@readma/cli",
-  "version": "0.6.13",
+  "name": "@readma/pkg-json",
+  "version": "0.0.0",
   "type": "module",
   "description": "{{description}}",
   "files": ["src"],

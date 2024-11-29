@@ -22,10 +22,8 @@
   <a href="https://github.com/elcoosp/readma/issues/new?template=feature-request.yml&title=%5BFeat%5D%3A+&labels=enhancement&assignees=elcoosp">Request Feature</a>
     </p>
     </div>
-    
-      > [!NOTE]
-      > You are inside the **@readma/cli** workspace member package, not the repository entry point
-      
+> [!NOTE]
+> You are inside the **@readma/cli** workspace member package, not the repository entry point
       
 [![JSR version][jsr-version-shield]][jsr-version-url]
 [![Codecov][codecov-shield]][codecov-url]

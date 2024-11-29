@@ -12,6 +12,7 @@
     "@std/testing": "jsr:@std/testing@^1.0.5",
     "@std/yaml": "jsr:@std/yaml@^1.0.5",
     "markdown-table": "npm:markdown-table@^3.0.4",
-    "jiti": "npm:jiti@^2.4.0"
+    "jiti": "npm:jiti@^2.4.0",
+    "ts-dedent": "npm:ts-dedent@^2.2.0"
   }
 }

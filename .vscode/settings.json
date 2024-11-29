@@ -1,9 +1,5 @@
 {
-  "deno.enablePaths": [
-    "cli",
-    "core",
-    "pkg-json"
-  ],
+  "deno.enable": true,
   "deno.lint": true,
   "deno.config": "deno.json",
   "editor.formatOnSave": true,

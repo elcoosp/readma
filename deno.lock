@@ -48,6 +48,7 @@
     "npm:markdown-table@^3.0.4": "3.0.4",
     "npm:react-dom@^18.3.1": "18.3.1_react@18.3.1",
     "npm:react@^18.3.1": "18.3.1",
+    "npm:ts-dedent@^2.2.0": "2.2.0",
     "npm:type-fest@^4.27.0": "4.28.1",
     "npm:types-package-json@^2.0.39": "2.0.39"
   },
@@ -1249,6 +1250,9 @@
     "trough@2.2.0": {
       "integrity": "sha512-tmMpK00BjZiUyVyvrBK7knerNgmgvcV/KLVyuma/SC+TQN167GrMRciANTz09+k3zW8L8t60jWO1GpfkZdjTaw=="
     },
+    "ts-dedent@2.2.0": {
+      "integrity": "sha512-q5W7tVM71e2xjHZTlgfTDoPF/SmqKG5hddq9SzR49CH2hayqRKJtQ4mtRlSxKaJlR/+9rEM+mnBHf7I2/BQcpQ=="
+    },
     "type-fest@4.28.1": {
       "integrity": "sha512-LO/+yb3mf46YqfUC7QkkoAlpa7CTYh//V1Xy9+NQ+pKqDqXIq0NTfPfQRwFfCt+if4Qkwb9gzZfsl6E5TkXZGw=="
     },
@@ -1379,7 +1383,8 @@
           "jsr:@std/testing@^1.0.5",
           "jsr:@std/yaml@^1.0.5",
           "npm:jiti@^2.4.0",
-          "npm:markdown-table@^3.0.4"
+          "npm:markdown-table@^3.0.4",
+          "npm:ts-dedent@^2.2.0"
         ]
       },
       "packages/pkg-json": {

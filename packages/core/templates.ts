@@ -1,3 +1,4 @@
+import { dedent } from 'ts-dedent'
 import { $ } from '@david/dax'
 import { join } from '@std/path'
 import * as yml from '@std/yaml'
@@ -111,7 +112,7 @@ export const readme: types.TemplateFn = async (
   const projectShields = `
 <!-- PROJECT SHIELDS -->
 `.trim()
-  const withoutToc = `${
+  const withoutToc = dedent`${
     `
   <a id="readme-top"></a>
   ${projectShields}
@@ -139,9 +140,9 @@ export const readme: types.TemplateFn = async (
     )}">Request Feature</a>
     </p>
     </div>
-    ${
+${
       workspaceMember
-        ? `
+        ? dedent`
       > [!NOTE]
       > You are inside the **${workspaceMember.pkgName}** workspace member package, not the repository entry point
       `

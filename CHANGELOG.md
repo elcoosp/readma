@@ -2,6 +2,36 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [2.12.0](https://github.com/elcoosp/readma/compare/14629197105afe56af1ddf873a8109c1947dae19..2.12.0) - 2024-11-28
+### Package updates
+- [core-0.13.1](core) bumped to [core-0.13.1](https://github.com/elcoosp/readma/compare/core-0.13.0..core-0.13.1)
+- [cli-0.11.0](cli) bumped to [cli-0.11.0](https://github.com/elcoosp/readma/compare/cli-0.10.0..cli-0.11.0)
+### Global changes
+#### Bug Fixes
+- mv badge before toc - ([25aabcc](https://github.com/elcoosp/readma/commit/25aabcccf6aa88b6b3c5bcc5519827d68f872cd6)) - [@elcoosp](https://github.com/elcoosp)
+- link license - ([62b44b9](https://github.com/elcoosp/readma/commit/62b44b94c27ced2de742ddcf1a3c2448603dc57f)) - [@elcoosp](https://github.com/elcoosp)
+- move packages to package folder - ([f6983f1](https://github.com/elcoosp/readma/commit/f6983f16337a109ffd366940f8099a63d1159df2)) - [@elcoosp](https://github.com/elcoosp)
+#### Continuous Integration
+- fix cog check - ([ae3d85f](https://github.com/elcoosp/readma/commit/ae3d85f44e76026201d2eff2b0c9043d5408ed2b)) - [@elcoosp](https://github.com/elcoosp)
+- fix packages/ work dir on test - ([f2d55e3](https://github.com/elcoosp/readma/commit/f2d55e39544817f003c58a75debf64660b38294f)) - [@elcoosp](https://github.com/elcoosp)
+- fix lock regen - ([ad2283e](https://github.com/elcoosp/readma/commit/ad2283ea5a3ce72de90cd5e0faffb0df64a22e0a)) - [@elcoosp](https://github.com/elcoosp)
+#### Documentation
+- up readme - ([9ecfe26](https://github.com/elcoosp/readma/commit/9ecfe2604a11fc849059a7a303f493785b94728d)) - [@elcoosp](https://github.com/elcoosp)
+#### Miscellaneous Chores
+- vscode settings - ([d92532a](https://github.com/elcoosp/readma/commit/d92532a9403e9b03a817fefdebe29a3969048ed5)) - [@elcoosp](https://github.com/elcoosp)
+- vscode settings deno fmt - ([6a4b151](https://github.com/elcoosp/readma/commit/6a4b151a5f6959c6fe0a294c04d888048de2f529)) - [@elcoosp](https://github.com/elcoosp)
+- fmt - ([3848d36](https://github.com/elcoosp/readma/commit/3848d3690f42e06d7a2ebfe068332ede1a92060a)) - [@elcoosp](https://github.com/elcoosp)
+- fmt - ([794c000](https://github.com/elcoosp/readma/commit/794c0000a01adbc32890d7ce9257ca5b821af2cc)) - [@elcoosp](https://github.com/elcoosp)
+- fmt rm type import - ([cb797c7](https://github.com/elcoosp/readma/commit/cb797c7acc3354ce1dcb10438371014e8217dd49)) - [@elcoosp](https://github.com/elcoosp)
+- fmt - ([19f6320](https://github.com/elcoosp/readma/commit/19f6320cca5322163d9b169b479a8584c8590f7a)) - [@elcoosp](https://github.com/elcoosp)
+- version packages - ([ad608a9](https://github.com/elcoosp/readma/commit/ad608a90c34421d42608db33568a1d0df63d7bd0)) - [@elcoosp](https://github.com/elcoosp)
+- fix exclude include rules - ([7f8579e](https://github.com/elcoosp/readma/commit/7f8579ef3fd8c662aaf262b1196a78de7f3db1c5)) - [@elcoosp](https://github.com/elcoosp)
+- add type bind - ([1462919](https://github.com/elcoosp/readma/commit/14629197105afe56af1ddf873a8109c1947dae19)) - [@elcoosp](https://github.com/elcoosp)
+#### Tests
+- fix workspaceRootPath one level up - ([4b64350](https://github.com/elcoosp/readma/commit/4b64350dc8321635fc2c9afba461277e3e928080)) - [@elcoosp](https://github.com/elcoosp)
+
+- - -
+
 ## [2.11.0](https://github.com/elcoosp/readma/compare/dcac3a22f16aac6bfc60f90dafdfa66a53927d0d..2.11.0) - 2024-11-28
 ### Package updates
 - [cli-0.10.0](cli) bumped to [cli-0.10.0](https://github.com/elcoosp/readma/compare/cli-0.9.0..cli-0.10.0)

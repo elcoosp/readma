@@ -19,6 +19,8 @@ export type GhIssueTemplateFilename =
 export type ReadmeTemplateArgs = {
   /** Hash of the repobeats svg to retrieve for your repo at https://repobeats.axiom.co/configs */
   repobeats?: string
+  /** Package status */
+  status?: 'unreleased' | 'early' | 'stable'
   /** Version control system */
   vcsName?: 'github'
   /** {@link WorkspaceMember}, auto generated if you use the cli */

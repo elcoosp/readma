@@ -7,7 +7,7 @@ on:
     types: [opened, synchronize]
 jobs:
   ci:
-    uses: elcoosp/elcoosp-configs/.github/workflows/ci.yml@feat/deno-ci
+    uses: elcoosp/elcoosp-configs/.github/workflows/ci.yml@main
     secrets: inherit
     with:
       deno-enabled: true

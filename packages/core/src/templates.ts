@@ -109,14 +109,9 @@ export const readme: types.TemplateFn = async (
     })
     return `${repoUrl}/issues/new?template=${templateFilename}&${urlParams}`
   }
-  const projectShields = `
-<!-- PROJECT SHIELDS -->
-`.trim()
   const withoutToc = dedent`${
     `
   <a id="readme-top"></a>
-  ${projectShields}
-  
   <!-- PROJECT LOGO -->
   <br />
   <div align="center">

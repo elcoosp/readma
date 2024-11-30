@@ -1,6 +1,4 @@
 <a id="readme-top"></a>
-  <!-- PROJECT SHIELDS -->
-  
   <!-- PROJECT LOGO -->
   <br />
   <div align="center">

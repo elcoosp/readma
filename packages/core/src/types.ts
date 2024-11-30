@@ -19,7 +19,7 @@ export type GhIssueTemplateFilename =
 export type ReadmeTemplateArgs = {
   /** Hash of the repobeats svg to retrieve for your repo at https://repobeats.axiom.co/configs */
   repobeats?: string
-  /** Package status */
+  /** Package status, not used yet */
   status?: 'unreleased' | 'early' | 'stable'
   /** Version control system */
   vcsName?: 'github'
@@ -30,6 +30,7 @@ export type ReadmeTemplateArgs = {
     /** All the members of the workspace */
     members: WorkspaceMember[]
   }
+  // TODO: permit multiple registry
   /** Registry on which the package is published  */
   packageRegistry?: PackageRegistry
   /** Set of urls for documentation, demo, etc. */

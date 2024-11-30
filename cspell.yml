@@ -1,3 +1,5 @@
+import:
+  - ./node_modules/@elcoosp-configs/cspell/src/base-ts.yml
 ignorePaths:
   - node_modules
   - pnpm-lock.yaml

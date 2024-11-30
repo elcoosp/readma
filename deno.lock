@@ -39,7 +39,8 @@
     "jsr:@wok/case@^1.0.1": "1.0.1",
     "npm:@biomejs/biome@*": "1.9.4",
     "npm:@changesets/cli@^2.27.10": "2.27.10",
-    "npm:@elcoosp-configs/biome@^0.0.1": "0.0.1",
+    "npm:@elcoosp-configs/biome@0": "0.0.1",
+    "npm:@elcoosp-configs/cspell@^0.0.5": "0.0.5",
     "npm:@mdx-js/mdx@^3.1.0": "3.1.0",
     "npm:@pnpm/workspace.read-manifest@^2.2.1": "2.2.1",
     "npm:glob@11": "11.0.0",
@@ -418,6 +419,9 @@
     },
     "@elcoosp-configs/biome@0.0.1": {
       "integrity": "sha512-jsrMyXdICN8243oSFmg/aSphr67uJXZ6/G+k6nSMpg71PKfNsq6CukC9mg+Enye1oGQ8p9PC6ChZB5M6Le8mVg=="
+    },
+    "@elcoosp-configs/cspell@0.0.5": {
+      "integrity": "sha512-1+ojobI42IxC8zuNVbhjqKj0bMo3WAKIGUnup2GjwWR8fjAq52BrxY1rqlVxZolvlotd1wgL/kJDSohwGciP+A=="
     },
     "@isaacs/cliui@8.0.2": {
       "integrity": "sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==",
@@ -1900,7 +1904,7 @@
       "jsr:@std/testing@^1.0.5",
       "jsr:@std/toml@1.0.2",
       "jsr:@wok/case@^1.0.1",
-      "npm:@elcoosp-configs/biome@^0.0.1",
+      "npm:@elcoosp-configs/biome@0",
       "npm:@mdx-js/mdx@^3.1.0",
       "npm:react-dom@^18.3.1",
       "npm:react@^18.3.1"
@@ -1908,6 +1912,7 @@
     "packageJson": {
       "dependencies": [
         "npm:@changesets/cli@^2.27.10",
+        "npm:@elcoosp-configs/cspell@^0.0.5",
         "npm:turbo@^2.3.3"
       ]
     },

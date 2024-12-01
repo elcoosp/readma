@@ -7,6 +7,7 @@ export type Shield = {
   linkUrl: string
   shieldUrl: string
   lang?: string
+  logo?: string
 }
 
 /** Create a {@link Shield} */
@@ -15,9 +16,10 @@ export function shield(
   linkUrl: string,
   shieldUrl: string,
   lang?: string,
+  logo?: string,
 ): Shield {
   const refName = paramCase(name)
-  return { name, refName, linkUrl, shieldUrl, lang }
+  return { name, refName, linkUrl, shieldUrl, lang, logo }
 }
 /** Util to create a {@link Shield.shieldUrl}, defaulting to [shields.io](https://shields.io/) */
 export const shieldUrl = (path: string, style?: string) =>

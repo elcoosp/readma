@@ -6,7 +6,6 @@ export type Shield = {
   refName: string
   linkUrl: string
   shieldUrl: string
-  lang?: string
   logo?: string
 }
 
@@ -15,17 +14,18 @@ export function shield(
   name: string,
   linkUrl: string,
   shieldUrl: string,
-  lang?: string,
   logo?: string,
 ): Shield {
   const refName = paramCase(name)
-  return { name, refName, linkUrl, shieldUrl, lang, logo }
+  return { name, refName, linkUrl, shieldUrl, logo }
 }
-/** Util to create a {@link Shield.shieldUrl}, defaulting to [shields.io](https://shields.io/) */
-export const shieldUrl = (path: string, style?: string) =>
+/** Util to create a {@link Shield['shieldUrl']}, defaulting to [shields.io](https://shields.io/) */
+export const shieldUrl = (path: string, style?: string, logo?: string) =>
   path.startsWith('https://')
     ? `${path}&style=${style}`
-    : `https://img.shields.io/${path}.svg?${style ? `style=${style}` : ''}`
+    : `https://img.shields.io/${path}.svg?${style ? `style=${style}` : ''}${
+      // TODO do not hardcode logoColor
+      logo ? `&logo=${logo}&logoColor=f5f5f5` : ''}`
 /** Dynamic list of shields, with some depending on args */
 export const shields = (
   {
@@ -65,6 +65,7 @@ export const shields = (
           'LinkedIn',
           `https://linkedin.com/in/${linkedinUsername}`,
           'badge/-LinkedIn-black',
+          'linkedin',
         ),
       ]
       : []),
@@ -74,6 +75,7 @@ export const shields = (
           'Crates MSRV',
           `https://crates.io/crates/${repoName}`,
           `crates/msrv/${repoName}`,
+          'rust',
         ),
       ]
       : []),
@@ -83,6 +85,7 @@ export const shields = (
           'JSR version',
           `https://jsr.io/${workspaceMember.pkgName}`,
           `jsr/v/${workspaceMember.pkgName}`,
+          'jsr',
         ),
       ]
       : []),
@@ -92,9 +95,11 @@ export const shields = (
           'NPM version',
           `https://www.npmjs.com/package/${workspaceMember.pkgName}`,
           `npm/v/${workspaceMember.pkgName}`,
+          'npm',
         ),
       ]
       : []),
+    // TODO link to docs.rs
     ...(language === 'rs' && packageRegistry === 'crates.io'
       ? [
         shield(
@@ -103,6 +108,7 @@ export const shields = (
             workspaceMember ? workspaceMember : repoName
           }`,
           `crates/v/${workspaceMember ? workspaceMember : repoName}`,
+          'rust',
         ),
       ]
       : []),
@@ -112,6 +118,7 @@ export const shields = (
         workspaceMember ? `/${workspaceMember.path.replace('./', '')}` : ''
       }`,
       `codecov/c/${vcsName}/${githubUsername}/${repoName}/${branch}`,
+      'codecov',
     ),
     shield(
       'Contributors',
@@ -137,13 +144,17 @@ export const shields = (
       'Branch action runs',
       `${repoUrl}/actions?query=${encodeURIComponent(`branch:${branch}`)}`,
       `github/check-runs/${githubUsername}/${repoName}/${branch}`,
+      'githubactions',
     ),
     shield(
       'License',
       `${repoUrl}/blob/master/LICENSE.txt`,
       `github/license/${githubUsername}/${repoName}`,
     ),
-  ].map((x) => ({ ...x, shieldUrl: shieldUrl(x.shieldUrl, badgeStyle) }))
+  ].map((x) => ({
+    ...x,
+    shieldUrl: shieldUrl(x.shieldUrl, badgeStyle, x.logo),
+  }))
 /** Render {@link shields} as markdown, return markdown refs which declare urls and badges to put at the top of the document */
 export const renderShields = (shields: Shield[]) => {
   const shieldsBadges = shields.map((s) =>

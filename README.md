@@ -122,7 +122,7 @@ Project Link: [https://github.com/elcoosp/readma](https://github.com/elcoosp/rea
 <sup> Licensed under <a href="https://github.com/elcoosp/readma/blob/master/LICENSE-MIT">MIT license</a></sup>
 
 
-[codecov-shield]: https://img.shields.io/codecov/c/github/elcoosp/readma/fix/mig-template.svg?style=for-the-badge
+[codecov-shield]: https://img.shields.io/codecov/c/github/elcoosp/readma/fix/mig-template.svg?style=for-the-badge&logo=codecov&logoColor=f5f5f5
 [codecov-url]: https://codecov.io/github/elcoosp/readma/tree/fix/mig-template
 [contributors-shield]: https://img.shields.io/github/contributors/elcoosp/readma.svg?style=for-the-badge
 [contributors-url]: https://github.com/elcoosp/readma/graphs/contributors
@@ -132,7 +132,7 @@ Project Link: [https://github.com/elcoosp/readma](https://github.com/elcoosp/rea
 [stargazers-url]: https://github.com/elcoosp/readma/stargazers
 [commit-activity-shield]: https://img.shields.io/github/commit-activity/w/elcoosp/readma.svg?style=for-the-badge
 [commit-activity-url]: https://github.com/elcoosp/readma/commits
-[branch-action-runs-shield]: https://img.shields.io/github/check-runs/elcoosp/readma/fix/mig-template.svg?style=for-the-badge
+[branch-action-runs-shield]: https://img.shields.io/github/check-runs/elcoosp/readma/fix/mig-template.svg?style=for-the-badge&logo=githubactions&logoColor=f5f5f5
 [branch-action-runs-url]: https://github.com/elcoosp/readma/actions?query=branch%3Afix%2Fmig-template
 [license-shield]: https://img.shields.io/github/license/elcoosp/readma.svg?style=for-the-badge
 [license-url]: https://github.com/elcoosp/readma/blob/master/LICENSE.txt

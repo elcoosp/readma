@@ -45,9 +45,9 @@
    <li><a href="#roadmap">🚀 Roadmap</a></li>
    <li><a href="#support">⛑️ Support</a></li>
    <li><a href="#contributing">💻 Contributing</a></li>
-   <li><a href="#license">📄 License</a></li>
    <li><a href="#contact">📨 Contact</a></li>
    <li><a href="#acknowledgments">👏 Acknowledgments</a></li>
+   <li><a href="#license">📄 License</a></li>
   </ol>
 </details>
 
@@ -96,10 +96,6 @@ Any contributions you make are **greatly appreciated**.
 > [!NOTE]
 > Check the [code of conduct](https://github.com/elcoosp/readma/tree/fix/mig-template/.github/CODE_OF_CONDUCT.md)
 
-## 📄 License
-
-Distributed under the MIT License. See [`LICENSE.txt`](./LICENSE.txt) for more information.
-
 ## 📨 Contact
 
 elcoosp - [@elcoosp](https://twitter.com/elcoosp) - [elcoosp@gmail.com](elcoosp@gmail.com)
@@ -114,6 +110,10 @@ Project Link: [https://github.com/elcoosp/readma](https://github.com/elcoosp/rea
 <!--MARKDOWN LINKS & IMAGES-- >
 <!--https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 ![Alt](https://repobeats.axiom.co/api/embed/1b12e7ffd13fd2d15772a30e8b0a995976150797.svg "Repobeats analytics image")
+## 📄 License
+
+<sup> Licensed under <a href="https://github.com/elcoosp/readma/blob/master/LICENSE-MIT">MIT license</a></sup>
+
 
 [jsr-version-shield]: https://img.shields.io/jsr/v/@readma/core.svg?style=for-the-badge
 [jsr-version-url]: https://jsr.io/@readma/core

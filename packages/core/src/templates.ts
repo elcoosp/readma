@@ -81,7 +81,7 @@ export const readme: types.TemplateFn = async (
   const logoSrc = ghContentUrl(images.logo)
   const screenshotSrc = ghContentUrl(images.screenshot)
   const licenseSectionBody = license === 'MIT'
-    ? 'Distributed under the MIT License. See [`LICENSE.txt`](./LICENSE.txt) for more information.'
+    ? `<sup> Licensed under <a href="${repoUrl}/blob/master/LICENSE-MIT">MIT license</a></sup>`
     : 'None'
 
   const getIssueTemplateUrl = async (templateFilename: string) => {
@@ -219,7 +219,6 @@ ${contributing ?? ''}`
 `,
       )
     }
-${tocer.section('📄 License', licenseSectionBody)}
 ${
       tocer.section(
         '📨 Contact',
@@ -238,6 +237,7 @@ ${
         ? `![Alt](https://repobeats.axiom.co/api/embed/${repobeats}.svg "Repobeats analytics image")`
         : ''
     }
+${tocer.section('📄 License', licenseSectionBody)}
 ${
       // The new line is absolutely necessary
       `\n${shieldsRefs}`}

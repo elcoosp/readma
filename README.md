@@ -1,6 +1,4 @@
 <a id="readme-top"></a>
-  <!-- PROJECT SHIELDS -->
-  
   <!-- PROJECT LOGO -->
   <br />
   <div align="center">
@@ -45,9 +43,9 @@
    <li><a href="#roadmap">🚀 Roadmap</a></li>
    <li><a href="#support">⛑️ Support</a></li>
    <li><a href="#contributing">💻 Contributing</a></li>
-   <li><a href="#license">📄 License</a></li>
    <li><a href="#contact">📨 Contact</a></li>
    <li><a href="#acknowledgments">👏 Acknowledgments</a></li>
+   <li><a href="#license">📄 License</a></li>
   </ol>
 </details>
 
@@ -103,11 +101,7 @@ Software is still **very early** expect **unexpected breaking changes**
 Any contributions you make are **greatly appreciated**.
 
 > [!NOTE]
-> Check the [code of conduct](https://github.com/elcoosp/readma/tree/main/.github/CODE_OF_CONDUCT.md)
-
-## 📄 License
-
-Distributed under the MIT License. See [`LICENSE.txt`](./LICENSE.txt) for more information.
+> Check the [code of conduct](https://github.com/elcoosp/readma/tree/fix/mig-template/.github/CODE_OF_CONDUCT.md)
 
 ## 📨 Contact
 
@@ -123,9 +117,13 @@ Project Link: [https://github.com/elcoosp/readma](https://github.com/elcoosp/rea
 <!--MARKDOWN LINKS & IMAGES-- >
 <!--https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 ![Alt](https://repobeats.axiom.co/api/embed/1b12e7ffd13fd2d15772a30e8b0a995976150797.svg "Repobeats analytics image")
+## 📄 License
 
-[codecov-shield]: https://img.shields.io/codecov/c/github/elcoosp/readma/main.svg?style=for-the-badge
-[codecov-url]: https://codecov.io/github/elcoosp/readma/tree/main
+<sup> Licensed under <a href="https://github.com/elcoosp/readma/blob/master/LICENSE-MIT">MIT license</a></sup>
+
+
+[codecov-shield]: https://img.shields.io/codecov/c/github/elcoosp/readma/fix/mig-template.svg?style=for-the-badge&logo=codecov&logoColor=f5f5f5
+[codecov-url]: https://codecov.io/github/elcoosp/readma/tree/fix/mig-template
 [contributors-shield]: https://img.shields.io/github/contributors/elcoosp/readma.svg?style=for-the-badge
 [contributors-url]: https://github.com/elcoosp/readma/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/elcoosp/readma.svg?style=for-the-badge
@@ -134,7 +132,7 @@ Project Link: [https://github.com/elcoosp/readma](https://github.com/elcoosp/rea
 [stargazers-url]: https://github.com/elcoosp/readma/stargazers
 [commit-activity-shield]: https://img.shields.io/github/commit-activity/w/elcoosp/readma.svg?style=for-the-badge
 [commit-activity-url]: https://github.com/elcoosp/readma/commits
-[branch-action-runs-shield]: https://img.shields.io/github/check-runs/elcoosp/readma/main.svg?style=for-the-badge
-[branch-action-runs-url]: https://github.com/elcoosp/readma/actions?query=branch%3Amain
+[branch-action-runs-shield]: https://img.shields.io/github/check-runs/elcoosp/readma/fix/mig-template.svg?style=for-the-badge&logo=githubactions&logoColor=f5f5f5
+[branch-action-runs-url]: https://github.com/elcoosp/readma/actions?query=branch%3Afix%2Fmig-template
 [license-shield]: https://img.shields.io/github/license/elcoosp/readma.svg?style=for-the-badge
 [license-url]: https://github.com/elcoosp/readma/blob/master/LICENSE.txt

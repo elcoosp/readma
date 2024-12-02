@@ -1,5 +1,5 @@
-import type * as types from './packages/core/types.ts'
-import { md } from './packages/core/utils.ts'
+import type * as types from './packages/core/src/types.ts'
+import { md } from './packages/core/src/utils.ts'
 const name = 'readma'
 const author = 'elcoosp'
 const urls = {

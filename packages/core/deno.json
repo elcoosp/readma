@@ -1,15 +1,10 @@
 {
   "name": "@readma/core",
   "version": "0.6.13",
-  "exports": "./mod.ts",
-  "tasks": {
-    "t": "deno test -A --coverage=coverage/ && deno coverage --lcov coverage/ > cov.lcov",
-    "d": "deno doc --html mod.ts"
-  },
+  "exports": "./src/mod.ts",
   "imports": {
     "@deno-library/logger": "jsr:@deno-library/logger@^1.1.7",
     "@david/dax": "jsr:@david/dax@^0.42.0",
-    "@std/testing": "jsr:@std/testing@^1.0.5",
     "@std/yaml": "jsr:@std/yaml@^1.0.5",
     "markdown-table": "npm:markdown-table@^3.0.4",
     "jiti": "npm:jiti@^2.4.0",

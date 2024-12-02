@@ -1,0 +1,28 @@
+export const snapshot = {};
+
+snapshot[`mod 1`] = `
+{
+  description: "{{description}}",
+  files: [
+    "src",
+  ],
+  name: "@readma/pkg-json",
+  publishConfig: {
+    access: "public",
+  },
+  scripts: {
+    "test:cov": "deno test -A --coverage=cov/ && deno coverage --lcov cov/ > cov.lcov",
+    "test:up": "pnpm test -- -- --update",
+    "test:watch": "deno test --watch",
+    build: \`echo "Nothing to build, it's deno!"\`,
+    check: "deno check src/mod.ts",
+    dev: "deno run --watch src/mod.ts",
+    doc: "deno doc --html src/mod.ts",
+    fmt: "deno fmt",
+    lint: "deno lint",
+    test: "deno test -A",
+  },
+  type: "module",
+  version: "0.0.0",
+}
+`;

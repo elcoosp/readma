@@ -8,5 +8,10 @@
   "editor.formatOnSave": true,
   "[typescript]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "yaml.schemas": {
+    "https://raw.githubusercontent.com/elcoosp/commitlint-rs/refs/heads/feat/schema/cli/json-schema/config.json": [
+      ".commitlintrc.yml"
+    ]
   }
 }

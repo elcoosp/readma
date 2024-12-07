@@ -34,8 +34,8 @@ importers:
         specifier: 3.6.3
         version: 3.6.3(@algolia/client-search@5.15.0)(@docusaurus/faster@3.6.3(@docusaurus/types@3.6.3(@swc/core@1.9.3)(acorn@8.14.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)))(@mdx-js/react@3.1.0(@types/react@18.3.12)(react@19.0.0))(@rspack/core@1.1.4)(@swc/core@1.9.3)(@types/react@18.3.12)(acorn@8.14.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(search-insights@2.17.3)(typescript@5.7.2)
       '@elcoosp-configs/docusaurus':
-        specifier: '1'
-        version: 1.1.2(@algolia/client-search@5.15.0)(@docusaurus/faster@3.6.3(@docusaurus/types@3.6.3(@swc/core@1.9.3)(acorn@8.14.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)))(@mdx-js/react@3.1.0(@types/react@18.3.12)(react@19.0.0))(@rspack/core@1.1.4)(@swc/core@1.9.3)(@types/react@18.3.12)(acorn@8.14.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(search-insights@2.17.3)(typescript@5.7.2)
+        specifier: ^1.1.3
+        version: 1.1.3(@algolia/client-search@5.15.0)(@docusaurus/faster@3.6.3(@docusaurus/types@3.6.3(@swc/core@1.9.3)(acorn@8.14.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)))(@mdx-js/react@3.1.0(@types/react@18.3.12)(react@19.0.0))(@rspack/core@1.1.4)(@swc/core@1.9.3)(@types/react@18.3.12)(acorn@8.14.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(search-insights@2.17.3)(typescript@5.7.2)
       '@mdx-js/react':
         specifier: ^3.1.0
         version: 3.1.0(@types/react@18.3.12)(react@19.0.0)
@@ -1294,8 +1294,8 @@ packages:
   '@elcoosp-configs/cspell@0.0.5':
     resolution: {integrity: sha512-1+ojobI42IxC8zuNVbhjqKj0bMo3WAKIGUnup2GjwWR8fjAq52BrxY1rqlVxZolvlotd1wgL/kJDSohwGciP+A==}
 
-  '@elcoosp-configs/docusaurus@1.1.2':
-    resolution: {integrity: sha512-RiWChenmngQvi0IUnMeCgjGfIoAz4I+eMTkSOpqzF8tbwq8x5viHPs/cAEE8fSzBUehtqBG7ofGXUgsrZ1THag==}
+  '@elcoosp-configs/docusaurus@1.1.3':
+    resolution: {integrity: sha512-vdnz7D0hlFSPNRCg1eQOhB+MP0AO4zfYGjixBB9pyb0eMLrpRXsGRYw8OxWqApi03tYWj77ZhcS+rdn2USjvCg==}
 
   '@hapi/hoek@9.3.0':
     resolution: {integrity: sha512-/c6rf4UJlmHlC9b5BaNvzAcFv7HZ2QHaV0D4/HNlBdvFnvQq8RI4kYdhyPCl7Xj+oWvTWQ8ujhqS53LIgAe6KQ==}
@@ -7950,7 +7950,7 @@ snapshots:
 
   '@elcoosp-configs/cspell@0.0.5': {}
 
-  '@elcoosp-configs/docusaurus@1.1.2(@algolia/client-search@5.15.0)(@docusaurus/faster@3.6.3(@docusaurus/types@3.6.3(@swc/core@1.9.3)(acorn@8.14.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)))(@mdx-js/react@3.1.0(@types/react@18.3.12)(react@19.0.0))(@rspack/core@1.1.4)(@swc/core@1.9.3)(@types/react@18.3.12)(acorn@8.14.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(search-insights@2.17.3)(typescript@5.7.2)':
+  '@elcoosp-configs/docusaurus@1.1.3(@algolia/client-search@5.15.0)(@docusaurus/faster@3.6.3(@docusaurus/types@3.6.3(@swc/core@1.9.3)(acorn@8.14.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)))(@mdx-js/react@3.1.0(@types/react@18.3.12)(react@19.0.0))(@rspack/core@1.1.4)(@swc/core@1.9.3)(@types/react@18.3.12)(acorn@8.14.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(search-insights@2.17.3)(typescript@5.7.2)':
     dependencies:
       '@docusaurus/preset-classic': 3.6.3(@algolia/client-search@5.15.0)(@docusaurus/faster@3.6.3(@docusaurus/types@3.6.3(@swc/core@1.9.3)(acorn@8.14.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)))(@mdx-js/react@3.1.0(@types/react@18.3.12)(react@19.0.0))(@rspack/core@1.1.4)(@swc/core@1.9.3)(@types/react@18.3.12)(acorn@8.14.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(search-insights@2.17.3)(typescript@5.7.2)
       '@docusaurus/types': 3.6.3(@swc/core@1.9.3)(acorn@8.14.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)

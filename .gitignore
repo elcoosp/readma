@@ -20,5 +20,6 @@ coverage
 packages/**/docs
 packages/documentation/.docusaurus
 packages/documentation/build
+!packages/documentation/docs
 packages/**/cov
 packages/**/cov.lcov

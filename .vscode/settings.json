@@ -1,12 +1,17 @@
 {
   "deno.enable": true,
   "deno.disablePaths": [
-    "documentation"
+    "packages/documentation"
   ],
   "deno.lint": true,
   "deno.config": "deno.json",
   "editor.formatOnSave": true,
   "[typescript]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "yaml.schemas": {
+    "https://raw.githubusercontent.com/elcoosp/commitlint-rs/refs/heads/feat/schema/cli/json-schema/config.json": [
+      ".commitlintrc.yml"
+    ]
   }
 }

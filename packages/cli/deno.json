@@ -1,11 +1,7 @@
 {
   "name": "@readma/cli",
   "version": "0.6.13",
-  "exports": "./mod.ts",
-  "tasks": {
-    "t": "deno test -A --coverage=coverage/ && deno coverage --lcov coverage/ > cov.lcov",
-    "d": "deno doc --html mod.ts"
-  },
+  "exports": "./src/mod.ts",
   "imports": {
     "@cross/deepmerge": "jsr:@cross/deepmerge@^1.0.0",
     "@david/dax": "jsr:@david/dax@^0.42.0",

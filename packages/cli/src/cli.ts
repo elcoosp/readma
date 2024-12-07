@@ -2,8 +2,8 @@ import { Command } from '@cliffy/command'
 import { deepMerge } from '@cross/deepmerge'
 import { Logger } from '@deno-library/logger'
 import {
-  readWorkspaceManifest,
   type WorkspaceManifest,
+  readWorkspaceManifest,
 } from '@pnpm/workspace.read-manifest'
 import { exists } from '@std/fs'
 import * as jsonc from '@std/jsonc'
@@ -11,9 +11,10 @@ import * as path from '@std/path'
 import * as toml from '@std/toml'
 import { glob } from 'glob'
 import type { PartialDeep } from 'type-fest'
-import { mdx, readme, types, utils } from '../core/mod.ts'
-import { loadPkgJson } from '../pkg-json/mod.ts'
-import denoConf from './deno.json' with { type: 'json' }
+// TODO use importMap
+import { mdx, readme, types, utils } from '../../core/src/mod.ts'
+import { loadPkgJson } from '../../pkg-json/src/mod.ts'
+import denoConf from '../deno.json' with { type: 'json' }
 const log = new Logger()
 type DenoFile = { workspace: string[] }
 type CargoFile = {
@@ -81,7 +82,7 @@ export const cli: Cli = {
       rs: rsFiles.find((x) => x !== null),
       pnpm: pnpmWorkspaceManifest,
     }
-
+    // TODO enable multiple pkg registry distributions (if both deno & package.json with access public)
     const packageRegistry: types.PackageRegistry | undefined = hasDenoFiles
       ? 'jsr'
       : pnpmWorkspaceManifest

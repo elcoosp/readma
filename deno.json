@@ -5,8 +5,7 @@
     "r": "deno run -A packages/cli/src/mod.ts gen",
     "r:w": "deno run -A --watch scripts/gen-readme.ts",
     "c": "cog changelog > CHANGELOG.md",
-    "f": "deno fmt",
-    "d": "(cd core && deno task d); (cd cli && deno task d)"
+    "f": "deno fmt"
   },
   "imports": {
     "@cliffy/command": "jsr:@cliffy/command@1.0.0-rc.7",

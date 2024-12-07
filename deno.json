@@ -16,7 +16,7 @@
     "@std/jsonc": "jsr:@std/jsonc@1.0.1",
     "@std/path": "jsr:@std/path@^1.0.8",
     "@std/toml": "jsr:@std/toml@1.0.2",
-    "@wok/case": "jsr:@wok/case@^1.0.1",
+    "@wok/case": "jsr:@wok/case@^1.0.2",
     "react": "npm:react@^18.3.1",
     "react-dom": "npm:react-dom@^18.3.1",
     "@std/testing": "jsr:@std/testing@^1.0.6"

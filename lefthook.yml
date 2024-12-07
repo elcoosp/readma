@@ -1,7 +1,7 @@
-remotes:
-  - git_url: git@github.com:elcoosp/elcoosp-configs
-    ref: main
-    configs:
-      - packages/lefthook/src/biome-deno.yml
-extends:
-  - biome-deno
+# remotes:
+#   - git_url: git@github.com:elcoosp/elcoosp-configs
+#     ref: main
+#     configs:
+#       - packages/lefthook/src/biome-deno.yml
+# extends:
+#   - biome-deno

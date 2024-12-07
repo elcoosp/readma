@@ -18,5 +18,7 @@ codecov.*
 # Test & docs
 coverage
 packages/**/docs
+packages/documentation/.docusaurus
+packages/documentation/build
 packages/**/cov
 packages/**/cov.lcov

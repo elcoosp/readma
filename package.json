@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.10",
-    "@elcoosp-configs/cspell": "^0.0.5",
+    "@elcoosp-configs/cspell": "^0.0.6",
     "turbo": "^2.3.3"
   }
 }

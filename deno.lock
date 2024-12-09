@@ -12,8 +12,8 @@
     "jsr:@david/which@~0.4.1": "0.4.1",
     "jsr:@deno-library/logger@^1.1.7": "1.1.7",
     "jsr:@std/assert@0.221": "0.221.0",
-    "jsr:@std/assert@1.0.8": "1.0.8",
-    "jsr:@std/assert@^1.0.8": "1.0.8",
+    "jsr:@std/assert@1.0.9": "1.0.9",
+    "jsr:@std/assert@^1.0.9": "1.0.9",
     "jsr:@std/bytes@0.221": "0.221.0",
     "jsr:@std/collections@^1.0.9": "1.0.9",
     "jsr:@std/fmt@1": "1.0.3",
@@ -23,6 +23,7 @@
     "jsr:@std/fs@1.0.5": "1.0.5",
     "jsr:@std/fs@1.0.6": "1.0.6",
     "jsr:@std/fs@^1.0.5": "1.0.6",
+    "jsr:@std/fs@^1.0.6": "1.0.6",
     "jsr:@std/internal@^1.0.5": "1.0.5",
     "jsr:@std/io@0.221": "0.221.0",
     "jsr:@std/io@0.225.0": "0.225.0",
@@ -32,15 +33,15 @@
     "jsr:@std/path@^1.0.7": "1.0.8",
     "jsr:@std/path@^1.0.8": "1.0.8",
     "jsr:@std/streams@0.221": "0.221.0",
-    "jsr:@std/testing@^1.0.5": "1.0.5",
+    "jsr:@std/testing@^1.0.6": "1.0.6",
     "jsr:@std/text@~1.0.7": "1.0.8",
     "jsr:@std/toml@1.0.2": "1.0.2",
     "jsr:@std/yaml@^1.0.5": "1.0.5",
-    "jsr:@wok/case@^1.0.1": "1.0.1",
+    "jsr:@wok/case@^1.0.2": "1.0.2",
     "npm:@biomejs/biome@*": "1.9.4",
     "npm:@changesets/cli@^2.27.10": "2.27.10",
     "npm:@elcoosp-configs/biome@0": "0.0.1",
-    "npm:@elcoosp-configs/cspell@^0.0.5": "0.0.5",
+    "npm:@elcoosp-configs/cspell@^0.0.6": "0.0.6",
     "npm:@mdx-js/mdx@^3.1.0": "3.1.0",
     "npm:@pnpm/workspace.read-manifest@^2.2.1": "2.2.1",
     "npm:glob@11": "11.0.0",
@@ -115,8 +116,8 @@
     "@std/assert@0.221.0": {
       "integrity": "a5f1aa6e7909dbea271754fd4ab3f4e687aeff4873b4cef9a320af813adb489a"
     },
-    "@std/assert@1.0.8": {
-      "integrity": "ebe0bd7eb488ee39686f77003992f389a06c3da1bbd8022184804852b2fa641b",
+    "@std/assert@1.0.9": {
+      "integrity": "a9f0c611a869cc791b26f523eec54c7e187aab7932c2c8e8bea0622d13680dcd",
       "dependencies": [
         "jsr:@std/internal"
       ]
@@ -173,11 +174,11 @@
         "jsr:@std/io@0.221"
       ]
     },
-    "@std/testing@1.0.5": {
-      "integrity": "6e693cbec94c81a1ad3df668685c7ba8e20742bb10305bc7137faa5cf16d2ec4",
+    "@std/testing@1.0.6": {
+      "integrity": "9192ded2d34065f4c959fdc1921fe836770abb9194410c2cc8a0fff4eff5c893",
       "dependencies": [
-        "jsr:@std/assert@^1.0.8",
-        "jsr:@std/fs@^1.0.5",
+        "jsr:@std/assert@^1.0.9",
+        "jsr:@std/fs@^1.0.6",
         "jsr:@std/internal",
         "jsr:@std/path@^1.0.8"
       ]
@@ -194,8 +195,8 @@
     "@std/yaml@1.0.5": {
       "integrity": "71ba3d334305ee2149391931508b2c293a8490f94a337eef3a09cade1a2a2742"
     },
-    "@wok/case@1.0.1": {
-      "integrity": "409e94f961f5b278992bace87a0c7d3c6a3db516d01759bdb827d9ae4d75e9aa"
+    "@wok/case@1.0.2": {
+      "integrity": "5d7c4da6ac87a372d603c6ab6fb0e07ec74d4a712c3cb9051961a0892b1f3090"
     }
   },
   "npm": {
@@ -420,8 +421,8 @@
     "@elcoosp-configs/biome@0.0.1": {
       "integrity": "sha512-jsrMyXdICN8243oSFmg/aSphr67uJXZ6/G+k6nSMpg71PKfNsq6CukC9mg+Enye1oGQ8p9PC6ChZB5M6Le8mVg=="
     },
-    "@elcoosp-configs/cspell@0.0.5": {
-      "integrity": "sha512-1+ojobI42IxC8zuNVbhjqKj0bMo3WAKIGUnup2GjwWR8fjAq52BrxY1rqlVxZolvlotd1wgL/kJDSohwGciP+A=="
+    "@elcoosp-configs/cspell@0.0.6": {
+      "integrity": "sha512-sx+xI9EE7bzkIW7SpZCfRGyxfeqcb29NWGyhyx3WnY4e21sx8cVDr5OdKABZ6jFdxBbUISHtgwPJvuSosJRv0g=="
     },
     "@isaacs/cliui@8.0.2": {
       "integrity": "sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==",
@@ -1897,13 +1898,13 @@
   "workspace": {
     "dependencies": [
       "jsr:@cliffy/command@1.0.0-rc.7",
-      "jsr:@std/assert@1.0.8",
+      "jsr:@std/assert@1.0.9",
       "jsr:@std/fs@1.0.6",
       "jsr:@std/jsonc@1.0.1",
       "jsr:@std/path@^1.0.8",
-      "jsr:@std/testing@^1.0.5",
+      "jsr:@std/testing@^1.0.6",
       "jsr:@std/toml@1.0.2",
-      "jsr:@wok/case@^1.0.1",
+      "jsr:@wok/case@^1.0.2",
       "npm:@elcoosp-configs/biome@0",
       "npm:@mdx-js/mdx@^3.1.0",
       "npm:react-dom@^18.3.1",
@@ -1912,7 +1913,7 @@
     "packageJson": {
       "dependencies": [
         "npm:@changesets/cli@^2.27.10",
-        "npm:@elcoosp-configs/cspell@^0.0.5",
+        "npm:@elcoosp-configs/cspell@^0.0.6",
         "npm:turbo@^2.3.3"
       ]
     },

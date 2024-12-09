@@ -21,7 +21,7 @@
     "test:watch": "turbo run test:watch",
     "doc": "turbo run doc",
     "ci:publish": "changeset publish",
-    "ci:version": "pnpm pre-version && changeset version",
+    "ci:version": "pnpm ci:pre-version && changeset version",
     "ci:pre-version": "deno run -A scripts/pre-version.ts",
     "changeset": "changeset"
   },

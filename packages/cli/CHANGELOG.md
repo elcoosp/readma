@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.14
+
+### Patch Changes
+
+- b68d86c: Setup unified workspace & ci
+
 All notable changes to this project will be documented in this file. See
 [conventional commits](https://www.conventionalcommits.org/) for commit
 guidelines.
@@ -51,16 +57,16 @@ guidelines.
 
 #### Bug Fixes
 
-- **(*)** missing paren on ternary - (e35fd33) - _elcoosp_
+- **(\*)** missing paren on ternary - (e35fd33) - _elcoosp_
 - default ws member description - (71cba1c) - elcoosp
 
 #### Features
 
-- **(*)** allow to not specify installation section in a single rust package
+- **(\*)** allow to not specify installation section in a single rust package
   case - (552b1bd) - _elcoosp_
-- **(*)** fetch jsr meta to get workspace member description - (4677ca6) -
+- **(\*)** fetch jsr meta to get workspace member description - (4677ca6) -
   _elcoosp_
-- **(*)** add features section - (1921956) - _elcoosp_
+- **(\*)** add features section - (1921956) - _elcoosp_
 
 #### Miscellaneous Chores
 
@@ -91,9 +97,9 @@ guidelines.
 
 #### Features
 
-- **(*)** allow custom sections & workspace specific mdx files inside
-  readma/sections/* - (02ad5ba) - _elcoosp_
-- **(*)** poc mdx-manager module to handle custom sections per workspace
+- **(\*)** allow custom sections & workspace specific mdx files inside
+  readma/sections/\* - (02ad5ba) - _elcoosp_
+- **(\*)** poc mdx-manager module to handle custom sections per workspace
   member - (ed816f6) - _elcoosp_
 
 #### Miscellaneous Chores
@@ -106,7 +112,7 @@ guidelines.
 
 #### Bug Fixes
 
-- **(*)** packages version - (c8a7fb9) - _elcoosp_
+- **(\*)** packages version - (c8a7fb9) - _elcoosp_
 
 ---
 
@@ -114,7 +120,7 @@ guidelines.
 
 #### Bug Fixes
 
-- **(*)** packages table with rel links - (7bd169a) - _elcoosp_
+- **(\*)** packages table with rel links - (7bd169a) - _elcoosp_
 
 ---
 
@@ -122,7 +128,7 @@ guidelines.
 
 #### Features
 
-- **(*)** add packages table in root readme - (4584dfb) - _elcoosp_
+- **(\*)** add packages table in root readme - (4584dfb) - _elcoosp_
 
 ---
 
@@ -130,7 +136,7 @@ guidelines.
 
 #### Bug Fixes
 
-- **(*)** rm root package.json making deno confused - (486537d) - _elcoosp_
+- **(\*)** rm root package.json making deno confused - (486537d) - _elcoosp_
 
 ---
 
@@ -174,7 +180,7 @@ guidelines.
 
 #### Bug Fixes
 
-- **(*)** deno version bump - (de9f55f) - _elcoosp_
+- **(\*)** deno version bump - (de9f55f) - _elcoosp_
 
 ---
 
@@ -182,7 +188,7 @@ guidelines.
 
 #### Bug Fixes
 
-- **(*)** test broken caused by license file read + setup rsdoctor - (a890485) -
+- **(\*)** test broken caused by license file read + setup rsdoctor - (a890485) -
   _elcoosp_
 - **(cli)** logs - (2d3c694) - _elcoosp_
 - **(core)** https://readma.vercel.app/ as doc url - (c48c88f) - _elcoosp_
@@ -206,7 +212,7 @@ guidelines.
 
 #### Bug Fixes
 
-- **(*)** readme - (f419f4c) - _elcoosp_
+- **(\*)** readme - (f419f4c) - _elcoosp_
 
 ---
 
@@ -239,7 +245,7 @@ guidelines.
 
 #### Bug Fixes
 
-- **(*)** fix rel import inside deno.json - (f599901) - _elcoosp_
+- **(\*)** fix rel import inside deno.json - (f599901) - _elcoosp_
 
 ---
 
@@ -247,7 +253,7 @@ guidelines.
 
 #### Bug Fixes
 
-- **(*)** fix rel import of core inside cli - (1a4e9fe) - _elcoosp_
+- **(\*)** fix rel import of core inside cli - (1a4e9fe) - _elcoosp_
 
 ---
 
@@ -263,7 +269,7 @@ guidelines.
 
 #### Miscellaneous Chores
 
-- **(*)** fix deno pkgs version - (b61f767) - _elcoosp_
+- **(\*)** fix deno pkgs version - (b61f767) - _elcoosp_
 
 ---
 

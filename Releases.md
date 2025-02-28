@@ -1,3 +1,13 @@
+### 2025.02.28
+
+#### @readma/core 0.6.13 (patch)
+
+- feat(core): add shields logo
+
+#### @readma/pkg-json 0.0.1 (patch)
+
+- test(pkg-json): add snap
+
 ### 2024.11.22
 
 #### @readma/cli 0.3.1 (patch)

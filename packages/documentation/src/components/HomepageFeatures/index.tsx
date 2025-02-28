@@ -2,7 +2,7 @@ import Heading from '@theme/Heading'
 import clsx from 'clsx'
 import LayersIcon from '../LayersIcon'
 import styles from './styles.module.css'
-
+import { JSX } from 'react'
 type FeatureItem =
   & {
     title: string

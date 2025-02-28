@@ -94,7 +94,7 @@ Software is still **very early** expect **unexpected breaking changes**
 Any contributions you make are **greatly appreciated**.
 
 > [!NOTE]
-> Check the [code of conduct](https://github.com/elcoosp/readma/tree/fix/mig-template/.github/CODE_OF_CONDUCT.md)
+> Check the [code of conduct](https://github.com/elcoosp/readma/tree/main/.github/CODE_OF_CONDUCT.md)
 
 ## 📨 Contact
 
@@ -117,8 +117,8 @@ Project Link: [https://github.com/elcoosp/readma](https://github.com/elcoosp/rea
 
 [jsr-version-shield]: https://img.shields.io/jsr/v/@readma/core.svg?style=for-the-badge&logo=jsr&logoColor=f5f5f5
 [jsr-version-url]: https://jsr.io/@readma/core
-[codecov-shield]: https://img.shields.io/codecov/c/github/elcoosp/readma/fix/mig-template.svg?style=for-the-badge&logo=codecov&logoColor=f5f5f5
-[codecov-url]: https://codecov.io/github/elcoosp/readma/tree/fix/mig-template/packages/core
+[codecov-shield]: https://img.shields.io/codecov/c/github/elcoosp/readma/main.svg?style=for-the-badge&logo=codecov&logoColor=f5f5f5
+[codecov-url]: https://codecov.io/github/elcoosp/readma/tree/main/packages/core
 [contributors-shield]: https://img.shields.io/github/contributors/elcoosp/readma.svg?style=for-the-badge
 [contributors-url]: https://github.com/elcoosp/readma/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/elcoosp/readma.svg?style=for-the-badge
@@ -127,7 +127,7 @@ Project Link: [https://github.com/elcoosp/readma](https://github.com/elcoosp/rea
 [stargazers-url]: https://github.com/elcoosp/readma/stargazers
 [commit-activity-shield]: https://img.shields.io/github/commit-activity/w/elcoosp/readma.svg?style=for-the-badge
 [commit-activity-url]: https://github.com/elcoosp/readma/commits
-[branch-action-runs-shield]: https://img.shields.io/github/check-runs/elcoosp/readma/fix/mig-template.svg?style=for-the-badge&logo=githubactions&logoColor=f5f5f5
-[branch-action-runs-url]: https://github.com/elcoosp/readma/actions?query=branch%3Afix%2Fmig-template
+[branch-action-runs-shield]: https://img.shields.io/github/check-runs/elcoosp/readma/main.svg?style=for-the-badge&logo=githubactions&logoColor=f5f5f5
+[branch-action-runs-url]: https://github.com/elcoosp/readma/actions?query=branch%3Amain
 [license-shield]: https://img.shields.io/github/license/elcoosp/readma.svg?style=for-the-badge
 [license-url]: https://github.com/elcoosp/readma/blob/master/LICENSE.txt

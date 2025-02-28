@@ -3,7 +3,7 @@
   "author": "elcoosp",
   "version": "0.0.0",
   "description": "",
-  "packageManager": "pnpm@9.15.3",
+  "packageManager": "pnpm@10.5.2",
   "publishConfig": {
     "access": "restricted"
   },
@@ -26,8 +26,8 @@
     "changeset": "changeset"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.27.10",
-    "@elcoosp-configs/cspell": "^0.0.6",
-    "turbo": "^2.3.3"
+    "@changesets/cli": "^2.28.1",
+    "@elcoosp-configs/cspell": "^0.0.7",
+    "turbo": "^2.4.4"
   }
 }

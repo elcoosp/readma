@@ -5,7 +5,7 @@
   "imports": {
     "@cross/deepmerge": "jsr:@cross/deepmerge@^1.0.0",
     "@david/dax": "jsr:@david/dax@^0.42.0",
-    "@deno-library/logger": "jsr:@deno-library/logger@^1.1.9",
+    "@deno-library/logger": "jsr:@deno-library/logger@^1.2.0",
     "@pnpm/workspace.read-manifest": "npm:@pnpm/workspace.read-manifest@^2.2.1",
     "@readma/core": "jsr:@readma/core@^0.6",
     "glob": "npm:glob@^11.0.0",

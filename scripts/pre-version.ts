@@ -48,15 +48,15 @@ for (const release of changesetStatusFile.releases) {
       `Could not find required ${packageFolderPath} to sync version: ${error}`,
     );
   }
+  const packageJsonVersionFile = "package.json";
   let versionFile = "deno.json";
   try {
     await Deno.stat(`${packageFolderPath}/${versionFile}`);
   } catch (_e) {
-    const defaultVersionFile = "package.json";
     console.warn(
-      `Could not find required ${packageFolderPath} ${versionFile} to sync version defaulting to ${defaultVersionFile}`,
+      `Could not find required ${packageFolderPath} ${versionFile} to sync version defaulting to ${packageJsonVersionFile}`,
     );
-    versionFile = defaultVersionFile;
+    versionFile = packageJsonVersionFile;
   }
   const outputPath = `${packageFolderPath}/${versionFile}`;
   writeJson(outputPath, (outputFile: { version: string }) => {
@@ -65,6 +65,8 @@ for (const release of changesetStatusFile.releases) {
     );
     return { ...outputFile, version: release.newVersion };
   });
-  await $`deno fmt ${outputPath}`;
+  if (versionFile !== packageJsonVersionFile) {
+    await $`deno fmt ${outputPath}`;
+  }
 }
 await $`rm ${STATUS_FILE}`;

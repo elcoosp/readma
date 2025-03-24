@@ -2,7 +2,7 @@ export const snapshot = {};
 
 snapshot[`mod 1`] = `
 {
-  description: "{{description}}",
+  description: "Readma util to read package.json",
   files: [
     "src",
   ],

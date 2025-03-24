@@ -2,7 +2,7 @@
   "name": "@readma/core",
   "version": "0.6.14",
   "type": "module",
-  "description": "{{description}}",
+  "description": "Readma core",
   "files": [
     "src"
   ],

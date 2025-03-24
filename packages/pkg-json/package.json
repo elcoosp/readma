@@ -2,8 +2,10 @@
   "name": "@readma/pkg-json",
   "version": "0.0.0",
   "type": "module",
-  "description": "{{description}}",
-  "files": ["src"],
+  "description": "Readma util to read package.json",
+  "files": [
+    "src"
+  ],
   "publishConfig": {
     "access": "public"
   },

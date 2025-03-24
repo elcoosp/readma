@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.15
+
+### Patch Changes
+
+- 05bd86a: Reorganize internal packages to use turbo workspace
+
 ## 0.6.14
 
 ### Patch Changes

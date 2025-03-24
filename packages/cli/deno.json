@@ -1,6 +1,6 @@
 {
   "name": "@readma/cli",
-  "version": "0.6.13",
+  "version": "0.6.15",
   "exports": "./src/mod.ts",
   "imports": {
     "@cross/deepmerge": "jsr:@cross/deepmerge@^1.0.0",

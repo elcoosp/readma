@@ -1,6 +1,6 @@
 {
   "name": "@readma/pkg-json",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "description": "Readma util to read package.json",
   "files": [

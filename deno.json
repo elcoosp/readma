@@ -15,7 +15,7 @@
     "@std/fs": "jsr:@std/fs@1.0.16",
     "@std/jsonc": "jsr:@std/jsonc@1.0.1",
     "@std/path": "jsr:@std/path@^1.0.8",
-    "@std/toml": "jsr:@std/toml@1.0.4",
+    "@std/toml": "jsr:@std/toml@1.0.5",
     "@wok/case": "jsr:@wok/case@^1.0.2",
     "react": "npm:react@^18.3.1",
     "react-dom": "npm:react-dom@^18.3.1",

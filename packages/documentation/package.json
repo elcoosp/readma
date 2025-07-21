@@ -16,9 +16,9 @@
     "check": "tsc"
   },
   "dependencies": {
-    "@docusaurus/core": "3.7.0",
+    "@docusaurus/core": "3.8.1",
     "@docusaurus/faster": "^3.7.0",
-    "@docusaurus/preset-classic": "3.7.0",
+    "@docusaurus/preset-classic": "3.8.1",
     "@elcoosp-configs/docusaurus": "^1.1.4",
     "@mdx-js/react": "^3.1.0",
     "clsx": "^2.1.1",
@@ -32,10 +32,10 @@
   },
   "devDependencies": {
     "@types/react": "^19.0.10",
-    "@docusaurus/module-type-aliases": "3.7.0",
+    "@docusaurus/module-type-aliases": "3.8.1",
     "@docusaurus/plugin-rsdoctor": "^3.7.0",
-    "@docusaurus/tsconfig": "3.7.0",
-    "@docusaurus/types": "3.7.0",
+    "@docusaurus/tsconfig": "3.8.1",
+    "@docusaurus/types": "3.8.1",
     "typescript": "~5.8.0"
   },
   "browserslist": {

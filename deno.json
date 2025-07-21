@@ -17,8 +17,8 @@
     "@std/path": "jsr:@std/path@^1.0.9",
     "@std/toml": "jsr:@std/toml@1.0.8",
     "@wok/case": "jsr:@wok/case@^1.0.2",
-    "react": "npm:react@^18.3.1",
-    "react-dom": "npm:react-dom@^18.3.1",
+    "react": "npm:react@^19.0.0",
+    "react-dom": "npm:react-dom@^19.0.0",
     "@std/testing": "jsr:@std/testing@^1.0.11"
   },
   "fmt": {

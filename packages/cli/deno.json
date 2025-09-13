@@ -9,6 +9,6 @@
     "@pnpm/workspace.read-manifest": "npm:@pnpm/workspace.read-manifest@^1000.0.0",
     "@readma/core": "jsr:@readma/core@^0.6",
     "glob": "npm:glob@^11.0.0",
-    "type-fest": "npm:type-fest@^4.27.0"
+    "type-fest": "npm:type-fest@^5.0.0"
   }
 }

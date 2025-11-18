@@ -8,7 +8,7 @@
     "@deno-library/logger": "jsr:@deno-library/logger@^1.2.0",
     "@pnpm/workspace.read-manifest": "npm:@pnpm/workspace.read-manifest@^1000.0.0",
     "@readma/core": "jsr:@readma/core@^0.6",
-    "glob": "npm:glob@^11.0.0",
+    "glob": "npm:glob@^12.0.0",
     "type-fest": "npm:type-fest@^5.0.0"
   }
 }

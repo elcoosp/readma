@@ -4,7 +4,7 @@
   "exports": "./src/mod.ts",
   "imports": {
     "@deno-library/logger": "jsr:@deno-library/logger@^1.2.0",
-    "@david/dax": "jsr:@david/dax@^0.43.0",
+    "@david/dax": "jsr:@david/dax@^0.44.0",
     "@std/yaml": "jsr:@std/yaml@^1.0.6",
     "markdown-table": "npm:markdown-table@^3.0.4",
     "jiti": "npm:jiti@^2.4.0",

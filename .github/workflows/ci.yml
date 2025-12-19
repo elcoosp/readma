@@ -10,4 +10,4 @@ jobs:
     uses: elcoosp/elcoosp-configs/.github/workflows/ci.yml@main
     secrets: inherit
     with:
-      deno-enabled: true
+      deno-enabled: false

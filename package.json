@@ -3,7 +3,7 @@
   "author": "elcoosp",
   "version": "0.0.0",
   "description": "",
-  "packageManager": "pnpm@11.9.0",
+  "packageManager": "pnpm@11.13.1",
   "publishConfig": {
     "access": "restricted"
   },

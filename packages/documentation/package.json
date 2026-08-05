@@ -23,7 +23,7 @@
     "@mdx-js/react": "^3.1.0",
     "clsx": "^2.1.1",
     "deepmerge-ts": "^7.1.5",
-    "motion": "^12.4.7",
+    "motion": "^13.0.0",
     "prism-react-renderer": "^2.4.1",
     "raw-loader": "^4.0.2",
     "react": "^19.0.0",

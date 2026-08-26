@@ -43,8 +43,8 @@ importers:
         specifier: ^2.1.1
         version: 2.1.1
       deepmerge-ts:
-        specifier: ^7.1.5
-        version: 7.1.5
+        specifier: ^8.0.0
+        version: 8.0.2
       motion:
         specifier: ^13.0.0
         version: 13.0.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -3110,6 +3110,10 @@ packages:
   deepmerge-ts@7.1.5:
     resolution: {integrity: sha512-HOJkrhaYsweh+W+e74Yn7YStZOilkoPb6fycpwNLKzSPtruFs48nYis0zy5yJz1+ktUhHxoRDJ27RQAWLIJVJw==}
     engines: {node: '>=16.0.0'}
+
+  deepmerge-ts@8.0.2:
+    resolution: {integrity: sha512-uqbvqLUMrc6p0MO+WBRtTxY55hmyh94WRwI5a++PZe54X+bfVh59FSN7uWCBCW1CCVjzjnrwzfI8zidE2obMMw==}
+    engines: {node: '>=16.9.0'}
 
   deepmerge@4.3.1:
     resolution: {integrity: sha512-3sUqbMEc77XqpdNO7FRyRog+eW3ph+GYCbj+rK+uYyRMuwsVy0rMiVtPn+QJlKFvWP/1PYpapqYn0Me2knFn+A==}
@@ -8344,7 +8348,7 @@ snapshots:
     dependencies:
       '@docusaurus/types': 3.7.0(@swc/core@1.15.46)(@swc/html@1.15.46)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.6))(csso@5.0.5)(html-minifier-terser@7.2.0)(lightningcss@1.32.0)(postcss@8.5.6)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(supports-color@8.1.1)
       '@types/history': 4.7.11
-      '@types/react': 19.2.17
+      '@types/react': 19.2.18
       '@types/react-router-config': 5.0.11
       '@types/react-router-dom': 5.3.3
       react: 19.2.8
@@ -9213,7 +9217,7 @@ snapshots:
 
   '@docusaurus/react-loadable@6.0.0(react@19.2.8)':
     dependencies:
-      '@types/react': 19.2.17
+      '@types/react': 19.2.18
       react: 19.2.8
 
   '@docusaurus/theme-classic@3.10.2(@docusaurus/faster@3.10.2(@docusaurus/types@3.10.2(@swc/core@1.15.46)(@swc/html@1.15.46)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.6))(csso@5.0.5)(html-minifier-terser@7.2.0)(lightningcss@1.32.0)(postcss@8.5.6)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(supports-color@8.1.1))(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.6))(csso@5.0.5)(html-minifier-terser@7.2.0)(postcss@8.5.6))(@rspack/core@1.7.12)(@swc/core@1.15.46)(@swc/html@1.15.46)(@types/react@19.2.18)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.6))(csso@5.0.5)(debug@4.4.3(supports-color@8.1.1))(html-minifier-terser@7.2.0)(lightningcss@1.32.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(supports-color@8.1.1)(typescript@7.0.2)':
@@ -9365,7 +9369,7 @@ snapshots:
       '@docusaurus/utils': 3.7.0(@swc/core@1.15.46)(@swc/html@1.15.46)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.6))(csso@5.0.5)(html-minifier-terser@7.2.0)(lightningcss@1.32.0)(postcss@8.5.6)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(supports-color@8.1.1)
       '@docusaurus/utils-common': 3.7.0(@swc/core@1.15.46)(@swc/html@1.15.46)(clean-css@5.3.3)(cssnano@6.1.2(postcss@8.5.6))(csso@5.0.5)(html-minifier-terser@7.2.0)(lightningcss@1.32.0)(postcss@8.5.6)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(supports-color@8.1.1)
       '@types/history': 4.7.11
-      '@types/react': 19.2.17
+      '@types/react': 19.2.18
       '@types/react-router-config': 5.0.11
       clsx: 2.1.1
       parse-numeric-range: 1.3.0
@@ -10586,7 +10590,7 @@ snapshots:
   '@types/react-router@5.1.20':
     dependencies:
       '@types/history': 4.7.11
-      '@types/react': 19.2.17
+      '@types/react': 19.2.18
 
   '@types/react@19.2.17':
     dependencies:
@@ -11539,6 +11543,8 @@ snapshots:
   deep-extend@0.6.0: {}
 
   deepmerge-ts@7.1.5: {}
+
+  deepmerge-ts@8.0.2: {}
 
   deepmerge@4.3.1: {}
 

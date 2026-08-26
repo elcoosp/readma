@@ -22,7 +22,7 @@
     "@elcoosp-configs/docusaurus": "^1.1.4",
     "@mdx-js/react": "^3.1.0",
     "clsx": "^2.1.1",
-    "deepmerge-ts": "^7.1.5",
+    "deepmerge-ts": "^8.0.0",
     "motion": "^13.0.0",
     "prism-react-renderer": "^2.4.1",
     "raw-loader": "^4.0.2",

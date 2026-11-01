@@ -1,138 +1,96 @@
-<a id="readme-top"></a>
-  <!-- PROJECT LOGO -->
-  <br />
-  <div align="center">
-  <a href="https://github.com/elcoosp/readma">
-  <img src="https://raw.githubusercontent.com/elcoosp/readma/HEAD/images/logo.png" style="max-height: 200px; object-fit: contain;" alt="Logo">
-  </a>
-  <h3 align="center">Readma</h3>
-  
-  <p align="center">
-  Beautiful effortless README generator
-  <br />
-  <a href="https://readma.vercel.app/"><strong>📖 Explore the docs »</strong></a>
-  <br />
-  <br />
-  <a href="https://github.com/elcoosp/readma">View Demo</a>
-  ·
-  <a href="https://github.com/elcoosp/readma/issues/new?template=bug-report.yml&title=%5BBug%5D%3A+&labels=bug&assignees=elcoosp">Report Bug</a>
-  ·
-  <a href="https://github.com/elcoosp/readma/issues/new?template=feature-request.yml&title=%5BFeat%5D%3A+&labels=enhancement&assignees=elcoosp">Request Feature</a>
-    </p>
-    </div>
+<div align="center">
+  <img src="docs/logo.png" alt="Readma Logo" width="300"/>
+  <p>
+    <strong>A beautiful, effortless README generator for modern workspaces.</strong><br/>
+    Automatically generates comprehensive, well-structured README files from known project files like <code>deno.json</code>, <code>Cargo.toml</code>, or <code>pnpm-workspace.yaml</code>. 
+    Features workspace compatibility, automatic shields, and cross-platform support.
+  </p>
+  <p>
+    <img src="https://img.shields.io/badge/Deno-2.0%2B-000000?style=flat-square&logo=deno" alt="Deno"/>
+    <img src="https://img.shields.io/badge/TypeScript-5.0%2B-3178C6?style=flat-square&logo=typescript" alt="TypeScript"/>
+    <img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square" alt="License MIT"/>
+    <img src="https://img.shields.io/badge/Workspace-pnpm%20%7C%20Deno-orange?style=flat-square" alt="Workspace"/>
+    <img src="https://img.shields.io/badge/Features-Auto%20Shields%20%7C%20Cross--platform-brightgreen?style=flat-square" alt="Features"/>
+  </p>
+</div>
 
+---
 
-      
-[![Codecov][codecov-shield]][codecov-url]
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stargazers-shield]][stargazers-url]
-[![Commit activity][commit-activity-shield]][commit-activity-url]
-[![Branch action runs][branch-action-runs-shield]][branch-action-runs-url]
-[![License][license-shield]][license-url]
+## About the Project
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of contents</summary>
-  <ol>
-   <li><a href="#about-the-project">💡 About the project</a></li>
-   <li><a href="#features">✨ Features</a></li>
-   <li><a href="#getting-started">🎉 Getting started</a></li>
-   <li><a href="#installation">📋 Installation</a></li>
-   <li><a href="#usage">🔧 Usage</a></li>
-   <li><a href="#roadmap">🚀 Roadmap</a></li>
-   <li><a href="#support">⛑️ Support</a></li>
-   <li><a href="#contributing">💻 Contributing</a></li>
-   <li><a href="#contact">📨 Contact</a></li>
-   <li><a href="#acknowledgments">👏 Acknowledgments</a></li>
-   <li><a href="#license">📄 License</a></li>
-  </ol>
-</details>
+**Readma** is a workspace-compatible documentation generator designed to make README creation effortless. Instead of manually writing and updating documentation, Readma parses your existing project configuration files and automatically generates a standardized, informative README complete with dynamic badges and relevant links.
 
-## 💡 About the project
-
-Create README that rocks
 
 <img src="https://raw.githubusercontent.com/elcoosp/readma/HEAD/images/screenshot.gif" alt="Product screenshot" />
 
-> [!TIP]
-> You are inside the entry point of **readma** workspace, here is a list of available packages
+> [!NOTE]
+> This repository serves as the entry point for the Readma monorepo. It is structured as a workspace containing multiple focused packages.
 
-| Package                                 | Description                                        |
-| --------------------------------------- | -------------------------------------------------- |
-| [@readma/core](./packages/core)         | Beautiful effortless README generator core package |
-| [@readma/cli](./packages/cli)           | Beautiful effortless README generator cli package  |
-| [@readma/pkg-json](./packages/pkg-json) | Typed function to read package.json                |
+### Workspace Packages
 
-## ✨ Features
+| Package | Description |
+| :--- | :--- |
+| `@readma/core` | The core engine responsible for parsing project files and generating README content. |
+| `@readma/cli` | The command-line interface to easily run and configure the README generation process. |
+| `@readma/pkg-json` | A typed utility function to safely read and parse `package.json` files. |
 
-- Workspace compatible
-- Automatic shields
-- Cross platform
+---
 
-## 🎉 Getting started
+## Features
 
-See screenshot
+- **Workspace Compatible**: Seamlessly integrates with monorepos and workspaces (Deno, pnpm, Cargo).
+- **Automatic Shields**: Dynamically generates relevant badges (e.g., language, license, build status) based on your project files.
+- **Cross-Platform**: Built with Deno and TypeScript to run consistently across all major operating systems.
+- **Configurable**: Supports custom configuration files to tailor the output to your project's specific needs.
 
-## 📋 Installation
+---
 
-```sh
-deno install @readma/core
+## Getting Started
+
+### Prerequisites
+
+Ensure you have [Deno](https://deno.com/) installed on your machine. Readma requires Deno 2.0 or higher.
+
+### Installation
+
+You can add the tools directly to your project's dependencies:
+
+```bash
+# Add the CLI to your project
+deno add @readma/cli
+
+# Or add the core package if you are building a custom integration
+deno add @readma/core
 ```
 
-## 🔧 Usage
+### Usage
 
-🚧 In construction, refer to the [docs](https://readma.vercel.app/)
+Run the generation task directly using Deno:
 
-## 🚀 Roadmap
+```bash
+# Generate README for the current workspace using the predefined task
+deno task r
 
-- [x] CLI with config file
-- [x] Workspace readme generated from known files like `Cargo.toml`/`deno.json`/`pnpm-workspace.yml`
-- [x] Github issue template links
+# Or run the CLI module directly with all permissions
+deno run -A packages/cli/src/mod.ts gen
+```
 
-See the [open issues](https://github.com/elcoosp/readma/issues) for a full list of proposed features (and known issues).
+> [!WARNING]
+> The project is still in its early stages. While the core functionality is operational, you may encounter unexpected breaking changes as the API stabilizes.
 
-## ⛑️ Support
+---
 
-Software is still **very early** expect **unexpected breaking changes**
+## Roadmap
 
-## 💻 Contributing
+- [x] CLI with configuration file support
+- [x] Workspace README generation from known files (`Cargo.toml`, `deno.json`, `pnpm-workspace.yaml`)
+- [x] Automatic GitHub issue template links
+- [ ] Comprehensive documentation and usage examples
+- [ ] Support for additional project file formats
 
-Any contributions you make are **greatly appreciated**.
+---
 
-> [!NOTE]
-> Check the [code of conduct](https://github.com/elcoosp/readma/tree/main/.github/CODE_OF_CONDUCT.md)
+## Acknowledgments
 
-## 📨 Contact
-
-elcoosp - [@elcoosp](https://twitter.com/elcoosp) - [elcoosp@gmail.com](elcoosp@gmail.com)
-
-Project Link: [https://github.com/elcoosp/readma](https://github.com/elcoosp/readma)
-
-## 👏 Acknowledgments
-
-- [Best Readme](https://github.com/othneildrew/Best-README-Template)
-- [Badges 4 README](https://github.com/alexandresanlim/Badges4-README.md-Profile)
-
-<!--MARKDOWN LINKS & IMAGES-- >
-<!--https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-![Alt](https://repobeats.axiom.co/api/embed/1b12e7ffd13fd2d15772a30e8b0a995976150797.svg "Repobeats analytics image")
-## 📄 License
-
-<sup> Licensed under <a href="https://github.com/elcoosp/readma/blob/master/LICENSE-MIT">MIT license</a></sup>
-
-
-[codecov-shield]: https://img.shields.io/codecov/c/github/elcoosp/readma/main.svg?style=for-the-badge&logo=codecov&logoColor=f5f5f5
-[codecov-url]: https://codecov.io/github/elcoosp/readma/tree/main
-[contributors-shield]: https://img.shields.io/github/contributors/elcoosp/readma.svg?style=for-the-badge
-[contributors-url]: https://github.com/elcoosp/readma/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/elcoosp/readma.svg?style=for-the-badge
-[forks-url]: https://github.com/elcoosp/readma/network/members
-[stargazers-shield]: https://img.shields.io/github/stars/elcoosp/readma.svg?style=for-the-badge
-[stargazers-url]: https://github.com/elcoosp/readma/stargazers
-[commit-activity-shield]: https://img.shields.io/github/commit-activity/w/elcoosp/readma.svg?style=for-the-badge
-[commit-activity-url]: https://github.com/elcoosp/readma/commits
-[branch-action-runs-shield]: https://img.shields.io/github/check-runs/elcoosp/readma/main.svg?style=for-the-badge&logo=githubactions&logoColor=f5f5f5
-[branch-action-runs-url]: https://github.com/elcoosp/readma/actions?query=branch%3Amain
-[license-shield]: https://img.shields.io/github/license/elcoosp/readma.svg?style=for-the-badge
-[license-url]: https://github.com/elcoosp/readma/blob/master/LICENSE.txt
+- [Best README Template](https://github.com/othneildrew/Best-README-Template) for structural inspiration.
+- [Badges 4 README](https://github.com/alexandresanlim/Badges4-README.md-Profile) for badge resources.

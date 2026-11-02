@@ -1,0 +1,86 @@
+name: Release
+
+# Release flow:
+# 1. Merge conventional commits to main, CI keeps everything green
+# 2. Tag the release commit: `git tag v0.7.0 && git push origin v0.7.0`
+# 3. This workflow generates the git-cliff changelog, creates the GitHub
+#    release with the changelog as body and publishes the packages to JSR
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+*'
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  release:
+    name: Changelog, GitHub release and JSR publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: release
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Set up Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate the changelog for the latest tag
+        uses: orhun/git-cliff-action@v4
+        id: git-cliff
+        with:
+          config: cliff.toml
+          args: --latest --strip header
+        env:
+          GITHUB_REPO: ${{ github.repository }}
+
+      - name: Create the GitHub release
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            --title "$GITHUB_REF_NAME" \
+            --notes "${{ steps.git-cliff.outputs.content }}" \
+            --verify-tag
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update CHANGELOG.md
+        uses: orhun/git-cliff-action@v4
+        with:
+          config: cliff.toml
+          args: --verbose
+        env:
+          OUTPUT: CHANGELOG.md
+          GITHUB_REPO: ${{ github.repository }}
+
+      - name: Commit the updated changelog
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add CHANGELOG.md
+          git diff --cached --quiet || git commit -m "docs(changelog): update changelog for $GITHUB_REF_NAME [skip ci]"
+          git push origin HEAD:main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Dry run publish
+        run: |
+          deno publish --dry-run --allow-dirty
+        working-directory: ${{ github.workspace }}
+
+      - name: Publish packages to JSR
+        run: |
+          deno publish --allow-dirty
+        working-directory: ${{ github.workspace }}

@@ -1,20 +1,40 @@
-import * as path from '@std/path'
-import { createJiti } from 'jiti/native'
-import type { MdSrc, ReadmeTemplateArgs } from './types.ts'
+import type { MdSrc } from './types.ts'
+
+/** Type safe error thrown by readma */
+export class ReadmaError extends Error {
+  constructor(message: string, options?: ErrorOptions) {
+    super(message, options)
+    this.name = 'ReadmaError'
+  }
+}
+
 /** Quick utils to avoid ugly escaping everywhere */
 export const md = {
   /** Return code between backticks with an optional lang */
   code: (c: MdSrc, lng = 'sh'): string => `\`\`\`${lng}\n${c.trim()}\n\`\`\``,
+  /** Return a markdown link */
+  link: (text: MdSrc, url: string): string => `[${text}](${url})`,
+  /** Return a markdown image */
+  img: (alt: MdSrc, src: string): string => `![${alt}](${src})`,
 }
 
-/** Import the `readma.config.ts` file via [`jiti`](https://github.com/unjs/jiti) */
-export const getReadmaConfig = async (
-  configPathRoot = './',
-): Promise<ReadmeTemplateArgs> => {
-  const configPath = path.join(Deno.cwd(), configPathRoot, 'readma.config.ts')
-  const jiti = createJiti(import.meta.url)
-
-  const config =
-    (await jiti.import(configPath) as { default: ReadmeTemplateArgs }).default
-  return config
+/**
+ * Slugify a markdown heading the same way GitHub does it for its anchors.
+ *
+ * The algorithm: lowercase, drop every character which is not a word
+ * character, a space, an underscore or an hyphen (this includes emojis and
+ * punctuation), then turn spaces into hyphens (without collapsing them).
+ *
+ * @example
+ * ```ts
+ * ghSlug('About the project') // 'about-the-project'
+ * ghSlug('💡 Features') // '-features'
+ * ghSlug('Contact & support') // 'contact--support'
+ * ```
+ */
+export function ghSlug(heading: string): string {
+  const cleaned = heading
+    .toLowerCase()
+    .replaceAll(/[^\p{L}\p{N} _-]/gu, '')
+  return cleaned.replaceAll(' ', '-')
 }

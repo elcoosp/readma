@@ -9,12 +9,64 @@ export type TemplateFn = (
   templateArgs: ReadmeTemplateArgs,
   globalOptions: GlobalOptions,
 ) => Promise<string>
+/** Registry on which a package is published */
 export type PackageRegistry = 'jsr' | 'npm' | 'crates.io'
+/** Version control system, github only for now */
+export type VcsName = 'github'
+/** Source files language */
+export type SourceLanguage = 'rs' | 'ts'
+/** SPDX license identifier, see [SPDX](https://spdx.org/licenses/) */
+export type LicenseId =
+  | 'MIT'
+  | 'Apache-2.0'
+  | 'GPL-3.0'
+  | 'BSD-3-Clause'
+  | 'MPL-2.0'
+  | (string & Record<never, never>)
 /** Path to a [github issue template](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository) */
 export type GhIssueTemplateFilename =
   | `${string}.yml`
   | `${string}.yaml`
   | `${string}.md`
+/** Arbitrary user provided badge appended after the builtin ones */
+export type CustomBadge = {
+  /** Accessible name of the badge, also used for the markdown reference name */
+  name: string
+  /** Image url of the badge */
+  image: string
+  /** Link url the badge points to */
+  link: string
+}
+/** Ids of the builtin badges, all enabled by default and individually disableable */
+export type BuiltinBadgeId =
+  | 'linkedin'
+  | 'msrv'
+  | 'registry'
+  | 'codecov'
+  | 'contributors'
+  | 'forks'
+  | 'stars'
+  | 'commitActivity'
+  | 'actions'
+  | 'issues'
+  | 'pullRequests'
+  | 'lastCommit'
+  | 'release'
+  | 'license'
+/** Badge related configuration */
+export type BadgesConfig = {
+  /** Builtin badges to disable, all builtin badges are enabled by default */
+  disabled?: BuiltinBadgeId[]
+  /** Arbitrary user provided badges appended after the builtin ones */
+  custom?: CustomBadge[]
+}
+/** Table of contents related configuration */
+export type TocConfig = {
+  /** Title of the table of contents block, default to `Table of contents` */
+  title?: string
+  /** Hide the table of contents entirely */
+  hide?: boolean
+}
 /** Config used to feed the {@link readme} function */
 export type ReadmeTemplateArgs = {
   /** Hash of the repobeats svg to retrieve for your repo at https://repobeats.axiom.co/configs */
@@ -22,7 +74,7 @@ export type ReadmeTemplateArgs = {
   /** Package status, not used yet */
   status?: 'unreleased' | 'early' | 'stable'
   /** Version control system */
-  vcsName?: 'github'
+  vcsName?: VcsName
   /** {@link WorkspaceMember}, auto generated if you use the cli */
   workspaceMember?: WorkspaceMember
   /** Root readme only related config */
@@ -30,7 +82,6 @@ export type ReadmeTemplateArgs = {
     /** All the members of the workspace */
     members: WorkspaceMember[]
   }
-  // TODO: permit multiple registry
   /** Registry on which the package is published  */
   packageRegistry?: PackageRegistry
   /** Set of urls for documentation, demo, etc. */
@@ -43,7 +94,7 @@ export type ReadmeTemplateArgs = {
     doc?: string
   }
   /** Source files language, rust or typescript only for now */
-  language: 'rs' | 'ts'
+  language: SourceLanguage
   /** Images links */
   images: { screenshot?: string; logo: string }
   /** Main author */
@@ -69,8 +120,7 @@ export type ReadmeTemplateArgs = {
   domainExt?: string
   /** Email (should just be the prefix, no @domain.com) */
   email: string
-  // FIXME semantically incorrect
-  /** This should be a reference to a folder that exist and contain source files for which you want a README  */
+  /** Title of the readme, displayed under the logo */
   title: string
   /** Wether or not to add a button to scroll back to the top of the readme */
   backToTop: boolean
@@ -102,17 +152,40 @@ export type ReadmeTemplateArgs = {
       contributing?: string
     }>
   /** Code of conduct file path if exist */
-  coc?: typeof COC_FILE_PATH
-  /** License */
-  license?: 'MIT'
+  coc?: string
+  /** License identifier, auto detected by the cli from the license file */
+  license?: LicenseId
+  /** License file path relative to the repo root, auto detected by the cli, default to `LICENSE.txt` */
+  licenseFile?: string
   /** Badge style for [shields.io](https://shields.io/) */
   badgeStyle?: 'for-the-badge' | 'social' | 'flat' | 'flat-square' | 'plastic'
+  /** Fine grained badge configuration, disable builtin badges or add custom ones */
+  badges?: BadgesConfig
+  /** Table of contents configuration */
+  toc?: TocConfig
 }
 /** Markdown source */
 export type MdSrc = string
 /** Template independent options */
 export type GlobalOptions = {
-  workspaceRootPath: string
+  /** Root path of the workspace, default to the current working directory */
+  workspaceRootPath?: string
+  /** Skip the file write side effect */
   dryRun?: boolean
+  /** Folder in which the `README.md` is written, default to the workspace root path */
+  folderPath?: string
 }
 export const COC_FILE_PATH = '.github/CODE_OF_CONDUCT.md' as const
+/** Keys of the builtin sections in rendering order */
+export const BUILTIN_SECTION_KEYS = [
+  'projectDescription',
+  'about',
+  'features',
+  'gettingStarted',
+  'installation',
+  'usage',
+  'roadmap',
+  'contributing',
+  'acknowledgments',
+] as const
+export type BuiltinSectionKey = (typeof BUILTIN_SECTION_KEYS)[number]

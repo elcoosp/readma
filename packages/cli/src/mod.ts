@@ -1,2 +1,4 @@
-import cli from './cli.ts'
-await cli.run()
+import { runCli } from './cli.ts'
+if (import.meta.main) {
+  Deno.exit(await runCli())
+}

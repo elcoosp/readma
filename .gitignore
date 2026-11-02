@@ -23,3 +23,7 @@ packages/documentation/build
 !packages/documentation/docs
 packages/**/cov
 packages/**/cov.lcov
+# Test coverage
+cov/
+*.lcov
+changeset-status.json

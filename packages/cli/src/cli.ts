@@ -1,286 +1,101 @@
 import { Command } from '@cliffy/command'
-import { deepMerge } from '@cross/deepmerge'
-import { Logger } from '@deno-library/logger'
-import {
-  type WorkspaceManifest,
-  readWorkspaceManifest,
-} from '@pnpm/workspace.read-manifest'
-import { exists } from '@std/fs'
-import * as jsonc from '@std/jsonc'
-import * as path from '@std/path'
-import * as toml from '@std/toml'
-import { glob } from 'glob'
-import type { PartialDeep } from 'type-fest'
-// TODO use importMap
-import { mdx, readme, types, utils } from '../../core/src/mod.ts'
-import { loadPkgJson } from '../../pkg-json/src/mod.ts'
 import denoConf from '../deno.json' with { type: 'json' }
-const log = new Logger()
-type DenoFile = { workspace: string[] }
-type CargoFile = {
-  workspace: { members: string[] }
-  package?: { description?: string; name?: string }
+import { logger, setLogLevel } from './logger.ts'
+import { type GenResult, runGen } from './gen.ts'
+import { runInit } from './init.ts'
+import { configJsonSchema } from './schema.ts'
+import { runValidate, type ValidationResult } from './validate.ts'
+/** Exit code used when the `--check` mode detects out of sync readmes */
+export const CHECK_EXIT_CODE = 2
+/** Exit code used when the validate command finds errors */
+export const VALIDATE_EXIT_CODE = 1
+/** Internal state collected while the commands run */
+type RunState = {
+  gen?: GenResult
+  validate?: ValidationResult
 }
 /**
- * Readma cli
+ * Run the readma cli
+ * @param args Cli args, default to `Deno.args`
+ * @returns The exit code of the run
  */
-export type Cli = {
-  /** Utility to detect language and get workspace members */
-  detectLanguage: (config: Partial<types.ReadmeTemplateArgs>) => Promise<{
-    language: types.ReadmeTemplateArgs['language']
-    files: {
-      deno?: DenoFile
-      rs?: CargoFile
-      pnpm?: WorkspaceManifest
-    }
-    workspaceMembers?: types.WorkspaceMember[]
-    packageRegistry?: types.PackageRegistry
-  }>
-  /** Run the cli */
-  run: () => Promise<unknown>
-}
-/** {@link Cli} instance */
-export const cli: Cli = {
-  async detectLanguage(config) {
-    const pnpmWorkspaceManifest = await readWorkspaceManifest('.')
-    const denoFilenames = ['deno.jsonc', 'deno.json']
-    const rsFilenames = ['Cargo.toml']
-    const getParsedFiles = async <T>(filenames: string[]) =>
-      await Promise.all(
-        filenames.map(async (filename) => {
-          if (await exists(filename)) {
-            const parserMap = {
-              toml,
-              json: JSON,
-              jsonc: jsonc,
-            } as const
-            const ext = filename.split('.')[1] as keyof typeof parserMap
-            const parser = parserMap[ext].parse
-            const file = await Deno.readTextFile(filename)
-            return parser(file) as T
-            // biome-ignore lint/style/noUselessElse: <explanation>
-          } else return null
-        }),
+export async function runCli(args: string[] = Deno.args): Promise<number> {
+  const state: RunState = {}
+  await new Command()
+    .name('readma')
+    .version(denoConf.version)
+    .description('Command line utility for Readma')
+    .globalOption('-d, --debug', 'Enable debug output.')
+    .globalOption('--root <path:string>', 'Project root path.', {
+      default: '.',
+    })
+    .action((options) => {
+      setLogLevel(options.debug ? 'debug' : 'info')
+      logger.warn(
+        'Main command called. Nothing will happen, use one of the subcommands: gen, init, validate, schema',
       )
-    const denoFiles = await getParsedFiles<DenoFile>(denoFilenames)
-    const rsFiles = await getParsedFiles<CargoFile>(rsFilenames)
-    const hasRsFiles = rsFiles.some((x) => x !== null)
-    const hasDenoFiles = denoFiles.some((x) => x !== null)
-    if (hasRsFiles && hasDenoFiles) {
-      throw new Error(
-        'Found both a deno and rust configuration file, not supported yet',
-      )
-    }
-    const language = hasDenoFiles || pnpmWorkspaceManifest !== undefined
-      ? ('ts' as const)
-      : hasRsFiles
-      ? ('rs' as const)
-      : null
-    if (language === null) throw new Error('Could not detect language')
-    const files = {
-      deno: denoFiles.find((x) => x !== null),
-      rs: rsFiles.find((x) => x !== null),
-      pnpm: pnpmWorkspaceManifest,
-    }
-    // TODO enable multiple pkg registry distributions (if both deno & package.json with access public)
-    const packageRegistry: types.PackageRegistry | undefined = hasDenoFiles
-      ? 'jsr'
-      : pnpmWorkspaceManifest
-      ? 'npm'
-      : hasRsFiles
-      ? 'crates.io'
-      : undefined
-    const workspaceMembers: types.WorkspaceMember[] | undefined =
-      packageRegistry === 'crates.io'
-        ? files.rs?.workspace?.members?.map((path) => ({
-          path,
-          description: files.rs?.package?.description ?? '-',
-          pkgName: getFolderName(path),
-        }))
-        : packageRegistry === 'jsr'
-        ? await Promise.all(
-          (files.deno?.workspace ?? []).map(async (path) => {
-            // TODO should double check that this match with package deno.json[name]
-            const pkgName = `@${config.repoName}/${getFolderName(path)}`
-
-            const jsrMeta = await fetch(
-              `https://npm.jsr.io/@jsr/${
-                pkgName
-                  .replace('/', '__')
-                  .replace('@', '')
-              }`,
-              {
-                headers: {
-                  Accept: 'application/json',
-                },
-              },
-            ).then((x) => x.json())
-
-            return {
-              path,
-              description: jsrMeta?.description ?? '-',
-              pkgName,
-            }
-          }),
-        )
-        : packageRegistry === 'npm'
-        ? await getPackagesFromManifest(files.pnpm)
-        : undefined
-    log.info({ packageRegistry })
-    log.info({ workspaceMembers })
-    return {
-      packageRegistry,
-      language,
-      files,
-      workspaceMembers,
-    }
-  },
-  async run() {
-    const licenseFile = await Deno.readTextFile('LICENSE.txt')
-    let cocFile: string | undefined = undefined
-    try {
-      cocFile = await Deno.readTextFile(types.COC_FILE_PATH)
-    } catch (error) {
-      if (!(error instanceof Deno.errors.NotFound)) {
-        throw error
-      }
-    }
-    const license = licenseFile.startsWith('MIT License') ? 'MIT' : undefined
-    const config = deepMerge<PartialDeep<types.ReadmeTemplateArgs>>(
-      await utils.getReadmaConfig(),
-      {
-        license,
-        coc: cocFile ? types.COC_FILE_PATH : undefined,
-      },
-    ) as types.ReadmeTemplateArgs
-
-    await new Command()
-      .name('readma')
-      .version(denoConf.version)
-      .description('Command line utility for Readma')
-      .globalOption('-d, --debug', 'Enable debug output.')
-      .action((_options, ..._args) =>
-        log.warn(
-          'Main command called. Nothing will happen, use `gen` subcommand',
-        )
-      )
-      .command('gen', 'Generate readme(s)')
-      .action(async (_options, ..._args) => {
-        log.info('Starting readma generation')
-        log.info({ license })
-        const { language, workspaceMembers, packageRegistry, files } = await cli
-          .detectLanguage(config)
-
-        const wsOverride = await Promise.all(
-          (workspaceMembers || [])?.map(async (wm) => {
-            const packageSpecificSections = Object.fromEntries(
-              (
-                await Promise.all(
-                  Object.entries(config.sections).map(
-                    async ([sectionName, v]) => {
-                      const sectionPath = path.join(
-                        wm.path,
-                        'readma',
-                        'sections',
-                        `${sectionName}.mdx`,
-                      )
-                      try {
-                        const mdxProcessed = await mdx.processFile(sectionPath)
-                        return [sectionName, mdxProcessed]
-                      } catch (error) {
-                        console.log(error)
-                        return [sectionName, v]
-                      }
-                    },
-                  ),
-                )
-              ).filter(([_, v]) => typeof v === 'string'),
-            )
-
-            const sections = {
-              installation: language === 'ts' && packageRegistry === 'jsr'
-                ? utils.md.code(`deno add ${wm.pkgName}`)
-                : language === 'ts' && packageRegistry === 'npm'
-                ? [
-                  utils.md.code(`pnpm add ${wm.pkgName}`),
-                  utils.md.code(`npm add ${wm.pkgName}`),
-                  utils.md.code(`yarn add ${wm.pkgName}`),
-                  utils.md.code(`deno add npm:${wm.pkgName}`),
-                  utils.md.code(`bun add ${wm.pkgName}`),
-                ].join('\n')
-                : language === 'rs'
-                ? utils.md.code(`cargo add ${wm.pkgName}`)
-                : undefined,
-              ...packageSpecificSections,
-            }
-            return deepMerge<PartialDeep<types.ReadmeTemplateArgs>>(config, {
-              packageRegistry,
-              sections,
-              workspaceMember: wm,
-            })
-          }),
-        )
-        await Promise.all(
-          (wsOverride || []).map((wsConfig) => {
-            log.info(
-              `Writing "${wsConfig.workspaceMember?.pkgName}" workspace member README`,
-            )
-            return readme(wsConfig as types.ReadmeTemplateArgs)
-          }),
-        )
-        log.info('Writing workspace root README')
-
-        await readme(
-          deepMerge<PartialDeep<types.ReadmeTemplateArgs>>(config, {
-            sections: {
-              installation: config.sections?.installation ??
-                (language === 'rs'
-                  ? utils.md.code(`cargo add ${files.rs?.package?.name}`)
-                  : 'Not specified'),
-            },
-            packageRegistry,
-            root: {
-              members: (wsOverride || []).map(
-                (x) => x.workspaceMember as types.WorkspaceMember,
-              ),
-            },
-          }) as types.ReadmeTemplateArgs,
-          { workspaceRootPath: '.' },
-        )
-      })
-      .parse(Deno.args)
-  },
-} as const
-export default cli
-
-async function getPackagesFromManifest(
-  pnpmWorkspaceManifest: WorkspaceManifest | undefined,
-): Promise<types.WorkspaceMember[]> {
-  if (!pnpmWorkspaceManifest) {
-    throw new Error('pnpmWorkspaceManifest should be defined')
-  }
-  const packages: types.WorkspaceMember[] = []
-  for (const pkgsGlob of pnpmWorkspaceManifest.packages) {
-    packages.push(
-      ...(await Promise.all(
-        (
-          await glob(`${pkgsGlob}/package.json`, {
-            ignore: '**/node_modules/**',
-            // FIXME Workaround nested package json (which is not a real one but a template)
-            maxDepth: 3,
-          })
-        ).map(async (path) => {
-          const memberPath = path.replace('/package.json', '')
-          const pkg = await loadPkgJson(memberPath)
-          return {
-            path: memberPath,
-            pkgName: pkg.name as string,
-            description: pkg.description ?? '-',
-          }
-        }),
-      )),
+    })
+    .command('gen', 'Generate readme(s)')
+    .option('--dry-run', 'Render the readmes without writing them')
+    .option('--stdout', 'Print the rendered readmes to stdout')
+    .option(
+      '--check',
+      'Exit with code 2 when a readme is out of sync with the config',
     )
-  }
-  return packages
+    .option('--config <path:string>', 'Path to the config folder or file')
+    .option('--root-only', 'Only generate the workspace root readme')
+    .option('--members-only', 'Only generate the workspace member readmes')
+    .option(
+      '--member <path:string>',
+      'Only generate the readme of a member path',
+    )
+    .option('--offline', 'Skip every network call')
+    .action(async (genOptions) => {
+      setLogLevel(genOptions.debug ? 'debug' : 'info')
+      state.gen = await runGen({
+        rootPath: genOptions.root,
+        configPath: genOptions.config,
+        dryRun: genOptions.dryRun,
+        stdout: genOptions.stdout,
+        check: genOptions.check,
+        rootOnly: genOptions.rootOnly,
+        membersOnly: genOptions.membersOnly,
+        member: genOptions.member,
+        offline: genOptions.offline,
+      })
+    })
+    .command('init', 'Scaffold a readma.config.ts')
+    .option('--force', 'Overwrite an existing config file')
+    .option('--config <path:string>', 'Target config file or folder path')
+    .option('--dry-run', 'Print the config content without writing it')
+    .action(async (initOptions) => {
+      setLogLevel(initOptions.debug ? 'debug' : 'info')
+      const result = await runInit({
+        rootPath: initOptions.root,
+        force: initOptions.force,
+        configPath: initOptions.config,
+        dryRun: initOptions.dryRun,
+      })
+      if (initOptions.dryRun) console.log(result.content)
+    })
+    .command('validate', 'Validate the readma config and its referenced files')
+    .option('--config <path:string>', 'Path to the config folder or file')
+    .action(async (validateOptions) => {
+      setLogLevel(validateOptions.debug ? 'debug' : 'info')
+      state.validate = await runValidate({
+        rootPath: validateOptions.root,
+        configPath: validateOptions.config,
+      })
+      for (const issue of state.validate.issues) {
+        logger.error(issue.message)
+      }
+    })
+    .command('schema', 'Print the JSON schema of the readma config')
+    .action(() => {
+      console.log(JSON.stringify(configJsonSchema(), undefined, 2))
+    })
+    .parse(args)
+  if (state.gen?.check && state.gen.changed.length > 0) return CHECK_EXIT_CODE
+  if (state.validate && !state.validate.ok) return VALIDATE_EXIT_CODE
+  return 0
 }
-const getFolderName = (x: string) => x.split('/').pop() as string

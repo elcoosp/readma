@@ -1,14 +1,10 @@
 {
   "name": "@readma/cli",
-  "version": "0.6.15",
+  "version": "0.7.0",
   "exports": "./src/mod.ts",
   "imports": {
-    "@cross/deepmerge": "jsr:@cross/deepmerge@^1.0.0",
-    "@david/dax": "jsr:@david/dax@^0.45.0",
-    "@deno-library/logger": "jsr:@deno-library/logger@^1.2.0",
-    "@pnpm/workspace.read-manifest": "npm:@pnpm/workspace.read-manifest@^1000.0.0",
-    "@readma/core": "jsr:@readma/core@^0.6",
-    "glob": "npm:glob@^13.0.0",
-    "type-fest": "npm:type-fest@^5.0.0"
+    "@pnpm/workspace.read-manifest": "npm:@pnpm/workspace.read-manifest@^1000.3.1",
+    "@readma/core": "jsr:@readma/core@^0.7.0",
+    "deepmerge-ts": "npm:deepmerge-ts@^8.0.2"
   }
 }

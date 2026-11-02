@@ -23,11 +23,15 @@
     "ci:publish": "changeset publish",
     "ci:version": "pnpm ci:pre-version && changeset version",
     "ci:pre-version": "deno run -A scripts/pre-version.ts",
-    "changeset": "changeset"
+    "changeset": "changeset",
+    "lint:ox": "oxlint --deny-warnings",
+    "coverage": "deno test -A --coverage=cov && deno coverage cov"
   },
   "devDependencies": {
-    "@changesets/cli": "^3.0.0",
+    "@changesets/cli": "^3.0.3",
     "@elcoosp-configs/cspell": "^0.0.7",
-    "turbo": "^2.4.4"
+    "lefthook": "^2.2.2",
+    "oxlint": "1.90.0",
+    "turbo": "^2.11.10"
   }
 }

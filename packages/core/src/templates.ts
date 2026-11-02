@@ -1,248 +1,124 @@
-import { $ } from '@david/dax'
 import { join } from '@std/path'
-import * as yml from '@std/yaml'
-import { markdownTable } from 'markdown-table'
-import { dedent } from 'ts-dedent'
-import { renderShields, shields } from './shields.ts'
+import { type ReadmeContext, resolveContext } from './context.ts'
+import { renderShields } from './shields.ts'
+import { allSections, renderSections } from './sections.ts'
 import { Tocer } from './toc.ts'
-import type * as types from './types.ts'
-const getBranch = async () => {
-  // Workaround github ci
-  const GITHUB_HEAD_REF = Deno.env.get('GITHUB_HEAD_REF')
-  if (GITHUB_HEAD_REF) return GITHUB_HEAD_REF
-  return (await $`git branch --show-current`.text()) || 'main'
-}
-/** Generate one readme based on {@link ReadmeTemplateArgs} with a table of content */
-export const readme: types.TemplateFn = async (
-  {
-    workspaceMember,
-    githubUsername,
-    repoName,
-    xHandle,
-    linkedinUsername,
-    domain,
-    email,
-    title,
-    author,
-    root,
-    repobeats,
-    packageRegistry,
-    urls,
-    sections: {
-      projectDescription,
-      about,
-      features,
-      installation,
-      acknowledgments,
-      contributing,
-      gettingStarted,
-      roadmap,
-      usage,
-      ...customSections
-    },
-    images,
-    template,
-    language,
-    backToTop,
-    vcsName = 'github',
-    domainExt = 'com',
-    license,
-    coc,
-    badgeStyle = 'for-the-badge',
-  },
-  globalOptions,
-) => {
-  const fullEmail = `${email}@${domain}.${domainExt}`
-  const repoUrl = urls?.repo ??
-    `https://${vcsName}.com/${githubUsername}/${repoName}`
-  const docUrl = urls?.doc ?? repoUrl
-  const demoUrl = urls?.demo ?? repoUrl
-  const branch = await getBranch()
-  const tocer = new Tocer(backToTop)
-  const commitActivityInterval = 'w'
-  const tocVar = '$$TOC$$'
-  const { shieldsBadges, shieldsRefs } = renderShields(
-    shields({
-      packageRegistry,
-      vcsName,
-      repoName,
-      repoUrl,
-      githubUsername,
-      workspaceMember,
-      badgeStyle,
-      commitActivityInterval,
-      branch,
-      language,
-      linkedinUsername,
-    }),
-  )
-  const ghContentUrl = (x = '') =>
-    `https://raw.githubusercontent.com/${githubUsername}/${repoName}/HEAD/${x}`
-  const logoSrc = ghContentUrl(images.logo)
-  const screenshotSrc = ghContentUrl(images.screenshot)
-  const licenseSectionBody = license === 'MIT'
-    ? `<sup> Licensed under <a href="${repoUrl}/blob/master/LICENSE-MIT">MIT license</a></sup>`
-    : 'None'
+import type { GlobalOptions, ReadmeTemplateArgs, TemplateFn } from './types.ts'
 
-  const getIssueTemplateUrl = async (templateFilename: string) => {
-    const fileStr = await Deno.readTextFile(
-      join(
-        globalOptions.workspaceRootPath,
-        '.github',
-        'ISSUE_TEMPLATE',
-        templateFilename,
-      ),
-    )
-    const { title, labels, assignees } = yml.parse(fileStr) as {
-      title: string
-      labels: string
-      assignees: string[]
-      // The rest is ignored hence unknown
-      name: unknown
-      description: unknown
-      body: unknown
-    }
-    const urlParams = new URLSearchParams({
-      title,
-      labels,
-      assignees: assignees.toString(),
-    })
-    return `${repoUrl}/issues/new?template=${templateFilename}&${urlParams}`
-  }
-  const withoutToc = dedent`${
-    `
-  <a id="readme-top"></a>
-  <!-- PROJECT LOGO -->
-  <br />
-  <div align="center">
-  <a href="${repoUrl}">
-  <img src="${logoSrc}" style="max-height: 200px; object-fit: contain;" alt="Logo">
-  </a>
-  <h3 align="center">${title}</h3>
-  ${workspaceMember ? `<h4 align="center">${workspaceMember.pkgName}</h4>` : ''}
-  <p align="center">
-  ${projectDescription}
-  <br />
-  <a href="${docUrl}"><strong>📖 Explore the docs »</strong></a>
-  <br />
-  <br />
-  <a href="${demoUrl}">View Demo</a>
-  ·
-  <a href="${await getIssueTemplateUrl(template.bugReport)}">Report Bug</a>
-  ·
-  <a href="${await getIssueTemplateUrl(
-      template.featRequest,
-    )}">Request Feature</a>
-    </p>
-    </div>
-
-${
-      // Space juste before is important
-      workspaceMember
-        ? `
+/** Render the readme header (logo, title, description, quick links, badges) */
+export function renderHeader(ctx: ReadmeContext): string {
+  const { args } = ctx
+  const { shieldsBadges } = renderShields(ctx.badgeList)
+  const workspaceMemberNote = args.workspaceMember
+    ? `
 > [!NOTE]
-> You are inside the **${workspaceMember.pkgName}** workspace member package, not the repository entry point
-      `.trim()
-        : ''}
-      
-${shieldsBadges}
-
-${tocVar}
-
-${
-      tocer.section(
-        '💡 About the project',
-        `
-${about}
-
-${
-          images.screenshot
-            ? `<img src="${screenshotSrc}" alt="Product screenshot" />\n`
-            : ''
-        }
-${
-          root && root.members.length > 0
-            ? `> [!TIP]
-> You are inside the entry point of **${repoName}** workspace, here is a list of available packages
-
-${
-              markdownTable(
-                [['Package', 'Description']].concat(
-                  root.members.map(({ pkgName, path, description }) => [
-                    `[${pkgName}](${path})`,
-                    description,
-                  ]),
-                ),
-              )
-            }
+> You are inside the **${args.workspaceMember.pkgName}** workspace member package, not the repository entry point
 `
-            : ''
-        }
-`,
-      )
-    }
-${tocer.section('✨ Features', features)}
-${tocer.section('🎉 Getting started', gettingStarted)}
-${tocer.section('📋 Installation', installation)}
-${tocer.section('🔧 Usage', usage)}
+    : ''
+  return `<a id="readme-top"></a>
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+<a href="${ctx.repoUrl}">
+<img src="${ctx.logoSrc}" style="max-height: 200px; object-fit: contain;" alt="Logo">
+</a>
+<h3 align="center">${args.title}</h3>
 ${
-      tocer.section(
-        '🚀 Roadmap',
-        `
-${roadmap}
+    args.workspaceMember
+      ? `<h4 align="center">${args.workspaceMember.pkgName}</h4>`
+      : ''
+  }
+<p align="center">
+${args.sections.projectDescription}
+<br />
+<a href="${ctx.docUrl}"><strong>📖 Explore the docs »</strong></a>
+<br />
+<br />
+<a href="${ctx.demoUrl}">View Demo</a>
+·
+<a href="${ctx.issueUrls.bug}">Report Bug</a>
+·
+<a href="${ctx.issueUrls.feat}">Request Feature</a>
+  </p>
+  </div>
+${workspaceMemberNote}
+${shieldsBadges}`
+}
 
-See the [open issues](${repoUrl}/issues) for a full list of proposed features (and known issues).
-`,
-      )
-    }
-${
-      Object.entries(customSections)
-        .map(([title, body]) => {
-          return tocer.section(title, body)
-        })
-        .join('\n')
-    }
-${
-      tocer.section(
-        '💻 Contributing',
-        `
-Any contributions you make are **greatly appreciated**.
-${
-          coc
-            ? `
-> [!NOTE]
-> Check the [code of conduct](${repoUrl}/tree/${branch}/${coc})
- 
-${contributing ?? ''}`
-            : (contributing ?? '')
-        }
-`,
-      )
-    }
-${
-      tocer.section(
-        '📨 Contact',
-        `
-${author} - [@${xHandle}](https://twitter.com/${xHandle}) - [${fullEmail}](${fullEmail})
-
-Project Link: [${repoUrl}](${repoUrl})
-`,
-      )
-    }
-${tocer.section('👏 Acknowledgments', acknowledgments)}
-<!--MARKDOWN LINKS & IMAGES-- >
+/** Render the readme footer (repobeats analytics and the markdown reference links) */
+export function renderFooter(ctx: ReadmeContext): string {
+  const { shieldsRefs } = renderShields(ctx.badgeList)
+  const repobeats = ctx.args.repobeats
+    ? `![Alt](https://repobeats.axiom.co/api/embed/${ctx.args.repobeats}.svg "Repobeats analytics image")`
+    : ''
+  return `<!--MARKDOWN LINKS & IMAGES-->
 <!--https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-${
-      repobeats
-        ? `![Alt](https://repobeats.axiom.co/api/embed/${repobeats}.svg "Repobeats analytics image")`
-        : ''
-    }
-${tocer.section('📄 License', licenseSectionBody)}
-${
-      // The new line is absolutely necessary
-      `\n${shieldsRefs}`}
-`.trim()
-  }\n`
+${repobeats}
+${shieldsRefs}`
+}
 
-  return withoutToc.replace(tocVar, tocer.toc())
+/** Render the full readme markdown from an already resolved context */
+function renderFromContext(ctx: ReadmeContext): string {
+  const tocer = new Tocer(ctx.args.backToTop, ctx.args.toc)
+  const body = renderSections(
+    ctx,
+    allSections(ctx),
+    (title, content) => tocer.section(title, content),
+  )
+  const tocBlock = tocer.toc()
+  return `${
+    [
+      renderHeader(ctx),
+      tocBlock,
+      body,
+      renderFooter(ctx),
+    ]
+      .filter((part) => part.trim() !== '')
+      .join('\n\n')
+  }\n`
+}
+
+/**
+ * Render a readme based on the template args, without any write side effect
+ *
+ * @param rt Readme arguments to feed the template
+ * @param options Global options
+ */
+export const readme: TemplateFn = async (rt, options = {}) => {
+  const ctx = await resolveContext(rt, options)
+  return renderFromContext(ctx)
+}
+
+/**
+ * Render a readme via {@link readme} then write it as `README.md` inside the
+ * resolved `folderPath` option, unless `dryRun` is set
+ *
+ * @param rt Readme arguments to feed the template
+ * @param options Global options
+ * @returns The rendered readme markdown
+ */
+export async function writeReadme(
+  rt: ReadmeTemplateArgs,
+  options: Partial<GlobalOptions> = {},
+): Promise<string> {
+  const ctx = await resolveContext(rt, options)
+  const rendered = renderFromContext(ctx)
+  if (!ctx.options.dryRun) {
+    const folderPath = ctx.options.folderPath === '.'
+      ? join(
+        ctx.options.workspaceRootPath,
+        rt.workspaceMember?.path ?? '',
+      )
+      : ctx.options.folderPath
+    const filepath = join(folderPath, 'README.md')
+    try {
+      await Deno.writeTextFile(filepath, rendered)
+    } catch (error) {
+      throw new Error(
+        `Expected ${folderPath} folder to exist, so that we can write the rendered markdown output inside, got error ${error}`,
+        { cause: error },
+      )
+    }
+  }
+  return rendered
 }

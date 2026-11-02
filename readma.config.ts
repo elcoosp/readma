@@ -19,8 +19,10 @@ const config: types.ReadmeTemplateArgs = {
   images: { screenshot: 'images/screenshot.gif', logo: 'images/logo.png' },
   sections: {
     features: `
-- Workspace compatible
-- Automatic shields
+- Workspace compatible (deno, pnpm/npm and cargo workspaces)
+- Automatic shields.io badges, disableable and extensible
+- Cli with \`init\`, \`gen\`, \`validate\` and \`schema\` commands
+- \`--check\` mode to keep readmes in sync in CI
 - Cross platform`,
     projectDescription: 'Beautiful effortless README generator',
     about: 'Create README that rocks',
@@ -29,11 +31,26 @@ const config: types.ReadmeTemplateArgs = {
 - [Best Readme](https://github.com/othneildrew/Best-README-Template)
 - [Badges 4 README](https://github.com/alexandresanlim/Badges4-README.md-Profile)`,
     gettingStarted: 'See screenshot',
-    usage: `🚧 In construction, refer to the [docs](${urls.doc})`,
+    usage: `\`\`\`sh
+# Scaffold a readma.config.ts from the local project
+deno run -A jsr:@readma/cli init
+
+# Generate the workspace root and member readmes
+deno run -A jsr:@readma/cli gen
+
+# Validate the config and its referenced files
+deno run -A jsr:@readma/cli validate
+
+# Print the JSON schema of the config for your editor
+deno run -A jsr:@readma/cli schema
+\`\`\`
+Refer to the [docs](${urls.doc}) for the full option list`,
     roadmap: `
 - [x] CLI with config file
 - [x] Workspace readme generated from known files like \`Cargo.toml\`/\`deno.json\`/\`pnpm-workspace.yml\`
 - [x] Github issue template links`,
+    contributing:
+      'PRs are welcome, check the [code of conduct](https://github.com/elcoosp/readma/blob/master/.github/CODE_OF_CONDUCT.md)',
     '⛑️ Support':
       'Software is still **very early** expect **unexpected breaking changes**',
   },

@@ -1,61 +1,51 @@
-import { join } from '@std/path'
-import * as templates from './templates.ts'
-import type { GlobalOptions, ReadmeTemplateArgs, TemplateFn } from './types.ts'
-// import { render } from "@deno/gfm"
+export { readme, renderFooter, renderHeader, writeReadme } from './templates.ts'
 export * as utils from './utils.ts'
 export * as types from './types.ts'
 export * as mdx from './mdx-manager.ts'
-
-/**
- * @param rt Readme arguments to feed the template
- * @param options Global options
- */
-export async function readme(
-  rt: ReadmeTemplateArgs,
-  options?: Partial<GlobalOptions>,
-): Promise<string> {
-  return (await renderWriteTemplate(templates.readme, rt, 'README', options))
-}
-
-/**
- * Render a template with it's args and options then write the file, this expect the templater to accept as first arg its template args and then global options
- * @param templater The templater function which should return correctly formatted markdown, see {@link readme}
- * @param templateArgs The templater first arg
- * @param filepath  Without extension, `.md` is hardcoded
- * @param options The templater second arg
- */
-async function renderWriteTemplate<
-  T extends TemplateFn,
->(
-  templater: T,
-  templateArgs: ReadmeTemplateArgs,
-  filepath: string,
-  options?: Partial<GlobalOptions>,
-) {
-  const workspaceRootPath = '.'
-  const defaultedOptions = {
-    workspaceRootPath,
-    folderPath: templateArgs?.workspaceMember
-      ? join(
-        workspaceRootPath,
-        templateArgs.workspaceMember.path,
-      )
-      : workspaceRootPath,
-    ...options || {},
-  }
-
-  const rendered = await templater(templateArgs, defaultedOptions)
-  if (!defaultedOptions.dryRun) {
-    try {
-      await Deno.writeTextFile(
-        `${defaultedOptions.folderPath}/${filepath}.md`,
-        rendered,
-      )
-    } catch (error) {
-      throw new Error(
-        `Expected ${defaultedOptions.folderPath} folder to exist, so that we can write the rendered markdown output inside, got error ${error}`,
-      )
-    }
-  }
-  return rendered
-}
+export * as shieldsModule from './shields.ts'
+export * as tocModule from './toc.ts'
+export * as contextModule from './context.ts'
+export * as sectionsModule from './sections.ts'
+export * as ioModule from './io.ts'
+export { ReadmaError } from './utils.ts'
+export { ghSlug, md } from './utils.ts'
+export { Tocer } from './toc.ts'
+export { renderShields, shield, shields, shieldUrl } from './shields.ts'
+export type { Shield } from './shields.ts'
+export {
+  fetchJsonDescription,
+  issueTemplateUrl,
+  resolveContext,
+} from './context.ts'
+export type { ReadmeContext } from './context.ts'
+export { allSections, installSnippet, renderSections } from './sections.ts'
+export type { SectionDef } from './sections.ts'
+export {
+  detectBranch,
+  detectLicense,
+  getReadmaConfig,
+  io,
+  matchLicense,
+  readOptionalFile,
+  resetIo,
+  setIo,
+} from './io.ts'
+export type { LicenseInfo, ReadmaIo } from './io.ts'
+export type {
+  BadgesConfig,
+  BuiltinBadgeId,
+  CustomBadge,
+  GhIssueTemplateFilename,
+  GlobalOptions,
+  LicenseId,
+  MdSrc,
+  PackageRegistry,
+  ReadmeTemplateArgs,
+  SourceLanguage,
+  TemplateFn,
+  TocConfig,
+  VcsName,
+  WorkspaceMember,
+} from './types.ts'
+export { BUILTIN_SECTION_KEYS, COC_FILE_PATH } from './types.ts'
+export type { BuiltinSectionKey } from './types.ts'

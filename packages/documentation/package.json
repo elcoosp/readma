@@ -35,7 +35,7 @@
     "typescript": "~5.9.3",
     "@docusaurus/plugin-content-docs": "3.10.2",
     "@docusaurus/theme-classic": "3.10.2",
-    "@types/node": "^24.0.0"
+    "@types/node": "^26.0.0"
   },
   "browserslist": {
     "production": [

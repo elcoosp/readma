@@ -1,0 +1,214 @@
+---
+id: reference
+title: Config reference
+description: Every field of ReadmeTemplateArgs, documented.
+---
+
+# Config reference
+
+Complete reference of the `ReadmeTemplateArgs` type. Required fields are
+enforced by `gen` and `validate`; optional fields have sane defaults listed
+in the [config overview](/docs/config/overview#defaults-applied-at-render-time).
+
+## Required fields
+
+### `language`
+
+```ts
+language: "ts" | "rs"
+```
+
+Source language of the project. Drives the installation snippet and which
+badges apply (`msrv` only exists for `rs`).
+
+### `title`, `author`, `githubUsername`, `repoName`, `xHandle`
+
+```ts
+title: string          // displayed under the logo
+author: string         // contact section
+githubUsername: string // used in every GitHub URL
+repoName: string       // used in every GitHub URL
+xHandle: string        // X/Twitter handle, contact section
+```
+
+### `domain`, `email`, `domainExt`
+
+```ts
+domain: string          // domain without extension, e.g. "gmail"
+email: string           // local part, e.g. "me"
+domainExt?: string      // defaults to "com"
+```
+
+Rendered as `email@domain.domainExt` in the contact section.
+
+### `images`
+
+```ts
+images: {
+  logo: string          // required, path relative to the repo root
+  screenshot?: string   // optional, shown in the about section
+}
+```
+
+Both paths are committed files, rendered through
+`raw.githubusercontent.com/<user>/<repo>/HEAD/<path>`.
+
+### `template`
+
+```ts
+template: {
+  bugReport: `${string}.yml` | `${string}.yaml` | `${string}.md`
+  featRequest: `${string}.yml` | `${string}.yaml` | `${string}.md`
+}
+```
+
+Filenames relative to `.github/ISSUE_TEMPLATE/`. The CLI reads the YAML front
+matter (`title`, `labels`, `assignees`) and builds prefilled
+*new issue* links for the header. Missing files fall back to a plain
+`?template=` link.
+
+### `sections`
+
+```ts
+sections: {
+  projectDescription: string  // header tagline
+  about: string               // 💡 About the project body
+  features: string            // ✨ Features body
+  gettingStarted: string      // 🎉 Getting started body
+  installation: string        // 📋 Installation body
+  usage: string               // 🔧 Usage body
+  roadmap: string             // 🚀 Roadmap body
+  acknowledgments: string     // 👏 Acknowledgments body
+  contributing?: string       // 💻 optional
+  [custom: string]: string    // any extra key = custom section
+}
+```
+
+All values are markdown sources. Empty strings are skipped at render time.
+See [sections & MDX](/docs/sections) for the rendering order and the MDX
+override mechanism.
+
+### `backToTop`
+
+```ts
+backToTop: boolean
+```
+
+Adds `<p align="right">(<a href="#readme-top">back to top</a>)</p>` after
+every section.
+
+## Optional fields
+
+### `packageRegistry`
+
+```ts
+packageRegistry?: "jsr" | "npm" | "crates.io"
+```
+
+Enables the version badge and drives the automatic installation snippet:
+
+| Registry     | Snippet                                      |
+| ------------ | -------------------------------------------- |
+| `jsr`        | `deno add <pkgName>`                          |
+| `npm`        | `pnpm` / `npm` / `yarn` / `deno` / `bun` add  |
+| `crates.io`  | `cargo add <pkgName>`                         |
+
+### `urls`
+
+```ts
+urls?: {
+  repo?: string
+  demo?: string
+  doc?: string
+}
+```
+
+Each value defaults to the derived repository URL
+(`https://github.com/<githubUsername>/<repoName>`).
+
+### `badgeStyle` and `badges`
+
+```ts
+badgeStyle?: "for-the-badge" | "social" | "flat" | "flat-square" | "plastic"
+badges?: {
+  disabled?: BuiltinBadgeId[]
+  custom?: { name: string; image: string; link: string }[]
+}
+```
+
+Full treatment in [badges & shields](/docs/config/badges).
+
+### `toc`
+
+```ts
+toc?: {
+  title?: string   // default "Table of contents"
+  hide?: boolean   // hides the whole table of contents block
+}
+```
+
+### `repobeats`
+
+```ts
+repobeats?: string
+```
+
+Hash of your repository SVG from
+[repobeats.axiom.co/configs](https://repobeats.axiom.co/configs),
+embedded as an analytics image in the footer.
+
+### `license`, `licenseFile`, `coc`
+
+```ts
+license?: string      // SPDX id, auto-detected when omitted
+licenseFile?: string  // default: detected file, else "LICENSE.txt"
+coc?: string          // default: .github/CODE_OF_CONDUCT.md when present
+```
+
+`license` appears in the license badge link and the footer license section.
+`coc` is linked from the contributing section.
+
+### `linkedinUsername`
+
+```ts
+linkedinUsername?: string
+```
+
+Adds the LinkedIn badge when set.
+
+### `vcsName`
+
+```ts
+vcsName?: "github"
+```
+
+Only `github` is supported for now — shields and raw asset URLs are
+GitHub-specific.
+
+### `status`
+
+```ts
+status?: "unreleased" | "early" | "stable"
+```
+
+Reserved for future use, not rendered yet.
+
+### `workspaceMember`, `root`
+
+```ts
+workspaceMember?: { pkgName: string; path: string; description: string }
+root?: { members: WorkspaceMember[] }
+```
+
+Injected by the CLI — see [workspace detection](/docs/workspace-detection).
+When rendering programmatically with `@readma/core` you can set them by hand.
+
+### `badgeStyle` values and their look
+
+| Style            | Look                              |
+| ---------------- | --------------------------------- |
+| `flat-square`    | Squared, no rounded corners        |
+| `flat`           | Rounded rectangle                  |
+| `plastic`        | Glossy gradient                    |
+| `for-the-badge`  | Large, uppercase, extra padding    |
+| `social`         | Compact, GitHub social style       |

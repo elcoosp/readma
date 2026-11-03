@@ -1,0 +1,8 @@
+{
+  "label": "Configuration",
+  "position": 8,
+  "link": {
+    "type": "doc",
+    "id": "config/overview"
+  }
+}

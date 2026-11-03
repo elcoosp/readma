@@ -1,0 +1,122 @@
+---
+id: overview
+title: Config overview
+description: The anatomy of readma.config.ts — a typed TypeScript module.
+---
+
+# Config overview
+
+Readma is configured by a single file, `readma.config.ts`, placed at the
+workspace root (or passed explicitly with `--config`). It is a plain
+TypeScript module that **default-exports** a
+[`ReadmeTemplateArgs`](https://jsr.io/@readma/core/doc/~/types.ReadmeTemplateArgs)
+object — no magic keys, no plugins, just types.
+
+```ts
+import type * as types from "@readma/core";
+
+const config: types.ReadmeTemplateArgs = {
+  // identity
+  language: "ts",
+  title: "Readma",
+  author: "elcoosp",
+  githubUsername: "elcoosp",
+  repoName: "readma",
+  // …
+};
+
+export default config;
+```
+
+## Why TypeScript?
+
+- **Autocompletion** — every field is documented in the
+  [`@readma/core`](https://jsr.io/@readma/core) types your editor loads.
+- **Reusable values** — compute URLs, share constants between fields, pull
+  values from other files.
+- **Type safety** — typos in field names or badge ids are compile errors,
+  caught before any README is written.
+
+## The five groups of fields
+
+### 1. Identity
+
+Who you are and where the project lives:
+
+| Field                                              | Purpose                                        |
+| -------------------------------------------------- | ---------------------------------------------- |
+| `author`, `githubUsername`, `repoName`, `xHandle`  | Header, contact section and shields            |
+| `email`, `domain`, `domainExt`                     | Contact email, rendered as `email@domain.ext`  |
+| `linkedinUsername`                                 | Optional LinkedIn badge                        |
+| `title`                                            | Displayed under the logo                       |
+| `urls.repo` / `urls.demo` / `urls.doc`             | Overrides for repository, demo and docs links  |
+
+### 2. Rendering
+
+| Field              | Purpose                                                          |
+| ------------------ | ---------------------------------------------------------------- |
+| `language`         | `ts` or `rs` — drives install snippets and badges                 |
+| `packageRegistry`  | `jsr`, `npm` or `crates.io` — drives the version badge            |
+| `images`           | `logo` (required) and `screenshot`, committed to the repo         |
+| `backToTop`        | Adds a *back to top* link after every section                     |
+| `toc`              | Table of contents title and visibility                            |
+| `badgeStyle`       | shields.io style: `for-the-badge`, `social`, `flat`, `flat-square`, `plastic` |
+| `badges`           | Disable built-in badges, append custom ones                       |
+| `repobeats`        | Hash of the repobeats analytics SVG for the footer                |
+| `template`         | GitHub issue template filenames for prefilled issue links         |
+
+### 3. Content
+
+The `sections` object holds your markdown. Eight keys are required
+(`projectDescription`, `about`, `features`, `gettingStarted`, `installation`,
+`usage`, `roadmap`, `acknowledgments`), `contributing` is optional, and **any
+extra key becomes a custom section** rendered in insertion order — see
+[sections & MDX](/docs/sections).
+
+### 4. Files & license
+
+| Field               | Purpose                                                        |
+| ------------------- | -------------------------------------------------------------- |
+| `license`           | SPDX identifier, auto-detected by the CLI when omitted          |
+| `licenseFile`       | Path relative to the repo root, default `LICENSE.txt`           |
+| `coc`               | Code of conduct path, defaults to `.github/CODE_OF_CONDUCT.md`  |
+
+### 5. Injected by the CLI
+
+You never write these — `gen` fills them in:
+
+| Field               | Injected for                              |
+| ------------------- | ----------------------------------------- |
+| `workspaceMember`   | Each member readme (name, path, description) |
+| `root.members`      | The root readme (list of all members)        |
+
+## Defaults applied at render time
+
+| Field        | Default                                |
+| ------------ | -------------------------------------- |
+| `vcsName`    | `github`                                |
+| `domainExt`  | `com`                                   |
+| `urls.repo`  | `https://github.com/<user>/<repo>`      |
+| `urls.doc`   | Falls back to `urls.repo`               |
+| `urls.demo`  | Falls back to `urls.repo`               |
+| `toc.title`  | `Table of contents`                     |
+| `licenseFile`| Detected license file or `LICENSE.txt`  |
+
+## Where images live
+
+`images.logo` and `images.screenshot` are rendered as
+`https://raw.githubusercontent.com/<user>/<repo>/HEAD/<path>` — commit them
+to the repository. The docs site of Readma itself uses
+[`docs/logo.png`](https://github.com/elcoosp/readma/blob/main/docs/logo.png)
+copied into its static assets.
+
+## Validating
+
+```bash
+deno run -A jsr:@readma/cli validate
+```
+
+reports missing required fields and broken file references — see
+[`validate`](/docs/cli/validate). For editor autocompletion of serialized
+configs, print the JSON schema with
+[`schema`](/docs/cli/schema).

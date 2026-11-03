@@ -1,0 +1,135 @@
+---
+id: badges
+title: Badges & shields
+description: The 14 built-in badges, how to disable them and how to add custom ones.
+---
+
+# Badges & shields
+
+Readma renders a badge row under the readme header using
+[shields.io](https://shields.io), with reference-style markdown links so the
+header stays tidy. Every badge has an accessible name and points to the most
+useful URL (the issues badge links to the issue tracker, the release badge to
+the releases page, and so on).
+
+## Built-in badges
+
+All badges are enabled by default. Ids marked *conditional* only appear when
+they apply to your project.
+
+| Id               | Badge             | Links to                        | Condition                        |
+| ---------------- | ----------------- | ------------------------------- | -------------------------------- |
+| `registry`       | JSR / NPM / Crates.io version | Package page        | *conditional* — see below        |
+| `codecov`        | Codecov           | Codecov page for the branch     | always                           |
+| `contributors`   | Contributors      | Contributors graph              | always                           |
+| `forks`          | Forks             | Network members                 | always                           |
+| `stars`          | Stargazers        | Stargazers page                 | always                           |
+| `commitActivity` | Commit activity   | Commits (weekly interval)       | always                           |
+| `actions`        | Branch action runs | Actions filtered on the branch | always                           |
+| `issues`         | Issues            | Issues list                     | always                           |
+| `pullRequests`   | Pull requests     | Pulls list                      | always                           |
+| `lastCommit`     | Last commit       | Commits list                    | always                           |
+| `release`        | Release           | Releases page                   | always                           |
+| `license`        | License           | License file on `master`        | always                           |
+| `linkedin`       | LinkedIn          | Profile page                    | *conditional* — `linkedinUsername` set |
+| `msrv`           | Crates MSRV       | Crates page                     | *conditional* — `language: "rs"` |
+
+### The `registry` badge
+
+Rendered only when the registry/language combination is published:
+
+| `language` | `packageRegistry` | Badge                          | Requires          |
+| ---------- | ----------------- | ------------------------------ | ----------------- |
+| `ts`       | `jsr`             | JSR version                    | a workspace member |
+| `ts`       | `npm`             | NPM version                    | a workspace member |
+| `rs`       | `crates.io`       | Crates.io version              | package name       |
+
+Root readmes get no version badge (the root is rarely published); member
+readmes do.
+
+## Disabling badges
+
+```ts
+badges: {
+  disabled: ["issues", "commitActivity"],
+}
+```
+
+Passing an id in `disabled` removes it from the row — useful when a badge
+would be noisy (e.g. a private repo with zero stars) or redundant with your
+hosting platform UI.
+
+## Custom badges
+
+Custom badges are appended **after** the built-in ones:
+
+```ts
+badges: {
+  custom: [
+    {
+      name: "Sponsor",
+      image: "https://img.shields.io/badge/-Sponsor-purple",
+      link: "https://sponsor.me/my-project",
+    },
+  ],
+}
+```
+
+| Field   | Meaning                                                     |
+| ------- | ----------------------------------------------------------- |
+| `name`  | Accessible name, also used to derive the markdown reference  |
+| `image` | Full image URL (any shields.io style or arbitrary SVG)       |
+| `link`  | URL the badge points to                                      |
+
+:::tip
+Mix built-in styling with custom badges by giving your `image` URLs the same
+`style=` query parameter as `badgeStyle`, so the row stays coherent.
+:::
+
+## Badge style
+
+```ts
+badgeStyle: "flat-square"
+```
+
+Applies the shields.io `style` parameter to every badge, built-in and custom.
+Available styles: `for-the-badge`, `social`, `flat`, `flat-square`, `plastic`.
+
+## How badges are rendered
+
+Badges use markdown **reference-style links**. The header contains:
+
+```markdown
+[![Codecov][codecov-shield]][codecov-url]
+[![Stargazers][stars-shield]][stars-url]
+```
+
+and the footer carries the URL definitions, keeping the top of the file
+readable when the readme is edited by hand:
+
+```markdown
+<!--MARKDOWN LINKS & IMAGES-->
+[codecov-shield]: https://img.shields.io/codecov/c/github/elcoosp/readma/main.svg?style=flat-square&logo=codecov&logoColor=f5f5f5
+[codecov-url]: https://codecov.io/github/elcoosp/readma/tree/main
+```
+
+The reference names are derived from the badge names with the same slug rules
+GitHub uses for anchors (kebab-case via `paramCase`).
+
+## Programmatic access
+
+The badge pipeline is exported from `@readma/core` if you want to reuse it:
+
+```ts
+import { shields, renderShields, shieldUrl } from "@readma/core";
+
+const list = shields({
+  repoName: "readma",
+  repoUrl: "https://github.com/elcoosp/readma",
+  githubUsername: "elcoosp",
+  branch: "main",
+  commitActivityInterval: "w",
+  language: "ts",
+});
+const { shieldsBadges, shieldsRefs } = renderShields(list);
+```

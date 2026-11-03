@@ -1,17 +1,63 @@
-# MDX support
+---
+sidebar_position: 13
+title: MDX
+description: Write member sections as MDX components.
+---
 
-## Sections
+# MDX
+
+Readma can compile [MDX](https://mdxjs.com) sources into the readme sections
+of workspace members. MDX gives you JSX components inside markdown — handy
+for structured content like comparison tables or lists generated from data.
 
 :::note
-Currently only workspace members `sections` can be customized using MDX.
+Only **workspace member** sections can be overridden with MDX. The root
+readme is fully driven by `readma.config.ts`.
 :::
 
-### How to
+## How to
 
-- Add a `readma/sections` folder to your workspace member
-- Add a `readma/sections/{sectionName}.mdx` file
-- Rerun [@readma/cli gen](intro.mdx#generate-readmes-of-your-project-workspace)
+1. Add a `readma/sections` folder inside the member:
 
+   ```text
+   packages/core/
+   └── readma/
+       └── sections/
+           └── usage.mdx
+   ```
 
+2. Write the section content in `usage.mdx` (the file name is the section
+   key):
 
+   ```mdx
+   ## Basic usage
 
+   Import the renderer and feed it your template args:
+
+   import { readme } from "@readma/core";
+
+   const markdown = await readme(args);
+   ```
+
+3. Rerun `gen` — the member readme now embeds the compiled MDX.
+
+```bash
+deno run -A jsr:@readma/cli gen
+```
+
+## Precedence
+
+For each section key, the first match wins:
+
+1. `readma/sections/<key>.mdx` in the member folder (compiled),
+2. `sections.<key>` from `readma.config.ts`,
+3. the automatic `installation` snippet (only for that key).
+
+Empty or broken MDX files are skipped with a warning and the config value is
+used instead — a half-written MDX file never breaks a generation.
+
+## Which keys can be overridden
+
+Any key: builtin section keys (`features`, `usage`, `roadmap`…) as well as
+your custom section keys. The section heading itself (title, emoji, position)
+still comes from the section pipeline, so MDX only replaces the body.

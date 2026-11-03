@@ -41,7 +41,9 @@
       "deno_cache",
       "packages/documentation",
       ".changeset",
-      "cov"
+      "cov",
+      "pnpm-lock.yaml",
+      "deno.lock"
     ]
   },
   "lint": {

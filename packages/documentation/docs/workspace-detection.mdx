@@ -1,0 +1,113 @@
+---
+sidebar_position: 12
+title: Workspace detection
+description: How Readma detects language, registry and workspace members.
+---
+
+# Workspace detection
+
+`gen` and `init` both start by detecting the shape of your project. There is
+no configuration for this step — it is derived from well-known files at the
+root path.
+
+## The decision tree
+
+```text
+deno.json / deno.jsonc found?
+├── yes → language: ts, registry: jsr
+│         members = deno.json workspace entries
+├── Cargo.toml found?
+│   ├── yes → error (deno + cargo mixed workspaces are not supported)
+│   └── no  → continue
+pnpm-workspace.yaml or package.json found?
+├── yes → language: ts, registry: npm
+│         members = pnpm workspace packages
+Cargo.toml found?
+├── yes → language: rs, registry: crates.io
+│         members = cargo workspace members
+└── no  → error: "Could not detect language"
+```
+
+Deno wins over pnpm when both exist; a repository with both a `deno.json`
+and a `Cargo.toml` is rejected because the two registries cannot be combined
+yet (see the [roadmap](https://github.com/elcoosp/readma#roadmap)).
+
+## Deno workspaces (registry: jsr)
+
+Members come from the `workspace` array of `deno.json` / `deno.jsonc`:
+
+```jsonc
+// deno.json
+{
+  "workspace": ["./packages/core", "./packages/cli", "./packages/*"]
+}
+```
+
+- Glob entries (`packages/*`) are expanded by looking for `deno.json` /
+  `deno.jsonc` in each candidate folder.
+- The package name is the member's `deno.json` `name`; when missing it falls
+  back to `@<repoScope>/<folderName>`.
+- The description is the member's `deno.json` `description`; when missing,
+  Readma fetches it from the JSR registry metadata and falls back to `-`
+  (also when `--offline`).
+
+## pnpm / npm workspaces (registry: npm)
+
+Members come from `pnpm-workspace.yaml` (parsed with
+`@pnpm/workspace.read-manifest`) or a root `package.json` with `workspaces`:
+
+```yaml
+# pnpm-workspace.yaml
+packages:
+  - "packages/**"
+```
+
+- Glob patterns are expanded by looking for a `package.json` in each
+  candidate folder (`node_modules` is excluded).
+- Name and description come from each member's `package.json`, with the
+  folder name as fallback.
+
+:::note
+Current limitations: glob expansion runs at a max depth of 3 and negated
+(`!`) patterns are not handled — see [limitations](/docs/limitations).
+:::
+
+## Cargo workspaces (registry: crates.io)
+
+Members come from `workspace.members` in `Cargo.toml`:
+
+```toml
+[workspace]
+members = ["crates/core", "crates/cli"]
+```
+
+Name and description come from each member's `[package]` section.
+
+## What detection feeds
+
+| Detected value    | Used by                                                                 |
+| ----------------- | ----------------------------------------------------------------------- |
+| `language`        | Installation snippets, `msrv` badge applicability                        |
+| `packageRegistry` | Version badge, automatic installation snippet                           |
+| `members`         | Root readme members table, per-member readme targets, `root.members`    |
+| descriptions      | The `Description` column of the members table                            |
+
+## Member readmes in practice
+
+For each member, `gen` deep-merges the root config with member-specific
+values (`workspaceMember`, `packageRegistry`, `installation`, MDX section
+overrides), so members inherit everything you configured globally:
+
+```text
+my-repo/
+├── deno.json            # workspace: ["./packages/*"]
+├── readma.config.ts     # one config for the whole workspace
+├── README.md            # generated: members table, root install
+└── packages/
+    ├── core/
+    │   ├── deno.json    # name + description picked up here
+    │   └── README.md    # generated: member install, JSR badge
+    └── cli/
+        ├── deno.json
+        └── README.md
+```

@@ -1,23 +1,37 @@
-/**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
- */
-
-.heroBanner {
-  padding: 4rem 0;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
-  }
-}
-
-.buttons {
-  display: flex;
+.heroInstall {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
+  gap: 0.8rem;
+  padding: 0.8rem 1.2rem;
+  border-radius: 14px;
+  background: rgba(6, 17, 31, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.95rem;
+  color: #f6b09a;
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.15s ease;
+}
+
+.heroInstall:hover {
+  border-color: rgba(240, 115, 80, 0.55);
+  transform: translateY(-1px);
+}
+
+.heroInstallCmd {
+  color: #f6b09a;
+}
+
+.heroInstallHint {
+  margin-left: auto;
+  font-size: 0.72rem;
+  font-family: var(--ifm-font-family-base);
+  color: #7d97ad;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .heroInstallHint {
+    display: none;
+  }
 }

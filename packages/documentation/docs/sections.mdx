@@ -1,0 +1,96 @@
+---
+sidebar_position: 11
+title: Sections & MDX
+description: Builtin section order, custom sections and per-member MDX overrides.
+---
+
+# Sections & MDX
+
+## Builtin sections
+
+Every readme follows the same layout. `projectDescription` is not a section —
+it is the tagline under the title — while the others are rendered as `##`
+headings in this exact order:
+
+| # | Section key          | Heading                 | Notes                                             |
+| - | -------------------- | ----------------------- | ------------------------------------------------- |
+| — | `projectDescription` | *(header tagline)*      | Rendered in the header, not as a section          |
+| 1 | `about`              | 💡 About the project     | Prepends the screenshot and, on root, the members table |
+| 2 | `features`           | ✨ Features              |                                                   |
+| 3 | `gettingStarted`     | 🎉 Getting started       |                                                   |
+| 4 | `installation`       | 📋 Installation          | Auto-derived from registry when omitted           |
+| 5 | `usage`              | 🔧 Usage                 |                                                   |
+| 6 | `roadmap`            | 🚀 Roadmap               | Non-empty roadmaps get a *open issues* link appended |
+| 7 | *(custom sections)*  | *(the key, as written)*  | Rendered in insertion order                        |
+| 8 | `contributing`       | 💻 Contributing          | Optional; links the code of conduct when found     |
+| 9 | `contact`            | 📨 Contact               | Not configurable — author, X handle, email, repo   |
+| 10 | `acknowledgments`    | 👏 Acknowledgments       |                                                   |
+| 11 | `license`            | 📄 License               | Not configurable — rendered from the detected license |
+
+A collapsible `<details>` table of contents lists every rendered section, and
+`backToTop: true` appends a *back to top* link after each one.
+
+## Custom sections
+
+Any key of `sections` that is not one of the nine builtin keys becomes a
+custom section, titled exactly as the key. Insertion order is preserved, so
+you control where it lands in the readme:
+
+```ts
+sections: {
+  // …required builtin sections…
+  "⛑️ Support": "Software is still **very early**, expect breaking changes",
+  Benchmarks: "\n- parse 1.2M lines/s\n- render 400 readmes/s",
+}
+```
+
+Custom sections render between `roadmap` and `contributing`.
+
+## Skipping a section
+
+Set it to an empty string. `renderSections` skips empty bodies, and
+`validate` warns you about them:
+
+```ts
+sections: {
+  // …
+  roadmap: "", // omitted from the readme, warning from validate
+}
+```
+
+## MDX overrides for workspace members
+
+Members can override a section **per folder**, straight from their own
+directory, without touching the root config:
+
+```text
+packages/core/
+├── deno.json
+└── readma/
+    └── sections/
+        └── usage.mdx
+```
+
+- The file name (`usage`) is the section key — builtin or custom.
+- The MDX content is compiled to HTML through `@mdx-js/mdx` and rendered with
+  React, so you can import components inside it.
+- Only workspace members get this treatment; the root readme is fully driven
+  by the config.
+- Empty or broken files are skipped with a warning and the config value is
+  used instead.
+
+Precedence for a member section body:
+
+1. `readma/sections/<key>.mdx` inside the member folder,
+2. the `sections.<key>` value from `readma.config.ts`,
+3. for `installation` only: the automatic install snippet derived from the
+   language and registry.
+
+## The contact and license sections
+
+Two sections are fully automatic and not driven by `sections`:
+
+- **Contact** — `author`, the X handle link, the email
+  (`email@domain.domainExt`) and the repository link.
+- **License** — links the license file on the current branch with the
+  detected SPDX identifier, or renders `None` when no license is found.

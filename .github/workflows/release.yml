@@ -33,7 +33,7 @@ jobs:
           deno-version: v2.x
 
       - name: Set up pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile

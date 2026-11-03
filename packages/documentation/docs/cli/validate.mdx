@@ -1,0 +1,70 @@
+---
+id: validate
+title: validate
+sidebar_position: 4
+description: Lint the readma config and every file it references.
+---
+
+# `validate`
+
+```bash
+deno run -A jsr:@readma/cli validate [options]
+```
+
+Loads the config and reports every problem it can find **before** you run
+`gen` or push to CI. Each issue is logged with its level; the command exits
+with code `1` when at least one error-level issue exists.
+
+## Options
+
+| Option            | Type     | Description                                  |
+| ----------------- | -------- | -------------------------------------------- |
+| `--config <path>` | `string` | Path to the config folder or file            |
+
+## What is checked
+
+### Required fields (errors)
+
+All required `ReadmeTemplateArgs` fields must be present:
+
+- `language`, `title`, `author`, `githubUsername`, `repoName`, `xHandle`,
+  `domain`, `email`, `backToTop`
+- `images.logo`
+- `template.bugReport`, `template.featRequest`
+- `sections.projectDescription`, `sections.about`, `sections.features`,
+  `sections.gettingStarted`, `sections.installation`, `sections.usage`,
+  `sections.roadmap`, `sections.acknowledgments`
+
+### Referenced files (errors)
+
+| Field                  | Resolved against                    |
+| ---------------------- | ----------------------------------- |
+| `images.logo`          | Project root                         |
+| `images.screenshot`    | Project root                         |
+| `template.bugReport`   | `.github/ISSUE_TEMPLATE/`            |
+| `template.featRequest` | `.github/ISSUE_TEMPLATE/`            |
+| `coc`                  | Project root                         |
+| `licenseFile`          | Project root                         |
+
+### Warnings
+
+- A section value that is an empty string — it will be omitted from the readme.
+- A `license` set without a `LICENSE.txt` next to the config (pass
+  `licenseFile` if your license lives elsewhere).
+
+## Example output
+
+```bash
+$ deno run -A jsr:@readma/cli validate
+Config at /path/to/repo is valid
+
+$ deno run -A jsr:@readma/cli validate
+[error] Logo image not found at /path/to/repo/images/logo.png
+[error] Missing required config field sections.roadmap
+```
+
+:::note
+`validate` checks the config, not the rendered output. To catch stale
+READMEs, use `gen --check` instead — the two are complementary and both
+belong in CI.
+:::

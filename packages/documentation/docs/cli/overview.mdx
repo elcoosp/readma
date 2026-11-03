@@ -1,0 +1,70 @@
+---
+id: overview
+title: CLI overview
+sidebar_position: 1
+description: The four Readma commands, global options and exit codes.
+---
+
+# CLI overview
+
+The Readma CLI ships four commands. Run them with `deno run -A jsr:@readma/cli`
+or add the CLI to your dependencies first (see [Getting started](/docs/getting-started)).
+
+```bash
+deno run -A jsr:@readma/cli --help
+```
+
+## Commands at a glance
+
+| Command    | Purpose                                                | Docs                                     |
+| ---------- | ------------------------------------------------------ | ---------------------------------------- |
+| `init`     | Scaffold a `readma.config.ts` from the local project    | [init](/docs/cli/init)                   |
+| `gen`      | Render the workspace root and member READMEs            | [gen](/docs/cli/gen)                     |
+| `validate` | Lint the config and every file it references            | [validate](/docs/cli/validate)           |
+| `schema`   | Print the JSON schema of the config for editor tooling  | [schema](/docs/cli/schema)               |
+
+Calling the CLI without a subcommand prints a warning and exits — it always
+expects one of the four above.
+
+## Global options
+
+Available on every command:
+
+| Option              | Type     | Default | Description                                  |
+| ------------------- | -------- | ------- | -------------------------------------------- |
+| `-d, --debug`       | flag     | off     | Enable debug logging                         |
+| `--root <path>`     | `string` | `.`     | Project root path the command operates on    |
+| `--config <path>`   | `string` | `.`     | Config folder or file path (command specific) |
+
+Debug mode prints extra traces such as detected custom MDX sections and
+workspace detection details.
+
+## Exit codes
+
+| Code | Meaning                                                                    |
+| ---- | -------------------------------------------------------------------------- |
+| `0`  | Success                                                                     |
+| `1`  | `validate` found at least one error-level issue                             |
+| `2`  | `gen --check` detected at least one out-of-sync README                      |
+
+The check exit code is what makes Readma CI-friendly: a pipeline step running
+`gen --check` fails exactly when a committed README is stale.
+
+## Typical workflows
+
+### Local loop
+
+```bash
+readma init        # once per repository
+readma gen         # after editing the config or the workspace
+```
+
+### CI pipeline
+
+```yaml
+- run: deno run -A jsr:@readma/cli validate
+- run: deno run -A jsr:@readma/cli gen --check --offline
+```
+
+`validate` catches config mistakes and missing referenced files; `gen --check`
+catches stale READMEs. `--offline` keeps the job hermetic.

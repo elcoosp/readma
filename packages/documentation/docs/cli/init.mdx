@@ -1,0 +1,94 @@
+---
+id: init
+title: init
+sidebar_position: 3
+description: Scaffold a readma.config.ts pre-filled from the local project.
+---
+
+# `init`
+
+```bash
+deno run -A jsr:@readma/cli init [options]
+```
+
+Scaffolds a `readma.config.ts` at the project root, pre-filled with everything
+Readma can detect locally:
+
+- **git remote** — parsed from `git config --get remote.origin.url`, both SSH
+  (`git@github.com:user/repo.git`) and HTTPS forms, into `githubUsername` and
+  `repoName`,
+- **language** — `ts` or `rs`, from [workspace detection](/docs/workspace-detection),
+- **package registry** — `jsr`, `npm` or `crates.io`,
+- **license** — SPDX identifier detected from the license file
+  ([detection rules](/docs/api#license-detection)).
+
+Everything else is filled with sensible placeholders you are expected to edit:
+sections, email, X handle, images.
+
+## Options
+
+| Option             | Type     | Description                                        |
+| ------------------ | -------- | -------------------------------------------------- |
+| `--force`          | flag     | Overwrite an existing config file                   |
+| `--config <path>`  | `string` | Target config file or folder path                   |
+| `--dry-run`        | flag     | Print the generated config without writing it       |
+
+## Behavior
+
+- Without `--force`, `init` refuses to overwrite an existing config and
+  throws.
+- With `--dry-run`, the config content is printed to stdout and nothing is
+  written.
+- When the git remote or license cannot be detected, safe placeholder values
+  (`your-github-username`, `MIT`) are used instead of failing.
+
+## Example output
+
+```ts
+import type * as types from "@readma/core";
+
+const urls = {
+  doc: `https://github.com/elcoosp/readma`,
+};
+
+const config: types.ReadmeTemplateArgs = {
+  language: "ts",
+  title: "readma",
+  author: "elcoosp",
+  githubUsername: "elcoosp",
+  repoName: "readma",
+  xHandle: "elcoosp",
+  domain: "gmail",
+  email: "elcoosp",
+  urls,
+  images: { logo: "images/logo.png" },
+  sections: {
+    features: `
+- Feature one
+- Feature two`,
+    projectDescription: "A short description of your project",
+    about: "Tell more about the project",
+    installation: "Installation instructions",
+    acknowledgments: `
+- [Best Readme](https://github.com/othneildrew/Best-README-Template)`,
+    gettingStarted: "Getting started instructions",
+    usage: "Usage instructions",
+    roadmap: `
+- [ ] Roadmap item`,
+  },
+  template: {
+    bugReport: "bug-report.yml",
+    featRequest: "feature-request.yml",
+  },
+  backToTop: true,
+  license: "MIT",
+  packageRegistry: "jsr",
+};
+
+export default config;
+```
+
+:::tip
+Right after `init`, `deno run -A jsr:@readma/cli validate` tells you which
+fields still need your attention.
+:::

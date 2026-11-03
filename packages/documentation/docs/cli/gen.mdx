@@ -1,0 +1,105 @@
+---
+id: gen
+title: gen
+sidebar_position: 2
+description: Render the workspace root and member READMEs.
+---
+
+# `gen`
+
+```bash
+deno run -A jsr:@readma/cli gen [options]
+```
+
+The main command. It:
+
+1. loads and validates `readma.config.ts`,
+2. detects the workspace (language, registry, members — see
+   [workspace detection](/docs/workspace-detection)),
+3. builds the template args for every target (root + each member),
+4. renders and writes one `README.md` per target.
+
+```bash
+$ deno run -A jsr:@readma/cli gen
+Starting readma generation
+Rendering "workspace root" readme
+Rendering "@readma/core" readme
+Rendering "@readma/cli" readme
+Rendering "@readma/pkg-json" readme
+```
+
+## Options
+
+| Option               | Type     | Description                                                       |
+| -------------------- | -------- | ----------------------------------------------------------------- |
+| `--dry-run`          | flag     | Render but skip every file write                                   |
+| `--stdout`           | flag     | Print the rendered markdown to stdout instead of writing files     |
+| `--check`            | flag     | Compare rendered output with existing files, exit 2 when different |
+| `--config <path>`    | `string` | Path to the config folder or file, relative to the root path       |
+| `--root-only`        | flag     | Only generate the workspace root readme                            |
+| `--members-only`     | flag     | Only generate the workspace member readmes                         |
+| `--member <path>`    | `string` | Only generate the readme of one member (by member path or folder)  |
+| `--offline`          | flag     | Skip every network call (package description fetches)              |
+
+Global options `-d, --debug` and `--root <path>` also apply.
+
+## Check mode in CI
+
+```bash
+deno run -A jsr:@readma/cli gen --check --offline
+```
+
+`--check` re-renders every target in memory and diffs it against the file on
+disk:
+
+- identical → exit `0`,
+- at least one differs (or is missing) → the paths are logged and the process
+  exits with code `2`.
+
+Combine it with `--offline` for a hermetic CI job. Add it to your workflow
+right after the test step so a stale README blocks the merge:
+
+```yaml
+name: CI
+on: [push, pull_request]
+jobs:
+  readmes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - run: deno run -A jsr:@readma/cli gen --check --offline
+```
+
+## Selective generation
+
+On a large workspace you rarely need to re-render everything:
+
+```bash
+# Only the root readme
+deno run -A jsr:@readma/cli gen --root-only
+
+# Every member except the root
+deno run -A jsr:@readma/cli gen --members-only
+
+# One member, by relative path or absolute folder
+deno run -A jsr:@readma/cli gen --member packages/core
+```
+
+:::tip
+`--member` matches either the member path as detected (`packages/core`) or any
+folder path resolving to it, so both forms above work.
+:::
+
+## How member readmes differ from the root one
+
+| Aspect            | Root readme                                   | Member readme                                        |
+| ----------------- | --------------------------------------------- | ---------------------------------------------------- |
+| Workspace table   | Lists all members (from detection)             | Replaced by a `> [!NOTE]` callout pointing to the root |
+| Installation      | Root package install snippet                   | Member package install snippet                        |
+| Registry badge    | —                                              | Version badge when `packageRegistry` matches          |
+| Package name      | Below the title                                | Below the title as `<h4>`                             |
+
+Both share the same config sections, badges and table of contents.

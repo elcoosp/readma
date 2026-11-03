@@ -1,0 +1,103 @@
+---
+sidebar_position: 2
+title: Getting started
+description: Prerequisites, installation options and your first Readma run.
+---
+
+# Getting started
+
+## Prerequisites
+
+- **[Deno](https://deno.com/) 2.0+** — the CLI and core library run on Deno,
+  which makes Readma cross-platform out of the box (Linux, macOS, Windows).
+- **A git repository** — Readma detects the current branch and your license
+  file; a git remote lets `init` prefill your GitHub username and repo name.
+- Optional: a `.github/ISSUE_TEMPLATE` folder with `yml`/`md` templates, so
+  the "Report Bug" / "Request Feature" links can be prefilled.
+
+## Installation
+
+### Zero-install (recommended)
+
+Run the CLI straight from JSR without adding it to your project:
+
+```bash
+deno run -A jsr:@readma/cli --help
+```
+
+:::note
+`-A` grants all permissions: Readma reads your config and project files,
+writes the READMEs, shells out to `git` for branch detection and (unless
+`--offline`) fetches package descriptions. Review with `--dry-run` first.
+:::
+
+### As a project dependency
+
+```bash
+deno add jsr:@readma/cli
+```
+
+Then use the binary in tasks:
+
+```jsonc
+// deno.json
+{
+  "tasks": {
+    "readme": "deno run -A jsr:@readma/cli gen",
+    "readme:check": "deno run -A jsr:@readma/cli gen --check --offline"
+  }
+}
+```
+
+### As a library
+
+Building your own integration? Use the rendering engine directly:
+
+```bash
+deno add jsr:@readma/core
+```
+
+```ts
+import { readme } from "@readma/core";
+
+const markdown = await readme(args, { workspaceRootPath: "." });
+console.log(markdown);
+```
+
+See the [programmatic API](/docs/api) for the full surface.
+
+## Your first run
+
+```bash
+# 1. Scaffold readma.config.ts from the local project
+deno run -A jsr:@readma/cli init
+
+# 2. Open it and fill the sections with your own markdown
+$EDITOR readma.config.ts
+
+# 3. Preview the result in the terminal
+deno run -A jsr:@readma/cli gen --stdout
+
+# 4. Write the READMEs
+deno run -A jsr:@readma/cli gen
+```
+
+On a workspace, step 4 writes one `README.md` per member plus a root readme
+that lists every member in a package table.
+
+## What gets written where
+
+| File                        | Content                                                  |
+| --------------------------- | -------------------------------------------------------- |
+| `README.md` (root)          | Root readme with the workspace members table             |
+| `<member>/README.md`        | Member readme with its own badges and installation block |
+
+Images referenced by the config (`images.logo`, `images.screenshot`) are
+rendered as `raw.githubusercontent.com/<user>/<repo>/HEAD/<path>` URLs, so
+**commit them to the repository** — a local-only path would break on GitHub.
+
+## Next steps
+
+- Understand the [config file anatomy](/docs/config/overview)
+- Browse the [CLI reference](/docs/cli/overview)
+- Wire the [check mode into CI](/docs/cli/gen#check-mode-in-ci)

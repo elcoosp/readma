@@ -1,0 +1,87 @@
+---
+sidebar_position: 16
+title: FAQ
+description: Frequently asked questions about Readma.
+---
+
+# FAQ
+
+## Will `gen` overwrite my README?
+
+Yes — `gen` writes `README.md` files wholesale. The recommended workflow is
+git-based: commit (or stash) before generating, review the diff, and keep
+`sections.*` content in `readma.config.ts` rather than editing generated
+files by hand. `--dry-run` and `--stdout` let you preview without touching
+anything, and `gen --check` fails in CI when a file drifted.
+
+## Can I keep hand-written parts?
+
+Absolutely — everything under `sections` is your markdown, and custom keys
+become custom sections in insertion order. What Readma owns is the
+scaffolding around it: header, badges, table of contents, contact, license.
+
+## Which version control systems are supported?
+
+GitHub only, for now. Asset URLs (`raw.githubusercontent.com`), shields
+endpoints and issue template links all assume GitHub. Track progress on the
+[roadmap](https://github.com/elcoosp/readma#roadmap).
+
+## Does it work outside a workspace?
+
+Yes. A single-package repository generates exactly one root readme; the
+members table simply does not appear. Detection requires one of `deno.json`,
+`pnpm-workspace.yaml` / `package.json`, or `Cargo.toml` at the root.
+
+## Why is a badge missing from my readme?
+
+Three common cases:
+
+- the badge is **conditional** (e.g. `registry` needs `packageRegistry` and a
+  published member package, `msrv` needs `language: "rs"`, `linkedin` needs
+  `linkedinUsername`) — see [badges](/docs/config/badges);
+- you disabled it in `badges.disabled`;
+- you are on the root readme, which never shows the registry version badge.
+
+## How do I add a section nobody else has?
+
+Add a custom key to `sections` — the key becomes the heading:
+
+```ts
+sections: {
+  // …
+  "🧪 Benchmarks": "\n- parse: 1.2M lines/s",
+}
+```
+
+## How are anchors computed?
+
+Exactly like GitHub: lowercase, strip characters that are not letters,
+numbers, spaces, underscores or hyphens (emojis included), spaces become
+hyphens, duplicates get `-1`, `-2` suffixes. That means `#-features` style
+anchors from emoji headings work on GitHub too.
+
+## Can I use Readma as a library?
+
+Yes — `@readma/core` exports the whole pipeline (`readme`, `writeReadme`,
+`resolveContext`, `Tocer`, `shields`…). See the
+[programmatic API](/docs/api).
+
+## Where should the logo live?
+
+`images.logo` is rendered as a `raw.githubusercontent.com/.../HEAD/<path>`
+URL, so the image must be committed. In the Readma repo itself the canonical
+logo lives at [`docs/logo.png`](https://github.com/elcoosp/readma/blob/main/docs/logo.png)
+and the documentation site serves a copy from its static assets.
+
+## What permissions does the CLI need?
+
+The documented usage grants `-A` (all permissions): reading config and
+project files, writing READMEs, running `git` for branch detection and
+fetching package descriptions. Use `--offline` to remove the network
+footprint, and `--dry-run` to skip writes.
+
+## How stable is the API?
+
+The project is in early development (`0.6.x`): expect breaking changes while
+the API stabilizes. Pin your version and check the
+[releases](https://github.com/elcoosp/readma/releases) before upgrading.

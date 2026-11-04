@@ -28,7 +28,7 @@ export const md = {
  * @example
  * ```ts
  * ghSlug('About the project') // 'about-the-project'
- * ghSlug('💡 Features') // '-features'
+ * ghSlug('\u{1F4A1} Features') // '-features' (pictographs are dropped)
  * ghSlug('Contact & support') // 'contact--support'
  * ```
  */

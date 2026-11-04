@@ -3,65 +3,53 @@ import {
   defaultOptions,
   fetchJsonDescription,
   issueTemplateUrl,
-  type ReadmeContext,
-  repoUrlFromArgs,
+  type ReadmaContext,
+  repoUrlFromConfig,
   resolveContext,
 } from '../src/context.ts'
 import { resetIo, setIo } from '../src/io.ts'
-import { COC_FILE_PATH, type ReadmeTemplateArgs } from '../src/types.ts'
+import { COC_FILE_PATH, type ReadmaConfig } from '../src/types.ts'
 import { ReadmaError } from '../src/utils.ts'
 
-const baseArgs: ReadmeTemplateArgs = {
-  language: 'ts',
+const baseConfig: ReadmaConfig = {
   title: 'Test',
+  repo: 'me/test-repo',
   author: 'me',
-  githubUsername: 'me',
-  repoName: 'test-repo',
-  xHandle: 'me',
-  domain: 'gmail',
-  email: 'me',
+  contact: { email: 'me@gmail.com', x: 'me' },
   images: { logo: 'images/logo.png' },
-  template: { bugReport: 'bug.yml', featRequest: 'feat.yml' },
-  backToTop: false,
-  sections: {
-    features: 'features',
-    projectDescription: 'desc',
-    about: 'about',
-    installation: 'install',
-    acknowledgments: 'thanks',
-    gettingStarted: 'start',
-    roadmap: 'road',
-    usage: 'usage',
-  },
+  language: 'ts',
+  content: { dir: 'readma' },
 }
 
-Deno.test('repoUrlFromArgs', () => {
+Deno.test('repoUrlFromConfig', () => {
   assertEquals(
-    repoUrlFromArgs(baseArgs),
+    repoUrlFromConfig(baseConfig),
     'https://github.com/me/test-repo',
   )
   assertEquals(
-    repoUrlFromArgs({ ...baseArgs, urls: { repo: 'https://custom.dev/repo' } }),
+    repoUrlFromConfig({
+      ...baseConfig,
+      links: { repo: 'https://custom.dev/repo' },
+    }),
     'https://custom.dev/repo',
   )
-  assertEquals(
-    repoUrlFromArgs({ ...baseArgs, vcsName: 'github' }),
-    'https://github.com/me/test-repo',
-  )
+  assertEquals(repoUrlFromConfig({ title: 'T' }), undefined)
 })
 
 Deno.test('defaultOptions', () => {
   assertEquals(defaultOptions({}), {
     workspaceRootPath: '.',
     dryRun: false,
-    folderPath: '.',
+    folderPath: undefined,
+    content: undefined,
   })
   assertEquals(
     defaultOptions({ workspaceRootPath: '/root', dryRun: true }),
     {
       workspaceRootPath: '/root',
       dryRun: true,
-      folderPath: '.',
+      folderPath: undefined,
+      content: undefined,
     },
   )
 })
@@ -136,7 +124,7 @@ Deno.test('resolveContext', async (t) => {
     try {
       await Deno.writeTextFile(`${dir}/LICENSE.txt`, 'MIT License')
       const ctx = await resolveContext(
-        { ...baseArgs, linkedinUsername: 'me' },
+        { ...baseConfig, contact: { linkedin: 'me' } },
         { workspaceRootPath: dir },
         {
           detectBranch: () => Promise.resolve('dev'),
@@ -149,39 +137,41 @@ Deno.test('resolveContext', async (t) => {
       assertEquals(ctx.repoUrl, 'https://github.com/me/test-repo')
       assertEquals(ctx.docUrl, 'https://github.com/me/test-repo')
       assertEquals(ctx.demoUrl, 'https://github.com/me/test-repo')
-      assertEquals(ctx.fullEmail, 'me@gmail.com')
       assertEquals(
         ctx.logoSrc,
         'https://raw.githubusercontent.com/me/test-repo/HEAD/images/logo.png',
       )
       assertEquals(ctx.screenshotSrc, undefined)
       assertEquals(ctx.cocPath, undefined)
-      const names = ctx.badgeList.map((s) => s.name)
+      const names = ctx.badgeList.map((shield) => shield.name)
       assertEquals(names.includes('LinkedIn'), true)
-      assertEquals(ctx.issueUrls.bug.includes('template=bug.yml'), true)
+      assertEquals(names.includes('Codecov'), true)
+      assertEquals(ctx.issueUrls.bug, undefined)
+      assertEquals(ctx.issueUrls.feat, undefined)
+      assertEquals(ctx.pkgName, 'test-repo')
       assertEquals(ctx.options.workspaceRootPath, dir)
+      assertEquals(ctx.content, [])
     } finally {
       await Deno.remove(dir, { recursive: true })
     }
   })
-  await t.step('uses urls, domainExt, screenshot and coc', async () => {
+  await t.step('uses urls, screenshot, coc and issue templates', async () => {
     const dir = await Deno.makeTempDir()
     try {
       await Deno.mkdir(`${dir}/.github`, { recursive: true })
       await Deno.writeTextFile(`${dir}/${COC_FILE_PATH}`, '# CoC')
       const ctx = await resolveContext(
         {
-          ...baseArgs,
-          urls: {
+          ...baseConfig,
+          links: {
             repo: 'https://repo',
             doc: 'https://docs',
             demo: 'https://demo',
           },
-          domainExt: 'fr',
           images: { logo: 'l.png', screenshot: 's.png' },
           coc: COC_FILE_PATH,
-          license: 'Apache-2.0',
-          licenseFile: 'LICENSE.md',
+          license: { id: 'Apache-2.0', file: 'LICENSE.md' },
+          issueTemplates: { bug: 'bug.yml', feature: 'feat.yml' },
         },
         { workspaceRootPath: dir },
         {
@@ -191,7 +181,6 @@ Deno.test('resolveContext', async (t) => {
       )
       assertEquals(ctx.docUrl, 'https://docs')
       assertEquals(ctx.demoUrl, 'https://demo')
-      assertEquals(ctx.fullEmail, 'me@gmail.fr')
       assertEquals(
         ctx.screenshotSrc,
         'https://raw.githubusercontent.com/me/test-repo/HEAD/s.png',
@@ -199,16 +188,82 @@ Deno.test('resolveContext', async (t) => {
       assertEquals(ctx.cocPath, COC_FILE_PATH)
       assertEquals(ctx.license, { id: 'Apache-2.0', file: 'LICENSE.md' })
       assertEquals(ctx.badgeList.length > 0, true)
+      assertEquals(ctx.issueUrls.bug?.includes('template=bug.yml'), true)
+      assertEquals(ctx.issueUrls.feat?.includes('template=feat.yml'), true)
     } finally {
       await Deno.remove(dir, { recursive: true })
     }
   })
-  await t.step('detects a missing license file fallback', async () => {
-    const ctx: ReadmeContext = await resolveContext(baseArgs, {}, {
+  await t.step('detects a missing license fallback', async () => {
+    const ctx: ReadmaContext = await resolveContext(baseConfig, {}, {
       detectBranch: () => Promise.resolve('main'),
       detectLicense: () => Promise.resolve({}),
     })
     assertEquals(ctx.license, { id: undefined, file: 'LICENSE.txt' })
+  })
+  await t.step('derives the member pkg name', async () => {
+    const ctx = await resolveContext(
+      {
+        ...baseConfig,
+        workspaceMember: {
+          pkgName: '@s/core',
+          path: 'packages/core',
+          description: '-',
+        },
+      },
+      {},
+      {
+        detectBranch: () => Promise.resolve('main'),
+        detectLicense: () => Promise.resolve({}),
+      },
+    )
+    assertEquals(ctx.pkgName, '@s/core')
+  })
+  await t.step('loads the content directory once', async () => {
+    const dir = await Deno.makeTempDir()
+    try {
+      await Deno.mkdir(`${dir}/docs`)
+      await Deno.writeTextFile(`${dir}/docs/about.md`, 'From the docs dir')
+      const ctx = await resolveContext(
+        { ...baseConfig, content: { dir: 'docs' } },
+        { workspaceRootPath: dir },
+        {
+          detectBranch: () => Promise.resolve('main'),
+          detectLicense: () => Promise.resolve({}),
+        },
+      )
+      assertEquals(ctx.content.length, 1)
+      assertEquals(ctx.content[0].id, 'about')
+      assertEquals(ctx.content[0].body, 'From the docs dir')
+    } finally {
+      await Deno.remove(dir, { recursive: true })
+    }
+  })
+  await t.step('honours pre loaded content', async () => {
+    const ctx = await resolveContext(
+      baseConfig,
+      {
+        content: [{ id: 'about', file: 'about.md', body: 'Pre loaded' }],
+      },
+      {
+        detectBranch: () => Promise.resolve('main'),
+        detectLicense: () => Promise.resolve({}),
+      },
+    )
+    assertEquals(ctx.content[0].body, 'Pre loaded')
+  })
+  await t.step('omits badges without a repo slug', async () => {
+    const ctx = await resolveContext(
+      { title: 'No repo' },
+      {},
+      {
+        detectBranch: () => Promise.resolve('main'),
+        detectLicense: () => Promise.resolve({}),
+      },
+    )
+    assertEquals(ctx.repoUrl, undefined)
+    assertEquals(ctx.badgeList, [])
+    assertEquals(ctx.logoSrc, undefined)
   })
 })
 
@@ -263,4 +318,16 @@ Deno.test('fetchJsonDescription', async (t) => {
       resetIo()
     }
   })
+})
+
+Deno.test('resolveContext keeps relative image paths without a repo slug', async () => {
+  const ctx = await resolveContext(
+    { title: 'Local', images: { logo: 'assets/logo.png' } },
+    {},
+    {
+      detectBranch: () => Promise.resolve('main'),
+      detectLicense: () => Promise.resolve({}),
+    },
+  )
+  assertEquals(ctx.logoSrc, 'assets/logo.png')
 })

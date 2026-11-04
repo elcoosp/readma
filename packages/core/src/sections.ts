@@ -1,21 +1,29 @@
-import type { PackageRegistry, SourceLanguage } from './types.ts'
+import {
+  type ContentFile,
+  DEFAULT_CUSTOM_SECTION_ORDER,
+  DEFAULT_SECTION_ORDER,
+  DEFAULT_SECTION_TITLES,
+  type PackageRegistry,
+  type SourceLanguage,
+} from './types.ts'
+import { humanizeTitle } from './content.ts'
 import { md } from './utils.ts'
-import type { ReadmeContext } from './context.ts'
-
+import type { ReadmaContext } from './context.ts'
 /** A readme section definition */
 export type SectionDef = {
   /** Unique section id */
   id: string
   /** Displayed section title, also used to derive the toc anchor */
   title: string
+  /** Render order, lower comes first */
+  order: number
   /** Render the section body, return undefined or an empty string to skip the section */
-  render: (ctx: ReadmeContext) => string | undefined
+  render: (ctx: ReadmaContext) => string | undefined
 }
-
 /** Installation snippet for a package, derived from the language and registry */
 export function installSnippet(
   pkgName: string,
-  language: SourceLanguage,
+  language: SourceLanguage | undefined,
   packageRegistry: PackageRegistry | undefined,
 ): string | undefined {
   if (language === 'ts' && packageRegistry === 'jsr') {
@@ -30,123 +38,174 @@ export function installSnippet(
       md.code(`bun add ${pkgName}`),
     ].join('\n')
   }
-  if (language === 'rs') return md.code(`cargo add ${pkgName}`)
+  if (language === 'rs' && packageRegistry === 'crates.io') {
+    return md.code(`cargo add ${pkgName}`)
+  }
   return undefined
 }
-
-/** Sections derived from the custom (non builtin) keys of `args.sections` */
-export function customSections(ctx: ReadmeContext): SectionDef[] {
-  const customKeys = Object.keys(ctx.args.sections).filter((key) =>
-    !(BUILTIN_SECTION_IDS as readonly string[]).includes(key)
-  )
-  return customKeys.map((key) => ({
-    id: key,
-    title: key,
-    render: () => ctx.args.sections[key],
-  }))
+/** Resolve the displayed title of a content file section */
+export function sectionTitleFor(
+  ctx: ReadmaContext,
+  file: ContentFile,
+): string {
+  return ctx.config.sections?.[file.id]?.title ?? file.title ??
+    DEFAULT_SECTION_TITLES[file.id] ?? humanizeTitle(file.id)
 }
-
-/** All the sections of a readme in rendering order */
-export function allSections(ctx: ReadmeContext): SectionDef[] {
-  return [
-    {
-      id: 'about',
-      title: '💡 About the project',
-      render: aboutSection,
-    },
-    {
-      id: 'features',
-      title: '✨ Features',
-      render: () => ctx.args.sections.features,
-    },
-    {
-      id: 'gettingStarted',
-      title: '🎉 Getting started',
-      render: () => ctx.args.sections.gettingStarted,
-    },
-    {
-      id: 'installation',
-      title: '📋 Installation',
-      render: () => ctx.args.sections.installation,
-    },
-    {
-      id: 'usage',
-      title: '🔧 Usage',
-      render: () => ctx.args.sections.usage,
-    },
-    {
-      id: 'roadmap',
-      title: '🚀 Roadmap',
-      render: () =>
-        ctx.args.sections.roadmap.trim()
-          ? `${ctx.args.sections.roadmap.trim()}
-
-See the [open issues](${ctx.repoUrl}/issues) for a full list of proposed features (and known issues).`
-          : undefined,
-    },
-    ...customSections(ctx),
-    {
-      id: 'contributing',
-      title: '💻 Contributing',
-      render: () => {
-        const { contributing } = ctx.args.sections
-        const contributingBody = contributing?.trim()
-          ? `\n\n${contributing.trim()}`
-          : ''
-        if (!ctx.cocPath && !contributingBody) return undefined
-        const cocNote = ctx.cocPath
-          ? `> [!NOTE]
-> Check the [code of conduct](${ctx.repoUrl}/tree/${ctx.branch}/${ctx.cocPath})`
-          : ''
-        return `Any contributions you make are **greatly appreciated**.
-${cocNote}${contributingBody}`
-      },
-    },
-    {
-      id: 'contact',
-      title: '📨 Contact',
-      render: () =>
-        `${ctx.args.author} - [@${ctx.args.xHandle}](https://twitter.com/${ctx.args.xHandle}) - [${ctx.fullEmail}](${ctx.fullEmail})
-
-Project Link: [${ctx.repoUrl}](${ctx.repoUrl})`,
-    },
-    {
-      id: 'acknowledgments',
-      title: '👏 Acknowledgments',
-      render: () => ctx.args.sections.acknowledgments,
-    },
-    {
-      id: 'license',
-      title: '📄 License',
-      render: () => {
-        const { license } = ctx
-        if (!license.id) return 'None'
-        return `<sup> Licensed under <a href="${ctx.repoUrl}/blob/master/${license.file}">${license.id} license</a></sup>`
-      },
-    },
-  ]
+/** Resolve the render order of a content file section */
+export function sectionOrderFor(file: ContentFile): number {
+  return file.order ??
+    DEFAULT_SECTION_ORDER[file.id] ?? DEFAULT_CUSTOM_SECTION_ORDER
 }
-
+/** Resolve the hide flag of a content file section */
+function sectionHiddenFor(ctx: ReadmaContext, file: ContentFile): boolean {
+  return ctx.config.sections?.[file.id]?.hide ?? file.hide ?? false
+}
+/** Wrap the raw markdown body of a section */
+function renderBody(
+  ctx: ReadmaContext,
+  file: ContentFile,
+): string | undefined {
+  const body = file.body.trim()
+  if (body === '') return undefined
+  switch (file.id) {
+    case 'about':
+      return aboutBody(ctx, body)
+    case 'roadmap':
+      return `${body}\n\nSee the [open issues](${ctx.repoUrl}/issues) for a full list of proposed features (and known issues).`
+    default:
+      return body
+  }
+}
 /** About section body, with the optional screenshot and the workspace members table */
-function aboutSection(ctx: ReadmeContext): string {
-  const { args } = ctx
+function aboutBody(ctx: ReadmaContext, body: string): string {
+  const { config } = ctx
   const screenshot = ctx.screenshotSrc
     ? `<img src="${ctx.screenshotSrc}" alt="Product screenshot" />\n`
     : ''
-  const members = args.root && args.root.members.length > 0
+  const members = config.root && config.root.members.length > 0
     ? `
 
 > [!TIP]
-> You are inside the entry point of **${args.repoName}** workspace, here is a list of available packages
+> You are inside the entry point of **${
+      config.repo?.split('/')[1] ?? config.title
+    }** workspace, here is a list of available packages
 
-${markdownMembersTable(args.root.members)}
+${markdownMembersTable(config.root.members)}
 `
     : ''
-  return `${args.sections.about.trim()}
+  return `${body}
 
 ${screenshot}${members}`.trim()
 }
-
+/** Contributing section body with the optional code of conduct note */
+function contributingBody(
+  ctx: ReadmaContext,
+  body: string,
+): string | undefined {
+  const trimmed = body.trim()
+  if (!ctx.cocPath && !trimmed) return undefined
+  const cocNote = ctx.cocPath
+    ? `> [!NOTE]
+> Check the [code of conduct](${ctx.repoUrl}/tree/${ctx.branch}/${ctx.cocPath})`
+    : ''
+  const base = trimmed ||
+    'Any contributions you make are **greatly appreciated**.'
+  return `${base}\n${cocNote}`.trim()
+}
+/** Contact section body derived from the config contact fields */
+function contactBody(ctx: ReadmaContext): string | undefined {
+  const { config } = ctx
+  const contact = config.contact
+  if (!contact) return undefined
+  const parts: string[] = []
+  if (config.author) parts.push(config.author)
+  if (contact.x) parts.push(`[@${contact.x}](https://x.com/${contact.x})`)
+  if (contact.linkedin) {
+    parts.push(
+      `[${contact.linkedin}](https://linkedin.com/in/${contact.linkedin})`,
+    )
+  }
+  if (contact.email) {
+    parts.push(`[${contact.email}](mailto:${contact.email})`)
+  }
+  if (parts.length === 0) return undefined
+  const projectLink = ctx.repoUrl
+    ? `\n\nProject Link: [${config.repo ?? ctx.repoUrl}](${ctx.repoUrl})`
+    : ''
+  return `${parts.join(' - ')}${projectLink}`
+}
+/** License section body, branch aware when the repo url is known */
+function licenseBody(ctx: ReadmaContext): string | undefined {
+  const { license } = ctx
+  if (!license.id) return undefined
+  if (!ctx.repoUrl) return `<sup>Licensed under the ${license.id} license</sup>`
+  return `<sup> Licensed under <a href="${ctx.repoUrl}/blob/${ctx.branch}/${license.file}">${license.id} license</a></sup>`
+}
+/** Installation fallback derived from the config, undefined when unknown */
+function installationFallback(ctx: ReadmaContext): string | undefined {
+  const { config } = ctx
+  if (!ctx.pkgName) return undefined
+  return installSnippet(ctx.pkgName, config.language, config.packageRegistry)
+}
+/**
+ * Assemble every section definition of a readme from the loaded content
+ * files, the engine generated sections and the config overrides.
+ *
+ * Definitions are sorted by render order, hidden and special files are
+ * dropped and empty bodies render as undefined.
+ */
+export function assembleSections(ctx: ReadmaContext): SectionDef[] {
+  const sectionFiles = ctx.content.filter((file) => !file.special)
+  const defs: SectionDef[] = sectionFiles
+    .filter((file) => !sectionHiddenFor(ctx, file))
+    .map((file) => ({
+      id: file.id,
+      title: sectionTitleFor(ctx, file),
+      order: sectionOrderFor(file),
+      render: (renderCtx: ReadmaContext) =>
+        file.id === 'contributing'
+          ? contributingBody(renderCtx, file.body)
+          : renderBody(renderCtx, file),
+    }))
+  if (!defs.some((def) => def.id === 'installation')) {
+    const snippet = installationFallback(ctx)
+    if (snippet) {
+      defs.push({
+        id: 'installation',
+        title: DEFAULT_SECTION_TITLES.installation,
+        order: DEFAULT_SECTION_ORDER.installation,
+        render: () => snippet,
+      })
+    }
+  }
+  if (!defs.some((def) => def.id === 'contributing') && ctx.cocPath) {
+    defs.push({
+      id: 'contributing',
+      title: DEFAULT_SECTION_TITLES.contributing,
+      order: DEFAULT_SECTION_ORDER.contributing,
+      render: (renderCtx: ReadmaContext) => contributingBody(renderCtx, ''),
+    })
+  }
+  if (!defs.some((def) => def.id === 'contact')) {
+    defs.push({
+      id: 'contact',
+      title: DEFAULT_SECTION_TITLES.contact,
+      order: DEFAULT_SECTION_ORDER.contact,
+      render: contactBody,
+    })
+  }
+  if (!defs.some((def) => def.id === 'license')) {
+    defs.push({
+      id: 'license',
+      title: DEFAULT_SECTION_TITLES.license,
+      order: DEFAULT_SECTION_ORDER.license,
+      render: licenseBody,
+    })
+  }
+  return defs
+    .filter((def) => ctx.config.sections?.[def.id]?.hide !== true)
+    .toSorted((a, b) => a.order - b.order || a.id.localeCompare(b.id))
+}
 /** Markdown table listing the workspace members */
 export function markdownMembersTable(
   members: { pkgName: string; path: string; description: string }[],
@@ -158,23 +217,9 @@ export function markdownMembersTable(
   ])
   return markdownTable([header, ...rows])
 }
-
-/** Builtin section ids which are not rendered as custom sections */
-export const BUILTIN_SECTION_IDS = [
-  'projectDescription',
-  'about',
-  'features',
-  'gettingStarted',
-  'installation',
-  'usage',
-  'roadmap',
-  'contributing',
-  'acknowledgments',
-] as const
-
 /** Render every section definition, skipping the empty ones */
 export function renderSections(
-  ctx: ReadmeContext,
+  ctx: ReadmaContext,
   defs: SectionDef[],
   renderSection: (title: string, content: string | undefined) => string,
 ): string {
@@ -187,7 +232,6 @@ export function renderSections(
   }
   return rendered.join('\n')
 }
-
 /** Minimal markdown table renderer (kept dependency free for the common case) */
 export function markdownTable(rows: string[][]): string {
   if (rows.length === 0) return ''

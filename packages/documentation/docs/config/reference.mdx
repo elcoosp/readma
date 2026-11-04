@@ -1,214 +1,133 @@
 ---
 id: reference
 title: Config reference
-description: Every field of ReadmeTemplateArgs, documented.
+description: Every field of the readma config, its type and its default.
 ---
 
 # Config reference
 
-Complete reference of the `ReadmeTemplateArgs` type. Required fields are
-enforced by `gen` and `validate`; optional fields have sane defaults listed
-in the [config overview](/docs/config/overview#defaults-applied-at-render-time).
+The config is a single object stored as `readma.yaml`, `readma.yml`,
+`readma.toml` or `readma.json`. Only `title` is required.
 
-## Required fields
+## Identity
 
-### `language`
+| Field         | Type     | Default | Description                                                                 |
+| ------------- | -------- | ------- | --------------------------------------------------------------------------- |
+| `title`       | `string` | —       | Readme title, displayed under the logo. Required.                            |
+| `description` | `string` | —       | Short description displayed inside the header block.                         |
+| `repo`        | `string` | —       | Github slug `owner/name`. Drives badges, repo links and raw image urls.      |
+| `author`      | `string` | —       | Main author name, used by the contact section.                               |
 
-```ts
-language: "ts" | "rs"
+## Links
+
+| Field        | Type     | Default                | Description        |
+| ------------ | -------- | ---------------------- | ------------------ |
+| `links.repo` | `string` | derived from `repo`    | Repository url     |
+| `links.doc`  | `string` | the repo url           | Documentation url  |
+| `links.demo` | `string` | the doc url            | Demo url           |
+
+The "Explore the docs" link only renders when `links.doc` is set, the
+"View Demo" link only when `links.demo` is set.
+
+## Contact
+
+All fields are optional; the contact section is omitted when none is set.
+
+| Field             | Type     | Rendered as                            |
+| ----------------- | -------- | -------------------------------------- |
+| `contact.email`   | `string` | Full email, linked with `mailto:`      |
+| `contact.x`       | `string` | X handle, linked to `x.com/<handle>`   |
+| `contact.linkedin`| `string` | LinkedIn username and badge            |
+
+## Language and registry
+
+| Field              | Type                            | Description                                      |
+| ------------------ | ------------------------------- | ------------------------------------------------ |
+| `language`         | `'ts' \| 'rs'`                  | Source language, drives the install snippet      |
+| `packageRegistry`  | `'jsr' \| 'npm' \| 'crates.io'` | Registry, drives the install snippet             |
+| `pkgName`          | `string`                        | Package name of the install snippet, auto filled by the cli |
+
+## Images
+
+| Field                | Type     | Description                                        |
+| -------------------- | -------- | -------------------------------------------------- |
+| `images.logo`        | `string` | Logo path or url, rendered in the header           |
+| `images.screenshot`  | `string` | Screenshot path or url, rendered in the about section |
+
+Paths are resolved against the repo slug as
+`raw.githubusercontent.com/<repo>/HEAD/<path>`; without a repo slug they stay
+relative.
+
+## License
+
+| Field           | Type     | Default             | Description                        |
+| --------------- | -------- | ------------------- | ---------------------------------- |
+| `license.id`    | `string` | detected from the file | SPDX identifier, e.g. `MIT`     |
+| `license.file`  | `string` | detected            | License file path, drives the link |
+
+The license section is omitted when no identifier is known.
+
+## Issue templates
+
+| Field                  | Type     | Description                                             |
+| ---------------------- | -------- | ------------------------------------------------------- |
+| `issueTemplates.bug`    | `string` | File name inside `.github/ISSUE_TEMPLATE`, drives the "Report Bug" link |
+| `issueTemplates.feature`| `string` | Same for the "Request Feature" link                     |
+
+When the template file exists, its `title`, `labels` and `assignees` are used
+to prefill the new issue url.
+
+## Badges
+
+See [badges and shields](/docs/config/badges) for the full behaviour.
+
+| Field               | Type                      | Description                       |
+| ------------------- | ------------------------- | --------------------------------- |
+| `badges.style`      | `'for-the-badge' \| 'social' \| 'flat' \| 'flat-square' \| 'plastic'` | Shields.io style |
+| `badges.disabled`   | `string[]`                | Builtin badge ids to remove       |
+| `badges.custom`     | `{name, image, link}[]`   | Badges appended after the builtin ones |
+
+## Table of contents
+
+| Field               | Type      | Default             | Description                            |
+| ------------------- | --------- | ------------------- | -------------------------------------- |
+| `toc.title`         | `string`  | `Table of contents` | Collapsible block summary              |
+| `toc.hide`          | `boolean` | `false`             | Remove the table of contents           |
+| `toc.backToTop`     | `boolean` | `false`             | Add a "back to top" button per section |
+
+## Content
+
+| Field        | Type     | Default   | Description                                              |
+| ------------ | -------- | --------- | -------------------------------------------------------- |
+| `content.dir`| `string` | `readma`  | Directory holding the markdown content files, per package |
+
+## Misc
+
+| Field        | Type     | Description                                                     |
+| ------------ | -------- | --------------------------------------------------------------- |
+| `coc`        | `string` | Code of conduct path, detected at `.github/CODE_OF_CONDUCT.md` by default |
+| `repobeats`  | `string` | Repobeats svg hash from https://repobeats.axiom.co/configs      |
+| `$schema`    | `string` | Json schema reference for editors, ignored by the engine        |
+
+## Sections overrides
+
+`sections` maps a section id to `{ title, hide }` overrides. Config entries
+win over front matter, front matter wins over the defaults. See
+[content files](/docs/sections).
+
+```yaml
+sections:
+  license:
+    title: Legal
+  roadmap:
+    hide: true
 ```
 
-Source language of the project. Drives the installation snippet and which
-badges apply (`msrv` only exists for `rs`).
+## Workspace internals
 
-### `title`, `author`, `githubUsername`, `repoName`, `xHandle`
+| Field                      | Description                                                        |
+| -------------------------- | ------------------------------------------------------------------ |
+| `workspaceMember`          | Set by the cli when rendering a member readme                       |
+| `root.members`             | Set by the cli when rendering the workspace root readme             |
 
-```ts
-title: string          // displayed under the logo
-author: string         // contact section
-githubUsername: string // used in every GitHub URL
-repoName: string       // used in every GitHub URL
-xHandle: string        // X/Twitter handle, contact section
-```
-
-### `domain`, `email`, `domainExt`
-
-```ts
-domain: string          // domain without extension, e.g. "gmail"
-email: string           // local part, e.g. "me"
-domainExt?: string      // defaults to "com"
-```
-
-Rendered as `email@domain.domainExt` in the contact section.
-
-### `images`
-
-```ts
-images: {
-  logo: string          // required, path relative to the repo root
-  screenshot?: string   // optional, shown in the about section
-}
-```
-
-Both paths are committed files, rendered through
-`raw.githubusercontent.com/<user>/<repo>/HEAD/<path>`.
-
-### `template`
-
-```ts
-template: {
-  bugReport: `${string}.yml` | `${string}.yaml` | `${string}.md`
-  featRequest: `${string}.yml` | `${string}.yaml` | `${string}.md`
-}
-```
-
-Filenames relative to `.github/ISSUE_TEMPLATE/`. The CLI reads the YAML front
-matter (`title`, `labels`, `assignees`) and builds prefilled
-*new issue* links for the header. Missing files fall back to a plain
-`?template=` link.
-
-### `sections`
-
-```ts
-sections: {
-  projectDescription: string  // header tagline
-  about: string               // 💡 About the project body
-  features: string            // ✨ Features body
-  gettingStarted: string      // 🎉 Getting started body
-  installation: string        // 📋 Installation body
-  usage: string               // 🔧 Usage body
-  roadmap: string             // 🚀 Roadmap body
-  acknowledgments: string     // 👏 Acknowledgments body
-  contributing?: string       // 💻 optional
-  [custom: string]: string    // any extra key = custom section
-}
-```
-
-All values are markdown sources. Empty strings are skipped at render time.
-See [sections & MDX](/docs/sections) for the rendering order and the MDX
-override mechanism.
-
-### `backToTop`
-
-```ts
-backToTop: boolean
-```
-
-Adds `<p align="right">(<a href="#readme-top">back to top</a>)</p>` after
-every section.
-
-## Optional fields
-
-### `packageRegistry`
-
-```ts
-packageRegistry?: "jsr" | "npm" | "crates.io"
-```
-
-Enables the version badge and drives the automatic installation snippet:
-
-| Registry     | Snippet                                      |
-| ------------ | -------------------------------------------- |
-| `jsr`        | `deno add <pkgName>`                          |
-| `npm`        | `pnpm` / `npm` / `yarn` / `deno` / `bun` add  |
-| `crates.io`  | `cargo add <pkgName>`                         |
-
-### `urls`
-
-```ts
-urls?: {
-  repo?: string
-  demo?: string
-  doc?: string
-}
-```
-
-Each value defaults to the derived repository URL
-(`https://github.com/<githubUsername>/<repoName>`).
-
-### `badgeStyle` and `badges`
-
-```ts
-badgeStyle?: "for-the-badge" | "social" | "flat" | "flat-square" | "plastic"
-badges?: {
-  disabled?: BuiltinBadgeId[]
-  custom?: { name: string; image: string; link: string }[]
-}
-```
-
-Full treatment in [badges & shields](/docs/config/badges).
-
-### `toc`
-
-```ts
-toc?: {
-  title?: string   // default "Table of contents"
-  hide?: boolean   // hides the whole table of contents block
-}
-```
-
-### `repobeats`
-
-```ts
-repobeats?: string
-```
-
-Hash of your repository SVG from
-[repobeats.axiom.co/configs](https://repobeats.axiom.co/configs),
-embedded as an analytics image in the footer.
-
-### `license`, `licenseFile`, `coc`
-
-```ts
-license?: string      // SPDX id, auto-detected when omitted
-licenseFile?: string  // default: detected file, else "LICENSE.txt"
-coc?: string          // default: .github/CODE_OF_CONDUCT.md when present
-```
-
-`license` appears in the license badge link and the footer license section.
-`coc` is linked from the contributing section.
-
-### `linkedinUsername`
-
-```ts
-linkedinUsername?: string
-```
-
-Adds the LinkedIn badge when set.
-
-### `vcsName`
-
-```ts
-vcsName?: "github"
-```
-
-Only `github` is supported for now — shields and raw asset URLs are
-GitHub-specific.
-
-### `status`
-
-```ts
-status?: "unreleased" | "early" | "stable"
-```
-
-Reserved for future use, not rendered yet.
-
-### `workspaceMember`, `root`
-
-```ts
-workspaceMember?: { pkgName: string; path: string; description: string }
-root?: { members: WorkspaceMember[] }
-```
-
-Injected by the CLI — see [workspace detection](/docs/workspace-detection).
-When rendering programmatically with `@readma/core` you can set them by hand.
-
-### `badgeStyle` values and their look
-
-| Style            | Look                              |
-| ---------------- | --------------------------------- |
-| `flat-square`    | Squared, no rounded corners        |
-| `flat`           | Rounded rectangle                  |
-| `plastic`        | Glossy gradient                    |
-| `for-the-badge`  | Large, uppercase, extra padding    |
-| `social`         | Compact, GitHub social style       |
+Both are managed by the cli; you rarely write them by hand.

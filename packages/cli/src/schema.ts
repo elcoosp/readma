@@ -1,6 +1,6 @@
 /**
  * JSON schema of the readma config, emit it with `readma schema` and feed it
- * to your editor to get autocompletion inside `readma.config.ts`
+ * to your editor to get autocompletion inside `readma.yaml`
  */
 export function configJsonSchema(): Record<string, unknown> {
   return {
@@ -8,57 +8,32 @@ export function configJsonSchema(): Record<string, unknown> {
     title: 'Readma config',
     description: 'Configuration of the readma readme generator',
     type: 'object',
-    required: [
-      'language',
-      'images',
-      'author',
-      'template',
-      'githubUsername',
-      'repoName',
-      'xHandle',
-      'domain',
-      'email',
-      'title',
-      'backToTop',
-      'sections',
-    ],
+    required: ['title'],
     properties: {
+      $schema: { type: 'string', description: 'Json schema reference' },
+      title: { type: 'string', description: 'Title of the readme' },
+      description: {
+        type: 'string',
+        description: 'Short description displayed under the title',
+      },
+      repo: {
+        type: 'string',
+        description: 'Github slug of the project, e.g. owner/name',
+      },
       language: { type: 'string', enum: ['rs', 'ts'] },
-      title: { type: 'string' },
-      author: { type: 'string' },
-      githubUsername: { type: 'string' },
-      repoName: { type: 'string' },
-      xHandle: { type: 'string' },
-      linkedinUsername: { type: 'string' },
-      domain: { type: 'string' },
-      domainExt: { type: 'string' },
-      email: { type: 'string' },
-      backToTop: { type: 'boolean' },
-      repobeats: { type: 'string' },
-      status: { type: 'string', enum: ['unreleased', 'early', 'stable'] },
-      vcsName: { type: 'string', enum: ['github'] },
       packageRegistry: {
         type: 'string',
         enum: ['jsr', 'npm', 'crates.io'],
       },
-      badgeStyle: {
+      pkgName: {
         type: 'string',
-        enum: ['for-the-badge', 'social', 'flat', 'flat-square', 'plastic'],
+        description:
+          'Package name used by the install snippet, auto filled by the cli',
       },
-      license: { type: 'string' },
-      licenseFile: { type: 'string' },
+      author: { type: 'string' },
+      repobeats: { type: 'string' },
       coc: { type: 'string' },
-      workspaceMember: { $ref: '#/$defs/workspaceMember' },
-      root: {
-        type: 'object',
-        properties: {
-          members: {
-            type: 'array',
-            items: { $ref: '#/$defs/workspaceMember' },
-          },
-        },
-      },
-      urls: {
+      links: {
         type: 'object',
         properties: {
           repo: { type: 'string' },
@@ -66,50 +41,42 @@ export function configJsonSchema(): Record<string, unknown> {
           doc: { type: 'string' },
         },
       },
+      contact: {
+        type: 'object',
+        properties: {
+          email: { type: 'string' },
+          x: { type: 'string' },
+          linkedin: { type: 'string' },
+        },
+      },
       images: {
         type: 'object',
-        required: ['logo'],
         properties: {
           logo: { type: 'string' },
           screenshot: { type: 'string' },
         },
       },
-      template: {
+      license: {
         type: 'object',
-        required: ['bugReport', 'featRequest'],
         properties: {
-          bugReport: { type: 'string' },
-          featRequest: { type: 'string' },
+          id: { type: 'string' },
+          file: { type: 'string' },
         },
       },
-      sections: {
+      issueTemplates: {
         type: 'object',
-        required: [
-          'features',
-          'projectDescription',
-          'about',
-          'installation',
-          'acknowledgments',
-          'gettingStarted',
-          'roadmap',
-          'usage',
-        ],
         properties: {
-          features: { type: 'string' },
-          projectDescription: { type: 'string' },
-          about: { type: 'string' },
-          installation: { type: 'string' },
-          acknowledgments: { type: 'string' },
-          gettingStarted: { type: 'string' },
-          roadmap: { type: 'string' },
-          usage: { type: 'string' },
-          contributing: { type: 'string' },
+          bug: { type: 'string' },
+          feature: { type: 'string' },
         },
-        additionalProperties: { type: 'string' },
       },
       badges: {
         type: 'object',
         properties: {
+          style: {
+            type: 'string',
+            enum: ['for-the-badge', 'social', 'flat', 'flat-square', 'plastic'],
+          },
           disabled: {
             type: 'array',
             items: {
@@ -151,6 +118,37 @@ export function configJsonSchema(): Record<string, unknown> {
         properties: {
           title: { type: 'string' },
           hide: { type: 'boolean' },
+          backToTop: { type: 'boolean' },
+        },
+      },
+      content: {
+        type: 'object',
+        properties: {
+          dir: {
+            type: 'string',
+            description: 'Content directory, default to readma',
+          },
+        },
+      },
+      sections: {
+        type: 'object',
+        description: 'Per section overrides keyed by section id',
+        additionalProperties: {
+          type: 'object',
+          properties: {
+            title: { type: 'string' },
+            hide: { type: 'boolean' },
+          },
+        },
+      },
+      workspaceMember: { $ref: '#/$defs/workspaceMember' },
+      root: {
+        type: 'object',
+        properties: {
+          members: {
+            type: 'array',
+            items: { $ref: '#/$defs/workspaceMember' },
+          },
         },
       },
     },

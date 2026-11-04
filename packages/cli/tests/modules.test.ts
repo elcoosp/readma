@@ -1,12 +1,22 @@
 import { assertEquals, assertInstanceOf, assertRejects } from '@std/assert'
-import { missingConfigFields, validateConfig } from '../src/config.ts'
-import { buildMemberArgs, resolveInstallation } from '../src/gen.ts'
+import {
+  configExtOf,
+  loadConfig,
+  loadConfigFile,
+  validateConfig,
+} from '../src/config.ts'
+import { buildMemberConfig } from '../src/gen.ts'
 import { detectWorkspace, getFolderName } from '../src/detect.ts'
-import { generateInitConfig, parseGitRemote, runInit } from '../src/init.ts'
+import {
+  generateInitConfig,
+  parseGitRemote,
+  runInit,
+  STARTER_CONTENT_FILES,
+} from '../src/init.ts'
 import { log, logger, setLogLevel } from '../src/logger.ts'
 import { configJsonSchema } from '../src/schema.ts'
 import { runValidate } from '../src/validate.ts'
-import { ReadmaError, type ReadmeTemplateArgs } from '@readma/core'
+import { type ReadmaConfig, ReadmaError } from '@readma/core'
 
 Deno.test('logger levels', () => {
   setLogLevel('warn')
@@ -40,6 +50,99 @@ Deno.test('parseGitRemote', () => {
     repoName: 'readma',
   })
   assertEquals(parseGitRemote('https://gitlab.com/elcoosp/readma.git'), {})
+})
+
+Deno.test('configExtOf', () => {
+  assertEquals(configExtOf('/x/readma.yaml'), 'yaml')
+  assertEquals(configExtOf('/x/readma.yml'), 'yml')
+  assertEquals(configExtOf('/x/readma.toml'), 'toml')
+  assertEquals(configExtOf('/x/readma.json'), 'json')
+  const error = (() => {
+    try {
+      configExtOf('/x/readma.config.ts')
+      return undefined
+    } catch (error_) {
+      return error_
+    }
+  })()
+  assertInstanceOf(error, ReadmaError)
+})
+
+Deno.test('loadConfigFile parses every format', async () => {
+  const dir = await Deno.makeTempDir()
+  try {
+    await Deno.writeTextFile(`${dir}/readma.yaml`, 'title: From Yaml\n')
+    assertEquals(
+      (await loadConfigFile(`${dir}/readma.yaml`)).title,
+      'From Yaml',
+    )
+    await Deno.writeTextFile(`${dir}/readma.toml`, 'title = "From Toml"\n')
+    assertEquals(
+      (await loadConfigFile(`${dir}/readma.toml`)).title,
+      'From Toml',
+    )
+    await Deno.writeTextFile(`${dir}/readma.json`, '{"title": "From Json"}')
+    assertEquals(
+      (await loadConfigFile(`${dir}/readma.json`)).title,
+      'From Json',
+    )
+    await Deno.writeTextFile(`${dir}/broken.yaml`, 'title: [unclosed\n')
+    const broken = await loadConfigFile(`${dir}/broken.yaml`).catch((e) => e)
+    assertInstanceOf(broken, ReadmaError)
+    await Deno.writeTextFile(`${dir}/readma.config.ts`, 'export default {}')
+    const legacy = await loadConfigFile(`${dir}/readma.config.ts`).catch((e) =>
+      e
+    )
+    assertInstanceOf(legacy, ReadmaError)
+  } finally {
+    await Deno.remove(dir, { recursive: true })
+  }
+})
+
+Deno.test('loadConfig discovers the config file', async () => {
+  const dir = await Deno.makeTempDir()
+  try {
+    const missing = await loadConfig(dir).catch((error) => error)
+    assertInstanceOf(missing, ReadmaError)
+    await Deno.writeTextFile(`${dir}/readma.json`, '{"title": "Json"}')
+    const fromJson = await loadConfig(dir)
+    assertEquals(fromJson.config.title, 'Json')
+    assertEquals(fromJson.path, `${dir}/readma.json`)
+    await Deno.writeTextFile(`${dir}/readma.yaml`, 'title: Yaml\n')
+    const fromYaml = await loadConfig(dir)
+    assertEquals(fromYaml.config.title, 'Yaml')
+    const explicit = await loadConfig(dir, 'readma.json')
+    assertEquals(explicit.config.title, 'Json')
+  } finally {
+    await Deno.remove(dir, { recursive: true })
+  }
+})
+
+Deno.test('validateConfig aggregates issues', () => {
+  const valid: ReadmaConfig = { title: 'T', repo: 'owner/name' }
+  validateConfig(valid)
+  const error = (() => {
+    try {
+      validateConfig({ title: '' })
+      return undefined
+    } catch (error_) {
+      return error_
+    }
+  })()
+  assertInstanceOf(error, ReadmaError)
+  assertEquals((error as Error).message.includes('title'), true)
+  assertEquals((error as Error).message.includes('repo'), false)
+  const multi = (() => {
+    try {
+      validateConfig({ title: 'T', repo: 'nope', language: 'go' as 'ts' })
+      return undefined
+    } catch (error_) {
+      return error_
+    }
+  })()
+  assertInstanceOf(multi, ReadmaError)
+  assertEquals((multi as Error).message.includes('repo'), true)
+  assertEquals((multi as Error).message.includes('language'), true)
 })
 
 Deno.test('detectWorkspace', async (t) => {
@@ -310,61 +413,18 @@ name = "crate-two"`,
   })
 })
 
-Deno.test('config validation', () => {
-  const completeArgs = {
-    language: 'ts',
-    title: 'T',
-    author: 'A',
-    githubUsername: 'g',
-    repoName: 'r',
-    xHandle: 'x',
-    domain: 'd',
-    email: 'e',
-    backToTop: false,
-    images: { logo: 'l.png' },
-    template: { bugReport: 'b.yml', featRequest: 'f.yml' },
-    sections: {
-      features: 'f',
-      projectDescription: 'p',
-      about: 'a',
-      installation: 'i',
-      acknowledgments: 'k',
-      gettingStarted: 'g',
-      roadmap: 'r',
-      usage: 'u',
-    },
-  } as unknown as ReadmeTemplateArgs
-  assertEquals(missingConfigFields(completeArgs), [])
-  validateConfig(completeArgs)
-  const missing = missingConfigFields({} as ReadmeTemplateArgs)
-  assertEquals(missing.length > 10, true)
-  const error = (() => {
-    try {
-      validateConfig({} as ReadmeTemplateArgs)
-      return undefined
-    } catch (error_) {
-      return error_
-    }
-  })()
-  assertInstanceOf(error, ReadmaError)
-  assertEquals((error as Error).message.includes('Missing required'), true)
-})
-
 Deno.test('configJsonSchema', () => {
   const schema = configJsonSchema()
   assertEquals(typeof schema, 'object')
   assertEquals(schema.$schema, 'https://json-schema.org/draft/2020-12/schema')
-  const parsed = structuredClone(schema) as {
-    properties: {
-      sections: Record<string, unknown>
-      badges: { properties: { disabled: { items: { enum: string[] } } } }
-    }
+  const properties = schema.properties as Record<string, unknown>
+  assertEquals(typeof properties.title, 'object')
+  assertEquals(typeof properties.sections, 'object')
+  const badges = properties.badges as {
+    properties: { disabled: { items: { enum: string[] } } }
   }
-  assertEquals(typeof parsed.properties.sections, 'object')
   assertEquals(
-    parsed.properties.badges.properties.disabled.items.enum.includes(
-      'registry',
-    ),
+    badges.properties.disabled.items.enum.includes('registry'),
     true,
   )
 })
@@ -381,16 +441,29 @@ Deno.test('generateInitConfig', async (t) => {
       repoName: 'repo',
       licenseId: 'MIT',
     })
-    assertEquals(content.includes("language: 'ts'"), true)
-    assertEquals(content.includes("githubUsername: 'octo'"), true)
-    assertEquals(content.includes("license: 'MIT'"), true)
-    assertEquals(content.includes("packageRegistry: 'jsr'"), true)
+    assertEquals(content.includes('language: ts'), true)
+    assertEquals(content.includes('repo: octo/repo'), true)
+    assertEquals(content.includes('id: MIT'), true)
+    assertEquals(content.includes('packageRegistry: jsr'), true)
+    assertEquals(content.includes('title: repo'), true)
   })
   await t.step('falls back to placeholders', () => {
     const content = generateInitConfig(detection, {})
     assertEquals(content.includes('your-github-username'), true)
-    assertEquals(content.includes("license: 'MIT'"), true)
+    assertEquals(content.includes('id: MIT'), true)
   })
+})
+
+Deno.test('STARTER_CONTENT_FILES', () => {
+  const names = STARTER_CONTENT_FILES.map((file) => file.name)
+  assertEquals(names, ['about.md', 'features.md', 'usage.md', 'roadmap.md'])
+  for (const file of STARTER_CONTENT_FILES) {
+    assertEquals(file.body.length > 0, true)
+    assertEquals(
+      /[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}]/u.test(file.body),
+      false,
+    )
+  }
 })
 
 Deno.test('runInit', async (t) => {
@@ -402,7 +475,7 @@ Deno.test('runInit', async (t) => {
     return dir
   }
   const rm = (dir: string) => Deno.remove(dir, { recursive: true })
-  await t.step('scaffolds a config from the detected project', async () => {
+  await t.step('scaffolds a config and content files', async () => {
     const dir = await mk({
       'package.json': JSON.stringify({ name: 'some-pkg' }),
       'LICENSE.txt': 'MIT License',
@@ -410,10 +483,13 @@ Deno.test('runInit', async (t) => {
     try {
       const result = await runInit({ rootPath: dir })
       assertEquals(result.written, true)
-      assertEquals(result.configPath, `${dir}/readma.config.ts`)
+      assertEquals(result.configPath, `${dir}/readma.yaml`)
       const written = await Deno.readTextFile(result.configPath)
       assertEquals(written, result.content)
-      assertEquals(written.includes("license: 'MIT'"), true)
+      assertEquals(written.includes('id: MIT'), true)
+      assertEquals(result.files.length, STARTER_CONTENT_FILES.length)
+      const about = await Deno.readTextFile(`${dir}/readma/about.md`)
+      assertEquals(about.length > 0, true)
     } finally {
       await rm(dir)
     }
@@ -421,7 +497,7 @@ Deno.test('runInit', async (t) => {
   await t.step('refuses to overwrite without force', async () => {
     const dir = await mk({
       'package.json': '{}',
-      'readma.config.ts': 'export default {}',
+      'readma.yaml': 'title: Existing\n',
     })
     try {
       const error = await assertRejects(() => runInit({ rootPath: dir }))
@@ -429,8 +505,23 @@ Deno.test('runInit', async (t) => {
       assertEquals(error.message.includes('--force'), true)
       const forced = await runInit({ rootPath: dir, force: true })
       assertEquals(forced.written, true)
+      const overwritten = await Deno.readTextFile(`${dir}/readma.yaml`)
+      assertEquals(overwritten !== 'title: Existing\n', true)
     } finally {
       await rm(dir)
+    }
+  })
+  await t.step('keeps existing content files', async () => {
+    const dir = await Deno.makeTempDir()
+    try {
+      await Deno.writeTextFile(`${dir}/package.json`, '{}')
+      await Deno.mkdir(`${dir}/readma`, { recursive: true })
+      await Deno.writeTextFile(`${dir}/readma/about.md`, 'Custom about\n')
+      await runInit({ rootPath: dir, force: true })
+      const about = await Deno.readTextFile(`${dir}/readma/about.md`)
+      assertEquals(about, 'Custom about\n')
+    } finally {
+      await Deno.remove(dir, { recursive: true })
     }
   })
   await t.step('dryRun skips the write', async () => {
@@ -438,10 +529,10 @@ Deno.test('runInit', async (t) => {
     try {
       const result = await runInit({ rootPath: dir, dryRun: true })
       assertEquals(result.written, false)
-      const stat = await Deno.stat(`${dir}/readma.config.ts`).catch(() =>
-        undefined
-      )
+      const stat = await Deno.stat(`${dir}/readma.yaml`).catch(() => undefined)
       assertEquals(stat, undefined)
+      const contentDir = await Deno.stat(`${dir}/readma`).catch(() => undefined)
+      assertEquals(contentDir, undefined)
     } finally {
       await rm(dir)
     }
@@ -451,9 +542,9 @@ Deno.test('runInit', async (t) => {
     try {
       const result = await runInit({
         rootPath: dir,
-        configPath: 'custom.config.ts',
+        configPath: 'custom.yaml',
       })
-      assertEquals(result.configPath, `${dir}/custom.config.ts`)
+      assertEquals(result.configPath, `${dir}/custom.yaml`)
     } finally {
       await rm(dir)
     }
@@ -473,36 +564,31 @@ Deno.test('runValidate', async (t) => {
     return dir
   }
   const rm = (dir: string) => Deno.remove(dir, { recursive: true })
-  const validConfig = `export default {
-  language: 'ts',
-  title: 'T',
-  author: 'A',
-  githubUsername: 'g',
-  repoName: 'r',
-  xHandle: 'x',
-  domain: 'd',
-  email: 'e',
-  backToTop: false,
-  images: { logo: 'logo.png', screenshot: 'shot.png' },
-  template: { bugReport: 'bug.yml', featRequest: 'feat.yml' },
-  coc: '.github/CODE_OF_CONDUCT.md',
-  licenseFile: 'LICENSE.txt',
-  sections: {
-    features: 'f', projectDescription: 'p', about: 'a', installation: 'i',
-    acknowledgments: 'k', gettingStarted: 'g', roadmap: 'r', usage: 'u',
-    emptySection: '',
-  },
-}`
+  const validConfig = `title: T
+repo: octo/repo
+contact:
+  email: me@gmail.com
+images:
+  logo: logo.png
+  screenshot: shot.png
+issueTemplates:
+  bug: bug.yml
+  feature: feat.yml
+coc: .github/CODE_OF_CONDUCT.md
+license:
+  id: MIT
+  file: LICENSE.txt
+`
   const fullFixture = {
-    'readma.config.ts': validConfig,
+    'readma.yaml': validConfig,
     'logo.png': 'logo',
     'shot.png': 'shot',
     'LICENSE.txt': 'MIT License',
+    'readma/about.md': 'About body\n',
+    'readma/empty.md': '\n',
     '.github/CODE_OF_CONDUCT.md': '# coc',
-    '.github/ISSUE_TEMPLATE/bug.yml':
-      "title: Bug\nlabels: ['bug']\nassignees: []",
-    '.github/ISSUE_TEMPLATE/feat.yml':
-      "title: Feat\nlabels: ['feat']\nassignees: []",
+    '.github/ISSUE_TEMPLATE/bug.yml': "title: Bug\nlabels: ['bug']",
+    '.github/ISSUE_TEMPLATE/feat.yml': "title: Feat\nlabels: ['feat']",
   }
   await t.step('valid project reports only warnings', async () => {
     const dir = await mk(fullFixture)
@@ -511,22 +597,23 @@ Deno.test('runValidate', async (t) => {
       assertEquals(result.ok, true)
       assertEquals(result.issues.length, 1)
       assertEquals(result.issues[0].level, 'warn')
-      assertEquals(result.issues[0].message.includes('emptySection'), true)
+      assertEquals(result.issues[0].message.includes('empty.md'), true)
     } finally {
       await rm(dir)
     }
   })
   await t.step('missing fields and files are errors', async () => {
     const dir = await mk({
-      'readma.config.ts': `export default {
-  language: 'ts', title: 'T', author: 'A', githubUsername: 'g', repoName: 'r',
-  xHandle: 'x', domain: 'd', email: 'e', backToTop: false,
-  images: { logo: 'missing-logo.png' },
-  template: { bugReport: 'nope.yml', featRequest: 'nope2.yml' },
-  coc: 'missing-coc.md',
-  license: 'MIT',
-  sections: { features: 'f', projectDescription: 'p', about: 'a', installation: 'i', acknowledgments: 'k', gettingStarted: 'g', roadmap: 'r', usage: 'u' },
-}`,
+      'readma.yaml': `title: T
+repo: octo/repo
+language: go
+images:
+  logo: missing-logo.png
+issueTemplates:
+  bug: nope.yml
+  feature: nope2.yml
+coc: missing-coc.md
+`,
     })
     try {
       const result = await runValidate({ rootPath: dir })
@@ -536,26 +623,69 @@ Deno.test('runValidate', async (t) => {
       assertEquals(messages.includes('nope.yml'), true)
       assertEquals(messages.includes('nope2.yml'), true)
       assertEquals(messages.includes('missing-coc.md'), true)
-      assertEquals(messages.includes('LICENSE.txt found'), true)
+      assertEquals(messages.includes('language'), true)
     } finally {
       await rm(dir)
     }
   })
-  await t.step('missing licenseFile is an error', async () => {
+  await t.step('a broken config file is an error', async () => {
+    const dir = await mk({ 'readma.yaml': 'title: [unclosed\n' })
+    try {
+      const result = await runValidate({ rootPath: dir })
+      assertEquals(result.ok, false)
+      assertEquals(result.issues[0].level, 'error')
+    } finally {
+      await rm(dir)
+    }
+  })
+  await t.step('a missing config file is an error', async () => {
+    const dir = await Deno.makeTempDir()
+    try {
+      const result = await runValidate({ rootPath: dir })
+      assertEquals(result.ok, false)
+      assertEquals(result.issues[0].message.includes('Could not find'), true)
+    } finally {
+      await rm(dir)
+    }
+  })
+  await t.step('broken front matter is an error', async () => {
     const dir = await mk({
-      'readma.config.ts': `export default {
-  language: 'ts', title: 'T', author: 'A', githubUsername: 'g', repoName: 'r',
-  xHandle: 'x', domain: 'd', email: 'e', backToTop: false,
-  images: { logo: 'l.png' },
-  template: { bugReport: 'b.yml', featRequest: 'f.yml' },
-  licenseFile: 'gone.txt',
-  sections: { features: 'f', projectDescription: 'p', about: 'a', installation: 'i', acknowledgments: 'k', gettingStarted: 'g', roadmap: 'r', usage: 'u' },
-}`,
+      'readma.yaml': validConfig,
+      'logo.png': 'logo',
+      'shot.png': 'shot',
+      'LICENSE.txt': 'MIT License',
+      'readma/about.md': '---\ntitle: [broken\n---\nbody\n',
+      '.github/CODE_OF_CONDUCT.md': '# coc',
+      '.github/ISSUE_TEMPLATE/bug.yml': "title: Bug\nlabels: ['bug']",
+      '.github/ISSUE_TEMPLATE/feat.yml': "title: Feat\nlabels: ['feat']",
     })
     try {
       const result = await runValidate({ rootPath: dir })
+      assertEquals(result.ok, false)
+      const messages = result.issues.map((issue) => issue.message).join('\n')
+      assertEquals(messages.includes('front matter'), true)
+    } finally {
+      await rm(dir)
+    }
+  })
+  await t.step('a legacy mdx file is a warning', async () => {
+    const dir = await mk({
+      'readma.yaml': validConfig,
+      'logo.png': 'logo',
+      'shot.png': 'shot',
+      'LICENSE.txt': 'MIT License',
+      'readma/about.md': 'About\n',
+      'readma/legacy.mdx': 'Legacy\n',
+      '.github/CODE_OF_CONDUCT.md': '# coc',
+      '.github/ISSUE_TEMPLATE/bug.yml': "title: Bug\nlabels: ['bug']",
+      '.github/ISSUE_TEMPLATE/feat.yml': "title: Feat\nlabels: ['feat']",
+    })
+    try {
+      const result = await runValidate({ rootPath: dir })
+      assertEquals(result.ok, true)
+      const warnings = result.issues.filter((issue) => issue.level === 'warn')
       assertEquals(
-        result.issues.some((issue) => issue.message.includes('gone.txt')),
+        warnings.some((issue) => issue.message.includes('legacy.mdx')),
         true,
       )
     } finally {
@@ -565,7 +695,7 @@ Deno.test('runValidate', async (t) => {
   await t.step('a fully valid project has no issues at all', async () => {
     const dir = await mk({
       ...fullFixture,
-      'readma.config.ts': validConfig.replace("emptySection: '',", ''),
+      'readma/empty.md': 'Not empty anymore\n',
     })
     try {
       const result = await runValidate({ rootPath: dir })
@@ -575,82 +705,74 @@ Deno.test('runValidate', async (t) => {
       await rm(dir)
     }
   })
-  await t.step('missing required fields are listed', async () => {
-    const dir = await mk({ 'readma.config.ts': 'export default {}' })
+  await t.step('an explicit missing content dir is an error', async () => {
+    const dir = await mk({
+      'readma.yaml': 'title: T\ncontent:\n  dir: gone\n',
+    })
     try {
       const result = await runValidate({ rootPath: dir })
       assertEquals(result.ok, false)
-      assertEquals(result.issues.length > 10, true)
+      assertEquals(
+        result.issues.some((issue) => issue.message.includes('gone')),
+        true,
+      )
     } finally {
       await rm(dir)
     }
   })
 })
 
-Deno.test('buildMemberArgs and resolveInstallation units', async () => {
-  const config = {
-    language: 'ts',
-    sections: { features: 'f', installation: '' },
-  } as unknown as ReadmeTemplateArgs
+Deno.test('buildMemberConfig', () => {
+  const config: ReadmaConfig = { title: 'T', language: undefined }
   const member = { pkgName: 'pkg-x', path: 'packages/x', description: '-' }
-  const withoutRegistry = await buildMemberArgs(config, member, 'ts', undefined)
-  assertEquals(
-    withoutRegistry.sections.installation,
-    '',
+  const memberConfig = buildMemberConfig(config, member, 'ts', 'npm')
+  assertEquals(memberConfig.workspaceMember, member)
+  assertEquals(memberConfig.language, 'ts')
+  assertEquals(memberConfig.packageRegistry, 'npm')
+  const keepsDetection = buildMemberConfig(
+    { title: 'T', language: 'rs' },
+    member,
+    'ts',
+    'npm',
   )
-  assertEquals(withoutRegistry.workspaceMember, member)
-  const withRegistry = await buildMemberArgs(config, member, 'ts', 'npm', {
-    verbose: true,
-  })
-  assertEquals(
-    withRegistry.sections.installation.includes('pnpm add pkg-x'),
-    true,
+  assertEquals(keepsDetection.language, 'ts')
+  assertEquals(keepsDetection.packageRegistry, 'npm')
+  const fallsBackToConfig = buildMemberConfig(
+    { title: 'T', packageRegistry: 'jsr' },
+    member,
+    undefined,
+    undefined,
   )
-  assertEquals(
-    resolveInstallation(undefined, 'p', 'ts', undefined),
-    '',
-  )
-  assertEquals(
-    resolveInstallation('Config install', 'p', 'ts', 'npm'),
-    'Config install',
-  )
-  assertEquals(
-    resolveInstallation(undefined, 'p', 'rs', 'crates.io'),
-    '```sh\ncargo add p\n```',
-  )
+  assertEquals(fallsBackToConfig.packageRegistry, 'jsr')
 })
 
 Deno.test('runValidate with a relative configPath', async () => {
-  const validConfig = `export default {
-  language: 'ts', title: 'T', author: 'A', githubUsername: 'g', repoName: 'r',
-  xHandle: 'x', domain: 'd', email: 'e', backToTop: false,
-  images: { logo: 'logo.png' },
-  template: { bugReport: 'bug.yml', featRequest: 'feat.yml' },
-  sections: {
-    features: 'f', projectDescription: 'p', about: 'a', installation: 'i',
-    acknowledgments: 'k', gettingStarted: 'g', roadmap: 'r', usage: 'u',
-    numeric: 42,
-  },
-}`
   const dir = await Deno.makeTempDir()
   try {
+    await Deno.writeTextFile(
+      `${dir}/readma.yaml`,
+      'title: T\nrepo: octo/repo\nimages:\n  logo: logo.png\n',
+    )
     await Deno.writeTextFile(`${dir}/logo.png`, 'logo')
-    await Deno.writeTextFile(`${dir}/readma.config.ts`, validConfig)
-    await Deno.mkdir(`${dir}/.github/ISSUE_TEMPLATE`, { recursive: true })
-    await Deno.writeTextFile(
-      `${dir}/.github/ISSUE_TEMPLATE/bug.yml`,
-      'title: Bug',
-    )
-    await Deno.writeTextFile(
-      `${dir}/.github/ISSUE_TEMPLATE/feat.yml`,
-      'title: Feat',
-    )
     const result = await runValidate({
       rootPath: dir,
-      configPath: 'readma.config.ts',
+      configPath: 'readma.yaml',
     })
-    assertEquals(result.ok, true)
     assertEquals(result.issues, [])
+    assertEquals(result.ok, true)
+  } finally {
+    await Deno.remove(dir, { recursive: true })
+  }
+})
+
+Deno.test('runValidate with an unreadable config path', async () => {
+  const dir = await Deno.makeTempDir()
+  try {
+    await Deno.mkdir(`${dir}/readma.yaml`)
+    const result = await runValidate({ rootPath: dir })
+    assertEquals(result.ok, false)
+    assertEquals(result.issues.length, 1)
+    assertEquals(result.issues[0].level, 'error')
   } finally {
     await Deno.remove(dir, { recursive: true })
   }

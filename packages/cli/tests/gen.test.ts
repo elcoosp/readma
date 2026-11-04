@@ -5,36 +5,29 @@ import { type GenOptions, runGen } from '../src/gen.ts'
 import { detectGithubRemote, parseGitRemote } from '../src/init.ts'
 import '../src/mod.ts'
 
-/** Build a pnpm style workspace fixture with a full readma config */
+const CONFIG_YAML = `title: Test Repo
+description: A test project
+repo: octo/test-repo
+language: ts
+license:
+  id: MIT
+contact:
+  email: octo@gmail.com
+  x: octo
+`
+
+/** Build a pnpm style workspace fixture with a readma.yaml and content files */
 async function makeWorkspace(): Promise<string> {
   const dir = await Deno.makeTempDir()
   const files: Record<string, string> = {
     'pnpm-workspace.yaml': 'packages:\n  - packages/**\n',
-    'readma.config.ts': `export default {
-  language: 'ts',
-  title: 'Test Repo',
-  author: 'octo',
-  githubUsername: 'octo',
-  repoName: 'test-repo',
-  xHandle: 'octo',
-  domain: 'gmail',
-  email: 'octo',
-  backToTop: false,
-  images: { logo: 'logo.png' },
-  template: { bugReport: 'bug.yml', featRequest: 'feat.yml' },
-  license: 'MIT',
-  sections: {
-    features: 'Feature list',
-    projectDescription: 'A test project',
-    about: 'About body',
-    installation: '',
-    acknowledgments: 'Thanks',
-    gettingStarted: 'Start here',
-    roadmap: 'Roadmap body',
-    usage: 'Usage body',
-    '🧪 Custom': 'Custom body',
-  },
-}`,
+    'readma.yaml': CONFIG_YAML,
+    'readma/about.md': 'About body\n',
+    'readma/features.md': 'Feature list\n',
+    'readma/usage.md': 'Usage body\n',
+    'readma/roadmap.md': 'Roadmap body\n',
+    'readma/acknowledgments.md': 'Thanks\n',
+    'readma/support.md': '---\ntitle: Support\n---\nSupport body\n',
     'logo.png': 'logo',
     'LICENSE.txt': 'MIT License',
     '.github/ISSUE_TEMPLATE/bug.yml':
@@ -45,7 +38,7 @@ async function makeWorkspace(): Promise<string> {
       name: 'pkg-a',
       description: 'Package A',
     }),
-    'packages/a/readma/sections/features.mdx': 'Custom **features** body',
+    'packages/a/readma/features.md': 'Member **features** body\n',
     'packages/b/package.json': JSON.stringify({ name: 'pkg-b' }),
   }
   for (const [filePath, content] of Object.entries(files)) {
@@ -84,7 +77,7 @@ Deno.test('runGen writes member and root readmes', async (t) => {
         r.path.endsWith('packages/a/README.md')
       )
       assertEquals(
-        memberA?.content.includes('Custom <strong>features</strong> body'),
+        memberA?.content.includes('Member **features** body'),
         true,
       )
       assertEquals(memberA?.content.includes('pkg-a'), true)
@@ -93,14 +86,26 @@ Deno.test('runGen writes member and root readmes', async (t) => {
         r.path.endsWith('/README.md') && !r.path.includes('packages/')
       )
       assertEquals(root?.content.includes('A test project'), true)
-      assertEquals(root?.content.includes('## 🧪 Custom'), true)
+      assertEquals(root?.content.includes('## Support'), true)
+      assertEquals(root?.content.includes('Feature list'), true)
       assertEquals(root?.content.includes('[pkg-a](packages/a)'), true)
       assertEquals(root?.content.includes('Package A'), true)
       assertEquals(root?.content.includes('MIT license'), true)
+      assertEquals(root?.content.includes('pnpm add test-repo'), true)
+      assertEquals(root?.content.includes('## Contact'), true)
+      assertEquals(
+        root?.content.includes('[octo@gmail.com](mailto:octo@gmail.com)'),
+        true,
+      )
       const memberB = result.rendered.find((r) =>
         r.path.endsWith('packages/b/README.md')
       )
+      assertEquals(memberB?.content.includes('Feature list'), true)
       assertEquals(memberB?.content.includes('pnpm add pkg-b'), true)
+      assertEquals(
+        memberB?.content.includes('deno run -A jsr:@readma/cli --help'),
+        false,
+      )
     })
     await t.step('check mode detects out of sync files', async () => {
       await Deno.writeTextFile(`${dir}/packages/a/README.md`, 'stale')
@@ -174,35 +179,45 @@ Deno.test('runGen writes member and root readmes', async (t) => {
         'untouched',
       )
     })
-    await t.step('custom mdx section and installation override', async () => {
-      await Deno.mkdir(`${dir}/packages/b/readma/sections`, { recursive: true })
+    await t.step(
+      'broken member content falls back to the root content',
+      async () => {
+        await Deno.mkdir(`${dir}/packages/b/readma`, { recursive: true })
+        await Deno.writeTextFile(
+          `${dir}/packages/b/readma/broken.md`,
+          '---\ntitle: [unclosed\n---\nbody',
+        )
+        const result = await runGen({
+          ...baseOpts,
+          rootPath: dir,
+          member: 'packages/b',
+          membersOnly: true,
+        })
+        assertEquals(result.rendered[0].content.includes('Feature list'), true)
+        await Deno.remove(`${dir}/packages/b/readma`, { recursive: true })
+      },
+    )
+    await t.step('custom content dir is honored', async () => {
+      await Deno.mkdir(`${dir}/docs`, { recursive: true })
+      await Deno.writeTextFile(`${dir}/docs/faq.md`, 'Docs based faq\n')
+      const originalYaml = await Deno.readTextFile(`${dir}/readma.yaml`)
       await Deno.writeTextFile(
-        `${dir}/packages/b/readma/sections/installation.mdx`,
-        'Custom install',
+        `${dir}/readma.yaml`,
+        `${originalYaml}content:\n  dir: docs\n`,
       )
       const result = await runGen({
         ...baseOpts,
         rootPath: dir,
-        member: 'packages/b',
-        membersOnly: true,
+        rootOnly: true,
       })
-      assertEquals(result.rendered[0].content.includes('Custom install'), true)
-      await Deno.remove(`${dir}/packages/b/readma`, { recursive: true })
-    })
-    await t.step('broken mdx section falls back to config', async () => {
-      await Deno.mkdir(`${dir}/packages/b/readma/sections`, { recursive: true })
+      assertEquals(result.rendered[0].content.includes('Docs based faq'), true)
+      assertEquals(result.rendered[0].content.includes('Feature list'), false)
+      const restored = await Deno.readTextFile(`${dir}/readma.yaml`)
       await Deno.writeTextFile(
-        `${dir}/packages/b/readma/sections/features.mdx`,
-        '<NotAComponent />',
+        `${dir}/readma.yaml`,
+        restored.replace('content:\n  dir: docs\n', ''),
       )
-      const result = await runGen({
-        ...baseOpts,
-        rootPath: dir,
-        member: 'packages/b',
-        membersOnly: true,
-      })
-      assertEquals(result.rendered[0].content.includes('Feature list'), true)
-      await Deno.remove(`${dir}/packages/b/readma`, { recursive: true })
+      await Deno.remove(`${dir}/docs`, { recursive: true })
     })
   } finally {
     await Deno.remove(dir, { recursive: true })
@@ -216,12 +231,29 @@ Deno.test('runGen validates the config', async () => {
       `${dir}/package.json`,
       JSON.stringify({ name: 'pkg' }),
     )
+    await Deno.writeTextFile(`${dir}/readma.yaml`, 'description: No title\n')
+    const error = await assertRejects(() => runGen({ rootPath: dir }))
+    assertEquals(
+      (error as Error).message.includes('Invalid readma config'),
+      true,
+    )
+  } finally {
+    await Deno.remove(dir, { recursive: true })
+  }
+})
+
+Deno.test('runGen requires a config file', async () => {
+  const dir = await Deno.makeTempDir()
+  try {
     await Deno.writeTextFile(
-      `${dir}/readma.config.ts`,
-      'export default { language: "ts" }',
+      `${dir}/package.json`,
+      JSON.stringify({ name: 'pkg' }),
     )
     const error = await assertRejects(() => runGen({ rootPath: dir }))
-    assertEquals((error as Error).message.includes('Missing required'), true)
+    assertEquals(
+      (error as Error).message.includes('Could not find a readma config'),
+      true,
+    )
   } finally {
     await Deno.remove(dir, { recursive: true })
   }
@@ -234,23 +266,12 @@ Deno.test('runGen on a single npm package', async () => {
       `${dir}/package.json`,
       JSON.stringify({ name: 'npm-pkg', description: 'A single npm package' }),
     )
-    await Deno.writeTextFile(
-      `${dir}/readma.config.ts`,
-      `export default {
-  language: 'ts', title: 'Npm Pkg', author: 'octo', githubUsername: 'octo',
-  repoName: 'npm-pkg', xHandle: 'octo', domain: 'gmail', email: 'octo',
-  backToTop: false, images: { logo: 'logo.png' },
-  template: { bugReport: 'bug.yml', featRequest: 'feat.yml' },
-  license: 'MIT',
-  sections: {
-    features: 'f', projectDescription: 'p', about: 'a', installation: '',
-    acknowledgments: 'k', gettingStarted: 'g', roadmap: 'r', usage: 'u',
-  },
-}`,
-    )
+    await Deno.writeTextFile(`${dir}/readma.yaml`, CONFIG_YAML)
+    await Deno.mkdir(`${dir}/readma`, { recursive: true })
+    await Deno.writeTextFile(`${dir}/readma/about.md`, 'About\n')
     const result = await runGen({
       rootPath: dir,
-      configPath: 'readma.config.ts',
+      configPath: 'readma.yaml',
       dryRun: true,
     })
     assertEquals(result.rendered.length, 1)
@@ -278,7 +299,7 @@ Deno.test('runCli end to end', async (t) => {
         console.log = originalLog
       }
       const printed = logs.join('\n')
-      assertEquals(JSON.parse(printed).properties.sections !== undefined, true)
+      assertEquals(JSON.parse(printed).properties.title !== undefined, true)
     })
     await t.step('main command warns', async () => {
       const logs: string[] = []
@@ -313,7 +334,7 @@ Deno.test('runCli end to end', async (t) => {
       const clean = await runCli(['--root', dir, 'gen', '--check'])
       assertEquals(clean, 0)
     })
-    await t.step('init scaffolds through the command', async () => {
+    await t.step('init scaffolds yaml and content files', async () => {
       const initDir = `${dir}/init-target`
       await Deno.mkdir(initDir)
       await Deno.writeTextFile(
@@ -345,25 +366,24 @@ Deno.test('runCli end to end', async (t) => {
           'init',
           '--force',
           '--config',
-          'custom.config.ts',
+          'custom.yaml',
         ])
         assertEquals(forced, 0)
       } finally {
         resetIo()
       }
-      const written = await Deno.readTextFile(`${initDir}/custom.config.ts`)
+      const written = await Deno.readTextFile(`${initDir}/custom.yaml`)
       assertEquals(written.includes('octocat'), true)
       assertEquals(written.includes('init-repo'), true)
+      const starter = await Deno.readTextFile(`${initDir}/readma/about.md`)
+      assertEquals(starter.length > 0, true)
     })
     await t.step('validate returns the validate exit code', async () => {
       const exitCode = await runCli(['--root', dir, 'validate', '--debug'])
       assertEquals(exitCode, 0)
       const emptyDir = `${dir}/empty-target`
       await Deno.mkdir(emptyDir)
-      await Deno.writeTextFile(
-        `${emptyDir}/readma.config.ts`,
-        'export default {}',
-      )
+      await Deno.writeTextFile(`${emptyDir}/readma.yaml`, '{}')
       const failing = await runCli(['--root', emptyDir, 'validate'])
       assertEquals(failing, VALIDATE_EXIT_CODE)
       assertEquals(VALIDATE_EXIT_CODE, 1)
@@ -418,16 +438,6 @@ Deno.test('runGen on deno and cargo workspaces', async (t) => {
     }
     return dir
   }
-  const config = `export default {
-  language: 'ts', title: 'Ws', author: 'octo', githubUsername: 'octo',
-  repoName: 'ws', xHandle: 'octo', domain: 'gmail', email: 'octo',
-  backToTop: false, images: { logo: 'logo.png' },
-  template: { bugReport: 'bug.yml', featRequest: 'feat.yml' },
-  sections: {
-    features: 'f', projectDescription: 'p', about: 'a', installation: '',
-    acknowledgments: 'k', gettingStarted: 'g', roadmap: 'r', usage: 'u',
-  },
-}`
   await t.step('deno workspace uses the root deno name', async () => {
     const dir = await mk({
       'deno.json': JSON.stringify({
@@ -435,7 +445,8 @@ Deno.test('runGen on deno and cargo workspaces', async (t) => {
         workspace: ['packages/core'],
       }),
       'packages/core/deno.json': JSON.stringify({ name: '@scope/core' }),
-      'readma.config.ts': config,
+      'readma.yaml': CONFIG_YAML,
+      'readma/about.md': 'About\n',
     })
     try {
       const result = await runGen({
@@ -454,13 +465,13 @@ Deno.test('runGen on deno and cargo workspaces', async (t) => {
     }
   })
   await t.step('cargo workspace uses the root crate name', async () => {
-    const cargoConfig = config.replace("language: 'ts'", "language: 'rs'")
     const dir = await mk({
       'Cargo.toml':
         '[workspace]\nmembers = ["crates/one"]\n\n[package]\nname = "root-crate"',
       'crates/one/Cargo.toml':
         '[package]\nname = "crate-one"\ndescription = "One"',
-      'readma.config.ts': cargoConfig,
+      'readma.yaml': CONFIG_YAML,
+      'readma/about.md': 'About\n',
     })
     try {
       const result = await runGen({ rootPath: dir, dryRun: true })

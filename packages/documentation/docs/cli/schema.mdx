@@ -11,27 +11,30 @@ description: Print the JSON schema of the readma config.
 deno run -A jsr:@readma/cli schema
 ```
 
-Prints the JSON Schema (draft 2020-12) describing the whole
-`ReadmeTemplateArgs` config — the same shape documented in the
-[configuration reference](/docs/config/reference).
+Prints the JSON Schema (draft 2020-12) describing the whole readma config —
+the same shape documented in the
+[configuration reference](/docs/config/reference). Only `title` is required,
+everything else is optional.
 
 ## What it is for
 
-The config is a TypeScript module, so editors already autocomplete it through
-the `@readma/core` type import. The JSON schema is useful when you:
-
-- build your own tooling around Readma (validators, generators, web UIs),
-- want validation for generated or serialized configs,
-- maintain editor snippets matching the config shape.
+The config is a data file (`readma.yaml`, `.yml`, `.toml` or `.json`), so the
+JSON schema is the primary editor integration: reference it with the
+`$schema` key to get validation and autocompletion while you edit.
 
 ## Usage
 
 ```bash
-# Inspect it
-deno run -A jsr:@readma/cli schema | less
+# Save it next to your config
+deno run -A jsr:@readma/cli schema > readma.schema.json
+```
 
-# Save it next to your project
-deno run -A jsr:@readma/cli schema > .readma.schema.json
+Then reference it:
+
+```yaml
+$schema: ./readma.schema.json
+title: My project
+repo: owner/my-project
 ```
 
 Example excerpt:
@@ -41,33 +44,13 @@ Example excerpt:
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Readma config",
   "type": "object",
-  "required": [
-    "language",
-    "images",
-    "author",
-    "template",
-    "githubUsername",
-    "repoName",
-    "xHandle",
-    "domain",
-    "email",
-    "title",
-    "backToTop",
-    "sections"
-  ],
+  "required": ["title"],
   "properties": {
-    "language": { "type": "string", "enum": ["rs", "ts"] },
-    "packageRegistry": {
+    "title": { "type": "string", "description": "Title of the readme" },
+    "repo": {
       "type": "string",
-      "enum": ["jsr", "npm", "crates.io"]
+      "description": "Github slug of the project, e.g. owner/name"
     }
   }
 }
 ```
-
-:::note
-The schema mirrors the config type but JSON Schema cannot express every
-TypeScript nicety — template literal types like `GhIssueTemplateFilename`
-are flattened to `string`. When in doubt, the TypeScript type is the source
-of truth.
-:::

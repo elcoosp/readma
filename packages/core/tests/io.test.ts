@@ -1,9 +1,9 @@
-import { assertEquals, assertInstanceOf, assertRejects } from '@std/assert'
+import { assertEquals, assertRejects } from '@std/assert'
 import {
   defaultIo,
   detectBranch,
   detectLicense,
-  getReadmaConfig,
+  findConfigFile,
   io,
   LICENSE_FILENAMES,
   matchLicense,
@@ -11,7 +11,6 @@ import {
   resetIo,
   setIo,
 } from '../src/io.ts'
-import { ReadmaError } from '../src/utils.ts'
 
 Deno.test('md helpers and errors', async (t) => {
   await t.step('readOptionalFile returns undefined when missing', async () => {
@@ -129,41 +128,50 @@ Deno.test('detectBranch reads github env', async (t) => {
   })
 })
 
-Deno.test('getReadmaConfig', async (t) => {
+Deno.test('findConfigFile', async (t) => {
   const dir = await Deno.makeTempDir()
   try {
-    await t.step('loads from a root folder', async () => {
-      await Deno.writeTextFile(
-        `${dir}/readma.config.ts`,
-        `const config = { language: 'ts', title: 'Folder' }
-export default config`,
-      )
-      const config = await getReadmaConfig(dir)
-      assertEquals(config.title, 'Folder')
+    await t.step('returns undefined without a config', async () => {
+      assertEquals(await findConfigFile(dir), undefined)
     })
-    await t.step('loads from a direct file path', async () => {
-      const filePath = `${dir}/custom.config.ts`
-      await Deno.writeTextFile(
-        filePath,
-        `const config = { language: 'rs', title: 'File' }
-export default config`,
+    await t.step('honours the detection order', async () => {
+      await Deno.writeTextFile(`${dir}/readma.toml`, 'title = "Toml"')
+      await Deno.writeTextFile(`${dir}/readma.json`, '{"title": "Json"}')
+      const found = await findConfigFile(dir)
+      assertEquals(found, `${dir}/readma.toml`)
+      await Deno.remove(`${dir}/readma.toml`)
+      await Deno.writeTextFile(`${dir}/readma.yaml`, 'title: Yaml')
+      assertEquals(await findConfigFile(dir), `${dir}/readma.yaml`)
+      assertEquals(
+        await findConfigFile(dir, ['readma.json']),
+        `${dir}/readma.json`,
       )
-      const config = await getReadmaConfig(filePath)
-      assertEquals(config.title, 'File')
     })
-    await t.step('throws when the default export is missing', async () => {
-      await Deno.writeTextFile(
-        `${dir}/invalid.config.ts`,
-        `export const notDefault = 1`,
+    await t.step('survives unreadable candidates', async () => {
+      const brokenDir = `${dir}/broken-${Date.now()}`
+      await Deno.mkdir(`${brokenDir}/readma.yml`, { recursive: true })
+      await Deno.writeTextFile(`${brokenDir}/readma.json`, '{"title": "J"}')
+      assertEquals(
+        await findConfigFile(brokenDir),
+        `${brokenDir}/readma.json`,
       )
-      const error = await assertRejects(
-        () => getReadmaConfig(`${dir}/invalid.config.ts`),
-        ReadmaError,
-      )
-      assertInstanceOf(error, ReadmaError)
-      assertEquals(error.name, 'ReadmaError')
     })
   } finally {
     await Deno.remove(dir, { recursive: true })
+  }
+})
+
+Deno.test('readOptionalFile honours NotFound named errors', async () => {
+  setIo({
+    readTextFile: () => {
+      const error = new Error('missing')
+      error.name = 'NotFound'
+      return Promise.reject(error)
+    },
+  })
+  try {
+    assertEquals(await readOptionalFile('some-path'), undefined)
+  } finally {
+    resetIo()
   }
 })

@@ -1,10 +1,10 @@
 import * as path from '@std/path'
-import { deepmerge } from 'deepmerge-ts'
 import {
-  installSnippet,
-  mdx,
+  DEFAULT_CONTENT_DIR,
+  loadContentDir,
+  mergeContent,
+  type ReadmaConfig,
   readme,
-  type ReadmeTemplateArgs,
   type WorkspaceMember,
   writeReadme,
 } from '@readma/core'
@@ -21,7 +21,7 @@ export type GenOptions = {
   stdout?: boolean
   /** Compare the rendered output with the existing files, exit with code 2 when out of sync */
   check?: boolean
-  /** Path to the config folder or file, relative to the root path */
+  /** Path to the config file, relative to the root path */
   configPath?: string
   /** Only generate the workspace root readme */
   rootOnly?: boolean
@@ -45,95 +45,58 @@ export type GenResult = {
   /** Whether the command ran in check mode */
   check: boolean
 }
-/** Custom mdx section overrides found inside a member folder, empty or broken files are skipped */
-async function memberMdxSections(
-  memberPath: string,
-  sectionKeys: string[],
-  verbose: boolean,
-): Promise<Record<string, string>> {
-  const entries = await Promise.all(
-    sectionKeys.map(async (sectionName) => {
-      const sectionPath = path.join(
-        memberPath,
-        'readma',
-        'sections',
-        `${sectionName}.mdx`,
-      )
-      try {
-        const mdxProcessed = await mdx.processFile(sectionPath)
-        if (mdxProcessed) {
-          logger.debug(`Found custom mdx section at ${sectionPath}`)
-          return [sectionName, mdxProcessed] as const
-        }
-        return undefined
-      } catch (error) {
-        if (verbose) {
-          logger.warn(
-            `Could not process ${sectionPath}, falling back to the config value: ${error}`,
-          )
-        }
-        return undefined
-      }
-    }),
-  )
-  return Object.fromEntries(
-    entries.filter((entry) => entry !== undefined),
-  ) as Record<string, string>
+/** A generation target: a config variant, its content and its output folder */
+type GenTarget = {
+  config: ReadmaConfig
+  content: Awaited<ReturnType<typeof loadContentDir>>
+  absFolderPath: string
 }
-/** Build the template args of a workspace member readme */
-export async function buildMemberArgs(
-  config: ReadmeTemplateArgs,
-  member: WorkspaceMember,
-  language: ReadmeTemplateArgs['language'],
-  packageRegistry: ReadmeTemplateArgs['packageRegistry'],
-  opts: { verbose?: boolean; absMemberPath?: string } = {},
-): Promise<ReadmeTemplateArgs> {
-  const mdxSections = await memberMdxSections(
-    opts.absMemberPath ?? member.path,
-    Object.keys(config.sections),
-    opts.verbose ?? false,
-  )
-  const installation = mdxSections.installation ??
-    installSnippet(member.pkgName, language, packageRegistry) ?? ''
-  return deepmerge(config, {
-    packageRegistry,
-    sections: { ...config.sections, ...mdxSections, installation },
-    workspaceMember: member,
-  }) as ReadmeTemplateArgs
-}
-/** Installation snippet derived from the config value or the language and registry */
-export function resolveInstallation(
-  configInstallation: string | undefined,
-  pkgName: string,
-  language: ReadmeTemplateArgs['language'],
-  packageRegistry: ReadmeTemplateArgs['packageRegistry'],
+/** Content directory of a package folder, honoring the config override */
+function contentDirFor(
+  packagePath: string,
+  config: ReadmaConfig,
 ): string {
-  return configInstallation ||
-    installSnippet(pkgName, language, packageRegistry) ||
-    ''
+  return path.join(packagePath, config.content?.dir ?? DEFAULT_CONTENT_DIR)
 }
-/** Root package name derived from the detection files, used for the root installation snippet */
-function rootPkgName(
+/** Root package name derived from the detection files, used for the root install snippet */
+export function rootPkgName(
   files: Awaited<ReturnType<typeof detectWorkspace>>['files'],
 ): string | undefined {
   return files.deno?.name ?? files.rs?.package?.name ?? files.pkgJson?.name
 }
 /**
- * Run the `gen` command: detect the workspace, build the member and root
- * readme args, then render and optionally write the readmes
+ * Build the config of a workspace member readme: detection values drive the
+ * language and registry fields (the cli detection is authoritative) and the
+ * member content overrides the root content on id collisions.
+ */
+export function buildMemberConfig(
+  config: ReadmaConfig,
+  member: WorkspaceMember,
+  language: ReadmaConfig['language'],
+  packageRegistry: ReadmaConfig['packageRegistry'],
+): ReadmaConfig {
+  return {
+    ...config,
+    language: language ?? config.language,
+    packageRegistry: packageRegistry ?? config.packageRegistry,
+    workspaceMember: member,
+  }
+}
+/**
+ * Run the `gen` command: detect the workspace, load the root and member
+ * content directories, then render and optionally write the readmes
  */
 export async function runGen(opts: GenOptions = {}): Promise<GenResult> {
   setLogLevel(opts.verbose ? 'debug' : 'info')
   const rootPath = path.resolve(opts.rootPath ?? '.')
-  const { args: config } = await loadConfig(
-    opts.configPath ? path.resolve(rootPath, opts.configPath) : rootPath,
-  )
+  const { config } = await loadConfig(rootPath, opts.configPath)
   validateConfig(config)
   logger.info('Starting readma generation')
   const detection = await detectWorkspace(rootPath, { offline: opts.offline })
-  const { language, packageRegistry, members, files } = detection
+  const { language, packageRegistry, members } = detection
   logger.debug(`Detected ${language} project with ${packageRegistry} registry`)
-  const targets: { args: ReadmeTemplateArgs; absFolderPath: string }[] = []
+  const rootContent = await loadContentDir(contentDirFor(rootPath, config))
+  const targets: GenTarget[] = []
   const selectedMembers = (members ?? []).filter((member) =>
     opts.member
       ? member.path === opts.member ||
@@ -146,29 +109,34 @@ export async function runGen(opts: GenOptions = {}): Promise<GenResult> {
   if (!opts.rootOnly) {
     for (const member of selectedMembers) {
       const absMemberPath = path.resolve(rootPath, member.path)
-      const memberArgs = await buildMemberArgs(
-        config,
-        member,
-        language,
-        packageRegistry,
-        { ...opts, absMemberPath },
-      )
-      targets.push({ args: memberArgs, absFolderPath: absMemberPath })
+      const memberContent = await loadContentDir(
+        contentDirFor(absMemberPath, config),
+      ).catch((error: unknown) => {
+        logger.warn(
+          `Could not load the member content of ${member.path}, falling back to the root content: ${error}`,
+        )
+        return []
+      })
+      // Installation is package specific: the root installation.md stays on
+      // the root readme, members get their own file or the auto snippet.
+      const inherited = rootContent.filter((file) => file.id !== 'installation')
+      targets.push({
+        config: buildMemberConfig(config, member, language, packageRegistry),
+        content: mergeContent(inherited, memberContent),
+        absFolderPath: absMemberPath,
+      })
     }
   }
-  const rootInstallation = resolveInstallation(
-    config.sections.installation,
-    rootPkgName(files) ?? config.repoName,
-    language,
-    packageRegistry,
-  )
   if (!opts.membersOnly) {
     targets.push({
-      args: deepmerge(config, {
-        packageRegistry,
-        sections: { ...config.sections, installation: rootInstallation },
+      config: {
+        ...config,
+        language: language ?? config.language,
+        packageRegistry: packageRegistry ?? config.packageRegistry,
+        pkgName: rootPkgName(detection.files) ?? config.pkgName,
         root: { members: selectedMembers },
-      }) as ReadmeTemplateArgs,
+      },
+      content: rootContent,
       absFolderPath: rootPath,
     })
   }
@@ -178,38 +146,42 @@ export async function runGen(opts: GenOptions = {}): Promise<GenResult> {
     changed: [],
     check: opts.check ?? false,
   }
-  await Promise.all(
-    targets.map(async (target) => {
-      const readmePath = path.join(target.absFolderPath, 'README.md')
-      logger.info(
-        `Rendering "${
-          target.args.workspaceMember?.pkgName ?? 'workspace root'
-        }" readme`,
-      )
-      const render = () =>
-        readme(target.args, { folderPath: target.absFolderPath })
-      if (opts.check) {
-        const rendered = await render()
-        const existing = await Deno.readTextFile(readmePath).catch(() =>
-          undefined
-        )
-        if (existing !== rendered) result.changed.push(readmePath)
-        result.rendered.push({ path: readmePath, content: rendered })
-        return
-      }
-      if (opts.stdout || opts.dryRun) {
-        const rendered = await render()
-        result.rendered.push({ path: readmePath, content: rendered })
-        if (opts.stdout) console.log(rendered)
-        return
-      }
-      const rendered = await writeReadme(target.args, {
+  for (const target of targets) {
+    const readmePath = path.join(target.absFolderPath, 'README.md')
+    logger.info(
+      `Rendering "${
+        target.config.workspaceMember?.pkgName ?? 'workspace root'
+      }" readme`,
+    )
+    const render = () =>
+      readme(target.config, {
         folderPath: target.absFolderPath,
+        content: target.content,
+        workspaceRootPath: rootPath,
       })
-      result.written.push(readmePath)
+    if (opts.check) {
+      const rendered = await render()
+      const existing = await Deno.readTextFile(readmePath).catch(() =>
+        undefined
+      )
+      if (existing !== rendered) result.changed.push(readmePath)
       result.rendered.push({ path: readmePath, content: rendered })
-    }),
-  )
+      continue
+    }
+    if (opts.stdout || opts.dryRun) {
+      const rendered = await render()
+      result.rendered.push({ path: readmePath, content: rendered })
+      if (opts.stdout) console.log(rendered)
+      continue
+    }
+    const rendered = await writeReadme(target.config, {
+      folderPath: target.absFolderPath,
+      content: target.content,
+      workspaceRootPath: rootPath,
+    })
+    result.written.push(readmePath)
+    result.rendered.push({ path: readmePath, content: rendered })
+  }
   if (opts.check && result.changed.length > 0) {
     logger.error(`Readmes out of sync: ${result.changed.join(', ')}`)
   }

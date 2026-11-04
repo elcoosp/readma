@@ -1,8 +1,10 @@
 {
   "name": "@readma/core",
-  "version": "0.7.0",
+  "version": "1.0.0",
+  "description": "Readma core engine",
   "exports": "./src/mod.ts",
   "imports": {
-    "@std/yaml": "jsr:@std/yaml@^1.3.0"
+    "@std/yaml": "jsr:@std/yaml@^1.3.0",
+    "@std/toml": "jsr:@std/toml@1.0.11"
   }
 }

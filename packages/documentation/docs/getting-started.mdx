@@ -60,7 +60,10 @@ deno add jsr:@readma/core
 ```ts
 import { readme } from "@readma/core";
 
-const markdown = await readme(args, { workspaceRootPath: "." });
+const markdown = await readme(
+  { title: "My project", repo: "owner/my-project" },
+  { workspaceRootPath: "." },
+);
 console.log(markdown);
 ```
 
@@ -69,11 +72,12 @@ See the [programmatic API](/docs/api) for the full surface.
 ## Your first run
 
 ```bash
-# 1. Scaffold readma.config.ts from the local project
+# 1. Scaffold readma.yaml and the readma/ content directory
+#    from the locally detected project
 deno run -A jsr:@readma/cli init
 
-# 2. Open it and fill the sections with your own markdown
-$EDITOR readma.config.ts
+# 2. Edit the config and fill the content files with your own markdown
+$EDITOR readma.yaml readma/about.md readma/features.md
 
 # 3. Preview the result in the terminal
 deno run -A jsr:@readma/cli gen --stdout
@@ -83,7 +87,8 @@ deno run -A jsr:@readma/cli gen
 ```
 
 On a workspace, step 4 writes one `README.md` per member plus a root readme
-that lists every member in a package table.
+that lists every member in a package table. Each member can override or
+extend the shared content with its own `readma/` directory.
 
 ## What gets written where
 

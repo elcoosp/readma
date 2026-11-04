@@ -143,6 +143,23 @@ Deno.test('shields - linkedin', () => {
   assertEquals(withoutLinkedin.find((s) => s.name === 'LinkedIn'), undefined)
 })
 
+Deno.test('shields - license link follows the branch and license file', () => {
+  const licensed = shields({
+    ...baseArgs,
+    branch: 'dev',
+    licenseFile: 'LICENSE.md',
+  })
+  assertEquals(
+    licensed.find((s) => s.name === 'License')?.linkUrl,
+    'https://github.com/elcoosp/readma/blob/dev/LICENSE.md',
+  )
+  const unlicensed = shields({ ...baseArgs })
+  assertEquals(
+    unlicensed.find((s) => s.name === 'License')?.linkUrl,
+    'https://github.com/elcoosp/readma/blob/main/LICENSE.txt',
+  )
+})
+
 Deno.test('shields - badges config', () => {
   const disabled = shields({
     ...baseArgs,

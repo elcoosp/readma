@@ -1,6 +1,7 @@
 {
   "name": "@readma/pkg-json",
   "version": "0.1.0",
+  "description": "Typed function to read package.json",
   "exports": "./src/mod.ts",
   "imports": {}
 }

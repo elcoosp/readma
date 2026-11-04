@@ -1,60 +1,80 @@
+import * as path from '@std/path'
 import {
-  BUILTIN_SECTION_KEYS,
-  getReadmaConfig,
+  CONFIG_FILENAMES,
+  type ConfigExt,
+  configIssues,
+  findConfigFile,
+  normalizeConfig,
+  parseConfigText,
+  type ReadmaConfig,
   ReadmaError,
-  type ReadmeTemplateArgs,
+  readOptionalFile,
 } from '@readma/core'
+
+export { configIssues } from '@readma/core'
 /** Loaded readma config */
 export type LoadedConfig = {
-  args: ReadmeTemplateArgs
+  config: ReadmaConfig
   /** Path of the loaded config file */
   path: string
 }
-/**
- * Load the readma config from the given root folder or file path
- * @param configPath Folder containing a `readma.config.ts` or a direct file path
- */
-export async function loadConfig(configPath = '.'): Promise<LoadedConfig> {
-  const path = configPath
-  const args = await getReadmaConfig(path)
-  return { args, path }
-}
-/** Required fields of {@link ReadmeTemplateArgs} checked by {@link validateConfig} */
-export const REQUIRED_SECTION_KEYS = BUILTIN_SECTION_KEYS.filter(
-  (sectionKey) => sectionKey !== 'contributing',
-)
-/** Check that every required config field is present, return the missing ones */
-export function missingConfigFields(args: ReadmeTemplateArgs): string[] {
-  const missing: string[] = []
-  const check = (condition: boolean, name: string) => {
-    if (!condition) missing.push(name)
+/** Extract the config extension of a file path */
+export function configExtOf(filePath: string): ConfigExt {
+  const ext = path.extname(filePath).slice(1)
+  if (ext === 'yaml' || ext === 'yml' || ext === 'toml' || ext === 'json') {
+    return ext
   }
-  check(args.language !== undefined, 'language')
-  check(args.title !== undefined, 'title')
-  check(args.author !== undefined, 'author')
-  check(args.githubUsername !== undefined, 'githubUsername')
-  check(args.repoName !== undefined, 'repoName')
-  check(args.xHandle !== undefined, 'xHandle')
-  check(args.domain !== undefined, 'domain')
-  check(args.email !== undefined, 'email')
-  check(args.backToTop !== undefined, 'backToTop')
-  check(args.images?.logo !== undefined, 'images.logo')
-  check(args.template?.bugReport !== undefined, 'template.bugReport')
-  check(args.template?.featRequest !== undefined, 'template.featRequest')
-  for (const sectionKey of REQUIRED_SECTION_KEYS) {
-    check(
-      typeof args.sections?.[sectionKey] === 'string',
-      `sections.${sectionKey}`,
+  throw new ReadmaError(
+    `Unsupported config file ${filePath}, expected one of ${
+      CONFIG_FILENAMES.join(', ')
+    }`,
+  )
+}
+/** Parse and normalize the config file at the given path */
+export async function loadConfigFile(
+  filePath: string,
+): Promise<ReadmaConfig> {
+  const text = await readOptionalFile(filePath)
+  if (text === undefined) {
+    throw new ReadmaError(`Config file not found at ${filePath}`)
+  }
+  const raw = parseConfigText(text, configExtOf(filePath))
+  return normalizeConfig(raw)
+}
+/**
+ * Load the readma config from the given root folder or file path.
+ *
+ * Without an explicit `configPath` the config is discovered among
+ * `readma.yaml`, `readma.yml`, `readma.toml` and `readma.json`.
+ *
+ * @param rootPath Project root folder
+ * @param configPath Optional config file path, relative to the root path
+ */
+export async function loadConfig(
+  rootPath = '.',
+  configPath?: string,
+): Promise<LoadedConfig> {
+  const resolved = configPath
+    ? path.resolve(rootPath, configPath)
+    : await findConfigFile(rootPath)
+  if (!resolved) {
+    throw new ReadmaError(
+      `Could not find a readma config file in ${rootPath}, expected one of ${
+        CONFIG_FILENAMES.join(', ')
+      }`,
     )
   }
-  return missing
+  const config = await loadConfigFile(resolved)
+  return { config, path: resolved }
 }
-/** Validate the config, throwing a detailed {@link ReadmaError} when incomplete */
-export function validateConfig(args: ReadmeTemplateArgs): void {
-  const missing = missingConfigFields(args)
-  if (missing.length > 0) {
+/** Validate the config, throwing a detailed {@link ReadmaError} when invalid */
+export function validateConfig(config: ReadmaConfig): void {
+  const issues = configIssues(config)
+  if (issues.length > 0) {
     throw new ReadmaError(
-      `Missing required readma config fields: ${missing.join(', ')}`,
+      `Invalid readma config:\n${
+        issues.map((issue) => `  - ${issue.path}: ${issue.message}`).join('\n')
+      }`,
     )
   }
 }

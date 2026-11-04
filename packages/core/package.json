@@ -1,6 +1,6 @@
 {
   "name": "@readma/core",
-  "version": "0.6.15",
+  "version": "1.0.0",
   "type": "module",
   "description": "Readma core",
   "files": [

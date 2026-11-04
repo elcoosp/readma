@@ -26,7 +26,7 @@ const themeConfig = {
   announcementBar: {
     id: "early-development",
     content:
-      '🚧 Readma is in early development — expect breaking changes. If it saves you time, <a target="_blank" rel="noopener noreferrer" href="https://github.com/elcoosp/readma">star it on GitHub</a>! ⭐',
+      'Readma is in early development, expect breaking changes. If it saves you time, <a target="_blank" rel="noopener noreferrer" href="https://github.com/elcoosp/readma">star it on GitHub</a>.',
     backgroundColor: "#0d2136",
     textColor: "#f5b09a",
     isCloseable: true,

@@ -1,0 +1,22 @@
+# Readma configuration, see https://readma.vercel.app for the full reference.
+# Every field except title is optional: drop what you do not need.
+title: Readma
+description: Beautiful effortless README generator
+repo: elcoosp/readma
+language: ts
+packageRegistry: jsr
+author: elcoosp
+contact:
+  email: elcoosp@gmail.com
+  x: elcoosp
+links:
+  doc: https://readma.vercel.app/
+images:
+  logo: images/logo.png
+  screenshot: images/screenshot.gif
+repobeats: 1b12e7ffd13fd2d15772a30e8b0a995976150797
+license:
+  id: MIT
+issueTemplates:
+  bug: bug-report.yml
+  feature: feature-request.yml

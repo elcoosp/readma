@@ -13,10 +13,10 @@ deno run -A jsr:@readma/cli gen [options]
 
 The main command. It:
 
-1. loads and validates `readma.config.ts`,
+1. loads and validates `readma.yaml` (or `.yml` / `.toml` / `.json`),
 2. detects the workspace (language, registry, members — see
    [workspace detection](/docs/workspace-detection)),
-3. builds the template args for every target (root + each member),
+3. loads the root and member content directories and merges them per target,
 4. renders and writes one `README.md` per target.
 
 ```bash
@@ -35,7 +35,7 @@ Rendering "@readma/pkg-json" readme
 | `--dry-run`          | flag     | Render but skip every file write                                   |
 | `--stdout`           | flag     | Print the rendered markdown to stdout instead of writing files     |
 | `--check`            | flag     | Compare rendered output with existing files, exit 2 when different |
-| `--config <path>`    | `string` | Path to the config folder or file, relative to the root path       |
+| `--config <path>`    | `string` | Path to the config file, relative to the root path                 |
 | `--root-only`        | flag     | Only generate the workspace root readme                            |
 | `--members-only`     | flag     | Only generate the workspace member readmes                         |
 | `--member <path>`    | `string` | Only generate the readme of one member (by member path or folder)  |
@@ -102,4 +102,6 @@ folder path resolving to it, so both forms above work.
 | Registry badge    | —                                              | Version badge when `packageRegistry` matches          |
 | Package name      | Below the title                                | Below the title as `<h4>`                             |
 
-Both share the same config sections, badges and table of contents.
+Both share the same config, badges and table of contents. Member content
+overrides root content on id collisions, see
+[content files](/docs/sections#workspace-member-overrides).

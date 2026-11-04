@@ -6,151 +6,141 @@ description: Copy-paste configurations for common project shapes.
 
 # Recipes
 
-Ready-to-adapt configurations. All of them are typed — if a field does not
-autocomplete, check the [config reference](/docs/config/reference).
+Ready-to-adapt configurations. All of them are declarative data files — if
+a field does not autocomplete, check the
+[config reference](/docs/config/reference).
 
 ## Deno monorepo with JSR packages
 
 The shape Readma itself uses:
 
-```ts
-import type * as types from "@readma/core";
-
-const config: types.ReadmeTemplateArgs = {
-  language: "ts",
-  packageRegistry: "jsr",
-  title: "My workspace",
-  author: "me",
-  githubUsername: "me",
-  repoName: "my-workspace",
-  xHandle: "me",
-  domain: "gmail",
-  email: "me",
-  urls: { doc: "https://my-workspace.dev" },
-  images: { logo: "images/logo.png" },
-  sections: {
-    projectDescription: "A monorepo of Deno packages",
-    about: "Published on [JSR](https://jsr.io).",
-    features: "\n- Workspace aware\n- One readme per package",
-    gettingStarted: "Clone and run `deno task dev`",
-    installation: "See each package below",
-    usage: "See each package's readme",
-    roadmap: "\n- [x] v1\n- [ ] v2",
-    acknowledgments: "\n- [Deno](https://deno.com)",
-  },
-  template: {
-    bugReport: "bug-report.yml",
-    featRequest: "feature-request.yml",
-  },
-  backToTop: true,
-};
-
-export default config;
+```yaml
+# readma.yaml
+title: My workspace
+description: A short description of the workspace
+repo: owner/my-workspace
+language: ts
+packageRegistry: jsr
+author: owner
+contact:
+  email: owner@gmail.com
+  x: owner
+links:
+  doc: https://my-workspace.dev
+images:
+  logo: images/logo.png
+  screenshot: images/screenshot.gif
+license:
+  id: MIT
+issueTemplates:
+  bug: bug-report.yml
+  feature: feature-request.yml
+badges:
+  style: flat-square
+  disabled:
+    - issues
+toc:
+  backToTop: false
 ```
 
-Each member gets its own README with a JSR version badge and a
-`deno add @scope/pkg` snippet; the root gets the members table.
-
-## Rust crate
-
-```ts
-const config: types.ReadmeTemplateArgs = {
-  language: "rs",
-  packageRegistry: "crates.io",
-  // …
-  badges: {
-    // MSRV + crates.io version badges appear automatically for rust
-  },
-  // …
-};
+```
+readma/
+  about.md
+  features.md
+  getting-started.md
+  installation.md
+  usage.md
+  roadmap.md
+  contributing.md
+  acknowledgments.md
 ```
 
-Rust projects get `cargo add <crate>` install snippets, the Crates.io
-version badge and the Crates MSRV badge.
+Every member package can override any of those files by dropping its own
+`readma/` directory next to its manifest.
 
-## Badge surgery
-
-Trim the noise and add your own:
-
-```ts
-badges: {
-  disabled: ["stars", "forks", "commitActivity"],
-  custom: [
-    {
-      name: "Sponsor",
-      image: "https://img.shields.io/badge/-Sponsor-purple",
-      link: "https://github.com/sponsors/me",
-    },
-    {
-      name: "Crates downloads",
-      image: "https://img.shields.io/crates/d/my-crate",
-      link: "https://crates.io/crates/my-crate",
-    },
-  ],
-},
-badgeStyle: "for-the-badge",
-```
-
-## Analytics footer with repobeats
-
-Grab the hash from [repobeats.axiom.co/configs](https://repobeats.axiom.co/configs)
-after enrolling your repository:
-
-```ts
-repobeats: "1b12e7ffd13fd2d15772a30e8b0a995976150797",
-```
-
-The analytics SVG is embedded in the readme footer.
-
-## Quiet table of contents
-
-```ts
-toc: { hide: true },
-// or keep it but rename it:
-toc: { title: "Jump to" },
-backToTop: true,
-```
-
-## CI check workflow
+## Single npm package
 
 ```yaml
-name: Readme sync
-on:
-  push:
-    branches: [main]
-  pull_request:
-
-jobs:
-  readmes:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: denoland/setup-deno@v2
-        with:
-          deno-version: v2.x
-      - name: Validate the config
-        run: deno run -A jsr:@readma/cli validate
-      - name: Check readmes are in sync
-        run: deno run -A jsr:@readma/cli gen --check --offline
+title: my-cli
+description: A tiny command line tool
+repo: owner/my-cli
+contact:
+  email: owner@gmail.com
+badges:
+  disabled:
+    - fork
 ```
 
-## Fully local generation
-
-No network at all — descriptions fall back to `-`:
-
-```bash
-deno run -A jsr:@readma/cli gen --offline
+```
+readma/
+  about.md
+  features.md
+  usage.md
 ```
 
-Combine with `--dry-run` / `--stdout` to inspect without writing.
+The installation section is auto-generated from the detected registry; drop a
+`readma/installation.md` to replace it.
 
-## A custom section per member via MDX
+## Rust workspace
 
-Root config keeps `usage` generic; each member overrides it:
-
-```text
-packages/core/readma/sections/usage.mdx
-packages/cli/readma/sections/usage.mdx
+```yaml
+title: my-crate
+repo: owner/my-crate
+language: rs
+packageRegistry: crates.io
+license:
+  id: Apache-2.0
 ```
 
-See [MDX](/docs/mdx) for the compilation details and precedence rules.
+```
+readma/
+  about.md
+  usage.md
+```
+
+The `msrv` badge appears automatically for `language: rs`, and the
+installation snippet becomes `cargo add my-crate`.
+
+## Minimal readme, no badges and no contact
+
+A readme with a title, some sections and nothing else:
+
+```yaml
+title: Notes
+```
+
+```
+readma/
+  about.md
+```
+
+No repo slug means no badges, no issue links and no raw image urls: exactly
+the header, the table of contents and your content.
+
+## Retitle a generated section
+
+```yaml
+sections:
+  license:
+    title: Legal
+  contact:
+    title: Get in touch
+  roadmap:
+    hide: true
+```
+
+## Custom ordered sections
+
+```
+readma/
+  usage.md
+  20-benchmarks.md
+  30-comparison.md
+```
+
+```md
+---
+title: Benchmarks
+---
+- parse: 1.2M lines/s
+```

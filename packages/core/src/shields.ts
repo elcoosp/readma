@@ -2,7 +2,11 @@ import { paramCase } from '@wok/case'
 import type {
   BuiltinBadgeId,
   CustomBadge,
-  ReadmeTemplateArgs,
+  PackageRegistry,
+  ReadmaConfig,
+  SourceLanguage,
+  VcsName,
+  WorkspaceMember,
 } from './types.ts'
 /** Shield definition, see [shields.io](https://shields.io/) */
 export type Shield = {
@@ -53,21 +57,22 @@ const appendParams = (
 /** Arguments needed to derive the builtin shields */
 export type ShieldsArgs =
   & Pick<
-    ReadmeTemplateArgs,
-    | 'repoName'
-    | 'githubUsername'
-    | 'linkedinUsername'
-    | 'badgeStyle'
+    ReadmaConfig,
     | 'language'
     | 'workspaceMember'
-    | 'vcsName'
     | 'packageRegistry'
     | 'badges'
   >
   & {
+    githubUsername: string
+    repoName: string
     repoUrl: string
+    linkedinUsername: string | undefined
+    badgeStyle: string | undefined
     commitActivityInterval: 'w'
     branch: string
+    licenseFile?: string
+    vcsName?: VcsName
   }
 /** Builtin badge ids which are conditionally derived from the args */
 export const CONDITIONAL_BADGE_IDS = [
@@ -77,9 +82,9 @@ export const CONDITIONAL_BADGE_IDS = [
 ] as const
 /** Registry derived version shield, undefined when the language/registry combination is not published */
 function registryShield(
-  language: ReadmeTemplateArgs['language'],
-  workspaceMember: ReadmeTemplateArgs['workspaceMember'],
-  packageRegistry: ReadmeTemplateArgs['packageRegistry'],
+  language: SourceLanguage | undefined,
+  workspaceMember: WorkspaceMember | undefined,
+  packageRegistry: PackageRegistry | undefined,
   memberName: string,
 ): Shield | undefined {
   if (language === 'ts' && workspaceMember && packageRegistry === 'jsr') {
@@ -118,6 +123,7 @@ export const shields = (args: ShieldsArgs): Shield[] => {
     commitActivityInterval,
     linkedinUsername,
     branch,
+    licenseFile = 'LICENSE.txt',
     language,
     vcsName = 'github',
     workspaceMember,
@@ -252,7 +258,7 @@ export const shields = (args: ShieldsArgs): Shield[] => {
       id: 'license',
       shield: shield(
         'License',
-        `${repoUrl}/blob/master/LICENSE.txt`,
+        `${repoUrl}/blob/${branch}/${licenseFile}`,
         `github/license/${githubUsername}/${repoName}`,
       ),
     },

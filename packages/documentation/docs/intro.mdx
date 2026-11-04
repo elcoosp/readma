@@ -14,8 +14,8 @@ a complete, well-structured `README.md` with:
 - a centered logo, title and description header,
 - a row of relevant [shields.io](https://shields.io) badges,
 - a collapsible table of contents with GitHub-compatible anchors,
-- your own markdown in the standard sections (features, installation, usage,
-  roadmap, contributing, acknowledgments…),
+- your own markdown, authored as plain files inside a `readma/` content
+  directory,
 - a workspace members table on the root readme,
 - a repobeats analytics footer (optional).
 
@@ -66,40 +66,27 @@ deno run -A jsr:@readma/cli init
 ```
 
 This detects your git remote, workspace layout and license, then writes a
-`readma.config.ts` at the root:
+declarative `readma.yaml` plus a `readma/` content directory holding your
+section texts as plain markdown files:
 
-```ts
-import type * as types from "@readma/core";
-
-const config: types.ReadmeTemplateArgs = {
-  language: "ts",
-  title: "My project",
-  author: "me",
-  githubUsername: "me",
-  repoName: "my-project",
-  xHandle: "me",
-  domain: "gmail",
-  email: "me",
-  images: { logo: "images/logo.png" },
-  sections: {
-    features: "\n- Fast\n- Small",
-    projectDescription: "A short description",
-    about: "About the project",
-    installation: "```sh\ndeno add my-project\n```",
-    acknowledgments: "\n- [Best README](https://github.com/othneildrew/Best-README-Template)",
-    gettingStarted: "Clone and run",
-    usage: "deno task start",
-    roadmap: "\n- [x] Ship",
-  },
-  template: {
-    bugReport: "bug-report.yml",
-    featRequest: "feature-request.yml",
-  },
-  backToTop: true,
-};
-
-export default config;
+```yaml
+# readma.yaml
+title: My project
+description: A short description
+repo: owner/my-project
+language: ts
+license:
+  id: MIT
 ```
+
+```md
+<!-- readma/features.md -->
+- Fast
+- Small
+```
+
+No markdown trapped inside code, no TypeScript to execute: the config is
+data, the content is markdown.
 
 ### 3. Generate
 
@@ -131,6 +118,6 @@ file would change. Add `--offline` to skip every network call.
 - [Getting started](/docs/getting-started) — installation and first run
 - [CLI reference](/docs/cli/overview) — every command and flag
 - [Configuration reference](/docs/config/overview) — every field of
-  `readma.config.ts`
+  `readma.yaml`
 - [Badges & shields](/docs/config/badges) — disable, restyle, extend
 - [Recipes](/docs/recipes) — copy-paste setups for common projects

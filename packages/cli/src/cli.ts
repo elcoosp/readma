@@ -42,7 +42,7 @@ export async function runCli(args: string[] = Deno.args): Promise<number> {
       '--check',
       'Exit with code 2 when a readme is out of sync with the config',
     )
-    .option('--config <path:string>', 'Path to the config folder or file')
+    .option('--config <path:string>', 'Path to the config file')
     .option('--root-only', 'Only generate the workspace root readme')
     .option('--members-only', 'Only generate the workspace member readmes')
     .option(
@@ -64,10 +64,13 @@ export async function runCli(args: string[] = Deno.args): Promise<number> {
         offline: genOptions.offline,
       })
     })
-    .command('init', 'Scaffold a readma.config.ts')
+    .command(
+      'init',
+      'Scaffold a readma.yaml config and a readma content directory',
+    )
     .option('--force', 'Overwrite an existing config file')
-    .option('--config <path:string>', 'Target config file or folder path')
-    .option('--dry-run', 'Print the config content without writing it')
+    .option('--config <path:string>', 'Target config file path')
+    .option('--dry-run', 'Print the scaffold result without writing it')
     .action(async (initOptions) => {
       setLogLevel(initOptions.debug ? 'debug' : 'info')
       const result = await runInit({
@@ -79,7 +82,7 @@ export async function runCli(args: string[] = Deno.args): Promise<number> {
       if (initOptions.dryRun) console.log(result.content)
     })
     .command('validate', 'Validate the readma config and its referenced files')
-    .option('--config <path:string>', 'Path to the config folder or file')
+    .option('--config <path:string>', 'Path to the config file')
     .action(async (validateOptions) => {
       setLogLevel(validateOptions.debug ? 'debug' : 'info')
       state.validate = await runValidate({

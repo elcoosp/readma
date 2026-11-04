@@ -10,14 +10,15 @@ description: Frequently asked questions about Readma.
 
 Yes — `gen` writes `README.md` files wholesale. The recommended workflow is
 git-based: commit (or stash) before generating, review the diff, and keep
-`sections.*` content in `readma.config.ts` rather than editing generated
+content files inside `readma/` rather than editing generated
 files by hand. `--dry-run` and `--stdout` let you preview without touching
 anything, and `gen --check` fails in CI when a file drifted.
 
 ## Can I keep hand-written parts?
 
-Absolutely — everything under `sections` is your markdown, and custom keys
-become custom sections in insertion order. What Readma owns is the
+Absolutely — every markdown file inside the content directory is yours,
+and any file outside the builtin names becomes a custom section. What Readma
+owns is the
 scaffolding around it: header, badges, table of contents, contact, license.
 
 ## Which version control systems are supported?
@@ -44,21 +45,23 @@ Three common cases:
 
 ## How do I add a section nobody else has?
 
-Add a custom key to `sections` — the key becomes the heading:
+Drop a markdown file inside the content directory — the file name becomes
+the section:
 
-```ts
-sections: {
-  // …
-  "🧪 Benchmarks": "\n- parse: 1.2M lines/s",
-}
+```md
+<!-- readma/20-benchmarks.md -->
+- parse: 1.2M lines/s
 ```
+
+The optional numeric prefix places it in the reading order, and a front
+matter block can retitle it.
 
 ## How are anchors computed?
 
 Exactly like GitHub: lowercase, strip characters that are not letters,
 numbers, spaces, underscores or hyphens (emojis included), spaces become
 hyphens, duplicates get `-1`, `-2` suffixes. That means `#-features` style
-anchors from emoji headings work on GitHub too.
+anchors from headings with pictographs work on GitHub too.
 
 ## Can I use Readma as a library?
 
@@ -82,6 +85,7 @@ footprint, and `--dry-run` to skip writes.
 
 ## How stable is the API?
 
-The project is in early development (`0.6.x`): expect breaking changes while
-the API stabilizes. Pin your version and check the
+The project is in early development (`1.0.x`): the v2 config is
+declarative and the content lives in markdown files, expect breaking changes
+while the API stabilizes. Pin your version and check the
 [releases](https://github.com/elcoosp/readma/releases) before upgrading.

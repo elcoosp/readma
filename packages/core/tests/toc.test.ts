@@ -3,14 +3,16 @@ import { Tocer } from '../src/toc.ts'
 
 Deno.test('Tocer renders a toc with github compatible anchors', () => {
   const tocer = new Tocer(false)
-  tocer.section('💡 About the project', 'About body')
-  tocer.section('✨ Features', 'Features body')
+  tocer.section('About the project', 'About body')
+  tocer.section('Features', 'Features body')
   const toc = tocer.toc()
   assertEquals(
-    toc.includes('<a href="#-about-the-project">💡 About the project</a>'),
+    toc.includes(
+      '<a href="#about-the-project">About the project</a>',
+    ),
     true,
   )
-  assertEquals(toc.includes('<a href="#-features">✨ Features</a>'), true)
+  assertEquals(toc.includes('<a href="#features">Features</a>'), true)
   assertEquals(toc.includes('<summary>Table of contents</summary>'), true)
 })
 

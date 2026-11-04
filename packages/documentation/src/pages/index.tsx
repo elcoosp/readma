@@ -28,7 +28,7 @@ function HeroInstall() {
       <span className="prompt">$</span>
       <span className={styles.heroInstallCmd}>{INSTALL_CMD}</span>
       <span className={styles.heroInstallHint} aria-live="polite">
-        {copied ? "copied ✓" : "click to copy"}
+        {copied ? "copied" : "click to copy"}
       </span>
     </button>
   );
@@ -72,16 +72,16 @@ function Hero() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            ⭐ GitHub
+            GitHub
           </a>
         </div>
         <HeroInstall />
         <div className="hero-trust">
-          <span>🦕 Deno 2+</span>
-          <span>🟦 TypeScript</span>
-          <span>📄 MIT</span>
-          <span>✅ 100% coverage</span>
-          <span>🦀 &amp; Rust crates</span>
+          <span>Deno 2+</span>
+          <span>TypeScript</span>
+          <span>MIT</span>
+          <span>100% coverage</span>
+          <span>Rust crates</span>
         </div>
       </div>
     </header>
@@ -116,7 +116,7 @@ function Demo() {
                 <div>Rendering <span className="t-coral">&quot;@readma/core&quot;</span> readme</div>
                 <div>Rendering <span className="t-coral">&quot;@readma/cli&quot;</span> readme</div>
                 <div>Rendering <span className="t-coral">&quot;@readma/pkg-json&quot;</span> readme</div>
-                <div className="t-green">✓ 4 readmes written</div>
+                <div className="t-green">4 readmes written</div>
                 <div>&nbsp;</div>
                 <div><span className="t-dim">$</span> <span className="t-cmd">git status --short</span></div>
                 <div><span className="t-coral">M</span> README.md</div>

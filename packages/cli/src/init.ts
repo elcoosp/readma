@@ -1,14 +1,19 @@
 import * as path from '@std/path'
-import { detectLicense, io, ReadmaError } from '@readma/core'
+import {
+  DEFAULT_CONTENT_DIR,
+  detectLicense,
+  io,
+  ReadmaError,
+} from '@readma/core'
 import { detectWorkspace, type WorkspaceDetection } from './detect.ts'
 import { logger } from './logger.ts'
 /** Options of the `init` command */
 export type InitOptions = {
   /** Overwrite an existing config file */
   force?: boolean
-  /** Target config file path, default to `readma.config.ts` inside the root path */
+  /** Target config file path, default to `readma.yaml` inside the root path */
   configPath?: string
-  /** Return the config content without writing it */
+  /** Return the scaffold result without writing it */
   dryRun?: boolean
   /** Project root path, default to the current working directory */
   rootPath?: string
@@ -19,7 +24,9 @@ export type InitResult = {
   configPath: string
   /** Generated config content */
   content: string
-  /** Whether the file was actually written */
+  /** Content starter files: path and body, only written when missing */
+  files: { path: string; body: string }[]
+  /** Whether the config file was actually written */
   written: boolean
 }
 /** Parse a git remote url into a github username and repository name */
@@ -62,7 +69,29 @@ export async function detectGithubRemote(
     return {}
   }
 }
-/** Generate the content of a `readma.config.ts` file */
+/** Starter content files scaffolded next to the config */
+export const STARTER_CONTENT_FILES: readonly { name: string; body: string }[] =
+  [
+    {
+      name: 'about.md',
+      body:
+        'A longer introduction to your project, what it does and why it exists.\n',
+    },
+    {
+      name: 'features.md',
+      body: '- Feature one\n- Feature two\n- Feature three\n',
+    },
+    {
+      name: 'usage.md',
+      body:
+        'Run the project with your usual commands, document the main entry points here.\n',
+    },
+    {
+      name: 'roadmap.md',
+      body: '- [ ] Roadmap item\n',
+    },
+  ]
+/** Generate the content of a `readma.yaml` file */
 export function generateInitConfig(
   detection: WorkspaceDetection,
   detected: {
@@ -73,52 +102,22 @@ export function generateInitConfig(
 ): string {
   const username = detected.username ?? 'your-github-username'
   const repoName = detected.repoName ?? 'your-repo-name'
-  return `import type * as types from '@readma/core'
-
-const urls = {
-  doc: \`https://github.com/${username}/${repoName}\`,
-}
-
-const config: types.ReadmeTemplateArgs = {
-  language: '${detection.language}',
-  title: '${repoName}',
-  author: '${username}',
-  githubUsername: '${username}',
-  repoName: '${repoName}',
-  xHandle: '${username}',
-  domain: 'gmail',
-  email: '${username}',
-  urls,
-  images: { logo: 'images/logo.png' },
-  sections: {
-    features: \`
-- Feature one
-- Feature two\`,
-    projectDescription: 'A short description of your project',
-    about: 'Tell more about the project',
-    installation: 'Installation instructions',
-    acknowledgments: \`
-- [Best Readme](https://github.com/othneildrew/Best-README-Template)\`,
-    gettingStarted: 'Getting started instructions',
-    usage: 'Usage instructions',
-    roadmap: \`
-- [ ] Roadmap item\`,
-  },
-  template: {
-    bugReport: 'bug-report.yml',
-    featRequest: 'feature-request.yml',
-  },
-  backToTop: true,
-  license: '${detected.licenseId ?? 'MIT'}',
-  packageRegistry: '${detection.packageRegistry}',
-}
-
-export default config
+  const licenseId = detected.licenseId ?? 'MIT'
+  return `# Readma configuration, see https://readma.vercel.app for the full reference.
+# Every field except title is optional: drop what you do not need.
+title: ${repoName}
+description: A short description of your project
+repo: ${username}/${repoName}
+language: ${detection.language}
+packageRegistry: ${detection.packageRegistry}
+license:
+  id: ${licenseId}
 `
 }
 /**
- * Run the `init` command: scaffold a `readma.config.ts` pre filled with the
- * locally detected git remote, language, registry and license
+ * Run the `init` command: scaffold a `readma.yaml` pre filled with the
+ * locally detected git remote, language, registry and license, plus a
+ * `readma/` content directory holding starter markdown files.
  */
 export async function runInit(
   opts: InitOptions = {},
@@ -126,7 +125,7 @@ export async function runInit(
   const rootPath = path.resolve(opts.rootPath ?? '.')
   const targetPath = opts.configPath
     ? path.resolve(rootPath, opts.configPath)
-    : path.join(rootPath, 'readma.config.ts')
+    : path.join(rootPath, 'readma.yaml')
   const existing = await Deno.readTextFile(targetPath).then(
     () => true,
     () => false,
@@ -139,15 +138,26 @@ export async function runInit(
   const detection = await detectWorkspace(rootPath)
   const gitRemote = await detectGithubRemote(rootPath)
   const license = await detectLicense(rootPath)
-  const licenseId = license.id
   const content = generateInitConfig(detection, {
     username: gitRemote.username,
     repoName: gitRemote.repoName,
-    licenseId,
+    licenseId: license.id,
   })
+  const contentDir = path.join(rootPath, DEFAULT_CONTENT_DIR)
+  const files: InitResult['files'] = []
+  for (const starter of STARTER_CONTENT_FILES) {
+    const filePath = path.join(contentDir, starter.name)
+    const alreadyThere = await Deno.readTextFile(filePath).then(
+      () => true,
+      () => false,
+    )
+    if (!alreadyThere) files.push({ path: filePath, body: starter.body })
+  }
   if (!opts.dryRun) {
     await Deno.writeTextFile(targetPath, content)
+    await Deno.mkdir(contentDir, { recursive: true })
+    for (const file of files) await Deno.writeTextFile(file.path, file.body)
     logger.info(`Scaffolded ${targetPath}`)
   }
-  return { configPath: targetPath, content, written: !opts.dryRun }
+  return { configPath: targetPath, content, files, written: !opts.dryRun }
 }

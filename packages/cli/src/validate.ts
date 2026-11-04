@@ -1,10 +1,17 @@
 import * as path from '@std/path'
-import { readOptionalFile } from '@readma/core'
-import { loadConfig, missingConfigFields } from './config.ts'
+import {
+  DEFAULT_CONTENT_DIR,
+  findConfigFile,
+  idFromFilename,
+  parseFrontMatter,
+  ReadmaError,
+  readOptionalFile,
+} from '@readma/core'
+import { configIssues, loadConfigFile } from './config.ts'
 import { logger } from './logger.ts'
 /** Options of the `validate` command */
 export type ValidateOptions = {
-  /** Path to the config folder or file */
+  /** Path to the config file, relative to the root path */
   configPath?: string
   /** Project root path, default to the current working directory */
   rootPath?: string
@@ -38,53 +45,74 @@ async function checkFile(
   }
 }
 /**
- * Run the `validate` command: check the config completeness and every file it
- * references (images, issue templates, code of conduct, license)
+ * Run the `validate` command: check the config data, every file it references
+ * (images, issue templates, code of conduct, license) and the content
+ * directory (front matter errors, empty sections, duplicate ids).
  */
 export async function runValidate(
   opts: ValidateOptions = {},
 ): Promise<ValidationResult> {
   const rootPath = path.resolve(opts.rootPath ?? '.')
-  const { args, path: configPath } = await loadConfig(
-    opts.configPath ? path.resolve(rootPath, opts.configPath) : rootPath,
-  )
   const issues: ValidationIssue[] = []
-  const missing = missingConfigFields(args)
-  for (const field of missing) {
+  const configPath = opts.configPath
+    ? path.resolve(rootPath, opts.configPath)
+    : await findConfigFile(rootPath)
+  if (!configPath) {
+    return {
+      issues: [{
+        level: 'error',
+        message:
+          `Could not find a readma config file in ${rootPath}, expected one of readma.yaml, readma.yml, readma.toml, readma.json`,
+      }],
+      ok: false,
+    }
+  }
+  let config
+  try {
+    config = await loadConfigFile(configPath)
+  } catch (error) {
+    return {
+      issues: [{
+        level: 'error',
+        message: error instanceof ReadmaError
+          ? error.message
+          : `Could not load the config at ${configPath}: ${error}`,
+      }],
+      ok: false,
+    }
+  }
+  for (const issue of configIssues(config)) {
     issues.push({
       level: 'error',
-      message: `Missing required config field ${field}`,
+      message: `${issue.path}: ${issue.message}`,
     })
   }
-  await checkFile(issues, rootPath, args.images?.logo, 'Logo image')
-  await checkFile(issues, rootPath, args.images?.screenshot, 'Screenshot image')
+  await checkFile(issues, rootPath, config.images?.logo, 'Logo image')
   await checkFile(
     issues,
     rootPath,
-    args.template?.bugReport === undefined
+    config.images?.screenshot,
+    'Screenshot image',
+  )
+  await checkFile(
+    issues,
+    rootPath,
+    config.issueTemplates?.bug === undefined
       ? undefined
-      : path.join('.github', 'ISSUE_TEMPLATE', args.template.bugReport),
+      : path.join('.github', 'ISSUE_TEMPLATE', config.issueTemplates.bug),
     'Bug report issue template',
   )
   await checkFile(
     issues,
     rootPath,
-    args.template?.featRequest === undefined
+    config.issueTemplates?.feature === undefined
       ? undefined
-      : path.join('.github', 'ISSUE_TEMPLATE', args.template.featRequest),
+      : path.join('.github', 'ISSUE_TEMPLATE', config.issueTemplates.feature),
     'Feature request issue template',
   )
-  await checkFile(issues, rootPath, args.coc, 'Code of conduct file')
-  await checkFile(issues, rootPath, args.licenseFile, 'License file')
-  for (const [key, value] of Object.entries(args.sections ?? {})) {
-    if (typeof value === 'string' && value.trim() === '') {
-      issues.push({
-        level: 'warn',
-        message: `Section ${key} is empty, it will be omitted from the readme`,
-      })
-    }
-  }
-  if (args.license && !args.licenseFile) {
+  await checkFile(issues, rootPath, config.coc, 'Code of conduct file')
+  await checkFile(issues, rootPath, config.license?.file, 'License file')
+  if (config.license?.id && !config.license?.file) {
     const licenseContent = await readOptionalFile(
       path.join(rootPath, 'LICENSE.txt'),
     )
@@ -92,12 +120,81 @@ export async function runValidate(
       issues.push({
         level: 'warn',
         message:
-          'No LICENSE.txt found next to the config, pass a licenseFile field if your license lives elsewhere',
+          'No LICENSE.txt found next to the config, pass a license.file field if your license lives elsewhere',
       })
     }
   }
+  await checkContentDir(issues, rootPath, config)
   if (issues.length === 0) {
     logger.info(`Config at ${configPath} is valid`)
   }
   return { issues, ok: !issues.some((issue) => issue.level === 'error') }
+}
+/** Validate the content directory of a config, content is optional */
+async function checkContentDir(
+  issues: ValidationIssue[],
+  rootPath: string,
+  config: Parameters<typeof configIssues>[0],
+): Promise<void> {
+  const explicitDir = config.content?.dir !== undefined
+  const contentDir = path.join(
+    rootPath,
+    config.content?.dir ?? DEFAULT_CONTENT_DIR,
+  )
+  let entries: string[]
+  try {
+    entries = (await Array.fromAsync(Deno.readDir(contentDir))).map((entry) =>
+      entry.name
+    )
+  } catch {
+    if (explicitDir) {
+      issues.push({
+        level: 'error',
+        message: `Content directory not found at ${contentDir}`,
+      })
+    }
+    return
+  }
+  const seen = new Map<string, string>()
+  for (const name of entries.toSorted()) {
+    if (name.endsWith('.mdx')) {
+      issues.push({
+        level: 'warn',
+        message:
+          `${contentDir}/${name} is a legacy mdx file, readma v2 only reads .md content files`,
+      })
+    }
+    const parsed = idFromFilename(name)
+    if (!parsed) continue
+    const already = seen.get(parsed.id)
+    if (already !== undefined) {
+      issues.push({
+        level: 'warn',
+        message:
+          `Duplicate section id ${parsed.id} from ${name} and ${already}, only ${already} is rendered`,
+      })
+      continue
+    }
+    seen.set(parsed.id, name)
+  }
+  for (const [, name] of seen) {
+    const filePath = path.join(contentDir, name)
+    const content = await readOptionalFile(filePath)
+    if (content === undefined) continue
+    try {
+      const { body } = parseFrontMatter(content, filePath)
+      if (body.trim() === '') {
+        issues.push({
+          level: 'warn',
+          message:
+            `Content file ${filePath} is empty, its section will be omitted`,
+        })
+      }
+    } catch (error) {
+      issues.push({
+        level: 'error',
+        message: error instanceof Error ? error.message : String(error),
+      })
+    }
+  }
 }

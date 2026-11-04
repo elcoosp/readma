@@ -20,7 +20,7 @@ deno add jsr:@readma/core
 
 ```ts
 async function readme(
-  rt: ReadmeTemplateArgs,
+  config: ReadmaConfig,
   options?: Partial<GlobalOptions>,
 ): Promise<string>
 ```
@@ -33,198 +33,93 @@ effects** — nothing is written to disk. This is what `--dry-run` and
 
 ```ts
 async function writeReadme(
-  rt: ReadmeTemplateArgs,
+  config: ReadmaConfig,
   options?: Partial<GlobalOptions>,
 ): Promise<string>
 ```
 
-Renders like `readme`, then writes `README.md` into the resolved
-`folderPath` unless `dryRun` is set. Returns the rendered markdown.
+Same as `readme`, plus a write of `README.md` inside the resolved folder
+(the `folderPath` option, the workspace member path or the workspace root)
+unless `options.dryRun` is set.
 
-### `GlobalOptions`
+## Global options
 
-```ts
-type GlobalOptions = {
-  workspaceRootPath?: string  // default "."
-  dryRun?: boolean            // skip the file write
-  folderPath?: string         // default: workspace root path
-}
-```
+| Option               | Type            | Description                                                |
+| -------------------- | --------------- | ---------------------------------------------------------- |
+| `workspaceRootPath`  | `string`        | Project root, default to the current directory              |
+| `dryRun`             | `boolean`       | Skip the file write                                         |
+| `folderPath`         | `string`        | Where `README.md` is written, derived when omitted          |
+| `content`            | `ContentFile[]` | Pre loaded content, loaded from the content dir when omitted |
 
-## Partial renders
-
-### `renderHeader` / `renderFooter`
+## Config pipeline
 
 ```ts
-function renderHeader(ctx: ReadmeContext): string
-function renderFooter(ctx: ReadmeContext): string
+import {
+  configIssues,
+  loadContentDir,
+  normalizeConfig,
+  parseConfigText,
+} from "@readma/core";
+
+const raw = parseConfigText(await Deno.readTextFile("readma.yaml"), "yaml");
+const config = normalizeConfig(raw);
+const issues = configIssues(config);
+if (issues.length > 0) throw new Error(issues.map((i) => i.path).join(", "));
+
+const content = await loadContentDir("./readma");
 ```
 
-Header = anchor, logo, title, description, quick links and badges. Footer =
-repobeats image and the markdown reference links of the badges.
-
-### Sections
-
-```ts
-type SectionDef = {
-  id: string
-  title: string
-  render: (ctx: ReadmeContext) => string | undefined
-}
-
-function allSections(ctx: ReadmeContext): SectionDef[]
-function renderSections(
-  ctx: ReadmeContext,
-  defs: SectionDef[],
-  renderSection: (title: string, content: string | undefined) => string,
-): string
-function installSnippet(
-  pkgName: string,
-  language: "rs" | "ts",
-  packageRegistry: "jsr" | "npm" | "crates.io" | undefined,
-): string | undefined
-```
-
-`renderSections` skips sections whose body is `undefined` or empty — pass
-your own `renderSection` callback to add numbers, back-to-top links, etc.
+- `parseConfigText(text, ext)` — parses `yaml`, `yml`, `toml` or `json`,
+- `normalizeConfig(raw)` — keeps the known fields and drops the rest,
+- `configIssues(config)` — returns `{ path, message }` data issues,
+- `loadContentDir(dir)` — loads and parses every `.md` content file,
+- `findConfigFile(root)` — discovers `readma.yaml` / `.yml` / `.toml` / `.json`.
 
 ## Context resolution
 
-### `resolveContext`
-
 ```ts
-async function resolveContext(
-  args: ReadmeTemplateArgs,
-  options?: Partial<GlobalOptions>,
-  deps?: Partial<ResolveContextDeps>,
-): Promise<ReadmeContext>
-```
+import { resolveContext } from "@readma/core";
 
-Resolves every environment-dependent value **once** — branch, license, code
-of conduct path, issue template URLs, badges, image URLs — so rendering stays
-pure. `deps` lets you inject `detectBranch` / `detectLicense` for tests.
-
-The returned `ReadmeContext` carries `args`, defaulted `options`, `repoUrl`,
-`docUrl`, `demoUrl`, `branch`, `fullEmail`, `logoSrc`, `screenshotSrc`,
-`license`, `cocPath`, `badgeList` and `issueUrls`.
-
-## Table of contents
-
-```ts
-class Tocer {
-  constructor(hasBackToTop: boolean, tocConfig?: TocConfig)
-  anchor(title: string): string   // GitHub-compatible, deduplicated
-  toc(): MdSrc                    // the <details> block
-  section(title: string, content: MdSrc | undefined): MdSrc
-}
-```
-
-`Tocer` reproduces GitHub's anchor algorithm:
-
-```ts
-ghSlug("About the project"); // "about-the-project"
-ghSlug("💡 Features");        // "-features"
-ghSlug("Contact & support"); // "contact--support"
-```
-
-Duplicate headings get the same `-1`, `-2` suffixes GitHub would produce.
-
-## Badges
-
-```ts
-function shield(
-  name: string,
-  linkUrl: string,
-  shieldUrl: string,
-  logo?: string,
-): Shield
-
-function shields(args: ShieldsArgs): Shield[]
-function renderShields(list: Shield[]): { shieldsBadges: string; shieldsRefs: string }
-function shieldUrl(path: string, style?: string, logo?: string): string
-```
-
-`shields` builds the full badge list from args, honoring `badges.disabled`
-and `badges.custom`. See [badges & shields](/docs/config/badges) for the
-behavior; the rendering format is documented there too.
-
-## IO and detection
-
-```ts
-async function detectLicense(rootPath?: string): Promise<LicenseInfo>
-function matchLicense(content: string): string | undefined
-async function detectBranch(rootPath?: string): Promise<string>
-async function getReadmaConfig(configPathRoot?: string): Promise<ReadmeTemplateArgs>
-async function readOptionalFile(filePath: string): Promise<string | undefined>
-async function issueTemplateUrl(rootPath: string, repoUrl: string, templateFilename: string): Promise<string>
-async function fetchJsonDescription(url: string, offline: boolean, fetchFn?: typeof fetch): Promise<string | undefined>
-```
-
-### License detection
-
-`detectLicense` probes, in order: `LICENSE.txt`, `LICENSE.md`, `LICENSE`,
-`LICENCE.txt`, `LICENCE.md`, `LICENCE`, `LICENSE-MIT`. `matchLicense` then
-matches the first 600 characters against the well-known headers: MIT,
-Apache-2.0, MPL-2.0, GPL-3.0, BSD-3-Clause.
-
-### Branch detection
-
-`GITHUB_HEAD_REF`, then `GITHUB_REF_NAME`, then `git rev-parse
---abbrev-ref HEAD`, then `"main"`.
-
-### Injectable IO
-
-```ts
-type ReadmaIo = {
-  readTextFile: (filePath: string) => Promise<string>
-  cwd: () => string
-  runCommand: (command: { cmd: string; args: string[]; cwd?: string }) => Promise<{ success: boolean; stdout: string; stderr: string }>
-  fetch: typeof fetch
-}
-
-function setIo(overrides: Partial<ReadmaIo>): void
-function resetIo(): void
-```
-
-`setIo` swaps the side-effect surface — used by the test suite to run 100%
-coverage without real git, network or filesystem access. Use it in your own
-tests the same way.
-
-## MDX
-
-```ts
-async function renderMdx(source: string): Promise<string>
-async function processFile(path: string): Promise<string | undefined>
-```
-
-Compile an MDX string to static HTML (`renderMdx`) or read an MDX file and
-compile it (`processFile`, returns `undefined` when the file is missing).
-Failures throw a typed `ReadmaError`.
-
-## Errors and markdown utils
-
-```ts
-class ReadmaError extends Error {}
-const md = {
-  code: (c: string, lng = "sh") => string  // fenced code block
-  link: (text: string, url: string) => string
-  img: (alt: string, src: string) => string
-}
-```
-
-## Example: render a readme for CI artifacts
-
-```ts
-import { readme, types } from "@readma/core";
-
-const args: types.ReadmeTemplateArgs = {
-  // …your config, or import it:
-  // ...(await getReadmaConfig("./config")),
-};
-
-const markdown = await readme(args, {
-  workspaceRootPath: ".",
+const ctx = await resolveContext(config, { workspaceRootPath: "." }, {
+  // both deps are injectable for tests
+  detectBranch: () => Promise.resolve("main"),
+  detectLicense: () => Promise.resolve({ id: "MIT", file: "LICENSE.txt" }),
 });
-
-await Deno.writeTextFile("artifacts/README.preview.md", markdown);
 ```
+
+The resolved context holds the repo url, branch, license info, code of
+conduct path, badge list and issue template urls. Rendering is pure —
+everything async happens once, here.
+
+## Sections
+
+```ts
+import { assembleSections, renderSections, sectionTitleFor } from "@readma/core";
+```
+
+- `assembleSections(ctx)` — builds the ordered `SectionDef[]` from the
+  content files, the generated sections and the config overrides,
+- `renderSections(ctx, defs, renderSection)` — renders non empty bodies,
+- `sectionTitleFor(ctx, file)` — config override > front matter > default.
+
+## Lower level pieces
+
+| Export                          | Purpose                                               |
+| ------------------------------- | ----------------------------------------------------- |
+| `Tocer`                         | Table of contents with GitHub compatible anchors      |
+| `shields`, `shield`, `shieldUrl`| Builtin and custom shields.io badges                  |
+| `renderShields`                 | Badge row plus reference-style links                  |
+| `installSnippet`                | Package manager install block from language + registry |
+| `markdownTable`                 | Minimal dependency free markdown table renderer       |
+| `ghSlug`, `md`                  | GitHub anchor slug and markdown helpers               |
+| `parseFrontMatter`              | Content file front matter parser                      |
+| `mergeContent`, `sortContent`   | Content merging and ordering helpers                  |
+| `io`, `setIo`, `resetIo`        | Injectable side effects surface for tests             |
+| `ReadmaError`                   | Typed error thrown across the codebase                |
+
+## License detection
+
+`detectLicense(root)` scans `LICENSE.txt`, `LICENSE.md`, `LICENSE`,
+`LICENCE.*` and `LICENSE-MIT`, and matches the file head against the MIT,
+Apache-2.0, MPL-2.0, GPL-3.0 and BSD-3-Clause texts. `detectBranch(root)`
+reads the git branch with `GITHUB_HEAD_REF` / `GITHUB_REF_NAME` env overrides.

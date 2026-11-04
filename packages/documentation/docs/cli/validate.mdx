@@ -2,13 +2,13 @@
 id: validate
 title: validate
 sidebar_position: 4
-description: Lint the readma config and every file it references.
+description: Lint the readma config, its referenced files and the content directory.
 ---
 
 # `validate`
 
 ```bash
-deno run -A jsr:@readma/cli validate [options]
+deno run -A jsr:@readma/cli validate
 ```
 
 Loads the config and reports every problem it can find **before** you run
@@ -17,54 +17,62 @@ with code `1` when at least one error-level issue exists.
 
 ## Options
 
-| Option            | Type     | Description                                  |
-| ----------------- | -------- | -------------------------------------------- |
-| `--config <path>` | `string` | Path to the config folder or file            |
+| Option            | Type     | Description                       |
+| ----------------- | -------- | --------------------------------- |
+| `--config <path>` | `string` | Path to the config file            |
 
 ## What is checked
 
-### Required fields (errors)
+### Config data (errors)
 
-All required `ReadmeTemplateArgs` fields must be present:
+The config object itself is validated: a non empty `title`, the `owner/name`
+shape of `repo`, enum values for `language`, `packageRegistry` and
+`badges.style`, and the types of every nested object. Issues are reported
+with their exact path:
 
-- `language`, `title`, `author`, `githubUsername`, `repoName`, `xHandle`,
-  `domain`, `email`, `backToTop`
-- `images.logo`
-- `template.bugReport`, `template.featRequest`
-- `sections.projectDescription`, `sections.about`, `sections.features`,
-  `sections.gettingStarted`, `sections.installation`, `sections.usage`,
-  `sections.roadmap`, `sections.acknowledgments`
+```
+[error] badges.style: expected one of for-the-badge, social, flat, flat-square, plastic
+```
 
 ### Referenced files (errors)
 
-| Field                  | Resolved against                    |
-| ---------------------- | ----------------------------------- |
-| `images.logo`          | Project root                         |
-| `images.screenshot`    | Project root                         |
-| `template.bugReport`   | `.github/ISSUE_TEMPLATE/`            |
-| `template.featRequest` | `.github/ISSUE_TEMPLATE/`            |
-| `coc`                  | Project root                         |
-| `licenseFile`          | Project root                         |
+| Field                      | Resolved against           |
+| -------------------------- | -------------------------- |
+| `images.logo`              | Project root               |
+| `images.screenshot`        | Project root               |
+| `issueTemplates.bug`       | `.github/ISSUE_TEMPLATE/`  |
+| `issueTemplates.feature`   | `.github/ISSUE_TEMPLATE/`  |
+| `coc`                      | Project root               |
+| `license.file`             | Project root               |
+
+A missing config file, a broken yaml/toml/json payload or a custom
+`content.dir` pointing nowhere are errors too.
+
+### Content directory
+
+- **error** — a front matter block that does not parse or holds wrong types,
+- **warning** — an empty content file, its section will be omitted,
+- **warning** — a duplicate section id (`10-faq.md` and `faq.md`),
+- **warning** — a leftover legacy `.mdx` file, Readma v2 only reads `.md`.
 
 ### Warnings
 
-- A section value that is an empty string — it will be omitted from the readme.
-- A `license` set without a `LICENSE.txt` next to the config (pass
-  `licenseFile` if your license lives elsewhere).
+- A `license.id` set without a `LICENSE.txt` next to the config (pass
+  `license.file` if your license lives elsewhere).
 
 ## Example output
 
 ```bash
 $ deno run -A jsr:@readma/cli validate
-Config at /path/to/repo is valid
+Config at /path/to/repo/readma.yaml is valid
 
 $ deno run -A jsr:@readma/cli validate
 [error] Logo image not found at /path/to/repo/images/logo.png
-[error] Missing required config field sections.roadmap
+[warn] Content file /path/to/repo/readma/draft.md is empty, its section will be omitted
 ```
 
 :::note
-`validate` checks the config, not the rendered output. To catch stale
-READMEs, use `gen --check` instead — the two are complementary and both
-belong in CI.
+`validate` checks the config and its inputs, not the rendered output. To
+catch stale READMEs, use `gen --check` instead — the two are complementary
+and both belong in CI.
 :::

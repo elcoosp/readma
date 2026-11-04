@@ -30,8 +30,8 @@ they apply to your project.
 | `pullRequests`   | Pull requests     | Pulls list                      | always                           |
 | `lastCommit`     | Last commit       | Commits list                    | always                           |
 | `release`        | Release           | Releases page                   | always                           |
-| `license`        | License           | License file on `master`        | always                           |
-| `linkedin`       | LinkedIn          | Profile page                    | *conditional* — `linkedinUsername` set |
+| `license`        | License           | License file on the current branch | always                        |
+| `linkedin`       | LinkedIn          | Profile page                    | *conditional* — `contact.linkedin` set |
 | `msrv`           | Crates MSRV       | Crates page                     | *conditional* — `language: "rs"` |
 
 ### The `registry` badge
@@ -49,10 +49,11 @@ readmes do.
 
 ## Disabling badges
 
-```ts
-badges: {
-  disabled: ["issues", "commitActivity"],
-}
+```yaml
+badges:
+  disabled:
+    - issues
+    - commitActivity
 ```
 
 Passing an id in `disabled` removes it from the row — useful when a badge

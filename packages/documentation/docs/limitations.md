@@ -19,9 +19,9 @@ needs to be hosted on one of these registries:
 
 | Registry                      | Support |
 | ----------------------------- | ------- |
-| [jsr](http://jsr.io)          | ✅      |
-| [npm](http://npmjs.com)       | ✅      |
-| [crates.io](http://crates.io) | ✅      |
+| [jsr](http://jsr.io)          | yes      |
+| [npm](http://npmjs.com)       | yes      |
+| [crates.io](http://crates.io) | yes      |
 
 ## Mixed workspaces
 

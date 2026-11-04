@@ -8,8 +8,9 @@ import { runInit } from '../packages/cli/src/init.ts'
 import { runValidate } from '../packages/cli/src/validate.ts'
 
 Deno.test('loadConfig without a path reads the repo config', async () => {
-  const { args } = await loadConfig()
-  assertEquals(args.title, 'Readma')
+  const { config } = await loadConfig()
+  assertEquals(config.title, 'Readma')
+  assertEquals(config.repo, 'elcoosp/readma')
 })
 
 Deno.test('runValidate on the readma repo itself', async () => {
@@ -26,9 +27,9 @@ Deno.test('runInit with an absolute config path', async () => {
       JSON.stringify({ name: 'abs-pkg' }),
     )
     const result = await runInit({
-      configPath: `${dir}/abs.config.ts`,
+      configPath: `${dir}/abs.config.yaml`,
     })
-    assertEquals(result.configPath, `${dir}/abs.config.ts`)
+    assertEquals(result.configPath, `${dir}/abs.config.yaml`)
     assertEquals(result.written, true)
   } finally {
     await Deno.remove(dir, { recursive: true })

@@ -1,10 +1,10 @@
 {
   "name": "@readma/cli",
-  "version": "0.7.0",
+  "version": "1.0.0",
+  "description": "Readma command line interface",
   "exports": "./src/mod.ts",
   "imports": {
     "@pnpm/workspace.read-manifest": "npm:@pnpm/workspace.read-manifest@^1000.3.1",
-    "@readma/core": "jsr:@readma/core@^0.7.0",
-    "deepmerge-ts": "npm:deepmerge-ts@^8.0.2"
+    "@readma/core": "jsr:@readma/core@^1.0.0"
   }
 }

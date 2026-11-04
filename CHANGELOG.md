@@ -1,6 +1,6 @@
-## [Unreleased]
+## Unreleased]
 
-### 🐛 Bug Fixes
+### Bug Fixes
 
 
 - Mv badge before toc ([25aabcc](https://github.com/elcoosp/readma/commit/25aabcccf6aa88b6b3c5bcc5519827d68f872cd6))
@@ -47,14 +47,14 @@
 - *(deps)* Update dependency motion to v13 ([f916dab](https://github.com/elcoosp/readma/commit/f916dabcd05fdb549c602fbfb09c64402d22e36c))
 - *(deps)* Update dependency deepmerge-ts to v8 ([dd80c13](https://github.com/elcoosp/readma/commit/dd80c131d1f2be5b27b14de7075e8c81dda7f3d1))
 
-### 📚 Documentation
+### Documentation
 
 
 - Up readme ([9ecfe26](https://github.com/elcoosp/readma/commit/9ecfe2604a11fc849059a7a303f493785b94728d))
 - Fix readma.config example & disable deno in documentation folder ([07f594c](https://github.com/elcoosp/readma/commit/07f594cb1850a063b295ea45a344bd96167b0dd4))
 - Up readme (latest) (rm html comm) ([c9d20f8](https://github.com/elcoosp/readma/commit/c9d20f80ecd603812ccac809783608ad57497278))
 
-### 🚀 Features
+### Features
 
 
 - Add bun install instruction if packageRegistry === 'npm' ([aaf8236](https://github.com/elcoosp/readma/commit/aaf82365d363f51c0204bb0512dc2018df16a4e9))
@@ -63,7 +63,7 @@
 - *(core)* Add shields logo ([0c570e5](https://github.com/elcoosp/readma/commit/0c570e530978553f82bdac1f0f2bb0a2945b56c9))
 - Fix snap ([f156bd1](https://github.com/elcoosp/readma/commit/f156bd15cb8b528bdc47ab44204081a9b95cf929))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - Fix cog check ([ae3d85f](https://github.com/elcoosp/readma/commit/ae3d85f44e76026201d2eff2b0c9043d5408ed2b))
@@ -106,7 +106,7 @@
 - No deno using configs workflow ([e930b6b](https://github.com/elcoosp/readma/commit/e930b6b2fff43a45e3b1475ec76351b7633fc30c))
 - Use deno with configs workflow ([fbc8758](https://github.com/elcoosp/readma/commit/fbc87583d4ab929b6a5bddba52f042a3f82ea3a6))
 
-### 🧪 Testing
+### Testing
 
 
 - Up snap ([10fc7da](https://github.com/elcoosp/readma/commit/10fc7da18d9fcc442c2af5c63e465219e1f9fd3e))
@@ -114,10 +114,10 @@
 - *(pkg-json)* Add snap ([4bb954e](https://github.com/elcoosp/readma/commit/4bb954eb3646d46a6df6a00f394d25146ff4fc81))
 - Snap & add type for Shield.logo ([bb1ee41](https://github.com/elcoosp/readma/commit/bb1ee41ae7afec830384359233afb606407d6aa6))
 - Up snap ([effb468](https://github.com/elcoosp/readma/commit/effb468538e8d6fe2b5474c9de4271c3982321a9))
-## [2.11.0] - 2024-11-28
+## 2.11.0] - 2024-11-28
 [compare: 7d603c5...1e6f42b](https://github.com/elcoosp/readma/compare/7d603c57a228ecac6e76c265448cab7965ab66e2...1e6f42b73a9ce62d99a026ccbf6e5bf6d5b04c9b)
 
-### 🐛 Bug Fixes
+### Bug Fixes
 
 
 - *(documentation)* Broken link ([a1b72cc](https://github.com/elcoosp/readma/commit/a1b72cc0b6bb0e14c6cc85ab27852192b1ee34e9))
@@ -130,7 +130,7 @@
 - *(deps)* Update dependency motion to v11.12.0 ([473b476](https://github.com/elcoosp/readma/commit/473b476f7e30b4361160472d66c68584db4dfa54))
 - *(deps)* Update dependency @elcoosp-configs/docusaurus to v1.1.1 ([62f1445](https://github.com/elcoosp/readma/commit/62f14457599d8f0d2969ab076dc0a12a4aa0ad19))
 
-### 📚 Documentation
+### Documentation
 
 
 - *(documentation)* Rename intro docs ([532ba54](https://github.com/elcoosp/readma/commit/532ba543f3dce3e5c55c77254918dce39416256a))
@@ -139,13 +139,13 @@
 - Fix WorkspaceMember & some join ([2e08d1b](https://github.com/elcoosp/readma/commit/2e08d1b732da97ab7c0f47f892104770189ce827))
 - *(documentation)* Add pnpm-workspace related limitation section ([6b7bbfa](https://github.com/elcoosp/readma/commit/6b7bbfaa802f9bad1f28ec646f29061de19c1a5c))
 
-### 🚀 Features
+### Features
 
 
 - Pass globalOptions to template to be able to read github issue templates from the folderPath & use correct links on bug report/feat request ([d965a18](https://github.com/elcoosp/readma/commit/d965a188c481c711e2025031c160d6f5740f9f43))
 - Handle coc in contributing optional section & add dryRun to global options for tests ([b5061d1](https://github.com/elcoosp/readma/commit/b5061d1e45b034be0bd6cef4911e6f618a86d4c7))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - Fmt ([609d209](https://github.com/elcoosp/readma/commit/609d2091339f1703312bada0e95e7e23c9631fdc))
@@ -164,7 +164,7 @@
 - Version packages ([73518b9](https://github.com/elcoosp/readma/commit/73518b9e6759cbc516b866812216dc1c1db74b8e))
 - *(version)* 2.11.0 ([1e6f42b](https://github.com/elcoosp/readma/commit/1e6f42b73a9ce62d99a026ccbf6e5bf6d5b04c9b))
 
-### 🧪 Testing
+### Testing
 
 
 - Shields test #12 ([7143b88](https://github.com/elcoosp/readma/commit/7143b88c60bfd00d5ff3770b8d7c44939060673d))
@@ -172,223 +172,223 @@
 - *(cli)* Fix detectLanguage ([cb63dfa](https://github.com/elcoosp/readma/commit/cb63dfa027dc382557d50791611eeaff8d888115))
 - Up snap ([cba1fc4](https://github.com/elcoosp/readma/commit/cba1fc4403eb3cc38a9c0cd794fd74871190b583))
 - Up snap ([3dcab27](https://github.com/elcoosp/readma/commit/3dcab27308b881f94384c7ffa1f64c0658b3bac7))
-## [2.10.0] - 2024-11-26
+## 2.10.0] - 2024-11-26
 [compare: d1524f5...7d603c5](https://github.com/elcoosp/readma/compare/d1524f55432626cb101da6696d1d89aada4adffa...7d603c57a228ecac6e76c265448cab7965ab66e2)
 
-### 🐛 Bug Fixes
+### Bug Fixes
 
 
 - Default ws member description ([71cba1c](https://github.com/elcoosp/readma/commit/71cba1c48f92ff0dc091e8b84a53cc72269a6747))
 - *(*)* Missing paren on ternary ([e35fd33](https://github.com/elcoosp/readma/commit/e35fd33f778d171854dfed956f115c43d610a9ae))
 
-### 🚀 Features
+### Features
 
 
 - *(*)* Add features section ([1921956](https://github.com/elcoosp/readma/commit/1921956754cd3f7ab463a42e7baa3eaa14394335))
 - *(*)* Fetch jsr meta to get workspace member description ([4677ca6](https://github.com/elcoosp/readma/commit/4677ca6368818677b3422ffb2bf8642991bdd97c))
 - *(*)* Allow to not specify installation section in a single rust package case ([552b1bd](https://github.com/elcoosp/readma/commit/552b1bd566d4426bc507237d5600ea9d350f0c8e))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - Version packages ([990f8b1](https://github.com/elcoosp/readma/commit/990f8b13fef25fb9c27a01c9f1fb00feeef480b1))
 - *(version)* 2.10.0 ([7d603c5](https://github.com/elcoosp/readma/commit/7d603c57a228ecac6e76c265448cab7965ab66e2))
-## [2.9.1] - 2024-11-26
+## 2.9.1] - 2024-11-26
 [compare: 6f02690...d1524f5](https://github.com/elcoosp/readma/compare/6f02690e0cdc81d6c2f0905afc2ee3a6ae2524e1...d1524f55432626cb101da6696d1d89aada4adffa)
 
-### 🐛 Bug Fixes
+### Bug Fixes
 
 
 - Mssing packageRegistry on main readme for single package ([31930bc](https://github.com/elcoosp/readma/commit/31930bc7a4933252a08225a64f333eeecda8fee7))
 - Mv about section ([9420588](https://github.com/elcoosp/readma/commit/9420588bf9a8140eea2b81f5969f55c49053aacd))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - Version packages ([489b88a](https://github.com/elcoosp/readma/commit/489b88a1d1d0ed207e3b1c3066ca2bf85f8f8322))
 - *(version)* 2.9.1 ([d1524f5](https://github.com/elcoosp/readma/commit/d1524f55432626cb101da6696d1d89aada4adffa))
-## [2.9.0] - 2024-11-26
+## 2.9.0] - 2024-11-26
 [compare: be21664...6f02690](https://github.com/elcoosp/readma/compare/be21664f4b7abb230f6638f8a84d698f3881e77d...6f02690e0cdc81d6c2f0905afc2ee3a6ae2524e1)
 
-### 📚 Documentation
+### Documentation
 
 
 - *(core)* ProcessFile ([33d17c2](https://github.com/elcoosp/readma/commit/33d17c22b5e9602c04e4b84ac735a1e3c84eef93))
 - *(documentation)* Intro & mdx ([0c50d1d](https://github.com/elcoosp/readma/commit/0c50d1d52d9744ce1a20f8d446ef245684bd0a2a))
 
-### 🚀 Features
+### Features
 
 
 - *(*)* Use jiti to read config ([32b1a6c](https://github.com/elcoosp/readma/commit/32b1a6cd9b27550c192583a82bd9441ae7918ad9))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - Version packages ([2002827](https://github.com/elcoosp/readma/commit/20028278c77d5cf7410fecb6a236dfa8aa7bdc7c))
 - *(version)* 2.9.0 ([6f02690](https://github.com/elcoosp/readma/commit/6f02690e0cdc81d6c2f0905afc2ee3a6ae2524e1))
-## [2.8.0] - 2024-11-26
+## 2.8.0] - 2024-11-26
 [compare: 93eb102...be21664](https://github.com/elcoosp/readma/compare/93eb102cce762c90e7230dc3803bb080324e8a49...be21664f4b7abb230f6638f8a84d698f3881e77d)
 
-### 🚀 Features
+### Features
 
 
 - *(*)* Poc mdx-manager module to handle custom sections per workspace member ([ed816f6](https://github.com/elcoosp/readma/commit/ed816f65a1889b1d6e2bb2273f0e0266acfe7452))
 - *(*)* Allow custom sections & workspace specific mdx files inside readma/sections/* ([02ad5ba](https://github.com/elcoosp/readma/commit/02ad5ba2d115d96f76ce4f13517f6ae436c67e45))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - Use single quote ([4996de0](https://github.com/elcoosp/readma/commit/4996de03142814f937b59f3d084dd7cfc7dc18ba))
 - *(version)* 2.8.0 ([be21664](https://github.com/elcoosp/readma/commit/be21664f4b7abb230f6638f8a84d698f3881e77d))
-## [2.7.4] - 2024-11-26
+## 2.7.4] - 2024-11-26
 [compare: 21a9538...93eb102](https://github.com/elcoosp/readma/compare/21a953857361c1365f89dd1cafd272d196012e90...93eb102cce762c90e7230dc3803bb080324e8a49)
 
-### 🐛 Bug Fixes
+### Bug Fixes
 
 
 - *(*)* Packages table in templates link to folder not just readme ([36d2405](https://github.com/elcoosp/readma/commit/36d240563e32c0b528b83352dfb846257ec41af8))
 - *(*)* Packages table only if at least one root.members ([2f7d7a9](https://github.com/elcoosp/readma/commit/2f7d7a9263cd2e539fafcc9670cd7f3d708e23b8))
 - *(*)* Screenshot src using gh content ([98f65e0](https://github.com/elcoosp/readma/commit/98f65e03d9251b89ad8931eb146b89405dca4e19))
 
-### 📚 Documentation
+### Documentation
 
 
 - Up readme ([f05b2c2](https://github.com/elcoosp/readma/commit/f05b2c2db0930fe40dcfe4276b7b5126ece75d64))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - *(version)* 2.7.4 ([93eb102](https://github.com/elcoosp/readma/commit/93eb102cce762c90e7230dc3803bb080324e8a49))
-## [2.7.3] - 2024-11-26
+## 2.7.3] - 2024-11-26
 [compare: fe403d7...21a9538](https://github.com/elcoosp/readma/compare/fe403d7c9f6cde1ebdfe3c6bdcc6070e4a278417...21a953857361c1365f89dd1cafd272d196012e90)
 
-### 🐛 Bug Fixes
+### Bug Fixes
 
 
 - *(*)* Packages version ([c8a7fb9](https://github.com/elcoosp/readma/commit/c8a7fb9d5e906b34559a01c4fcb49043140dd485))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - *(version)* 2.7.3 ([21a9538](https://github.com/elcoosp/readma/commit/21a953857361c1365f89dd1cafd272d196012e90))
-## [2.7.2] - 2024-11-26
+## 2.7.2] - 2024-11-26
 [compare: 426582a...fe403d7](https://github.com/elcoosp/readma/compare/426582ae7220ea16e717833ef3a22ae875cc8d6e...fe403d7c9f6cde1ebdfe3c6bdcc6070e4a278417)
 
-### 🐛 Bug Fixes
+### Bug Fixes
 
 
 - *(*)* Packages table with rel links ([7bd169a](https://github.com/elcoosp/readma/commit/7bd169a554f7720dd4828c808a55d670fadefb66))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - *(version)* 2.7.2 ([fe403d7](https://github.com/elcoosp/readma/commit/fe403d7c9f6cde1ebdfe3c6bdcc6070e4a278417))
-## [2.7.1] - 2024-11-26
+## 2.7.1] - 2024-11-26
 [compare: 32b0a49...426582a](https://github.com/elcoosp/readma/compare/32b0a49a40671b3f6c7eda7aad54061866d7eb91...426582ae7220ea16e717833ef3a22ae875cc8d6e)
 
-### 🐛 Bug Fixes
+### Bug Fixes
 
 
 - *(*)* Jsr shield ([060a9ed](https://github.com/elcoosp/readma/commit/060a9edf769b0245bb55a387224b87130e64f9a8))
 - *(*)* Re jsr shield ([7e8da38](https://github.com/elcoosp/readma/commit/7e8da3826493401d690490137805b39417fec640))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - *(version)* 2.7.1 ([426582a](https://github.com/elcoosp/readma/commit/426582ae7220ea16e717833ef3a22ae875cc8d6e))
-## [2.7.0] - 2024-11-26
+## 2.7.0] - 2024-11-26
 [compare: bb490c5...32b0a49](https://github.com/elcoosp/readma/compare/bb490c5b3501be56e62968b95872930f6c906307...32b0a49a40671b3f6c7eda7aad54061866d7eb91)
 
-### 🚀 Features
+### Features
 
 
 - *(*)* Add packages table in root readme ([4584dfb](https://github.com/elcoosp/readma/commit/4584dfbae4e37a1e2337a21ed36fdec9b61fc16d))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - *(version)* 2.7.0 ([32b0a49](https://github.com/elcoosp/readma/commit/32b0a49a40671b3f6c7eda7aad54061866d7eb91))
-## [2.6.2] - 2024-11-26
+## 2.6.2] - 2024-11-26
 [compare: 89b0460...bb490c5](https://github.com/elcoosp/readma/compare/89b046054591ebd8eb95713d63ca55edc95f1561...bb490c5b3501be56e62968b95872930f6c906307)
 
-### 🐛 Bug Fixes
+### Bug Fixes
 
 
 - *(*)* Rm root package.json making deno confused ([486537d](https://github.com/elcoosp/readma/commit/486537dfa90c4fff5d26355ec5207bbcecd89001))
 
-### 📚 Documentation
+### Documentation
 
 
 - Up screenshot & ignore cast files in cspell ([48f81ca](https://github.com/elcoosp/readma/commit/48f81ca379864e73a323741b33f026839618994b))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - *(version)* 2.6.2 ([bb490c5](https://github.com/elcoosp/readma/commit/bb490c5b3501be56e62968b95872930f6c906307))
-## [2.6.1] - 2024-11-26
+## 2.6.1] - 2024-11-26
 [compare: e135586...89b0460](https://github.com/elcoosp/readma/compare/e135586821ca3b6c7146656ad21cb9dfe4043f28...89b046054591ebd8eb95713d63ca55edc95f1561)
 
-### 🐛 Bug Fixes
+### Bug Fixes
 
 
 - *(cli,pkg-json)* Use npm: specifier ([e580e60](https://github.com/elcoosp/readma/commit/e580e6063826726c64e9b8c3b5f668d347e67955))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - *(version)* 2.6.1 ([89b0460](https://github.com/elcoosp/readma/commit/89b046054591ebd8eb95713d63ca55edc95f1561))
-## [2.6.0] - 2024-11-26
+## 2.6.0] - 2024-11-26
 [compare: d6d6575...e135586](https://github.com/elcoosp/readma/compare/d6d65751ab597b0da7e23554d8a9ab6b2966e9ec...e135586821ca3b6c7146656ad21cb9dfe4043f28)
 
-### 🐛 Bug Fixes
+### Bug Fixes
 
 
 - Installation ws override for npm packageRegistry ([adc7550](https://github.com/elcoosp/readma/commit/adc755040ddc15a8b76893f0d4e309025bfa0a07))
 
-### 📚 Documentation
+### Documentation
 
 
 - Use @elcoosp-configs/docusaurus ([3e4de96](https://github.com/elcoosp/readma/commit/3e4de960d10a06cb9b929239a3ec0b75265113b0))
 
-### 🚀 Features
+### Features
 
 
 - Allow poc reading of pnpm workspace file if it exist, & deduce the packageRegistry from it + retrieve workspace members ([f8488bd](https://github.com/elcoosp/readma/commit/f8488bd5d5c4f4d1742c127dca6c5d7854ea5cc7))
 - Detect package registry & fix deno workspace member pkgName ([3be3e85](https://github.com/elcoosp/readma/commit/3be3e853ad75a1c4ac37574f41f3d8cff5ccfcbf))
 - Add pkg-json package ([ca8e3b7](https://github.com/elcoosp/readma/commit/ca8e3b77765e0eb3d68ddc0dfff39c7a94b7aab8))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - *(version)* 2.6.0 ([e135586](https://github.com/elcoosp/readma/commit/e135586821ca3b6c7146656ad21cb9dfe4043f28))
-## [2.5.2] - 2024-11-24
+## 2.5.2] - 2024-11-24
 [compare: b6fb5de...d6d6575](https://github.com/elcoosp/readma/compare/b6fb5de409e3fd932589270819e2461888976011...d6d65751ab597b0da7e23554d8a9ab6b2966e9ec)
 
-### 🐛 Bug Fixes
+### Bug Fixes
 
 
 - *(cli)* Deno version bump core in cli ([ac58b11](https://github.com/elcoosp/readma/commit/ac58b112890df2b856f76f59d265fc7995cf5b2e))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - *(version)* 2.5.2 ([d6d6575](https://github.com/elcoosp/readma/commit/d6d65751ab597b0da7e23554d8a9ab6b2966e9ec))
-## [2.5.1] - 2024-11-24
+## 2.5.1] - 2024-11-24
 [compare: 1c7aeb7...b6fb5de](https://github.com/elcoosp/readma/compare/1c7aeb74d38db8c3fecadefb01387d92d140ea2b...b6fb5de409e3fd932589270819e2461888976011)
 
-### 🐛 Bug Fixes
+### Bug Fixes
 
 
 - *(*)* Deno version bump ([de9f55f](https://github.com/elcoosp/readma/commit/de9f55f3bf37f19b9738f6ae7d619521811d3cf2))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - *(version)* 2.5.1 ([b6fb5de](https://github.com/elcoosp/readma/commit/b6fb5de409e3fd932589270819e2461888976011))
-## [2.5.0] - 2024-11-24
+## 2.5.0] - 2024-11-24
 [compare: 10b5d52...1c7aeb7](https://github.com/elcoosp/readma/compare/10b5d52e54f99535022aea1ba34909c00fe735d0...1c7aeb74d38db8c3fecadefb01387d92d140ea2b)
 
-### 🐛 Bug Fixes
+### Bug Fixes
 
 
 - Rename readReadmaConfig to getReadmaConfig ([b387f91](https://github.com/elcoosp/readma/commit/b387f919df20d3a0ce1b8a70ca44fb3fba71c392))
@@ -404,7 +404,7 @@
 - Use rspack misconfigured, split docusaurus config to reusable module & rename doc tuto intro ([dfd091c](https://github.com/elcoosp/readma/commit/dfd091c566d3b1fe592899e388cfb539cab22eca))
 - *(*)* Crates version link ([c738b28](https://github.com/elcoosp/readma/commit/c738b285ce81e2c4907542716ba95294f99b142d))
 
-### 📚 Documentation
+### Documentation
 
 
 - Add intro tuto ([e625a69](https://github.com/elcoosp/readma/commit/e625a690c77f41fbd260a0cf5bdc1ef9fd6a3c90))
@@ -413,12 +413,12 @@
 - Coherent feats list ([73fc1cb](https://github.com/elcoosp/readma/commit/73fc1cb4e1284f296ec9667e4b5ed9a794714ca0))
 - Rm useless images & add warn to intro ([b48981b](https://github.com/elcoosp/readma/commit/b48981b1499be27e143bffe5e788804082fb0dbc))
 
-### 🚀 Features
+### Features
 
 
 - Bootstrap docusaurus ([9112a62](https://github.com/elcoosp/readma/commit/9112a62feaf856fc79349f1b3cdf0eddcbcc59de))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - Type conf ([4220118](https://github.com/elcoosp/readma/commit/4220118f8fdabfefbf6073666fc1b14401db7516))
@@ -427,166 +427,166 @@
 - Fix favicon ([a4c4b44](https://github.com/elcoosp/readma/commit/a4c4b446b510ff5705728e6e289612ac81bc13e5))
 - New screenshot ([c74a0e2](https://github.com/elcoosp/readma/commit/c74a0e2535feb381aa903a47e304cc6153dec496))
 - *(version)* 2.5.0 ([1c7aeb7](https://github.com/elcoosp/readma/commit/1c7aeb74d38db8c3fecadefb01387d92d140ea2b))
-## [2.4.0] - 2024-11-24
+## 2.4.0] - 2024-11-24
 [compare: 01d933e...10b5d52](https://github.com/elcoosp/readma/compare/01d933e15ac9935930935bae04f82470b6091a1d...10b5d52e54f99535022aea1ba34909c00fe735d0)
 
-### 🚀 Features
+### Features
 
 
 - *(*)* Crates.io version shield ([d21e2fa](https://github.com/elcoosp/readma/commit/d21e2fa736bbb103d0aecdefb659fb5501ca4339))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - 0.6.2 ([d42782a](https://github.com/elcoosp/readma/commit/d42782a735e3f435d251a32c0f2d87b6e973b369))
 - *(version)* 2.4.0 ([10b5d52](https://github.com/elcoosp/readma/commit/10b5d52e54f99535022aea1ba34909c00fe735d0))
-## [2.3.5] - 2024-11-24
+## 2.3.5] - 2024-11-24
 [compare: e8793bf...01d933e](https://github.com/elcoosp/readma/compare/e8793bfbc9c99179984b7c0002c660152b2c23fd...01d933e15ac9935930935bae04f82470b6091a1d)
 
-### 🐛 Bug Fixes
+### Bug Fixes
 
 
 - *(cli)* Bump version ([f8b1d3e](https://github.com/elcoosp/readma/commit/f8b1d3e6b4b240025abd2534336a0b60f84273d4))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - Codecov-action v5 ([1d01c66](https://github.com/elcoosp/readma/commit/1d01c667a7e2b3aec52cd8dedd92a68ba0144886))
 - *(version)* 2.3.5 ([01d933e](https://github.com/elcoosp/readma/commit/01d933e15ac9935930935bae04f82470b6091a1d))
-## [2.3.4] - 2024-11-23
+## 2.3.4] - 2024-11-23
 [compare: 093904a...e8793bf](https://github.com/elcoosp/readma/compare/093904a7f5da7062071c33d7b9af4284ab90fdff...e8793bfbc9c99179984b7c0002c660152b2c23fd)
 
-### 🐛 Bug Fixes
+### Bug Fixes
 
 
 - *(*)* Readme ([f419f4c](https://github.com/elcoosp/readma/commit/f419f4c153f7c4eb8b014ba2cc94ec5e2f1e118d))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - *(version)* 2.3.4 ([e8793bf](https://github.com/elcoosp/readma/commit/e8793bfbc9c99179984b7c0002c660152b2c23fd))
-## [2.3.3] - 2024-11-23
+## 2.3.3] - 2024-11-23
 [compare: 6a7cf5d...093904a](https://github.com/elcoosp/readma/compare/6a7cf5db8d417892b890f0e73e6d7101e71209f9...093904a7f5da7062071c33d7b9af4284ab90fdff)
 
-### 🐛 Bug Fixes
+### Bug Fixes
 
 
 - *(core)* Deno 0.6.1 ([7fed2b6](https://github.com/elcoosp/readma/commit/7fed2b6fa898c7aad1660cd07d6495f39f5ee0c6))
 - *(cli)* Core import ([11569fc](https://github.com/elcoosp/readma/commit/11569fcc6e32e825d618d486675f0893d9de75d0))
 - *(cli)* Deno 0.6.0 ([753d1f5](https://github.com/elcoosp/readma/commit/753d1f511784ce647bed6b5a24e9c4be5a59530a))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - *(version)* 2.3.3 ([093904a](https://github.com/elcoosp/readma/commit/093904a7f5da7062071c33d7b9af4284ab90fdff))
-## [2.3.2] - 2024-11-23
+## 2.3.2] - 2024-11-23
 [compare: 5f757ed...6a7cf5d](https://github.com/elcoosp/readma/compare/5f757edea1d6470a3204a36d1ad75ea16708efc6...6a7cf5db8d417892b890f0e73e6d7101e71209f9)
 
-### 🐛 Bug Fixes
+### Bug Fixes
 
 
 - *(core)* Opt screenshot ([dfe1867](https://github.com/elcoosp/readma/commit/dfe18673006a691ddd0983893c6db7114bc3bbbd))
 - *(core)* Shield license dup ([01cf001](https://github.com/elcoosp/readma/commit/01cf001113edca19fb77075c505fa64f195f0656))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - *(version)* 2.3.2 ([6a7cf5d](https://github.com/elcoosp/readma/commit/6a7cf5db8d417892b890f0e73e6d7101e71209f9))
-## [2.3.1] - 2024-11-22
+## 2.3.1] - 2024-11-22
 [compare: 7b51e2f...5f757ed](https://github.com/elcoosp/readma/compare/7b51e2f87e24adffb22cfa18a52ceb10a9955bd0...5f757edea1d6470a3204a36d1ad75ea16708efc6)
 
-### 🐛 Bug Fixes
+### Bug Fixes
 
 
 - *(cli)* Deno pkg version ([37e3870](https://github.com/elcoosp/readma/commit/37e3870a580c6c2a748d01f42c91743b2930a40f))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - *(version)* 2.3.1 ([5f757ed](https://github.com/elcoosp/readma/commit/5f757edea1d6470a3204a36d1ad75ea16708efc6))
-## [2.3.0] - 2024-11-22
+## 2.3.0] - 2024-11-22
 [compare: 7d37027...7b51e2f](https://github.com/elcoosp/readma/compare/7d370274c29b90fc947c6fb2b47c4e54e7279f66...7b51e2f87e24adffb22cfa18a52ceb10a9955bd0)
 
-### 🐛 Bug Fixes
+### Bug Fixes
 
 
 - *(cli)* Opt files.rs.workspace.members ([6c8f7f2](https://github.com/elcoosp/readma/commit/6c8f7f226634e36a1b53eabaada72d862529e2d2))
 
-### 🚀 Features
+### Features
 
 
 - *(core)* Add branch & ws handling to codecov shield linkUrll ([32dbecf](https://github.com/elcoosp/readma/commit/32dbecf1d73eb8cbd7075a1537a77ce2e4dec875))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - *(version)* 2.3.0 ([7b51e2f](https://github.com/elcoosp/readma/commit/7b51e2f87e24adffb22cfa18a52ceb10a9955bd0))
-## [2.2.3] - 2024-11-22
+## 2.2.3] - 2024-11-22
 [compare: 132c3e7...7d37027](https://github.com/elcoosp/readma/compare/132c3e78eda8e708aae686c0ca36ce1c589d6c1c...7d370274c29b90fc947c6fb2b47c4e54e7279f66)
 
-### 🐛 Bug Fixes
+### Bug Fixes
 
 
 - *(*)* Fix rel import inside deno.json ([f599901](https://github.com/elcoosp/readma/commit/f599901b9b20021d0a0df1cf54ee87f1930a6ae0))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - *(version)* 2.2.3 ([7d37027](https://github.com/elcoosp/readma/commit/7d370274c29b90fc947c6fb2b47c4e54e7279f66))
-## [2.2.2] - 2024-11-22
+## 2.2.2] - 2024-11-22
 [compare: 86fab49...132c3e7](https://github.com/elcoosp/readma/compare/86fab495ae8160d474b427b6cfc4ee1fc74b70c8...132c3e78eda8e708aae686c0ca36ce1c589d6c1c)
 
-### 🐛 Bug Fixes
+### Bug Fixes
 
 
 - *(*)* Fix rel import of core inside cli ([1a4e9fe](https://github.com/elcoosp/readma/commit/1a4e9febdd7cb24a6c368b3865a2d7e0af138fa1))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - *(version)* 2.2.2 ([132c3e7](https://github.com/elcoosp/readma/commit/132c3e78eda8e708aae686c0ca36ce1c589d6c1c))
-## [2.2.1] - 2024-11-22
+## 2.2.1] - 2024-11-22
 [compare: 025b18f...86fab49](https://github.com/elcoosp/readma/compare/025b18f785e4cca4596ceccea24440fa8ab6be35...86fab495ae8160d474b427b6cfc4ee1fc74b70c8)
 
-### 🐛 Bug Fixes
+### Bug Fixes
 
 
 - *(cli)* Doc ([a53c13a](https://github.com/elcoosp/readma/commit/a53c13ad6434f1e0c291b00d3ffdc7da21b82d39))
 
-### 📚 Documentation
+### Documentation
 
 
 - *(core)* Add ReadmeTemplateArgs jsdoc ([b611a0a](https://github.com/elcoosp/readma/commit/b611a0a65d42fc631ee6439613b5f440ead34567))
 - *(core)* Add readme jsdoc ([7a6e3cd](https://github.com/elcoosp/readma/commit/7a6e3cd6cee2622a24779451d138f43bf860701f))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - *(*)* Fix deno pkgs version ([b61f767](https://github.com/elcoosp/readma/commit/b61f767556fc3db3b87ce0cc6255102706fc790c))
 - Pub cli & update usage readma.config ([19074aa](https://github.com/elcoosp/readma/commit/19074aaec58e30e2d298e26971eeb7e04030847e))
 - *(version)* 2.2.1 ([86fab49](https://github.com/elcoosp/readma/commit/86fab495ae8160d474b427b6cfc4ee1fc74b70c8))
-## [2.2.0] - 2024-11-22
+## 2.2.0] - 2024-11-22
 [compare: fe3f2e8...025b18f](https://github.com/elcoosp/readma/compare/fe3f2e8e2337c02923cbc118ae61f269af613209...025b18f785e4cca4596ceccea24440fa8ab6be35)
 
-### 🐛 Bug Fixes
+### Bug Fixes
 
 
 - *(*)* Deno.lock ([4e4b29b](https://github.com/elcoosp/readma/commit/4e4b29b22d5e6a46e1ccc3223a90edc6eb4919c7))
 - *(*)* Fmt ([a1d1ddd](https://github.com/elcoosp/readma/commit/a1d1dddbfa60da38a8389dd5a843baa73aa8373e))
 - *(core)* Doc & ret ty on readReadmaConfig ([c8348d5](https://github.com/elcoosp/readma/commit/c8348d50ad9cf3565b1beafac417e8a394001564))
 
-### 📚 Documentation
+### Documentation
 
 
 - *(core)* Add shields jsdoc ([f2bbaf9](https://github.com/elcoosp/readma/commit/f2bbaf9fdef471a643e498580ec4ce423c83b8d6))
 - *(cli)* Add cli jsdoc ([2842e8d](https://github.com/elcoosp/readma/commit/2842e8de62f2a404f9a1dc2eb84d0a995855f822))
 
-### 🚀 Features
+### Features
 
 
 - Add branch codecov shield ([368a28f](https://github.com/elcoosp/readma/commit/368a28f1398c95f57476be92d78ab884e760a7e9))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - Cache before install ([c739547](https://github.com/elcoosp/readma/commit/c7395471c5429d4f3193a16158335e93e876e511))
@@ -600,20 +600,20 @@
 - Release 2024.11.22 ([7c769a0](https://github.com/elcoosp/readma/commit/7c769a030ec0643a1b89097e37c9acfa454f8074))
 - *(version)* 2.2.0 ([025b18f](https://github.com/elcoosp/readma/commit/025b18f785e4cca4596ceccea24440fa8ab6be35))
 
-### 🧪 Testing
+### Testing
 
 
 - *(core)* Add readReadmaConfig to core & test ([3b6846b](https://github.com/elcoosp/readma/commit/3b6846b0350e071c9e6f55a1cfa7d6614a04275b))
-## [2.1.1] - 2024-11-22
+## 2.1.1] - 2024-11-22
 [compare: aad9662...fe3f2e8](https://github.com/elcoosp/readma/compare/aad9662288f81f86f7534ab86e69fdfb50601f55...fe3f2e8e2337c02923cbc118ae61f269af613209)
 
-### 🐛 Bug Fixes
+### Bug Fixes
 
 
 - *(core)* 0.4.0 ([baa9a25](https://github.com/elcoosp/readma/commit/baa9a2576d421ce8b35ee17f97ab26c8e020245f))
 - *(core)* Template wording ([284ff84](https://github.com/elcoosp/readma/commit/284ff840bb4d82ca1727e6d6c251f6d450a9f6f0))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - Coverage during t task ([779b471](https://github.com/elcoosp/readma/commit/779b47116ea2d36c15d1f12e57e9c4718bc1f8c4))
@@ -622,10 +622,10 @@
 - Missing cache key ([107930a](https://github.com/elcoosp/readma/commit/107930a379055a6145ba910e0f3a0ca7f7dae8b8))
 - Use v4 cache ([c6bf8e4](https://github.com/elcoosp/readma/commit/c6bf8e4cc522dc5fea2fec34dc59b43979526744))
 - *(version)* 2.1.1 ([fe3f2e8](https://github.com/elcoosp/readma/commit/fe3f2e8e2337c02923cbc118ae61f269af613209))
-## [2.1.0] - 2024-11-21
+## 2.1.0] - 2024-11-21
 [compare: 7d366f1...aad9662](https://github.com/elcoosp/readma/compare/7d366f1cfb7b8806b219fd9a74ef574b47f5dde0...aad9662288f81f86f7534ab86e69fdfb50601f55)
 
-### 🐛 Bug Fixes
+### Bug Fixes
 
 
 - *(core)* Pub workflow ([1f8c19e](https://github.com/elcoosp/readma/commit/1f8c19e6e9753b35642bdbb778ba0be9ad4152af))
@@ -636,65 +636,65 @@
 - *(core)* Use gh user content to get a static logo src & fix jsr display ([1bbe1c5](https://github.com/elcoosp/readma/commit/1bbe1c5ff62e703d9d1b63107f243d9447953589))
 - *(core)* Regen readme ([6f7459b](https://github.com/elcoosp/readma/commit/6f7459bb20937baf66d2133615baa31d11ae5d34))
 
-### 🚀 Features
+### Features
 
 
 - *(core)* Jsr version shield template ([cf02c28](https://github.com/elcoosp/readma/commit/cf02c28f663ab6c5735cf01a13e56cf3caac5714))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - *(version)* 2.1.0 ([aad9662](https://github.com/elcoosp/readma/commit/aad9662288f81f86f7534ab86e69fdfb50601f55))
-## [2.0.1] - 2024-11-21
+## 2.0.1] - 2024-11-21
 [compare: 8bb004b...7d366f1](https://github.com/elcoosp/readma/compare/8bb004bc22252b0cd67fb2292728a84cef484215...7d366f1cfb7b8806b219fd9a74ef574b47f5dde0)
 
-### 🐛 Bug Fixes
+### Bug Fixes
 
 
 - *(core)* Template contrib update ([9a9491f](https://github.com/elcoosp/readma/commit/9a9491ff3431d9db0d79f861c2e3f72e38b9d82f))
 - *(core)* Regen readme & rename ci workflow job ([28ae644](https://github.com/elcoosp/readma/commit/28ae6446edf72d86b6ef6d935d746dba23248487))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - Add pub workflow on tags ([7c2a2f8](https://github.com/elcoosp/readma/commit/7c2a2f89549e2076a9ef12979820138cb2bf9ba0))
 - *(version)* 2.0.1 ([7d366f1](https://github.com/elcoosp/readma/commit/7d366f1cfb7b8806b219fd9a74ef574b47f5dde0))
-## [2.0.0] - 2024-11-21
+## 2.0.0] - 2024-11-21
 [compare: dca930a...8bb004b](https://github.com/elcoosp/readma/compare/dca930a0da37fffbb1a1c765007ad8227092d0c2...8bb004bc22252b0cd67fb2292728a84cef484215)
 
-### 🐛 Bug Fixes
+### Bug Fixes
 
 
 - *(core)* Emojis in template ([34bb9f0](https://github.com/elcoosp/readma/commit/34bb9f0d5a5aa95c63a67fb9b5587372ae132823))
 - *(core)* Sync deno conf version ([3e0dc90](https://github.com/elcoosp/readma/commit/3e0dc90611461cc902928f0624dca7e7ef65a138))
 
-### 🚀 Features
+### Features
 
 
 - *(cli)* [**breaking**] Use david/dax ([8c589f6](https://github.com/elcoosp/readma/commit/8c589f64b5c8cf3d6981989bfe6e86dfba826c98))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - No fmt changelog ([a7d45be](https://github.com/elcoosp/readma/commit/a7d45be509210dc2629f67c0bdbf6adc7303080f))
 - Cocogitto release in vbump ([f6f9052](https://github.com/elcoosp/readma/commit/f6f9052e56c3eb2224c0270d11c82d968a69e570))
 - *(version)* 2.0.0 ([8bb004b](https://github.com/elcoosp/readma/commit/8bb004bc22252b0cd67fb2292728a84cef484215))
-## [1.2.0] - 2024-11-21
+## 1.2.0] - 2024-11-21
 [compare: b1eba03...dca930a](https://github.com/elcoosp/readma/compare/b1eba0337209bb688fe5ba6676dd37c9d0f9e272...dca930a0da37fffbb1a1c765007ad8227092d0c2)
 
-### 🐛 Bug Fixes
+### Bug Fixes
 
 
 - *(core)* Fix logo path on ws member ([d56c3ca](https://github.com/elcoosp/readma/commit/d56c3ca79198e28ba330970da8dc3198e65ebec6))
 
-### 🚀 Features
+### Features
 
 
 - *(cli)* Produce deep merged readma config per workspace member ([b763641](https://github.com/elcoosp/readma/commit/b763641e660d5d8f7c257a3a21f84a18e6e1cd09))
 - *(core)* Render workspaceMember in template ([0b9b1d1](https://github.com/elcoosp/readma/commit/0b9b1d1621f80fd09c402f5325dbb9494b8ffc20))
 - *(core)* Ws member note in template ([6c516dc](https://github.com/elcoosp/readma/commit/6c516dc95b321d1300fe9f5b4b7619dfd5421dab))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - Fmt changelog ([189d219](https://github.com/elcoosp/readma/commit/189d219488ac22b0d21afcdb391c03fd8f032fdb))
@@ -706,10 +706,10 @@
 - Revert changelog fmt add sep --- ([60eb2f3](https://github.com/elcoosp/readma/commit/60eb2f3b9e76764b211118de2398c5675558c655))
 - Rm all changelog ([dea9d2a](https://github.com/elcoosp/readma/commit/dea9d2a66e86788c1b8d069c74c2133dfd7fa9a7))
 - *(version)* 1.2.0 ([dca930a](https://github.com/elcoosp/readma/commit/dca930a0da37fffbb1a1c765007ad8227092d0c2))
-## [1.1.0] - 2024-11-21
+## 1.1.0] - 2024-11-21
 [compare: 68f985c...b1eba03](https://github.com/elcoosp/readma/compare/68f985ca2a369cfe5341165a3270921d7927a3be...b1eba0337209bb688fe5ba6676dd37c9d0f9e272)
 
-### 🐛 Bug Fixes
+### Bug Fixes
 
 
 - Migrate linkedin & msrv shields to delcarative mod ([4724b38](https://github.com/elcoosp/readma/commit/4724b386893a105c3c4350830c5e8f3bdc65fb99))
@@ -727,14 +727,14 @@
 - *(core)* Re missing changelog file ([8c1f0b1](https://github.com/elcoosp/readma/commit/8c1f0b17c4060f8253033c0477c2410aca81a19b))
 - *(core)* Revert pkg  changelog files ([1235ad6](https://github.com/elcoosp/readma/commit/1235ad6a4ee4bd53dbba176825d4a873c6688c75))
 
-### 🚀 Features
+### Features
 
 
 - Add emoji to template sections ([77149a5](https://github.com/elcoosp/readma/commit/77149a5ef736c4fb14e671fa21271dfd24dd6cdf))
 - Read config & use it to produce overrides for the template args for each workspace member ([53cb4c4](https://github.com/elcoosp/readma/commit/53cb4c400b8375c0c9874b88e1e7dffdf6a205bf))
 - *(cli)* Add configPathRoot arg to read config fn ([5e0da41](https://github.com/elcoosp/readma/commit/5e0da41355414a5533faef8ae2ce2cdac7188935))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - Add renovate.json ([1730869](https://github.com/elcoosp/readma/commit/17308692e06336f3dd3147100575bf641832c6a5))
@@ -742,10 +742,10 @@
 - Use github.actor ([8b2a3c7](https://github.com/elcoosp/readma/commit/8b2a3c7c54ec2e915a9c80482966a0e7ec66c7d7))
 - Use github.token ([b197a8f](https://github.com/elcoosp/readma/commit/b197a8f4a000a71f960b4edf1b1cc807fa83721d))
 - *(version)* 1.1.0 ([b1eba03](https://github.com/elcoosp/readma/commit/b1eba0337209bb688fe5ba6676dd37c9d0f9e272))
-## [1.0.0] - 2024-11-21
+## 1.0.0] - 2024-11-21
 [compare: d83e3b2...68f985c](https://github.com/elcoosp/readma/compare/d83e3b2df98f66d85f128e2aba41d216246280e0...68f985ca2a369cfe5341165a3270921d7927a3be)
 
-### 🐛 Bug Fixes
+### Bug Fixes
 
 
 - V0.2.1 ([75655cf](https://github.com/elcoosp/readma/commit/75655cf24ec316b8725292012e1c541e40d848b0))
@@ -763,26 +763,26 @@
 - Clean changelog ([d508cfe](https://github.com/elcoosp/readma/commit/d508cfecb498170339e6d8877297c2f6c1b82aaa))
 - Cog separator changelog ([3bc88a2](https://github.com/elcoosp/readma/commit/3bc88a21b9e765715a5836f8ee001146ac3dff34))
 
-### 🚀 Features
+### Features
 
 
 - Use renderShields for non opt shields ([03e89ba](https://github.com/elcoosp/readma/commit/03e89ba93e29c272c28aa7ecf94ca3fb81bae368))
 
-### 🚙 Miscellaneous
+### Miscellaneous
 
 
 - *(version)* 1.0.0 ([68f985c](https://github.com/elcoosp/readma/commit/68f985ca2a369cfe5341165a3270921d7927a3be))
-## [0.2.1] - 2024-11-20
+## 0.2.1] - 2024-11-20
 [compare: f22baf3...d83e3b2](https://github.com/elcoosp/readma/compare/f22baf36628150190558da7b80e90aa32508b07b...d83e3b2df98f66d85f128e2aba41d216246280e0)
 
-### 🐛 Bug Fixes
+### Bug Fixes
 
 
 - Fmt ([d83e3b2](https://github.com/elcoosp/readma/commit/d83e3b2df98f66d85f128e2aba41d216246280e0))
-## [0.2.0] - 2024-11-20
+## 0.2.0] - 2024-11-20
 [compare: f5cc4ff...f22baf3](https://github.com/elcoosp/readma/compare/f5cc4ffc600137802e2843c8e67568ced7b5f034...f22baf36628150190558da7b80e90aa32508b07b)
 
-### 🐛 Bug Fixes
+### Bug Fixes
 
 
 - Changelog ([cfef256](https://github.com/elcoosp/readma/commit/cfef2560e0802655705f6632e18a275ffff66602))
@@ -790,9 +790,9 @@
 - Handle GITHUB_REF to not crash on tag push ([2ec1112](https://github.com/elcoosp/readma/commit/2ec11124b5b0c4002ef3ad0d0557b733b585a1dd))
 - Typo refs ([55ce809](https://github.com/elcoosp/readma/commit/55ce8094fe0b8355d6f62493efe6bbd7125dc49b))
 - Bump version & changelog ([f22baf3](https://github.com/elcoosp/readma/commit/f22baf36628150190558da7b80e90aa32508b07b))
-## [0.1.0] - 2024-11-20
+## 0.1.0] - 2024-11-20
 
-### 🐛 Bug Fixes
+### Bug Fixes
 
 
 - Init core & cli ([6da9566](https://github.com/elcoosp/readma/commit/6da956630cb23ff60d96ce36e6f5071cee0c4214))
@@ -815,12 +815,12 @@
 - Reuse GITHUB_TOKEN ([dd217df](https://github.com/elcoosp/readma/commit/dd217df8a190b965abcb4c7131e1f4a41bd89463))
 - Rm old files & manual vbump ([f5cc4ff](https://github.com/elcoosp/readma/commit/f5cc4ffc600137802e2843c8e67568ced7b5f034))
 
-### 📚 Documentation
+### Documentation
 
 
 - Changelog & update c task ([64b414c](https://github.com/elcoosp/readma/commit/64b414c8498bd5b71f393a8343a3f44630eda0fc))
 
-### 🚀 Features
+### Features
 
 
 - Replace check-status by runs shield ([c63acdc](https://github.com/elcoosp/readma/commit/c63acdc812602062cce2444d2b2bbae36b003846))
